@@ -18,10 +18,12 @@ export default function ChatPage() {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const { data: sessions, refetch: refetchSessions } = api.chat.getSessions.useQuery();
+  const { data: sessions, refetch: refetchSessions } = api.chat.getSessions.useQuery(undefined, {
+    enabled: typeof window !== 'undefined',
+  });
   const { data: currentSession } = api.chat.getSession.useQuery(
     { sessionId: currentSessionId! },
-    { enabled: !!currentSessionId }
+    { enabled: !!currentSessionId && typeof window !== 'undefined' }
   );
 
   const createSessionMutation = api.chat.createSession.useMutation({

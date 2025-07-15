@@ -13,9 +13,11 @@ export default function ProgramsPage() {
   const { user } = useAuth();
   const [selectedProgram, setSelectedProgram] = useState<string | null>(null);
   
-  const { data: programs, isLoading } = api.programs.getAll.useQuery();
+  const { data: programs, isLoading } = api.programs.getAll.useQuery(undefined, {
+    enabled: typeof window !== 'undefined',
+  });
   const { data: userProgress } = api.user.getProgress.useQuery(undefined, {
-    enabled: !!user,
+    enabled: !!user && typeof window !== 'undefined',
   });
 
   const enrollMutation = api.programs.enroll.useMutation({

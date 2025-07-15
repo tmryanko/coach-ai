@@ -3,7 +3,9 @@
 import { api } from '@/utils/api';
 
 export function TestTRPC() {
-  const { data, isLoading, error } = api.example.getAll.useQuery();
+  const { data, isLoading, error } = api.example.getAll.useQuery(undefined, {
+    enabled: typeof window !== 'undefined',
+  });
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
