@@ -1,0 +1,159 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  avatar        String?
+  googleId      String?   @unique
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  // User progress and sessions
+  userProgress  UserProgress[]
+  chatSessions  ChatSession[]
+  taskProgress  TaskProgress[]
+  
+  @@map("users")
+}
+
+model CoachingProgram {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  duration    Int      // in days
+  phases      Phase[]
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // User progress for this program
+  userProgress UserProgress[]
+  
+  @@map("coaching_programs")
+}
+
+model Phase {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  order       Int
+  programId   String
+  program     CoachingProgram @relation(fields: [programId], references: [id], onDelete: Cascade)
+  
+  // Tasks within this phase
+  tasks       Task[]
+  
+  @@map("phases")
+}
+
+model Task {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  type        TaskType
+  content     Json?    // Flexible content for different task types
+  order       Int
+  phaseId     String
+  phase       Phase    @relation(fields: [phaseId], references: [id], onDelete: Cascade)
+  
+  // User progress for this task
+  taskProgress TaskProgress[]
+  
+  @@map("tasks")
+}
+
+model UserProgress {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  programId       String
+  program         CoachingProgram @relation(fields: [programId], references: [id], onDelete: Cascade)
+  
+  currentPhase    Int      @default(1)
+  completedTasks  Int      @default(0)
+  totalTasks      Int      @default(0)
+  startedAt       DateTime @default(now())
+  completedAt     DateTime?
+  
+  @@unique([userId, programId])
+  @@map("user_progress")
+}
+
+model TaskProgress {
+  id          String     @id @default(cuid())
+  userId      String
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  taskId      String
+  task        Task       @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  
+  status      TaskStatus @default(NOT_STARTED)
+  response    String?    // User's response to the task
+  feedback    String?    // AI feedback on the response
+  completedAt DateTime?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  
+  @@unique([userId, taskId])
+  @@map("task_progress")
+}
+
+model ChatSession {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  title     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Messages in this chat session
+  messages  ChatMessage[]
+  
+  @@map("chat_sessions")
+}
+
+model ChatMessage {
+  id        String   @id @default(cuid())
+  sessionId String
+  session   ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  
+  role      MessageRole
+  content   String
+  metadata  Json?       // Additional metadata like task references, etc.
+  createdAt DateTime    @default(now())
+  
+  @@map("chat_messages")
+}
+
+enum TaskType {
+  REFLECTION
+  EXERCISE
+  ASSESSMENT
+  JOURNALING
+  COMMUNICATION
+}
+
+enum TaskStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+  SKIPPED
+}
+
+enum MessageRole {
+  USER
+  ASSISTANT
+  SYSTEM
+}
