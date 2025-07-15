@@ -40,9 +40,6 @@ dependencies:
   '@trpc/client':
     specifier: ^11.4.3
     version: 11.4.3(@trpc/server@11.4.3)(typescript@5.8.3)
-  '@trpc/next':
-    specifier: ^11.4.3
-    version: 11.4.3(@tanstack/react-query@5.83.0)(@trpc/client@11.4.3)(@trpc/react-query@11.4.3)(@trpc/server@11.4.3)(next@15.4.1)(react-dom@19.1.0)(react@19.1.0)(typescript@5.8.3)
   '@trpc/react-query':
     specifier: ^11.4.3
     version: 11.4.3(@tanstack/react-query@5.83.0)(@trpc/client@11.4.3)(@trpc/server@11.4.3)(react-dom@19.1.0)(react@19.1.0)(typescript@5.8.3)
@@ -1176,33 +1173,6 @@ packages:
       typescript: '>=5.7.2'
     dependencies:
       '@trpc/server': 11.4.3(typescript@5.8.3)
-      typescript: 5.8.3
-    dev: false
-
-  /@trpc/next@11.4.3(@tanstack/react-query@5.83.0)(@trpc/client@11.4.3)(@trpc/react-query@11.4.3)(@trpc/server@11.4.3)(next@15.4.1)(react-dom@19.1.0)(react@19.1.0)(typescript@5.8.3):
-    resolution: {integrity: sha512-/AqPpzlrQy8ylLEdBAemRU1xmdqJVaXrXI/ZUYl3Oz1Id36gvGMdn5uxm0wgKPpZneM2EICvYcrsLSsdtddW4w==}
-    peerDependencies:
-      '@tanstack/react-query': ^5.59.15
-      '@trpc/client': 11.4.3
-      '@trpc/react-query': 11.4.3
-      '@trpc/server': 11.4.3
-      next: '*'
-      react: '>=16.8.0'
-      react-dom: '>=16.8.0'
-      typescript: '>=5.7.2'
-    peerDependenciesMeta:
-      '@tanstack/react-query':
-        optional: true
-      '@trpc/react-query':
-        optional: true
-    dependencies:
-      '@tanstack/react-query': 5.83.0(react@19.1.0)
-      '@trpc/client': 11.4.3(@trpc/server@11.4.3)(typescript@5.8.3)
-      '@trpc/react-query': 11.4.3(@tanstack/react-query@5.83.0)(@trpc/client@11.4.3)(@trpc/server@11.4.3)(react-dom@19.1.0)(react@19.1.0)(typescript@5.8.3)
-      '@trpc/server': 11.4.3(typescript@5.8.3)
-      next: 15.4.1(react-dom@19.1.0)(react@19.1.0)
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
       typescript: 5.8.3
     dev: false
 
