@@ -41,7 +41,7 @@ const createInnerTRPCContext = (opts: CreateContextOptions) => {
  * @see https://trpc.io/docs/context
  */
 export const createTRPCContext = async (opts: CreateNextContextOptions) => {
-  const supabase = createClient();
+  const supabase = await createClient();
   
   // Get the user session
   const {

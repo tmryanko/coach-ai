@@ -4,7 +4,7 @@ import { createClient } from '@/lib/supabase/server';
 
 export const userRouter = createTRPCRouter({
   getProfile: protectedProcedure.query(async ({ ctx }) => {
-    const supabase = createClient();
+    const supabase = await createClient();
     
     // Get user from Supabase
     const { data: { user } } = await supabase.auth.getUser();

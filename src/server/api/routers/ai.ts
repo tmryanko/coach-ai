@@ -161,7 +161,7 @@ export const aiRouter = createTRPCRouter({
       relationshipGoals: z.string(),
       currentChallenges: z.string(),
       relationshipStatus: z.string(),
-      preferences: z.record(z.any()).optional(),
+      preferences: z.record(z.string(), z.any()).optional(),
     }))
     .mutation(async ({ ctx, input }) => {
       // This would generate a personalized program based on user input

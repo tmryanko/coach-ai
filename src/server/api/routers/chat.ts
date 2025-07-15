@@ -92,7 +92,7 @@ export const chatRouter = createTRPCRouter({
       sessionId: z.string(),
       content: z.string(),
       role: z.nativeEnum(MessageRole),
-      metadata: z.record(z.any()).optional(),
+      metadata: z.record(z.string(), z.any()).optional(),
     }))
     .mutation(async ({ ctx, input }) => {
       const message = await ctx.prisma.chatMessage.create({

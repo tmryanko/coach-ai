@@ -126,10 +126,10 @@ export default function ProgramsPage() {
                     ) : (
                       <Button
                         onClick={() => handleEnroll(program.id)}
-                        disabled={enrollMutation.isLoading}
+                        disabled={enrollMutation.isPending}
                         className="w-full"
                       >
-                        {enrollMutation.isLoading ? 'Enrolling...' : 'Start Program'}
+                        {enrollMutation.isPending ? 'Enrolling...' : 'Start Program'}
                       </Button>
                     )}
                   </div>

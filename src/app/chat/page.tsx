@@ -128,7 +128,7 @@ export default function ChatPage() {
                 <div>
                   <h2 className="text-lg font-semibold">Your AI Relationship Coach</h2>
                   <p className="text-sm text-gray-500 dark:text-gray-400">
-                    I'm here to help you with your relationship questions and goals.
+                    I&apos;m here to help you with your relationship questions and goals.
                   </p>
                 </div>
                 <Badge variant="secondary">Online</Badge>

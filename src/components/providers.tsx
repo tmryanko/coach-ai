@@ -11,12 +11,10 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <api.Provider client={api.createClient()} queryClient={queryClient}>
-        <AuthProvider>
-          {children}
-          <ReactQueryDevtools initialIsOpen={false} />
-        </AuthProvider>
-      </api.Provider>
+      <AuthProvider>
+        {children}
+        <ReactQueryDevtools initialIsOpen={false} />
+      </AuthProvider>
     </QueryClientProvider>
   );
 }
