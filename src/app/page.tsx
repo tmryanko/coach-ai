@@ -71,7 +71,9 @@ export default function Home() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Button className="w-full">Choose a Program</Button>
+              <Button asChild className="w-full">
+                <a href="/programs">Choose a Program</a>
+              </Button>
             </CardContent>
           </Card>
           
@@ -83,7 +85,9 @@ export default function Home() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Button className="w-full" variant="outline">Start Chat</Button>
+              <Button asChild className="w-full" variant="outline">
+                <a href="/chat">Start Chat</a>
+              </Button>
             </CardContent>
           </Card>
         </div>
