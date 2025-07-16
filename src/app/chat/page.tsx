@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useAuth } from '@/contexts/auth-context';
 import { api } from '@/utils/api';
+import { AppLayout } from '@/components/layout/app-layout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -79,7 +80,12 @@ export default function ChatPage() {
   }
 
   return (
-    <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
+    <AppLayout 
+      title="AI Coaching Chat"
+      description="Have a conversation with your personal AI relationship coach"
+      showBackButton={true}
+    >
+      <div className="flex h-[calc(100vh-200px)] bg-gray-50 dark:bg-gray-900 rounded-lg border">
       {/* Sidebar */}
       <div className="w-80 border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
         <div className="p-4 border-b border-gray-200 dark:border-gray-700">
@@ -234,6 +240,7 @@ export default function ChatPage() {
           </div>
         )}
       </div>
-    </div>
+      </div>
+    </AppLayout>
   );
 }

@@ -20,6 +20,14 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   
+  // Assessment profile fields
+  relationshipStatus        String?
+  relationshipGoals         String[]  @default([])
+  currentChallenges         String[]  @default([])
+  preferredCommunicationStyle String?
+  personalityTraits         Json?
+  assessmentCompletedAt     DateTime?
+  
   // User progress and sessions
   userProgress  UserProgress[]
   chatSessions  ChatSession[]

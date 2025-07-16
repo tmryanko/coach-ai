@@ -50,6 +50,7 @@ export async function generateCoachResponse(
   userMessage: string,
   conversationHistory: Array<{ role: 'user' | 'assistant'; content: string }> = [],
   context?: {
+    userProfile?: any;
     userProgress?: any;
     currentTask?: any;
     programPhase?: string;
@@ -63,6 +64,55 @@ export async function generateCoachResponse(
     // Add context if available
     if (context) {
       let contextMessage = '';
+      
+      // Add user assessment profile
+      if (context.userProfile) {
+        const profile = context.userProfile;
+        contextMessage += `User Profile:\n`;
+        
+        if (profile.relationshipStatus) {
+          contextMessage += `- Relationship Status: ${profile.relationshipStatus}\n`;
+        }
+        
+        if (profile.relationshipGoals && profile.relationshipGoals.length > 0) {
+          contextMessage += `- Goals: ${profile.relationshipGoals.join(', ')}\n`;
+        }
+        
+        if (profile.currentChallenges && profile.currentChallenges.length > 0) {
+          contextMessage += `- Current Challenges: ${profile.currentChallenges.join(', ')}\n`;
+        }
+        
+        if (profile.preferredCommunicationStyle) {
+          contextMessage += `- Communication Style: ${profile.preferredCommunicationStyle}\n`;
+        }
+        
+        if (profile.personalityTraits) {
+          const traits = profile.personalityTraits as any;
+          contextMessage += `- Personality: `;
+          
+          if (traits.introversion) {
+            const socialStyle = traits.introversion <= 2 ? 'extroverted' : traits.introversion >= 4 ? 'introverted' : 'balanced social energy';
+            contextMessage += `${socialStyle}, `;
+          }
+          
+          if (traits.empathy) {
+            const empathyLevel = traits.empathy <= 2 ? 'logic-focused' : traits.empathy >= 4 ? 'highly empathetic' : 'balanced empathy';
+            contextMessage += `${empathyLevel}, `;
+          }
+          
+          if (traits.conflictStyle) {
+            contextMessage += `${traits.conflictStyle} conflict style, `;
+          }
+          
+          if (traits.learningPreference) {
+            contextMessage += `prefers ${traits.learningPreference.replace('-', ' ')} learning`;
+          }
+          
+          contextMessage = contextMessage.replace(/, $/, '') + '\n';
+        }
+        
+        contextMessage += '\n';
+      }
       
       if (context.currentTask) {
         contextMessage += `Current task: ${context.currentTask.title} - ${context.currentTask.description}\n`;
@@ -79,7 +129,7 @@ export async function generateCoachResponse(
       if (contextMessage) {
         messages.push({
           role: 'system',
-          content: `Context for this conversation:\n${contextMessage}\nPlease incorporate this context into your response when relevant.`,
+          content: `Context for this conversation:\n${contextMessage}\nPlease tailor your coaching style and advice to match the user's profile, especially their communication preferences and relationship goals. Be personalized and specific to their situation.`,
         });
       }
     }

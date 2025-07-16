@@ -49,6 +49,19 @@ export const aiRouter = createTRPCRouter({
       // Get user context if requested
       let context;
       if (input.includeContext) {
+        // Get user assessment profile
+        const userProfile = await ctx.prisma.user.findUnique({
+          where: { id: ctx.userId },
+          select: {
+            relationshipStatus: true,
+            relationshipGoals: true,
+            currentChallenges: true,
+            preferredCommunicationStyle: true,
+            personalityTraits: true,
+            assessmentCompletedAt: true,
+          },
+        });
+
         const userProgress = await ctx.prisma.userProgress.findFirst({
           where: { userId: ctx.userId },
           include: {
@@ -71,12 +84,11 @@ export const aiRouter = createTRPCRouter({
           orderBy: { startedAt: 'desc' },
         });
 
-        if (userProgress) {
-          context = {
-            userProgress,
-            programPhase: userProgress.program.phases[userProgress.currentPhase - 1]?.name,
-          };
-        }
+        context = {
+          userProfile,
+          userProgress,
+          programPhase: userProgress?.program.phases[userProgress.currentPhase - 1]?.name,
+        };
       }
 
       // Generate AI response
@@ -157,35 +169,55 @@ export const aiRouter = createTRPCRouter({
     }),
 
   generatePersonalizedProgram: protectedProcedure
-    .input(z.object({
-      relationshipGoals: z.string(),
-      currentChallenges: z.string(),
-      relationshipStatus: z.string(),
-      preferences: z.record(z.string(), z.any()).optional(),
-    }))
-    .mutation(async ({ ctx, input }) => {
-      // This would generate a personalized program based on user input
-      // For now, we'll return a structured response that could be used to create a custom program
-      
-      const prompt = `Based on this user's relationship information, suggest a personalized coaching program:
+    .mutation(async ({ ctx }) => {
+      // Get user's assessment profile
+      const userProfile = await ctx.prisma.user.findUnique({
+        where: { id: ctx.userId },
+        select: {
+          relationshipStatus: true,
+          relationshipGoals: true,
+          currentChallenges: true,
+          preferredCommunicationStyle: true,
+          personalityTraits: true,
+        },
+      });
 
-Relationship Goals: ${input.relationshipGoals}
-Current Challenges: ${input.currentChallenges}
-Relationship Status: ${input.relationshipStatus}
+      if (!userProfile || !userProfile.relationshipGoals?.length) {
+        throw new Error('User assessment profile not found. Please complete your assessment first.');
+      }
+
+      const goals = userProfile.relationshipGoals.join(', ');
+      const challenges = userProfile.currentChallenges?.join(', ') || 'None specified';
+      const status = userProfile.relationshipStatus || 'Not specified';
+      const communicationStyle = userProfile.preferredCommunicationStyle || 'Not specified';
+
+      const prompt = `Based on this user's relationship assessment, suggest a personalized coaching program:
+
+Relationship Status: ${status}
+Relationship Goals: ${goals}
+Current Challenges: ${challenges}
+Communication Style: ${communicationStyle}
+${userProfile.personalityTraits ? `Personality Traits: ${JSON.stringify(userProfile.personalityTraits)}` : ''}
 
 Please provide:
-1. A program title
-2. 3-4 key focus areas
-3. Recommended duration
-4. 2-3 specific first steps they should take
+1. A specific program title tailored to their needs
+2. 3-4 key focus areas based on their goals and challenges
+3. Recommended duration (in weeks)
+4. 2-3 specific first steps they should take immediately
+5. How the program will address their specific communication style
 
-Format as a structured response that's encouraging and actionable.`;
+Format as a structured, encouraging response that feels personalized to their exact situation.`;
 
       const suggestion = await generateCoachResponse(prompt);
 
       return {
         suggestion,
-        userInput: input,
+        userProfile: {
+          relationshipStatus: status,
+          goals: userProfile.relationshipGoals,
+          challenges: userProfile.currentChallenges,
+          communicationStyle,
+        },
       };
     }),
 });
