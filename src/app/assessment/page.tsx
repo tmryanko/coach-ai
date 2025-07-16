@@ -60,11 +60,13 @@ export default function AssessmentPage() {
       const updatedData = { ...assessmentData, ...stepData };
       setAssessmentData(updatedData);
       
-      // Save progress
-      await updateStep.mutateAsync({
-        step: STEPS[currentStep]!.id,
-        data: stepData,
-      });
+      // Save progress - only for steps that actually have data (skip welcome step)
+      if (currentStep > 0) {
+        await updateStep.mutateAsync({
+          step: STEPS[currentStep]!.id,
+          data: stepData,
+        });
+      }
     }
 
     if (currentStep < STEPS.length - 1) {

@@ -64,11 +64,16 @@ export const assessmentRouter = createTRPCRouter({
   updateStep: protectedProcedure
     .input(z.object({
       step: z.string(),
-      data: z.record(z.string(), z.any()),
+      data: z.record(z.string(), z.any()).optional(),
     }))
     .mutation(async ({ ctx, input }) => {
       // Progressive saving of assessment data
       const updateData: any = {};
+      
+      // Early return if no data provided
+      if (!input.data) {
+        return { success: true, message: 'No data to save' };
+      }
       
       if (input.step === 'relationship-status' && input.data.relationshipStatus) {
         updateData.relationshipStatus = input.data.relationshipStatus;

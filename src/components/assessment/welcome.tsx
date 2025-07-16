@@ -29,7 +29,7 @@ export function AssessmentWelcome({ onNext }: AssessmentWelcomeProps) {
       </div>
 
       <div className="pt-4">
-        <Button onClick={onNext} size="lg" className="px-8">
+        <Button onClick={() => onNext()} size="lg" className="px-8">
           Let&apos;s Get Started
         </Button>
       </div>
