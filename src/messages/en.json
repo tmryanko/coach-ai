@@ -1,0 +1,155 @@
+{
+  "navigation": {
+    "home": "Home",
+    "pricing": "Pricing",
+    "howItWorks": "How It Works",
+    "faq": "FAQ",
+    "signIn": "Sign In",
+    "getStarted": "Get Started",
+    "dashboard": "Dashboard",
+    "chat": "Chat",
+    "assessment": "Assessment",
+    "programs": "Programs",
+    "profile": "Profile",
+    "logout": "Logout"
+  },
+  "hero": {
+    "title": "Your Personal AI Dating Coach",
+    "subtitle": "Build confidence. Gain clarity. Find love — one step at a time.",
+    "description": "A fully personalized coaching journey, guided by an intelligent and emotionally aware AI coach.",
+    "startFreeCoaching": "Start Your Free Coaching",
+    "viewPricing": "View Pricing",
+    "learnMore": "Learn More",
+    "disclaimer": "Starting free • No credit card required • Cancel anytime"
+  },
+  "howItWorks": {
+    "title": "How the Coaching Journey Works",
+    "subtitle": "A structured approach to personal growth and relationship readiness",
+    "step1": {
+      "title": "Create Your Profile",
+      "description": "Fill out an assessment that helps your AI coach understand you deeply — your personality, past relationships, current challenges, and goals."
+    },
+    "step2": {
+      "title": "Meet Your AI Coach",
+      "description": "Begin an ongoing, dynamic conversation with your personal AI coach — tailored just for you."
+    },
+    "step3": {
+      "title": "Follow a Personalized Plan",
+      "description": "Get step-by-step guidance through exercises, reflections, and challenges that match your pace and emotional state."
+    },
+    "step4": {
+      "title": "Track Your Progress",
+      "description": "The coach remembers everything — your answers, your growth, your completed exercises — and adjusts the plan as you evolve."
+    },
+    "step5": {
+      "title": "Build Real Confidence & Connection",
+      "description": "The goal isn't just to find someone — it's to become ready for the right kind of relationship."
+    }
+  },
+  "differentiators": {
+    "title": "Why This Isn't Just Another Chatbot",
+    "subtitle": "A fundamentally different approach to relationship coaching",
+    "notGeneric": {
+      "title": "Not Generic — Tailored to You",
+      "description": "A real training plan designed specifically for your personality, goals, and relationship history."
+    },
+    "remembers": {
+      "title": "Remembers Your Journey",
+      "description": "The AI coach remembers your history and adapts as you grow, building on every conversation."
+    },
+    "expertBuilt": {
+      "title": "Built by Experts",
+      "description": "Developed with experts in emotional intelligence, dating psychology, and coaching methodologies."
+    },
+    "longTerm": {
+      "title": "Long-term Relationship Readiness",
+      "description": "Designed for lasting change, not just quick dating tips — become ready for the right relationship."
+    },
+    "private": {
+      "title": "Private & Judgment-Free",
+      "description": "Safe, secure, and completely confidential. No judgment, just personalized guidance."
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Get answers to common questions about AI coaching",
+    "q1": {
+      "question": "Is this really free?",
+      "answer": "Yes, you can start with a free plan. Premium features may be added later."
+    },
+    "q2": {
+      "question": "Is this a real person or AI?",
+      "answer": "It's an advanced AI coach trained to guide you with warmth, empathy, and structure."
+    },
+    "q3": {
+      "question": "How long does the process take?",
+      "answer": "It's self-paced. Some users go through the core program in 3–6 weeks, others take more time."
+    },
+    "q4": {
+      "question": "Do I need experience in dating to start?",
+      "answer": "Not at all. The coach adapts to your level — whether you're new or experienced."
+    },
+    "q5": {
+      "question": "Is my data private?",
+      "answer": "Yes. Everything is stored securely and never shared."
+    }
+  },
+  "cta": {
+    "title": "Start Your Personalized Journey Today",
+    "subtitle": "Join thousands who have transformed their dating life with personalized AI coaching. Your journey to meaningful connections starts here.",
+    "getStarted": "Get Started – It's Free",
+    "viewAllPlans": "View All Plans",
+    "disclaimer": "No credit card required • Start immediately • Cancel anytime"
+  },
+  "pricing": {
+    "title": "Choose Your Coaching Plan",
+    "subtitle": "Select the perfect plan for your relationship journey",
+    "backToHome": "← Back to Home",
+    "mainTitle": "Simple, Transparent Pricing",
+    "mainSubtitle": "Start your relationship coaching journey with our AI-powered platform. Choose a plan that fits your needs and budget.",
+    "notSure": {
+      "title": "Not sure which plan is right for you?",
+      "description": "Start with our free plan and upgrade anytime. All plans include access to our AI coach and basic relationship guidance.",
+      "tryFree": "Try Free Coaching",
+      "takeAssessment": "Take Assessment"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "canChange": {
+        "question": "Can I change my plan anytime?",
+        "answer": "Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately."
+      },
+      "dataSecure": {
+        "question": "Is my data secure?",
+        "answer": "Absolutely. We use enterprise-grade security to protect your personal information and conversations."
+      },
+      "notSatisfied": {
+        "question": "What if I'm not satisfied?",
+        "answer": "We offer a 30-day money-back guarantee on all paid plans. No questions asked."
+      },
+      "howWorks": {
+        "question": "How does AI coaching work?",
+        "answer": "Our AI coach is trained on relationship psychology and adapts to your communication style and needs."
+      }
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Retry",
+    "cancel": "Cancel",
+    "save": "Save",
+    "continue": "Continue",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "close": "Close",
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Info"
+  }
+}

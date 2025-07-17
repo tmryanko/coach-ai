@@ -1,6 +1,24 @@
 import { updateSession } from '@/lib/supabase/middleware';
+import createIntlMiddleware from 'next-intl/middleware';
+import { locales, defaultLocale } from './i18n/config';
+
+// Create the intl middleware
+const intlMiddleware = createIntlMiddleware({
+  locales,
+  defaultLocale,
+  localePrefix: 'as-needed'
+});
 
 export async function middleware(request: any) {
+  // First run the intl middleware for locale detection
+  const intlResponse = intlMiddleware(request);
+  
+  // If intl middleware returns a response (redirect), use it
+  if (intlResponse) {
+    return intlResponse;
+  }
+  
+  // Otherwise, continue with the Supabase auth middleware
   return await updateSession(request);
 }
 

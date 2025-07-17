@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { AssessmentData } from '@/app/assessment/page';
+import { AssessmentData } from '@/types/assessment';
 
 interface SummaryStepProps {
   data: Partial<AssessmentData>;

@@ -20,6 +20,10 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   
+  // Language and localization
+  preferredLanguage String  @default("en")
+  locale            String  @default("en")
+  
   // Assessment profile fields
   relationshipStatus        String?
   relationshipGoals         String[]  @default([])

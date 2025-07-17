@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { AssessmentData } from '@/app/assessment/page';
+import { AssessmentData } from '@/types/assessment';
 
 interface RelationshipStatusStepProps {
   data: Partial<AssessmentData>;

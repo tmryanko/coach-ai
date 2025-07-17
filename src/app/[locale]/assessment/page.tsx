@@ -14,6 +14,7 @@ import { ChallengesStep } from '@/components/assessment/challenges';
 import { CommunicationStep } from '@/components/assessment/communication';
 import { PersonalityStep } from '@/components/assessment/personality';
 import { SummaryStep } from '@/components/assessment/summary';
+import { AssessmentData } from '@/types/assessment';
 
 const STEPS = [
   { id: 'welcome', title: 'Welcome', component: AssessmentWelcome },
@@ -24,20 +25,6 @@ const STEPS = [
   { id: 'personality', title: 'Personality & Learning', component: PersonalityStep },
   { id: 'summary', title: 'Summary', component: SummaryStep },
 ];
-
-export interface AssessmentData {
-  relationshipStatus: string;
-  relationshipGoals: string[];
-  currentChallenges: string[];
-  preferredCommunicationStyle: string;
-  personalityTraits: {
-    introversion: number;
-    empathy: number;
-    conflictStyle: string;
-    learningPreference: string;
-    priorities: string[];
-  };
-}
 
 export default function AssessmentPage() {
   const router = useRouter();

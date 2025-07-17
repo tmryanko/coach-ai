@@ -8,6 +8,7 @@ import { api } from "@/utils/api";
 import { useAuth } from "@/contexts/auth-context";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import Link from "next/link";
 
 export default function Dashboard() {
   const { user } = useAuth();
@@ -119,10 +120,10 @@ export default function Dashboard() {
             <CardContent>
               <div className="space-y-2">
                 <Button asChild className="w-full" size="sm">
-                  <a href="/chat">Start Coaching Session</a>
+                  <Link href="/chat">Start Coaching Session</Link>
                 </Button>
                 <Button asChild className="w-full" variant="outline" size="sm">
-                  <a href="/assessment">Update Profile</a>
+                  <Link href="/assessment">Update Profile</Link>
                 </Button>
               </div>
             </CardContent>
@@ -189,7 +190,7 @@ export default function Dashboard() {
                   </p>
                 </div>
                 <Button asChild className="w-full">
-                  <a href="/chat">Start Coaching Chat</a>
+                  <Link href="/chat">Start Coaching Chat</Link>
                 </Button>
               </div>
             </CardContent>

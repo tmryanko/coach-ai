@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
-import { AssessmentData } from '@/app/assessment/page';
+import { AssessmentData } from '@/types/assessment';
 
 interface PersonalityStepProps {
   data: Partial<AssessmentData>;
