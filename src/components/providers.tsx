@@ -6,6 +6,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { httpBatchLink } from '@trpc/client';
 import { useState } from 'react';
 import { AuthProvider } from '@/contexts/auth-context';
+import ErrorBoundary from '@/components/error-boundary';
 import superjson from 'superjson';
 
 function getBaseUrl() {
@@ -28,13 +29,15 @@ export function Providers({ children }: { children: React.ReactNode }) {
   );
 
   return (
-    <api.Provider client={trpcClient} queryClient={queryClient}>
-      <QueryClientProvider client={queryClient}>
-        <AuthProvider>
-          {children}
-          <ReactQueryDevtools initialIsOpen={false} />
-        </AuthProvider>
-      </QueryClientProvider>
-    </api.Provider>
+    <ErrorBoundary>
+      <api.Provider client={trpcClient} queryClient={queryClient}>
+        <QueryClientProvider client={queryClient}>
+          <AuthProvider>
+            {children}
+            <ReactQueryDevtools initialIsOpen={false} />
+          </AuthProvider>
+        </QueryClientProvider>
+      </api.Provider>
+    </ErrorBoundary>
   );
 }

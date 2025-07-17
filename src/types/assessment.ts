@@ -5,10 +5,10 @@ export interface AssessmentData {
   preferredCommunicationStyle: string;
   personalityTraits: {
     introversion: number;
-    openness: number;
-    conscientiousness: number;
-    agreeableness: number;
-    neuroticism: number;
+    empathy: number;
+    conflictStyle: string;
+    learningPreference: string;
+    priorities: string[];
   };
   additionalNotes?: string;
 }
