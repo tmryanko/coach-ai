@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useAuth } from "@/contexts/auth-context";
 import { useRouter } from "next/navigation";
@@ -18,7 +18,7 @@ export default function Home() {
     if (!loading && user) {
       // Redirect authenticated users to dashboard
       // Middleware will handle assessment completion check
-      router.push('/dashboard');
+      router.push("/dashboard");
     }
   }, [user, loading, router]);
 

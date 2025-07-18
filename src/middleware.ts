@@ -1,25 +1,31 @@
-import { updateSession } from '@/lib/supabase/middleware';
-import createIntlMiddleware from 'next-intl/middleware';
-import { locales, defaultLocale } from './i18n/config';
+import { updateSession } from "@/lib/supabase/middleware";
+import createIntlMiddleware from "next-intl/middleware";
+import { locales, defaultLocale } from "./i18n/config";
+import { type NextRequest } from "next/server";
 
 // Create the intl middleware
 const intlMiddleware = createIntlMiddleware({
   locales,
   defaultLocale,
-  localePrefix: 'as-needed'
+  localePrefix: "as-needed",
 });
 
-export async function middleware(request: any) {
-  // First run the intl middleware for locale detection
-  const intlResponse = intlMiddleware(request);
-  
-  // If intl middleware returns a response (redirect), use it
-  if (intlResponse) {
-    return intlResponse;
+export async function middleware(request: NextRequest) {
+  try {
+    // First run the intl middleware for locale detection
+    const intlResponse = intlMiddleware(request);
+    
+    // If intl middleware returns a response (redirect), use it
+    if (intlResponse) {
+      return intlResponse;
+    }
+
+    // Otherwise, continue with the Supabase auth middleware
+    return await updateSession(request);
+  } catch (error) {
+    console.error("Middleware error:", error);
+    throw error;
   }
-  
-  // Otherwise, continue with the Supabase auth middleware
-  return await updateSession(request);
 }
 
 export const config = {
@@ -31,6 +37,6 @@ export const config = {
      * - favicon.ico (favicon file)
      * Feel free to modify this pattern to include more paths.
      */
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };
