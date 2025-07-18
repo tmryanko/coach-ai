@@ -14,6 +14,8 @@ export default function Home() {
   const { user, loading } = useAuth();
   const router = useRouter();
 
+  console.log("edededededed");
+
   useEffect(() => {
     if (!loading && user) {
       // Redirect authenticated users to dashboard

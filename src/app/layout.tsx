@@ -1,9 +1,14 @@
-// This root layout is intentionally minimal
+// This root layout provides the required HTML structure
 // The actual layout with providers is in [locale]/layout.tsx
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  console.log("layout");
+  return (
+    <html>
+      <body>{children}</body>
+    </html>
+  );
 }

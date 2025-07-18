@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import Link from 'next/link';
+import { useEffect } from "react";
+import Link from "next/link";
 
 export default function Error({
   error,
@@ -20,12 +20,14 @@ export default function Error({
       <div className="max-w-md w-full text-center px-4">
         <div className="mb-8">
           <h1 className="text-9xl font-bold text-red-300">500</h1>
-          <h2 className="text-3xl font-semibold text-gray-800 mb-2">Something went wrong</h2>
+          <h2 className="text-3xl font-semibold text-gray-800 mb-2">
+            Something went wrong
+          </h2>
           <p className="text-gray-600 mb-8">
             We encountered an unexpected error. Please try again.
           </p>
         </div>
-        
+
         <div className="space-y-4">
           <button
             onClick={reset}
