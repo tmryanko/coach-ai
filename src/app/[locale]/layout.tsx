@@ -32,7 +32,6 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  console.log("locale1111", locale, locales.includes(locale as any));
 
   // Validate that the incoming `locale` is valid
   if (!locales.includes(locale as any)) {
@@ -41,8 +40,6 @@ export default async function LocaleLayout({
 
   // Providing all messages to the client
   const messages = await getMessages();
-
-  console.log("locale", locale, messages);
 
   return (
     <html lang={locale}>

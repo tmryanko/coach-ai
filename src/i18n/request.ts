@@ -7,10 +7,7 @@ export default getRequestConfig(async ({ locale }) => {
   const validLocales = ['en', 'he'];
   const finalLocale = locale || 'en'; // Default to 'en' if undefined
   
-  console.log("Received locale:", locale, "Final locale:", finalLocale);
-  
   if (!validLocales.includes(finalLocale)) {
-    console.log("Invalid locale detected, calling notFound()");
     notFound();
   }
 

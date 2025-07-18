@@ -5,10 +5,5 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  console.log("layout");
-  return (
-    <html>
-      <body>{children}</body>
-    </html>
-  );
+  return children;
 }

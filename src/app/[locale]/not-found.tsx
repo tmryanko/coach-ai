@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 export default function LocaleNotFound() {
-  console.log("not found LocaleNotFound");
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="max-w-md w-full text-center px-4">
