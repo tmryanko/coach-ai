@@ -45,10 +45,6 @@ export function LanguageSwitcher() {
       <DropdownMenuContent align="end">
         {locales.map((loc) => {
           const config = localeConfig[loc];
-          // const pathWithoutLocale = pathname.replace(`/${locale}`, "") || "/";
-          // const newPath = `/${loc}${
-          //   pathWithoutLocale === "/" ? "" : pathWithoutLocale
-          // }`;
 
           return (
             <DropdownMenuItem key={loc} asChild>
