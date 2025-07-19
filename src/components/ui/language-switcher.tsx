@@ -33,8 +33,6 @@ export function LanguageSwitcher() {
 
   const currentLocaleConfig = localeConfig[locale as keyof typeof localeConfig];
 
-  console.log("currentLocaleConfig", currentLocaleConfig);
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
