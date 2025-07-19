@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/contexts/auth-context';
@@ -35,43 +36,46 @@ interface NavItem {
   description?: string;
 }
 
-const navigationItems: NavItem[] = [
+const getNavigationItems = (t: any): NavItem[] => [
   {
     href: '/dashboard',
-    label: 'Dashboard',
+    label: t('dashboard'),
     icon: Home,
-    description: 'Your coaching overview'
+    description: t('descriptions.dashboard')
   },
   {
     href: '/chat',
-    label: 'Chat',
+    label: t('chat'),
     icon: MessageCircle,
-    description: 'Talk with your AI coach'
+    description: t('descriptions.chat')
   },
   {
     href: '/programs',
-    label: 'Programs',
+    label: t('programs'),
     icon: BookOpen,
-    description: 'Browse coaching programs'
+    description: t('descriptions.programs')
   },
   {
     href: '/pricing',
-    label: 'Pricing',
+    label: t('pricing'),
     icon: CreditCard,
-    description: 'View plans and pricing'
+    description: t('descriptions.pricing')
   },
   {
     href: '/assessment',
-    label: 'Profile',
+    label: t('profile'),
     icon: Settings,
-    description: 'Update your profile'
+    description: t('descriptions.profile')
   },
 ];
 
 export function MainNavigation() {
+  const t = useTranslations('navigation');
   const pathname = usePathname();
   const { user, signOut } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
+  const navigationItems = getNavigationItems(t);
 
   const { data: profile } = api.assessment.getProfile.useQuery();
 
@@ -95,7 +99,7 @@ export function MainNavigation() {
             <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center">
               <span className="text-primary-foreground font-bold text-sm">CA</span>
             </div>
-            <span className="hidden font-bold sm:inline-block">Coach AI</span>
+            <span className="hidden font-bold sm:inline-block">{t('appName')}</span>
           </Link>
         </div>
 
@@ -175,13 +179,13 @@ export function MainNavigation() {
               <DropdownMenuItem asChild>
                 <Link href="/assessment" className="cursor-pointer">
                   <User className="mr-2 h-4 w-4" />
-                  <span>Profile Settings</span>
+                  <span>{t('userMenu.profileSettings')}</span>
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link href="/dashboard" className="cursor-pointer">
                   <Home className="mr-2 h-4 w-4" />
-                  <span>Dashboard</span>
+                  <span>{t('dashboard')}</span>
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
@@ -190,7 +194,7 @@ export function MainNavigation() {
                 className="cursor-pointer text-red-600 focus:text-red-600"
               >
                 <LogOut className="mr-2 h-4 w-4" />
-                <span>Sign Out</span>
+                <span>{t('userMenu.signOut')}</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

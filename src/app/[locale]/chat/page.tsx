@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { useTranslations } from 'next-intl';
 import { useAuth } from '@/contexts/auth-context';
 import { api } from '@/utils/api';
 import { AppLayout } from '@/components/layout/app-layout';
@@ -13,6 +14,8 @@ import { Send, Plus, MessageCircle } from 'lucide-react';
 import { MessageRole } from '@prisma/client';
 
 export default function ChatPage() {
+  const t = useTranslations('chat');
+  const tAuth = useTranslations('auth');
   const { user } = useAuth();
   const [currentSessionId, setCurrentSessionId] = useState<string | null>(null);
   const [message, setMessage] = useState('');
@@ -64,7 +67,7 @@ export default function ChatPage() {
 
   const handleCreateSession = () => {
     createSessionMutation.mutate({
-      title: 'New Conversation',
+      title: t('newConversation'),
     });
   };
 
@@ -76,7 +79,7 @@ export default function ChatPage() {
   };
 
   if (!user) {
-    return <div>Please sign in to access chat.</div>;
+    return <div>{tAuth('signInRequired')}</div>;
   }
 
   return (
@@ -91,13 +94,13 @@ export default function ChatPage() {
         <div className="p-4 border-b border-gray-200 dark:border-gray-700">
           <Button onClick={handleCreateSession} className="w-full" size="sm">
             <Plus className="w-4 h-4 mr-2" />
-            New Conversation
+            {t('newConversation')}
           </Button>
         </div>
         
         <div className="p-4 space-y-2">
           <h3 className="font-medium text-sm text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-            Recent Conversations
+            {t('recentConversations')}
           </h3>
           
           {sessions?.map((session) => (
@@ -114,7 +117,7 @@ export default function ChatPage() {
                 <MessageCircle className="w-4 h-4 text-gray-400" />
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium truncate">
-                    {session.title || 'Untitled Conversation'}
+                    {session.title || t('untitledConversation')}
                   </p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
                     {new Date(session.updatedAt).toLocaleDateString()}
@@ -134,12 +137,12 @@ export default function ChatPage() {
             <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-lg font-semibold">Your AI Relationship Coach</h2>
+                  <h2 className="text-lg font-semibold">{t('coachTitle')}</h2>
                   <p className="text-sm text-gray-500 dark:text-gray-400">
-                    I&apos;m here to help you with your relationship questions and goals.
+                    {t('coachWelcome')}
                   </p>
                 </div>
-                <Badge variant="secondary">Online</Badge>
+                <Badge variant="secondary">{t('online')}</Badge>
               </div>
             </div>
 
@@ -207,7 +210,7 @@ export default function ChatPage() {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   onKeyPress={handleKeyPress}
-                  placeholder="Type your message here..."
+                  placeholder={t('messagePlaceholder')}
                   disabled={isLoading}
                   className="flex-1"
                 />
@@ -225,15 +228,15 @@ export default function ChatPage() {
           <div className="flex-1 flex items-center justify-center">
             <Card className="w-full max-w-md">
               <CardHeader className="text-center">
-                <CardTitle>Start a Conversation</CardTitle>
+                <CardTitle>{t('startConversation')}</CardTitle>
                 <CardDescription>
-                  Create a new conversation to begin chatting with your AI relationship coach.
+                  {t('startDescription')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <Button onClick={handleCreateSession} className="w-full">
                   <Plus className="w-4 h-4 mr-2" />
-                  Start New Conversation
+                  {t('startNewConversation')}
                 </Button>
               </CardContent>
             </Card>

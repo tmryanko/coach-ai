@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { AppLayout } from "@/components/layout/app-layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,6 +12,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 
 export default function Dashboard() {
+  const t = useTranslations('dashboard');
   const { user } = useAuth();
   const router = useRouter();
   const { data: profile, isLoading: profileLoading } = api.assessment.getProfile.useQuery();
@@ -28,7 +30,7 @@ export default function Dashboard() {
     return (
       <AppLayout>
         <div className="flex items-center justify-center py-12">
-          <div className="text-lg">Loading your dashboard...</div>
+          <div className="text-lg">{t('loading')}</div>
         </div>
       </AppLayout>
     );
@@ -36,32 +38,26 @@ export default function Dashboard() {
 
   const getWelcomeMessage = () => {
     if (profile?.relationshipStatus === 'single') {
-      return "Ready to build meaningful connections?";
+      return t('welcomeMessages.single');
     } else if (profile?.relationshipStatus === 'dating') {
-      return "Let's strengthen your dating journey!";
+      return t('welcomeMessages.dating');
     } else if (['committed', 'engaged', 'married'].includes(profile?.relationshipStatus || '')) {
-      return "Time to deepen your relationship!";
+      return t('welcomeMessages.committed');
     }
-    return "Welcome to your personal coaching journey!";
+    return t('welcomeMessages.default');
   };
 
   const getPrimaryGoal = () => {
     if (profile?.relationshipGoals && profile.relationshipGoals.length > 0) {
-      const goalLabels: Record<string, string> = {
-        'improve-communication': 'improve communication',
-        'build-trust': 'build trust',
-        'resolve-conflicts': 'resolve conflicts',
-        'increase-intimacy': 'increase intimacy',
-        'work-life-balance': 'achieve work-life balance',
-      };
-      return goalLabels[profile.relationshipGoals[0]] || profile.relationshipGoals[0];
+      const goalKey = profile.relationshipGoals[0] as keyof typeof t.raw('goalLabels');
+      return t(`goalLabels.${goalKey}`) || t('goalLabels.default');
     }
-    return 'personal growth';
+    return t('goalLabels.default');
   };
 
   return (
     <AppLayout 
-      title={`Welcome back, ${userProfile?.name || user?.user_metadata?.name || 'there'}!`}
+      title={t('welcomeBack', { name: userProfile?.name || user?.user_metadata?.name || 'there' })}
       description={getWelcomeMessage()}
     >
       <div className="max-w-6xl mx-auto">
@@ -69,20 +65,20 @@ export default function Dashboard() {
           {/* Quick Stats */}
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-lg">Your Progress</CardTitle>
+              <CardTitle className="text-lg">{t('sections.progress')}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-600 dark:text-gray-300">Programs Started:</span>
+                  <span className="text-sm text-gray-600 dark:text-gray-300">{t('progressLabels.programsStarted')}</span>
                   <span className="font-medium">{progress?.length || 0}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-600 dark:text-gray-300">Primary Goal:</span>
+                  <span className="text-sm text-gray-600 dark:text-gray-300">{t('progressLabels.primaryGoal')}</span>
                   <span className="font-medium text-sm capitalize">{getPrimaryGoal()}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-600 dark:text-gray-300">Challenges:</span>
+                  <span className="text-sm text-gray-600 dark:text-gray-300">{t('progressLabels.challenges')}</span>
                   <span className="font-medium">{profile?.currentChallenges?.length || 0}</span>
                 </div>
               </div>
@@ -92,20 +88,20 @@ export default function Dashboard() {
           {/* Communication Style */}
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-lg">Your Style</CardTitle>
+              <CardTitle className="text-lg">{t('sections.style')}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
                 <div>
-                  <span className="text-sm text-gray-600 dark:text-gray-300">Communication:</span>
+                  <span className="text-sm text-gray-600 dark:text-gray-300">{t('progressLabels.communication')}</span>
                   <p className="text-sm font-medium capitalize">
-                    {profile?.preferredCommunicationStyle?.replace('-', ' ') || 'Not set'}
+                    {profile?.preferredCommunicationStyle?.replace('-', ' ') || t('progressLabels.notSet')}
                   </p>
                 </div>
                 <div>
-                  <span className="text-sm text-gray-600 dark:text-gray-300">Learning:</span>
+                  <span className="text-sm text-gray-600 dark:text-gray-300">{t('progressLabels.learning')}</span>
                   <p className="text-sm font-medium capitalize">
-                    {(profile?.personalityTraits as any)?.learningPreference?.replace('-', ' ') || 'Not set'}
+                    {(profile?.personalityTraits as any)?.learningPreference?.replace('-', ' ') || t('progressLabels.notSet')}
                   </p>
                 </div>
               </div>
@@ -115,15 +111,15 @@ export default function Dashboard() {
           {/* Quick Actions */}
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-lg">Quick Actions</CardTitle>
+              <CardTitle className="text-lg">{t('sections.quickActions')}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
                 <Button asChild className="w-full" size="sm">
-                  <Link href="/chat">Start Coaching Session</Link>
+                  <Link href="/chat">{t('buttons.startCoaching')}</Link>
                 </Button>
                 <Button asChild className="w-full" variant="outline" size="sm">
-                  <Link href="/assessment">Update Profile</Link>
+                  <Link href="/assessment">{t('buttons.updateProfile')}</Link>
                 </Button>
               </div>
             </CardContent>
@@ -133,31 +129,31 @@ export default function Dashboard() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <Card>
             <CardHeader>
-              <CardTitle>Recommended Programs</CardTitle>
+              <CardTitle>{t('sections.recommendedPrograms')}</CardTitle>
               <CardDescription>
-                Based on your goals to {getPrimaryGoal()}
+                {t('programs.basedOnGoals', { goal: getPrimaryGoal() })}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
                 {profile?.relationshipGoals?.includes('improve-communication') && (
                   <div className="p-3 border rounded-lg">
-                    <h3 className="font-medium">Communication Mastery</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">Learn effective communication techniques</p>
-                    <Button size="sm" className="mt-2">Start Program</Button>
+                    <h3 className="font-medium">{t('programs.communicationMastery.title')}</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">{t('programs.communicationMastery.description')}</p>
+                    <Button size="sm" className="mt-2">{t('buttons.startProgram')}</Button>
                   </div>
                 )}
                 {profile?.relationshipGoals?.includes('build-trust') && (
                   <div className="p-3 border rounded-lg">
-                    <h3 className="font-medium">Trust Building</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">Strengthen trust and emotional bonds</p>
-                    <Button size="sm" className="mt-2">Start Program</Button>
+                    <h3 className="font-medium">{t('programs.trustBuilding.title')}</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">{t('programs.trustBuilding.description')}</p>
+                    <Button size="sm" className="mt-2">{t('buttons.startProgram')}</Button>
                   </div>
                 )}
                 <div className="p-3 border rounded-lg">
-                  <h3 className="font-medium">Relationship Foundations</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">Essential skills for healthy relationships</p>
-                  <Button size="sm" className="mt-2">Start Program</Button>
+                  <h3 className="font-medium">{t('programs.relationshipFoundations.title')}</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">{t('programs.relationshipFoundations.description')}</p>
+                  <Button size="sm" className="mt-2">{t('buttons.startProgram')}</Button>
                 </div>
               </div>
             </CardContent>
@@ -165,32 +161,32 @@ export default function Dashboard() {
           
           <Card>
             <CardHeader>
-              <CardTitle>Your AI Coach</CardTitle>
+              <CardTitle>{t('sections.yourAiCoach')}</CardTitle>
               <CardDescription>
-                Personalized guidance based on your profile
+                {t('coachingStyles.personalizedGuidance')}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
                   <h3 className="font-medium text-blue-900 dark:text-blue-100 mb-2">
-                    Coaching Style Matched for You:
+                    {t('coachingStyles.title')}
                   </h3>
                   <p className="text-sm text-blue-800 dark:text-blue-200">
                     {profile?.preferredCommunicationStyle === 'direct-honest' && 
-                      "Your coach will be straightforward and honest, focusing on practical solutions."}
+                      t('coachingStyles.direct-honest')}
                     {profile?.preferredCommunicationStyle === 'gentle-supportive' && 
-                      "Your coach will be warm and encouraging, providing supportive guidance."}
+                      t('coachingStyles.gentle-supportive')}
                     {profile?.preferredCommunicationStyle === 'analytical-logical' && 
-                      "Your coach will use fact-based approaches with clear reasoning."}
+                      t('coachingStyles.analytical-logical')}
                     {profile?.preferredCommunicationStyle === 'emotional-expressive' && 
-                      "Your coach will help you explore and express emotions openly."}
+                      t('coachingStyles.emotional-expressive')}
                     {!profile?.preferredCommunicationStyle && 
-                      "Complete your assessment to get personalized coaching style."}
+                      t('coachingStyles.notComplete')}
                   </p>
                 </div>
                 <Button asChild className="w-full">
-                  <Link href="/chat">Start Coaching Chat</Link>
+                  <Link href="/chat">{t('buttons.startCoachingChat')}</Link>
                 </Button>
               </div>
             </CardContent>

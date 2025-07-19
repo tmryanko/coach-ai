@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -13,24 +14,26 @@ interface GoalsStepProps {
 }
 
 const GOAL_OPTIONS = [
-  { value: 'improve-communication', label: 'Improve Communication', category: 'communication' },
-  { value: 'build-trust', label: 'Build Trust', category: 'trust' },
-  { value: 'resolve-conflicts', label: 'Resolve Conflicts Better', category: 'conflict' },
-  { value: 'increase-intimacy', label: 'Increase Intimacy', category: 'intimacy' },
-  { value: 'work-life-balance', label: 'Better Work-Life Balance', category: 'balance' },
-  { value: 'future-planning', label: 'Plan Our Future Together', category: 'planning' },
-  { value: 'family-planning', label: 'Navigate Family Planning', category: 'family' },
-  { value: 'financial-harmony', label: 'Financial Harmony', category: 'finances' },
-  { value: 'social-life', label: 'Improve Social Life Together', category: 'social' },
-  { value: 'personal-growth', label: 'Support Each Other&apos;s Growth', category: 'growth' },
-  { value: 'physical-health', label: 'Health & Fitness Goals', category: 'health' },
-  { value: 'spiritual-connection', label: 'Spiritual Connection', category: 'spiritual' },
-  { value: 'dating-skills', label: 'Improve Dating Skills', category: 'dating' },
-  { value: 'self-confidence', label: 'Build Self-Confidence', category: 'confidence' },
-  { value: 'emotional-intelligence', label: 'Emotional Intelligence', category: 'emotional' },
+  { value: 'improve-communication', category: 'communication' },
+  { value: 'build-trust', category: 'trust' },
+  { value: 'resolve-conflicts', category: 'conflict' },
+  { value: 'increase-intimacy', category: 'intimacy' },
+  { value: 'work-life-balance', category: 'balance' },
+  { value: 'future-planning', category: 'planning' },
+  { value: 'family-planning', category: 'family' },
+  { value: 'financial-harmony', category: 'finances' },
+  { value: 'social-life', category: 'social' },
+  { value: 'personal-growth', category: 'growth' },
+  { value: 'physical-health', category: 'health' },
+  { value: 'spiritual-connection', category: 'spiritual' },
+  { value: 'dating-skills', category: 'dating' },
+  { value: 'self-confidence', category: 'confidence' },
+  { value: 'emotional-intelligence', category: 'emotional' },
 ];
 
 export function GoalsStep({ data, onNext, onBack, canGoBack, isLoading }: GoalsStepProps) {
+  const t = useTranslations('assessment.goals');
+  const tCommon = useTranslations('common');
   const [selectedGoals, setSelectedGoals] = useState<string[]>(data.relationshipGoals || []);
 
   const toggleGoal = (goal: string) => {
@@ -51,24 +54,23 @@ export function GoalsStep({ data, onNext, onBack, canGoBack, isLoading }: GoalsS
     <div className="space-y-6">
       <div className="text-center space-y-2">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-          What are your relationship goals?
+          {t('title')}
         </h2>
         <p className="text-gray-600 dark:text-gray-300">
-          Select all the areas you&apos;d like to work on. We&apos;ll personalize your coaching accordingly.
+          {t('description')}
         </p>
       </div>
 
       {selectedGoals.length > 0 && (
         <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
           <p className="text-sm font-medium text-blue-900 dark:text-blue-100 mb-2">
-            Selected goals ({selectedGoals.length}):
+            {t('selectedGoalsText')} ({selectedGoals.length}):
           </p>
           <div className="flex flex-wrap gap-2">
             {selectedGoals.map(goal => {
-              const option = GOAL_OPTIONS.find(opt => opt.value === goal);
               return (
                 <Badge key={goal} variant="secondary">
-                  {option?.label}
+                  {t(`goalOptions.${goal}`)}
                 </Badge>
               );
             })}
@@ -89,7 +91,7 @@ export function GoalsStep({ data, onNext, onBack, canGoBack, isLoading }: GoalsS
           >
             <div className="flex items-center justify-between">
               <span className="font-medium text-gray-900 dark:text-gray-100">
-                {option.label}
+                {t(`goalOptions.${option.value}`)}
               </span>
               <div className={`w-4 h-4 rounded border-2 flex items-center justify-center ${
                 selectedGoals.includes(option.value)
@@ -111,13 +113,13 @@ export function GoalsStep({ data, onNext, onBack, canGoBack, isLoading }: GoalsS
           onClick={onBack}
           disabled={!canGoBack || isLoading}
         >
-          Back
+          {tCommon('back')}
         </Button>
         <Button
           onClick={handleNext}
           disabled={selectedGoals.length === 0 || isLoading}
         >
-          {isLoading ? 'Saving...' : 'Continue'}
+          {isLoading ? tCommon('saving') : tCommon('continue')}
         </Button>
       </div>
     </div>

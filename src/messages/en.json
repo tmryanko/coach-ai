@@ -11,7 +11,19 @@
     "assessment": "Assessment",
     "programs": "Programs",
     "profile": "Profile",
-    "logout": "Logout"
+    "logout": "Logout",
+    "descriptions": {
+      "dashboard": "Your coaching overview",
+      "chat": "Talk with your AI coach",
+      "programs": "Browse coaching programs",
+      "pricing": "View plans and pricing",
+      "profile": "Update your profile"
+    },
+    "userMenu": {
+      "profileSettings": "Profile Settings",
+      "signOut": "Sign Out"
+    },
+    "appName": "Coach AI"
   },
   "hero": {
     "title": "Your Personal AI Dating Coach",
@@ -107,6 +119,64 @@
     "backToHome": "← Back to Home",
     "mainTitle": "Simple, Transparent Pricing",
     "mainSubtitle": "Start your relationship coaching journey with our AI-powered platform. Choose a plan that fits your needs and budget.",
+    "mostPopular": "Most Popular",
+    "limitations": "Limitations:",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "price": "$0",
+        "period": "forever",
+        "description": "Perfect for getting started with AI coaching",
+        "buttonText": "Get Started Free",
+        "features": [
+          "Basic coaching chat",
+          "5 sessions per month",
+          "Basic relationship assessment",
+          "General coaching programs",
+          "Community support"
+        ],
+        "limitations": [
+          "Limited session history",
+          "Basic progress tracking"
+        ]
+      },
+      "monthly": {
+        "name": "Monthly",
+        "price": "$19.99",
+        "period": "per month",
+        "description": "Enhanced coaching with more personalized guidance",
+        "buttonText": "Start Monthly Plan",
+        "features": [
+          "Unlimited coaching sessions",
+          "Advanced personality assessment",
+          "Progress tracking & analytics",
+          "Access to specialized programs",
+          "Priority support",
+          "Session history & notes",
+          "Personalized coaching style"
+        ],
+        "limitations": []
+      },
+      "yearly": {
+        "name": "Yearly",
+        "price": "$199.99",
+        "period": "per year",
+        "description": "Full access to all coaching features and programs",
+        "buttonText": "Start Yearly Plan",
+        "features": [
+          "Everything in Monthly plan",
+          "Access to ALL coaching programs",
+          "Advanced relationship insights",
+          "Custom coaching plans",
+          "Weekly progress reports",
+          "Priority 24/7 support",
+          "Early access to new features",
+          "Export session transcripts",
+          "2 months free (20% savings)"
+        ],
+        "limitations": []
+      }
+    },
     "notSure": {
       "title": "Not sure which plan is right for you?",
       "description": "Start with our free plan and upgrade anytime. All plans include access to our AI coach and basic relationship guidance.",
@@ -133,6 +203,296 @@
       }
     }
   },
+  "assessment": {
+    "welcome": {
+      "title": "Welcome to Your Personal Coaching Journey!",
+      "description": "Before we begin, let's get to know you better. This assessment will help us create a personalized coaching experience tailored to your unique relationship goals and communication style.",
+      "expectationsTitle": "What to expect:",
+      "expectations": {
+        "steps": "6 quick steps to build your personal profile",
+        "time": "Takes about 5-7 minutes to complete",
+        "personalized": "Your responses help create personalized coaching programs",
+        "private": "All information is private and secure"
+      },
+      "getStarted": "Let's Get Started"
+    },
+    "goals": {
+      "title": "What are your relationship goals?",
+      "description": "Select all the areas you'd like to work on. We'll personalize your coaching accordingly.",
+      "selectedGoalsText": "Selected goals",
+      "goalOptions": {
+        "improve-communication": "Improve Communication",
+        "build-trust": "Build Trust",
+        "resolve-conflicts": "Resolve Conflicts Better",
+        "increase-intimacy": "Increase Intimacy",
+        "work-life-balance": "Better Work-Life Balance",
+        "future-planning": "Plan Our Future Together",
+        "family-planning": "Navigate Family Planning",
+        "financial-harmony": "Financial Harmony",
+        "social-life": "Improve Social Life Together",
+        "personal-growth": "Support Each Other's Growth",
+        "physical-health": "Health & Fitness Goals",
+        "spiritual-connection": "Spiritual Connection",
+        "dating-skills": "Improve Dating Skills",
+        "self-confidence": "Build Self-Confidence",
+        "emotional-intelligence": "Emotional Intelligence"
+      }
+    },
+    "challenges": {
+      "title": "What challenges are you currently facing?",
+      "description": "Select the areas where you'd like support. Being honest helps us provide better guidance.",
+      "selectedChallengesText": "Selected challenges",
+      "challengeOptions": {
+        "poor-communication": {
+          "label": "Poor Communication",
+          "description": "We don't communicate well"
+        },
+        "frequent-arguments": {
+          "label": "Frequent Arguments", 
+          "description": "We argue too often"
+        },
+        "trust-issues": {
+          "label": "Trust Issues",
+          "description": "Lack of trust between us"
+        },
+        "lack-intimacy": {
+          "label": "Lack of Intimacy",
+          "description": "Physical or emotional distance"
+        },
+        "different-values": {
+          "label": "Different Values",
+          "description": "We have conflicting values"
+        },
+        "time-management": {
+          "label": "Time Management",
+          "description": "Struggling to spend quality time together"
+        },
+        "financial-stress": {
+          "label": "Financial Stress",
+          "description": "Money causes tension"
+        },
+        "family-pressure": {
+          "label": "Family Pressure",
+          "description": "External family influences"
+        },
+        "jealousy": {
+          "label": "Jealousy Issues",
+          "description": "Jealousy is affecting our relationship"
+        },
+        "future-uncertainty": {
+          "label": "Future Uncertainty",
+          "description": "Unclear about our future together"
+        },
+        "social-differences": {
+          "label": "Social Differences",
+          "description": "Different social needs and preferences"
+        },
+        "personal-growth": {
+          "label": "Personal Growth Gaps",
+          "description": "Growing at different rates"
+        },
+        "past-baggage": {
+          "label": "Past Relationship Baggage",
+          "description": "Previous experiences affecting us"
+        },
+        "long-distance": {
+          "label": "Long Distance",
+          "description": "Physical distance challenges"
+        },
+        "work-stress": {
+          "label": "Work-Related Stress",
+          "description": "Career pressures affecting relationship"
+        },
+        "commitment-fears": {
+          "label": "Commitment Fears",
+          "description": "Anxiety about commitment level"
+        }
+      }
+    },
+    "communication": {
+      "title": "How do you prefer to communicate?",
+      "description": "Understanding your communication style helps us tailor coaching strategies that work best for you.",
+      "exampleApproach": "Example approach:",
+      "communicationStyles": {
+        "direct-honest": {
+          "label": "Direct & Honest",
+          "description": "I prefer straightforward, honest communication even if it might be uncomfortable",
+          "example": "Let's talk about this issue directly and work through it together"
+        },
+        "gentle-supportive": {
+          "label": "Gentle & Supportive",
+          "description": "I like warm, encouraging communication that focuses on positive solutions",
+          "example": "I understand how you feel, and I'm here to support you through this"
+        },
+        "analytical-logical": {
+          "label": "Analytical & Logical",
+          "description": "I prefer fact-based discussions with clear reasoning and practical solutions",
+          "example": "Let's look at the facts and figure out the most logical approach to solve this"
+        },
+        "emotional-expressive": {
+          "label": "Emotional & Expressive",
+          "description": "I communicate best when we can share feelings openly and emotionally",
+          "example": "I need us to really share how we're feeling about this situation"
+        },
+        "collaborative-democratic": {
+          "label": "Collaborative & Democratic",
+          "description": "I like when we make decisions together and everyone has equal input",
+          "example": "What do you think? Let's brainstorm solutions together and decide as a team"
+        },
+        "patient-thoughtful": {
+          "label": "Patient & Thoughtful",
+          "description": "I prefer taking time to think things through before discussing important topics",
+          "example": "Can we take some time to think about this and discuss it when we're both ready?"
+        }
+      }
+    },
+    "personality": {
+      "title": "Tell us about your personality",
+      "description": "Help us understand how you approach relationships and learning."
+    },
+    "relationshipStatus": {
+      "title": "What's your current relationship status?",
+      "description": "This helps us provide the most relevant coaching guidance for your situation.",
+      "statusOptions": {
+        "single": {
+          "label": "Single",
+          "description": "Not currently in a relationship"
+        },
+        "dating": {
+          "label": "Dating",
+          "description": "In the early stages of dating"
+        },
+        "committed": {
+          "label": "In a committed relationship",
+          "description": "Exclusive but not married/partnered"
+        },
+        "engaged": {
+          "label": "Engaged",
+          "description": "Engaged to be married"
+        },
+        "married": {
+          "label": "Married",
+          "description": "Married or in a civil partnership"
+        },
+        "separated": {
+          "label": "Separated",
+          "description": "Taking time apart from partner"
+        },
+        "divorced": {
+          "label": "Divorced",
+          "description": "Divorced and looking to improve future relationships"
+        },
+        "widowed": {
+          "label": "Widowed",
+          "description": "Lost a partner and ready to move forward"
+        },
+        "complicated": {
+          "label": "It's complicated",
+          "description": "Relationship status is complex"
+        }
+      }
+    },
+    "summary": {
+      "title": "Review Your Profile",
+      "description": "Please review your responses below. This information will be used to personalize your coaching experience.",
+      "relationshipStatusLabel": "Relationship Status",
+      "goalsLabel": "Your Goals",
+      "challengesLabel": "Current Challenges", 
+      "communicationStyleLabel": "Communication Style",
+      "personalityLabel": "Personality & Preferences",
+      "personalityFields": {
+        "personality": "Personality:",
+        "conflictStyle": "Conflict Style:",
+        "learningStyle": "Learning Style:",
+        "lifePriorities": "Life Priorities:"
+      },
+      "personalityValues": {
+        "extroverted": "Extroverted",
+        "introverted": "Introverted", 
+        "balanced": "Balanced",
+        "logicFocused": "Logic-focused",
+        "highlyEmpathetic": "Highly empathetic",
+        "balancedEmpathy": "Balanced empathy"
+      },
+      "notSpecified": "Not specified",
+      "noGoalsSpecified": "No goals specified",
+      "noChallengesSpecified": "No challenges specified",
+      "nextSteps": {
+        "title": "What happens next?",
+        "items": [
+          "Your AI coach will use this profile to personalize your experience",
+          "You'll receive customized coaching programs based on your goals",
+          "Conversation style will match your communication preferences",
+          "You can update your profile anytime in settings"
+        ]
+      },
+      "completingAssessment": "Completing Assessment...",
+      "completeButton": "Complete Assessment & Start Coaching!"
+    }
+  },
+  "dashboard": {
+    "loading": "Loading your dashboard...",
+    "welcomeBack": "Welcome back, {name}!",
+    "welcomeMessages": {
+      "single": "Ready to build meaningful connections?",
+      "dating": "Let's strengthen your dating journey!",
+      "committed": "Time to deepen your relationship!",
+      "default": "Welcome to your personal coaching journey!"
+    },
+    "sections": {
+      "progress": "Your Progress",
+      "style": "Your Style", 
+      "quickActions": "Quick Actions",
+      "recommendedPrograms": "Recommended Programs",
+      "yourAiCoach": "Your AI Coach"
+    },
+    "progressLabels": {
+      "programsStarted": "Programs Started:",
+      "primaryGoal": "Primary Goal:",
+      "challenges": "Challenges:",
+      "communication": "Communication:",
+      "learning": "Learning:",
+      "notSet": "Not set"
+    },
+    "goalLabels": {
+      "improve-communication": "improve communication",
+      "build-trust": "build trust",
+      "resolve-conflicts": "resolve conflicts",
+      "increase-intimacy": "increase intimacy",
+      "work-life-balance": "achieve work-life balance",
+      "default": "personal growth"
+    },
+    "buttons": {
+      "startCoaching": "Start Coaching Session",
+      "updateProfile": "Update Profile",
+      "startProgram": "Start Program",
+      "startCoachingChat": "Start Coaching Chat"
+    },
+    "programs": {
+      "communicationMastery": {
+        "title": "Communication Mastery",
+        "description": "Learn effective communication techniques"
+      },
+      "trustBuilding": {
+        "title": "Trust Building",
+        "description": "Strengthen trust and emotional bonds"
+      },
+      "relationshipFoundations": {
+        "title": "Relationship Foundations",
+        "description": "Essential skills for healthy relationships"
+      },
+      "basedOnGoals": "Based on your goals to {goal}"
+    },
+    "coachingStyles": {
+      "title": "Coaching Style Matched for You:",
+      "personalizedGuidance": "Personalized guidance based on your profile",
+      "direct-honest": "Your coach will be straightforward and honest, focusing on practical solutions.",
+      "gentle-supportive": "Your coach will be warm and encouraging, providing supportive guidance.",
+      "analytical-logical": "Your coach will use fact-based approaches with clear reasoning.",
+      "emotional-expressive": "Your coach will help you explore and express emotions openly.",
+      "notComplete": "Complete your assessment to get personalized coaching style."
+    }
+  },
   "common": {
     "loading": "Loading...",
     "error": "Error",
@@ -150,6 +510,51 @@
     "confirm": "Confirm",
     "success": "Success",
     "warning": "Warning",
-    "info": "Info"
+    "info": "Info",
+    "saving": "Saving..."
+  },
+  "errors": {
+    "notFound": {
+      "title": "Page Not Found",
+      "description": "Sorry, the page you are looking for could not be found.",
+      "goHome": "Go Home",
+      "goDashboard": "Go to Dashboard"
+    },
+    "serverError": {
+      "title": "Something went wrong",
+      "description": "We encountered an unexpected error. Please try again.",
+      "tryAgain": "Try again",
+      "goHome": "Go Home"
+    },
+    "authError": {
+      "title": "Authentication Error",
+      "description": "There was an error during the authentication process. Please try again.",
+      "tryAgain": "Try Again"
+    },
+    "loginError": "Error during login. Please try again.",
+    "unexpectedError": "Unexpected error. Please try again.",
+    "generic": "Oops!",
+    "boundaryDescription": "We encountered an unexpected error. Please try again or go back to the homepage."
+  },
+  "auth": {
+    "welcome": "Welcome to Coach AI",
+    "description": "Your personal AI relationship coach. Sign in to get started with personalized coaching programs.",
+    "loginDescription": "Your personal AI relationship coach. Sign in with Google to get started.",
+    "signingIn": "Signing in...",
+    "continueWithGoogle": "Continue with Google",
+    "signInWithGoogle": "Sign In with Google",
+    "signInRequired": "Please sign in to access chat."
+  },
+  "chat": {
+    "newConversation": "New Conversation",
+    "recentConversations": "Recent Conversations",
+    "untitledConversation": "Untitled Conversation",
+    "coachTitle": "Your AI Relationship Coach",
+    "coachWelcome": "I'm here to help you with your relationship questions and goals.",
+    "online": "Online",
+    "messagePlaceholder": "Type your message here...",
+    "startConversation": "Start a Conversation",
+    "startDescription": "Create a new conversation to begin chatting with your AI relationship coach.",
+    "startNewConversation": "Start New Conversation"
   }
 }

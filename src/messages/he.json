@@ -11,7 +11,19 @@
     "assessment": "הערכה",
     "programs": "תכניות",
     "profile": "פרופיל",
-    "logout": "התנתקות"
+    "logout": "התנתקות",
+    "descriptions": {
+      "dashboard": "סקירת האימון שלכם",
+      "chat": "דברו עם המאמן AI שלכם",
+      "programs": "עיון בתכניות אימון",
+      "pricing": "צפו בתוכניות ומחירים",
+      "profile": "עדכנו את הפרופיל שלכם"
+    },
+    "userMenu": {
+      "profileSettings": "הגדרות פרופיל",
+      "signOut": "התנתקות"
+    },
+    "appName": "מאמן AI"
   },
   "hero": {
     "title": "המאמן האישי שלך לדייטים",
@@ -107,6 +119,64 @@
     "backToHome": "← חזור לבית",
     "mainTitle": "מחירים פשוטים ושקופים",
     "mainSubtitle": "התחל את מסע אימון הזוגיות שלך עם הפלטפורמה שלנו המופעלת על ידי AI. בחר תוכנית שמתאימה לצרכים ולתקציב שלך.",
+    "mostPopular": "הכי פופולרי",
+    "limitations": "מגבלות:",
+    "plans": {
+      "free": {
+        "name": "חינמי",
+        "price": "$0",
+        "period": "לתמיד",
+        "description": "מושלם להתחלה עם אימון AI",
+        "buttonText": "התחל בחינם",
+        "features": [
+          "צ'אט אימון בסיסי",
+          "5 מפגשים בחודש",
+          "הערכת זוגיות בסיסית",
+          "תכניות אימון כלליות",
+          "תמיכת קהילה"
+        ],
+        "limitations": [
+          "היסטוריית מפגשים מוגבלת",
+          "מעקב התקדמות בסיסי"
+        ]
+      },
+      "monthly": {
+        "name": "חודשי",
+        "price": "$19.99",
+        "period": "לחודש",
+        "description": "אימון משופר עם הדרכה אישית יותר",
+        "buttonText": "התחל תוכנית חודשית",
+        "features": [
+          "מפגשי אימון ללא הגבלה",
+          "הערכת אישיות מתקדמת",
+          "מעקב התקדמות ואנליטיקה",
+          "גישה לתכניות מיוחדות",
+          "תמיכה עם עדיפות",
+          "היסטוריית מפגשים והערות",
+          "סגנון אימון אישי"
+        ],
+        "limitations": []
+      },
+      "yearly": {
+        "name": "שנתי",
+        "price": "$199.99",
+        "period": "לשנה",
+        "description": "גישה מלאה לכל תכונות האימון והתכניות",
+        "buttonText": "התחל תוכנית שנתית",
+        "features": [
+          "הכל מהתוכנית החודשית",
+          "גישה לכל תכניות האימון",
+          "תובנות זוגיות מתקדמות",
+          "תוכניות אימון מותאמות אישית",
+          "דוחות התקדמות שבועיים",
+          "תמיכה 24/7 עם עדיפות",
+          "גישה מוקדמת לתכונות חדשות",
+          "ייצוא תמלילי מפגשים",
+          "2 חודשים בחינם (20% חיסכון)"
+        ],
+        "limitations": []
+      }
+    },
     "notSure": {
       "title": "לא בטוח איזו תוכנית מתאימה לך?",
       "description": "התחל עם התוכנית החינמית שלנו ושדרג בכל עת. כל התוכניות כוללות גישה למאמן AI שלנו והדרכת זוגיות בסיסית.",
@@ -133,6 +203,296 @@
       }
     }
   },
+  "assessment": {
+    "welcome": {
+      "title": "ברוכים הבאים למסע האימון האישי שלכם!",
+      "description": "לפני שנתחיל, בואו נכיר אתכם טוב יותר. הערכה זו תעזור לנו ליצור חוויית אימון אישית המותאמת למטרות הזוגיות הייחודיות שלכם ולסגנון התקשורת שלכם.",
+      "expectationsTitle": "למה לצפות:",
+      "expectations": {
+        "steps": "6 שלבים מהירים לבניית הפרופיל האישי שלכם",
+        "time": "לוקח כ-5-7 דקות להשלמה",
+        "personalized": "התגובות שלכם עוזרות ליצור תכניות אימון אישיות",
+        "private": "כל המידע פרטי ומאובטח"
+      },
+      "getStarted": "בואו נתחיל"
+    },
+    "goals": {
+      "title": "מה המטרות הזוגיות שלכם?",
+      "description": "בחרו את כל התחומים שבהם תרצו לעבוד. נתאים את האימון שלכם בהתאם.",
+      "selectedGoalsText": "מטרות שנבחרו",
+      "goalOptions": {
+        "improve-communication": "שיפור תקשורת",
+        "build-trust": "בניית אמון",
+        "resolve-conflicts": "פתרון קונפליקטים בצורה טובה יותר",
+        "increase-intimacy": "הגברת אינטימיות",
+        "work-life-balance": "איזון טוב יותר בין עבודה לחיים",
+        "future-planning": "תכנון העתיד שלנו יחד",
+        "family-planning": "ניווט בתכנון משפחה",
+        "financial-harmony": "הרמוניה כלכלית",
+        "social-life": "שיפור החיים החברתיים יחד",
+        "personal-growth": "תמיכה בצמיחה האישית של זה את זה",
+        "physical-health": "מטרות בריאות וכושר",
+        "spiritual-connection": "קשר רוחני",
+        "dating-skills": "שיפור כישורי דייטים",
+        "self-confidence": "בניית ביטחון עצמי",
+        "emotional-intelligence": "אינטליגנציה רגשית"
+      }
+    },
+    "challenges": {
+      "title": "אילו אתגרים אתם מתמודדים איתם כרגע?",
+      "description": "בחרו את התחומים שבהם תרצו תמיכה. כנות עוזרת לנו לספק הדרכה טובה יותר.",
+      "selectedChallengesText": "אתגרים שנבחרו",
+      "challengeOptions": {
+        "poor-communication": {
+          "label": "תקשורת לקויה",
+          "description": "אנחנו לא מתקשרים טוב"
+        },
+        "frequent-arguments": {
+          "label": "ויכוחים תכופים", 
+          "description": "אנחנו רבים יותר מדי"
+        },
+        "trust-issues": {
+          "label": "בעיות אמון",
+          "description": "חוסר אמון בינינו"
+        },
+        "lack-intimacy": {
+          "label": "חוסר אינטימיות",
+          "description": "מרחק פיזי או רגשי"
+        },
+        "different-values": {
+          "label": "ערכים שונים",
+          "description": "יש לנו ערכים מתנגשים"
+        },
+        "time-management": {
+          "label": "ניהול זמן",
+          "description": "מתקשים לבלות זמן איכות יחד"
+        },
+        "financial-stress": {
+          "label": "לחץ כלכלי",
+          "description": "כסף גורם למתח"
+        },
+        "family-pressure": {
+          "label": "לחץ משפחתי",
+          "description": "השפעות חיצוניות מהמשפחה"
+        },
+        "jealousy": {
+          "label": "בעיות קנאה",
+          "description": "קנאה משפיעה על הזוגיות שלנו"
+        },
+        "future-uncertainty": {
+          "label": "אי וודאות לגבי העתיד",
+          "description": "לא ברור לנו לגבי העתיד שלנו יחד"
+        },
+        "social-differences": {
+          "label": "הבדלים חברתיים",
+          "description": "צרכים והעדפות חברתיות שונות"
+        },
+        "personal-growth": {
+          "label": "פערי צמיחה אישית",
+          "description": "צומחים בקצבים שונים"
+        },
+        "past-baggage": {
+          "label": "מטען מזוגיות קודמת",
+          "description": "חוויות קודמות משפיעות עלינו"
+        },
+        "long-distance": {
+          "label": "מרחק ארוך",
+          "description": "אתגרי מרחק פיזי"
+        },
+        "work-stress": {
+          "label": "לחץ הקשור לעבודה",
+          "description": "לחצי קריירה משפיעים על הזוגיות"
+        },
+        "commitment-fears": {
+          "label": "פחדי מחויבות",
+          "description": "חרדה לגבי רמת המחויבות"
+        }
+      }
+    },
+    "communication": {
+      "title": "איך אתם מעדיפים לתקשר?",
+      "description": "הבנת סגנון התקשורת שלכם עוזרת לנו להתאים אסטרטגיות אימון שעובדות הכי טוב עבורכם.",
+      "exampleApproach": "דוגמה לגישה:",
+      "communicationStyles": {
+        "direct-honest": {
+          "label": "ישיר וכנה",
+          "description": "אני מעדיף תקשורת ישירה וכנה גם אם זה עלול להיות לא נוח",
+          "example": "בואו נדבר על הנושא הזה ישירות ונפתור את זה יחד"
+        },
+        "gentle-supportive": {
+          "label": "עדין ותומך",
+          "description": "אני אוהב תקשורת חמה ומעודדת שמתמקדת בפתרונות חיוביים",
+          "example": "אני מבין איך אתה מרגיש, ואני כאן לתמוך בך בזה"
+        },
+        "analytical-logical": {
+          "label": "אנליטי והגיוני",
+          "description": "אני מעדיף דיונים מבוססי עובדות עם נימוק ברור ופתרונות מעשיים",
+          "example": "בואו נסתכל על העובדות ונמצא את הגישה הכי הגיונית לפתור את זה"
+        },
+        "emotional-expressive": {
+          "label": "רגשי וביטויי",
+          "description": "אני מתקשר הכי טוב כשאנחנו יכולים לחלוק רגשות בפתיחות ורגשנות",
+          "example": "אני צריך שנחלוק באמת איך אנחנו מרגישים לגבי המצב הזה"
+        },
+        "collaborative-democratic": {
+          "label": "שיתופי ודמוקרטי",
+          "description": "אני אוהב כשאנחנו מקבלים החלטות יחד וכולם יש להם קלט שווה",
+          "example": "מה אתה חושב? בואו נזרום רעיונות יחד ונחליט כקבוצה"
+        },
+        "patient-thoughtful": {
+          "label": "סבלני ומהורהר",
+          "description": "אני מעדיף לקחת זמן לחשוב על דברים לפני שמדברים על נושאים חשובים",
+          "example": "אנחנו יכולים לקחת קצת זמן לחשוב על זה ולדבר כשנהיה מוכנים?"
+        }
+      }
+    },
+    "personality": {
+      "title": "ספרו לנו על האישיות שלכם",
+      "description": "עזרו לנו להבין איך אתם ניגשים לזוגיות ולמידה."
+    },
+    "relationshipStatus": {
+      "title": "מה המצב הזוגי הנוכחי שלכם?",
+      "description": "זה עוזר לנו לספק את ההדרכה הכי רלוונטית למצב שלכם.",
+      "statusOptions": {
+        "single": {
+          "label": "רווק/ה",
+          "description": "לא במערכת יחסים כרגע"
+        },
+        "dating": {
+          "label": "דייטים",
+          "description": "בשלבים המוקדמים של דייטים"
+        },
+        "committed": {
+          "label": "במערכת יחסים מחויבת",
+          "description": "יחסים בלעדיים אך לא נשוי/ה"
+        },
+        "engaged": {
+          "label": "מאורס/ת",
+          "description": "מאורס/ת להתחתן"
+        },
+        "married": {
+          "label": "נשוי/ה",
+          "description": "נשוי/ה או בשותפות אזרחית"
+        },
+        "separated": {
+          "label": "פרוד/ה",
+          "description": "לוקח זמן הפסקה מהשותף/ה"
+        },
+        "divorced": {
+          "label": "גרוש/ה",
+          "description": "גרוש/ה ומחפש/ת לשפר יחסים עתידיים"
+        },
+        "widowed": {
+          "label": "אלמן/ה",
+          "description": "איבד/ה שותף/ה ומוכן/ה להתקדם"
+        },
+        "complicated": {
+          "label": "זה מסובך",
+          "description": "המצב הזוגי מורכב"
+        }
+      }
+    },
+    "summary": {
+      "title": "סקירת הפרופיל שלכם",
+      "description": "אנא סקרו את התגובות שלכם למטה. המידע הזה ישמש להתאמה אישית של חוויית האימון שלכם.",
+      "relationshipStatusLabel": "מצב זוגי",
+      "goalsLabel": "המטרות שלכם",
+      "challengesLabel": "אתגרים נוכחיים", 
+      "communicationStyleLabel": "סגנון תקשורת",
+      "personalityLabel": "אישיות והעדפות",
+      "personalityFields": {
+        "personality": "אישיות:",
+        "conflictStyle": "סגנון התמודדות עם קונפליקטים:",
+        "learningStyle": "סגנון למידה:",
+        "lifePriorities": "סדרי עדיפויות בחיים:"
+      },
+      "personalityValues": {
+        "extroverted": "חברותי",
+        "introverted": "מופנם", 
+        "balanced": "מאוזן",
+        "logicFocused": "מתמקד בהיגיון",
+        "highlyEmpathetic": "אמפתי מאוד",
+        "balancedEmpathy": "אמפתיה מאוזנת"
+      },
+      "notSpecified": "לא צוין",
+      "noGoalsSpecified": "לא צוינו מטרות",
+      "noChallengesSpecified": "לא צוינו אתגרים",
+      "nextSteps": {
+        "title": "מה קורה הלאה?",
+        "items": [
+          "המאמן AI שלכם ישתמש בפרופיל הזה כדי להתאים אישית את החוויה שלכם",
+          "תקבלו תכניות אימון מותאמות אישית על בסיס המטרות שלכם",
+          "סגנון השיחה יתאים להעדפות התקשורת שלכם",
+          "תוכלו לעדכן את הפרופיל שלכם בכל עת בהגדרות"
+        ]
+      },
+      "completingAssessment": "משלים הערכה...",
+      "completeButton": "השלימו הערכה והתחילו אימון!"
+    }
+  },
+  "dashboard": {
+    "loading": "טוען את לוח הבקרה שלכם...",
+    "welcomeBack": "ברוכים השבים, {name}!",
+    "welcomeMessages": {
+      "single": "מוכנים לבנות קשרים משמעותיים?",
+      "dating": "בואו נחזק את מסע הדייטים שלכם!",
+      "committed": "זמן להעמיק את הזוגיות שלכם!",
+      "default": "ברוכים הבאים למסע האימון האישי שלכם!"
+    },
+    "sections": {
+      "progress": "ההתקדמות שלכם",
+      "style": "הסגנון שלכם", 
+      "quickActions": "פעולות מהירות",
+      "recommendedPrograms": "תכניות מומלצות",
+      "yourAiCoach": "המאמן AI שלכם"
+    },
+    "progressLabels": {
+      "programsStarted": "תכניות שהתחלו:",
+      "primaryGoal": "מטרה עיקרית:",
+      "challenges": "אתגרים:",
+      "communication": "תקשורת:",
+      "learning": "למידה:",
+      "notSet": "לא הוגדר"
+    },
+    "goalLabels": {
+      "improve-communication": "שיפור תקשורת",
+      "build-trust": "בניית אמון",
+      "resolve-conflicts": "פתרון קונפליקטים",
+      "increase-intimacy": "הגברת אינטימיות",
+      "work-life-balance": "השגת איזון עבודה-חיים",
+      "default": "צמיחה אישית"
+    },
+    "buttons": {
+      "startCoaching": "התחלת מפגש אימון",
+      "updateProfile": "עדכון פרופיל",
+      "startProgram": "התחלת תכנית",
+      "startCoachingChat": "התחלת צ'אט אימון"
+    },
+    "programs": {
+      "communicationMastery": {
+        "title": "שליטה בתקשורת",
+        "description": "למדו טכניקות תקשורת יעילות"
+      },
+      "trustBuilding": {
+        "title": "בניית אמון",
+        "description": "חיזוק אמון וקשרים רגשיים"
+      },
+      "relationshipFoundations": {
+        "title": "יסודות הזוגיות",
+        "description": "כישורים חיוניים לזוגיות בריאה"
+      },
+      "basedOnGoals": "מבוסס על המטרות שלכם ל{goal}"
+    },
+    "coachingStyles": {
+      "title": "סגנון אימון שמותאם לכם:",
+      "personalizedGuidance": "הדרכה אישית מבוססת על הפרופיל שלכם",
+      "direct-honest": "המאמן שלכם יהיה ישיר וכנה, יתמקד בפתרונות מעשיים.",
+      "gentle-supportive": "המאמן שלכם יהיה חם ומעודד, יספק הדרכה תומכת.",
+      "analytical-logical": "המאמן שלכם ישתמש בגישות מבוססות עובדות עם נימוק ברור.",
+      "emotional-expressive": "המאמן שלכם יעזור לכם לחקור ולבטא רגשות בפתיחות.",
+      "notComplete": "השלימו את ההערכה שלכם כדי לקבל סגנון אימון אישי."
+    }
+  },
   "common": {
     "loading": "טוען...",
     "error": "שגיאה",
@@ -150,6 +510,51 @@
     "confirm": "אשר",
     "success": "הצלחה",
     "warning": "אזהרה",
-    "info": "מידע"
+    "info": "מידע",
+    "saving": "שומר..."
+  },
+  "errors": {
+    "notFound": {
+      "title": "הדף לא נמצא",
+      "description": "מצטערים, הדף שאתם מחפשים לא נמצא.",
+      "goHome": "חזור לעמוד הבית",
+      "goDashboard": "עבור ללוח הבקרה"
+    },
+    "serverError": {
+      "title": "משהו השתבש",
+      "description": "נתקלנו בשגיאה לא צפויה. אנא נסו שוב.",
+      "tryAgain": "נסו שוב",
+      "goHome": "חזור לעמוד הבית"
+    },
+    "authError": {
+      "title": "שגיאת אימות",
+      "description": "הייתה שגיאה במהלך תהליך האימות. אנא נסו שוב.",
+      "tryAgain": "נסו שוב"
+    },
+    "loginError": "שגיאה במהלך ההתחברות. אנא נסו שוב.",
+    "unexpectedError": "שגיאה לא צפויה. אנא נסו שוב.",
+    "generic": "אופס!",
+    "boundaryDescription": "נתקלנו בשגיאה לא צפויה. אנא נסו שוב או חזרו לעמוד הבית."
+  },
+  "auth": {
+    "welcome": "ברוכים הבאים ל-Coach AI",
+    "description": "המאמן האישי שלכם לזוגיות. היכנסו כדי להתחיל עם תכניות אימון אישיות.",
+    "loginDescription": "המאמן האישי שלכם לזוגיות. היכנסו עם Google כדי להתחיל.",
+    "signingIn": "מתחבר...",
+    "continueWithGoogle": "המשך עם Google",
+    "signInWithGoogle": "היכנס עם Google",
+    "signInRequired": "אנא היכנסו כדי לגשת לצ'אט."
+  },
+  "chat": {
+    "newConversation": "שיחה חדשה",
+    "recentConversations": "שיחות אחרונות",
+    "untitledConversation": "שיחה ללא כותרת",
+    "coachTitle": "המאמן AI לזוגיות שלכם",
+    "coachWelcome": "אני כאן כדי לעזור לכם עם שאלות ומטרות הזוגיות שלכם.",
+    "online": "מחובר",
+    "messagePlaceholder": "הקלידו את ההודעה שלכם כאן...",
+    "startConversation": "התחילו שיחה",
+    "startDescription": "צרו שיחה חדשה כדי להתחיל לדבר עם המאמן AI לזוגיות שלכם.",
+    "startNewConversation": "התחילו שיחה חדשה"
   }
 }
