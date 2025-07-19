@@ -1,7 +1,8 @@
-'use client';
+"use client";
 
-import { useLocale, useTranslations } from 'next-intl';
-import { useRouter, usePathname } from 'next/navigation';
+import { useLocale, useTranslations } from "next-intl";
+import { useRouter, usePathname } from "next/navigation";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -9,23 +10,30 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { locales, localeConfig } from '@/i18n/config';
-import { Globe } from 'lucide-react';
+import { locales, localeConfig } from "@/i18n/config";
+import { Globe } from "lucide-react";
 
 export function LanguageSwitcher() {
   const locale = useLocale();
-  const router = useRouter();
   const pathname = usePathname();
-  const t = useTranslations('common');
+  const t = useTranslations("common");
 
-  const handleLanguageChange = (newLocale: string) => {
-    // Remove current locale from pathname
-    const pathWithoutLocale = pathname.replace(`/${locale}`, '');
-    const newPath = `/${newLocale}${pathWithoutLocale}`;
-    router.push(newPath);
+  const getLocalizedPath = (newLocale: string) => {
+    const segments = pathname.split("/").filter(Boolean);
+
+    // Remove current locale if it exists
+    if (segments[0] && locales.includes(segments[0] as any)) {
+      segments.shift();
+    }
+
+    // Add new locale (unless it's your default locale, if you have one)
+    const path = segments.length ? `/${segments.join("/")}` : "/";
+    return `/${newLocale}${path === "/" ? "" : path}`;
   };
 
   const currentLocaleConfig = localeConfig[locale as keyof typeof localeConfig];
+
+  console.log("currentLocaleConfig", currentLocaleConfig);
 
   return (
     <DropdownMenu>
@@ -39,16 +47,22 @@ export function LanguageSwitcher() {
       <DropdownMenuContent align="end">
         {locales.map((loc) => {
           const config = localeConfig[loc];
+          // const pathWithoutLocale = pathname.replace(`/${locale}`, "") || "/";
+          // const newPath = `/${loc}${
+          //   pathWithoutLocale === "/" ? "" : pathWithoutLocale
+          // }`;
+
           return (
-            <DropdownMenuItem
-              key={loc}
-              onClick={() => handleLanguageChange(loc)}
-              className={`flex items-center gap-2 ${
-                loc === locale ? 'bg-muted' : ''
-              }`}
-            >
-              <span>{config.flag}</span>
-              <span>{config.label}</span>
+            <DropdownMenuItem key={loc} asChild>
+              <Link
+                href={getLocalizedPath(loc)}
+                className={`flex items-center gap-2 w-full ${
+                  loc === locale ? "bg-muted" : ""
+                }`}
+              >
+                <span>{config.flag}</span>
+                <span>{config.label}</span>
+              </Link>
             </DropdownMenuItem>
           );
         })}
