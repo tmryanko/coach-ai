@@ -59,8 +59,15 @@ export default function AssessmentPage() {
     if (currentStep < STEPS.length - 1) {
       setCurrentStep(currentStep + 1);
     } else {
-      // Final submission
-      await submitAssessment.mutateAsync(assessmentData as AssessmentData);
+      // Final submission - only send required fields
+      const cleanData = {
+        relationshipStatus: assessmentData.relationshipStatus!,
+        relationshipGoals: assessmentData.relationshipGoals!,
+        currentChallenges: assessmentData.currentChallenges!,
+        preferredCommunicationStyle: assessmentData.preferredCommunicationStyle!,
+        personalityTraits: assessmentData.personalityTraits!,
+      };
+      await submitAssessment.mutateAsync(cleanData);
     }
   };
 

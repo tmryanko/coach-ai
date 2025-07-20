@@ -158,13 +158,13 @@ export function SummaryStep({ data, onNext, onBack, canGoBack, isLoading, isLast
       <div className="flex justify-between pt-6">
         <Button
           variant="outline"
-          onClick={onBack}
+          onClick={() => onBack()}
           disabled={!canGoBack || isLoading}
         >
           {tCommon('back')}
         </Button>
         <Button
-          onClick={onNext}
+          onClick={() => onNext()}
           disabled={isLoading}
           size="lg"
         >
