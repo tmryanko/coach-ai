@@ -14,7 +14,7 @@ interface SummaryStepProps {
 }
 
 
-export function SummaryStep({ data, onNext, onBack, canGoBack, isLoading, isLastStep }: SummaryStepProps) {
+export function SummaryStep({ data, onNext, onBack, canGoBack, isLoading }: SummaryStepProps) {
   const t = useTranslations('assessment.summary');
   const tGoals = useTranslations('assessment.goals.goalOptions');
   const tChallenges = useTranslations('assessment.challenges.challengeOptions');
