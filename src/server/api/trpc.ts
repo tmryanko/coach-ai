@@ -60,6 +60,9 @@ export const createTRPCContext = async (opts: FetchCreateContextFnOptions) => {
  * ZodErrors so that you get typesafety on the frontend if your procedure fails due to validation
  * errors on the backend.
  */
+// superjson handles Date objects and other built-in types automatically
+// Removed custom configuration that was interfering with Date serialization
+
 const t = initTRPC.context<typeof createTRPCContext>().create({
   transformer: superjson,
   errorFormatter({ shape, error }) {
@@ -72,6 +75,25 @@ const t = initTRPC.context<typeof createTRPCContext>().create({
       },
     };
   },
+});
+
+/**
+ * Development middleware to catch serialization issues early
+ */
+const serializationDebugMiddleware = t.middleware(async ({ next, path, type }) => {
+  const result = await next();
+  
+  if (process.env.NODE_ENV === 'development' && result.ok) {
+    try {
+      // Test serialization in development
+      JSON.stringify(result.data);
+    } catch (error) {
+      console.error(`[tRPC Serialization Error] ${type} ${path}:`, error);
+      console.error('Data that failed to serialize:', result.data);
+    }
+  }
+  
+  return result;
 });
 
 /**
@@ -105,14 +127,16 @@ export const publicProcedure = t.procedure;
  *
  * @see https://trpc.io/docs/procedures
  */
-export const protectedProcedure = t.procedure.use(({ ctx, next }) => {
-  if (!ctx.userId) {
-    throw new TRPCError({ code: 'UNAUTHORIZED' });
-  }
-  return next({
-    ctx: {
-      ...ctx,
-      userId: ctx.userId,
-    },
+export const protectedProcedure = t.procedure
+  .use(serializationDebugMiddleware)
+  .use(({ ctx, next }) => {
+    if (!ctx.userId) {
+      throw new TRPCError({ code: 'UNAUTHORIZED' });
+    }
+    return next({
+      ctx: {
+        ...ctx,
+        userId: ctx.userId,
+      },
+    });
   });
-});

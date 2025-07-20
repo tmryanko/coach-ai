@@ -64,15 +64,36 @@ export const aiRouter = createTRPCRouter({
 
         const userProgress = await ctx.prisma.userProgress.findFirst({
           where: { userId: ctx.userId },
-          include: {
+          select: {
+            id: true,
+            currentPhase: true,
+            startedAt: true,
             program: {
-              include: {
+              select: {
+                id: true,
+                name: true,
+                description: true,
                 phases: {
-                  include: {
+                  select: {
+                    id: true,
+                    name: true,
+                    description: true,
+                    order: true,
                     tasks: {
-                      include: {
+                      select: {
+                        id: true,
+                        title: true,
+                        description: true,
+                        type: true,
+                        order: true,
                         taskProgress: {
                           where: { userId: ctx.userId },
+                          select: {
+                            id: true,
+                            status: true,
+                            completedAt: true,
+                            response: true,
+                          },
                         },
                       },
                     },
@@ -84,10 +105,15 @@ export const aiRouter = createTRPCRouter({
           orderBy: { startedAt: 'desc' },
         });
 
+        // Get current phase name safely
+        const currentPhase = userProgress?.program?.phases?.find(
+          phase => phase.order === userProgress.currentPhase
+        );
+
         context = {
           userProfile,
           userProgress,
-          programPhase: userProgress?.program.phases[userProgress.currentPhase - 1]?.name,
+          programPhase: currentPhase?.name,
         };
       }
 
@@ -208,7 +234,12 @@ Please provide:
 
 Format as a structured, encouraging response that feels personalized to their exact situation.`;
 
-      const suggestion = await generateCoachResponse(prompt);
+      const suggestion = await generateCoachResponse(prompt, [], {
+        userProfile,
+        userProgress: undefined,
+        currentTask: undefined,
+        programPhase: undefined,
+      });
 
       return {
         suggestion,
