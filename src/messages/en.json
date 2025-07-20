@@ -1,4 +1,35 @@
 {
+  "profile": {
+    "title": "Your Profile",
+    "description": "View and manage your coaching profile information",
+    "editProfile": "Edit Profile",
+    "relationshipStatus": "Relationship Status",
+    "goals": "Relationship Goals",
+    "challenges": "Current Challenges",
+    "communicationStyle": "Communication Style",
+    "personality": "Personality & Learning",
+    "completedAt": "Assessment Completed",
+    "noProfileFound": "No profile found. Please complete the assessment to create your profile.",
+    "completeAssessment": "Complete Assessment",
+    "backToDashboard": "Back to Dashboard",
+    "notSpecified": "Not specified",
+    "noGoalsSpecified": "No goals specified",
+    "noChallengesSpecified": "No challenges specified",
+    "personalityFields": {
+      "personality": "Personality:",
+      "conflictStyle": "Conflict Style:",
+      "learningStyle": "Learning Style:",
+      "lifePriorities": "Life Priorities:"
+    },
+    "personalityValues": {
+      "extroverted": "Extroverted",
+      "introverted": "Introverted",
+      "balanced": "Balanced",
+      "logicFocused": "Logic-focused",
+      "highlyEmpathetic": "Highly empathetic",
+      "balancedEmpathy": "Balanced empathy"
+    }
+  },
   "navigation": {
     "home": "Home",
     "pricing": "Pricing",
@@ -17,7 +48,7 @@
       "chat": "Talk with your AI coach",
       "programs": "Browse coaching programs",
       "pricing": "View plans and pricing",
-      "profile": "Update your profile"
+      "profile": "View and edit your profile"
     },
     "userMenu": {
       "profileSettings": "Profile Settings",

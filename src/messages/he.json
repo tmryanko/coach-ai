@@ -1,4 +1,35 @@
 {
+  "profile": {
+    "title": "הפרופיל שלכם",
+    "description": "צפו ונהלו את פרטי פרופיל האימון שלכם",
+    "editProfile": "עריכת פרופיל",
+    "relationshipStatus": "סטטוס זוגיות",
+    "goals": "מטרות זוגיות",
+    "challenges": "אתגרים נוכחיים",
+    "communicationStyle": "סגנון תקשורת",
+    "personality": "אישיות ולמידה",
+    "completedAt": "ההערכה הושלמה",
+    "noProfileFound": "לא נמצא פרופיל. אנא השלימו את ההערכה כדי ליצור את הפרופיל שלכם.",
+    "completeAssessment": "השלמת הערכה",
+    "backToDashboard": "חזרה ללוח הבקרה",
+    "notSpecified": "לא הוגדר",
+    "noGoalsSpecified": "לא הוגדרו מטרות",
+    "noChallengesSpecified": "לא הוגדרו אתגרים",
+    "personalityFields": {
+      "personality": "אישיות:",
+      "conflictStyle": "סגנון פתרון קונפליקטים:",
+      "learningStyle": "סגנון למידה:",
+      "lifePriorities": "עדיפויות חיים:"
+    },
+    "personalityValues": {
+      "extroverted": "חברותי",
+      "introverted": "מופנם",
+      "balanced": "מאוזן",
+      "logicFocused": "מתמקד בהיגיון",
+      "highlyEmpathetic": "אמפתי מאוד",
+      "balancedEmpathy": "אמפתיה מאוזנת"
+    }
+  },
   "navigation": {
     "home": "בית",
     "pricing": "מחירון",
@@ -17,7 +48,7 @@
       "chat": "דברו עם המאמן AI שלכם",
       "programs": "עיון בתכניות אימון",
       "pricing": "צפו בתוכניות ומחירים",
-      "profile": "עדכנו את הפרופיל שלכם"
+      "profile": "צפו ועדכנו את הפרופיל שלכם"
     },
     "userMenu": {
       "profileSettings": "הגדרות פרופיל",

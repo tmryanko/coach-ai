@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { api } from '@/utils/api';
 import { SimpleAppLayout } from '@/components/layout/app-layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -28,16 +28,52 @@ const STEPS = [
 
 export default function AssessmentPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const isEditMode = searchParams.get('edit') === 'true';
   const [currentStep, setCurrentStep] = useState(0);
   const [assessmentData, setAssessmentData] = useState<Partial<AssessmentData>>({});
   
+  const { data: assessmentStatus } = api.assessment.getStatus.useQuery();
+  const { data: existingProfile } = api.assessment.getProfile.useQuery(undefined, {
+    enabled: isEditMode
+  });
+  
   const submitAssessment = api.assessment.submit.useMutation({
     onSuccess: () => {
-      router.push('/dashboard');
+      if (isEditMode) {
+        router.push('/profile');
+      } else {
+        router.push('/dashboard');
+      }
     },
   });
 
   const updateStep = api.assessment.updateStep.useMutation();
+
+  // If user has already completed assessment and not in edit mode, redirect to profile
+  useEffect(() => {
+    if (assessmentStatus?.isCompleted && !isEditMode) {
+      router.push('/profile');
+    }
+  }, [assessmentStatus?.isCompleted, isEditMode, router]);
+
+  // Pre-populate assessment data with existing profile when in edit mode
+  useEffect(() => {
+    if (isEditMode && existingProfile) {
+      setAssessmentData({
+        relationshipStatus: existingProfile.relationshipStatus || undefined,
+        relationshipGoals: existingProfile.relationshipGoals || undefined,
+        currentChallenges: existingProfile.currentChallenges || undefined,
+        preferredCommunicationStyle: existingProfile.preferredCommunicationStyle || undefined,
+        personalityTraits: existingProfile.personalityTraits || undefined,
+      });
+    }
+  }, [isEditMode, existingProfile]);
+
+  // Show loading while checking assessment status or redirecting
+  if (assessmentStatus?.isCompleted && !isEditMode) {
+    return null;
+  }
 
   const progress = ((currentStep + 1) / STEPS.length) * 100;
   const CurrentStepComponent = STEPS[currentStep]?.component;
@@ -87,9 +123,9 @@ export default function AssessmentPage() {
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle>Personal Coaching Profile</CardTitle>
+                <CardTitle>{isEditMode ? 'Edit Your Profile' : 'Personal Coaching Profile'}</CardTitle>
                 <CardDescription>
-                  Help us understand you better to provide personalized coaching
+                  {isEditMode ? 'Update your information to keep your coaching personalized' : 'Help us understand you better to provide personalized coaching'}
                 </CardDescription>
               </div>
               {!isWelcomeStep && (

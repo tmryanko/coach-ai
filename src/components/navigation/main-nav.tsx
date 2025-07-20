@@ -62,7 +62,7 @@ const getNavigationItems = (t: any): NavItem[] => [
     description: t('descriptions.pricing')
   },
   {
-    href: '/assessment',
+    href: '/profile',
     label: t('profile'),
     icon: Settings,
     description: t('descriptions.profile')
@@ -177,7 +177,7 @@ export function MainNavigation() {
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
-                <Link href="/assessment" className="cursor-pointer">
+                <Link href="/profile" className="cursor-pointer">
                   <User className="mr-2 h-4 w-4" />
                   <span>{t('userMenu.profileSettings')}</span>
                 </Link>
