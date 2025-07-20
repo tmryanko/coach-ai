@@ -25,6 +25,7 @@ export default function Dashboard() {
     api.assessment.getProfile.useQuery();
   const { data: userProfile } = api.user.getProfile.useQuery();
   const { data: progress } = api.user.getProgress.useQuery();
+  const { data: recommendations } = api.programs.getRecommendations.useQuery();
 
   // Check if user has completed assessment
   useEffect(() => {
@@ -166,50 +167,82 @@ export default function Dashboard() {
             <CardHeader>
               <CardTitle>{t("sections.recommendedPrograms")}</CardTitle>
               <CardDescription>
-                {t("programs.basedOnGoals", { goal: getPrimaryGoal() })}
+                {recommendations?.userProfile ? 
+                  `Personalized for ${recommendations.userProfile.relationshipStatus || 'your'} relationship journey` :
+                  t("programs.basedOnGoals", { goal: getPrimaryGoal() })
+                }
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                {profile?.relationshipGoals?.includes(
-                  "improve-communication"
-                ) && (
-                  <div className="p-3 border rounded-lg">
-                    <h3 className="font-medium">
-                      {t("programs.communicationMastery.title")}
-                    </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">
-                      {t("programs.communicationMastery.description")}
+                {recommendations?.recommendations?.slice(0, 2).map((program) => (
+                  <div key={program.id} className="p-4 border rounded-lg bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20">
+                    <div className="flex items-start justify-between mb-2">
+                      <h3 className="font-medium text-lg">{program.name}</h3>
+                      {program.isEnrolled ? (
+                        <Badge variant="default" className="ml-2">Enrolled</Badge>
+                      ) : (
+                        <Badge variant="outline" className="ml-2">Recommended</Badge>
+                      )}
+                    </div>
+                    
+                    <p className="text-sm text-blue-800 dark:text-blue-200 mb-2 font-medium">
+                      {program.customization.personalizedMessage}
                     </p>
-                    <Button size="sm" className="mt-2">
-                      {t("buttons.startProgram")}
-                    </Button>
+                    
+                    <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
+                      {program.customization.description}
+                    </p>
+
+                    {program.customization.highlightedStages.length > 0 && (
+                      <div className="mb-3">
+                        <p className="text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+                          Key stages for you:
+                        </p>
+                        <div className="flex flex-wrap gap-1">
+                          {program.customization.highlightedStages.slice(0, 3).map((stage) => (
+                            <Badge key={stage} variant="secondary" className="text-xs">
+                              {stage}
+                            </Badge>
+                          ))}
+                          {program.customization.highlightedStages.length > 3 && (
+                            <span className="text-xs text-gray-500">
+                              +{program.customization.highlightedStages.length - 3} more
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="flex items-center justify-between">
+                      <div className="text-xs text-gray-500">
+                        {program.phases?.length || 0} stages • {program.totalTasks} tasks • {program.duration} days
+                      </div>
+                      {program.isEnrolled ? (
+                        <Button size="sm" variant="outline" asChild>
+                          <Link href={`/programs/${program.id}`}>Continue</Link>
+                        </Button>
+                      ) : (
+                        <Button size="sm" asChild>
+                          <Link href={`/programs`}>{t("buttons.startProgram")}</Link>
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+                ))}
+
+                {!recommendations?.recommendations?.length && (
+                  <div className="p-4 border rounded-lg text-center">
+                    <p className="text-gray-600 dark:text-gray-300 mb-2">
+                      {recommendations?.message || "Loading recommendations..."}
+                    </p>
+                    {!profile && (
+                      <Button size="sm" asChild>
+                        <Link href="/assessment">Complete Assessment</Link>
+                      </Button>
+                    )}
                   </div>
                 )}
-                {profile?.relationshipGoals?.includes("build-trust") && (
-                  <div className="p-3 border rounded-lg">
-                    <h3 className="font-medium">
-                      {t("programs.trustBuilding.title")}
-                    </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">
-                      {t("programs.trustBuilding.description")}
-                    </p>
-                    <Button size="sm" className="mt-2">
-                      {t("buttons.startProgram")}
-                    </Button>
-                  </div>
-                )}
-                <div className="p-3 border rounded-lg">
-                  <h3 className="font-medium">
-                    {t("programs.relationshipFoundations.title")}
-                  </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">
-                    {t("programs.relationshipFoundations.description")}
-                  </p>
-                  <Button size="sm" className="mt-2">
-                    {t("buttons.startProgram")}
-                  </Button>
-                </div>
               </div>
             </CardContent>
           </Card>
