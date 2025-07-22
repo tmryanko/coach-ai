@@ -195,3 +195,118 @@ Keep the feedback supportive, specific, and actionable. Limit to 200 words.`;
     throw new Error('Failed to generate task feedback');
   }
 }
+
+export async function generateTaskCoachResponse(
+  userMessage: string,
+  conversationHistory: Array<{ role: 'user' | 'assistant'; content: string }> = [],
+  context: {
+    task: any;
+    userProfile?: any;
+    systemPrompt: string;
+  }
+) {
+  try {
+    const messages: OpenAI.Chat.Completions.ChatCompletionMessageParam[] = [
+      { role: 'system', content: context.systemPrompt },
+    ];
+
+    // Add user profile context if available
+    if (context.userProfile) {
+      const profile = context.userProfile;
+      let contextMessage = 'User Context:\n';
+      
+      if (profile.relationshipStatus) {
+        contextMessage += `- Relationship Status: ${profile.relationshipStatus}\n`;
+      }
+      
+      if (profile.relationshipGoals && profile.relationshipGoals.length > 0) {
+        contextMessage += `- Goals: ${profile.relationshipGoals.join(', ')}\n`;
+      }
+      
+      if (profile.currentChallenges && profile.currentChallenges.length > 0) {
+        contextMessage += `- Challenges: ${profile.currentChallenges.join(', ')}\n`;
+      }
+      
+      if (profile.preferredCommunicationStyle) {
+        contextMessage += `- Communication Style: ${profile.preferredCommunicationStyle}\n`;
+      }
+
+      contextMessage += '\nTailor your coaching to their profile while staying focused on the current task.';
+      
+      messages.push({
+        role: 'system',
+        content: contextMessage,
+      });
+    }
+
+    // Add recent conversation history (limit to last 10 messages)
+    const recentHistory = conversationHistory.slice(-10);
+    for (const msg of recentHistory) {
+      messages.push({ role: msg.role, content: msg.content });
+    }
+
+    // Add current user message
+    messages.push({ role: 'user', content: userMessage });
+
+    // Check for topic drift and task completion indicators
+    const isDriftAttempt = checkForTopicDrift(userMessage, context.task);
+    const isCompletionReady = checkForTaskCompletion(userMessage, conversationHistory);
+
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-4o-mini',
+      messages,
+      max_tokens: 300,
+      temperature: 0.7,
+      presence_penalty: 0.2,
+      frequency_penalty: 0.1,
+    });
+
+    let response = completion.choices[0]?.message?.content || 'I apologize, but I had trouble generating a response. Could you please try again?';
+
+    // Add specific guidance based on context
+    if (isDriftAttempt) {
+      response += "\n\nI notice we're starting to explore other topics - that's natural! Let's hold onto those thoughts for another time and stay focused on completing this task together.";
+    }
+
+    if (isCompletionReady) {
+      const { getTaskCompletionMessage } = await import('@/lib/task-prompts');
+      response += `\n\n${getTaskCompletionMessage(context.task.type)}`;
+    }
+
+    return response;
+  } catch (error) {
+    console.error('Error generating task coach response:', error);
+    throw new Error('Failed to generate task coach response');
+  }
+}
+
+function checkForTopicDrift(message: string, task: any): boolean {
+  const lowerMessage = message.toLowerCase();
+  const taskKeywords = [
+    task.title.toLowerCase(),
+    task.type.toLowerCase(),
+    ...task.description.toLowerCase().split(' ').slice(0, 5)
+  ];
+  
+  // Simple heuristic: if the message doesn't contain any task-related keywords
+  // and mentions other relationship topics, it might be drift
+  const relationshipKeywords = ['dating', 'partner', 'boyfriend', 'girlfriend', 'marriage', 'breakup', 'ex'];
+  const hasTaskKeywords = taskKeywords.some(keyword => lowerMessage.includes(keyword));
+  const hasOtherTopics = relationshipKeywords.some(keyword => lowerMessage.includes(keyword));
+  
+  return !hasTaskKeywords && hasOtherTopics && lowerMessage.length > 50;
+}
+
+function checkForTaskCompletion(message: string, history: Array<{ role: 'user' | 'assistant'; content: string }>): boolean {
+  const lowerMessage = message.toLowerCase();
+  const completionIndicators = [
+    'done', 'finished', 'complete', 'ready to submit', 'ready to move on',
+    'what\'s next', 'submit', 'move forward', 'all set'
+  ];
+  
+  // Check if user indicates completion or if there's been substantial conversation
+  const indicatesCompletion = completionIndicators.some(indicator => lowerMessage.includes(indicator));
+  const hasSubstantialConversation = history.length >= 8; // At least 4 exchanges
+  
+  return indicatesCompletion || hasSubstantialConversation;
+}

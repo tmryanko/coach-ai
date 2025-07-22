@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { createTRPCRouter, protectedProcedure } from '@/server/api/trpc';
-import { MessageRole } from '@prisma/client';
+import { MessageRole, SessionType } from '@prisma/client';
+import { getTaskSystemPrompt, getTaskWelcomeMessage } from '@/lib/task-prompts';
 
 export const chatRouter = createTRPCRouter({
   getSessions: protectedProcedure.query(async ({ ctx }) => {
@@ -145,5 +146,105 @@ export const chatRouter = createTRPCRouter({
         messages: messages.reverse(),
         nextCursor,
       };
+    }),
+
+  // Task-specific session endpoints
+  createTaskSession: protectedProcedure
+    .input(z.object({
+      taskId: z.string(),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      // Get task details to create appropriate system prompt
+      const task = await ctx.prisma.task.findUnique({
+        where: { id: input.taskId },
+        include: {
+          phase: {
+            include: {
+              program: true,
+            },
+          },
+        },
+      });
+
+      if (!task) {
+        throw new Error('Task not found');
+      }
+
+      // Check if session already exists for this task
+      const existingSession = await ctx.prisma.chatSession.findFirst({
+        where: {
+          userId: ctx.userId,
+          taskId: input.taskId,
+          sessionType: SessionType.TASK_FOCUSED,
+        },
+      });
+
+      if (existingSession) {
+        return existingSession;
+      }
+
+      // Create new task-focused session
+      const systemPrompt = getTaskSystemPrompt(task.type, task.title, task.description);
+      const welcomeMessage = getTaskWelcomeMessage(task.type, task.title);
+
+      const session = await ctx.prisma.chatSession.create({
+        data: {
+          userId: ctx.userId,
+          title: `Task: ${task.title}`,
+          sessionType: SessionType.TASK_FOCUSED,
+          taskId: input.taskId,
+          systemPrompt,
+        },
+      });
+
+      // Add welcome message
+      await ctx.prisma.chatMessage.create({
+        data: {
+          sessionId: session.id,
+          content: welcomeMessage,
+          role: MessageRole.ASSISTANT,
+        },
+      });
+
+      return session;
+    }),
+
+  getTaskSession: protectedProcedure
+    .input(z.object({
+      taskId: z.string(),
+    }))
+    .query(async ({ ctx, input }) => {
+      const session = await ctx.prisma.chatSession.findFirst({
+        where: {
+          userId: ctx.userId,
+          taskId: input.taskId,
+          sessionType: SessionType.TASK_FOCUSED,
+        },
+        include: {
+          messages: {
+            orderBy: { createdAt: 'asc' },
+          },
+        },
+      });
+
+      return session;
+    }),
+
+  completeTaskSession: protectedProcedure
+    .input(z.object({
+      sessionId: z.string(),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const session = await ctx.prisma.chatSession.update({
+        where: {
+          id: input.sessionId,
+          userId: ctx.userId,
+        },
+        data: {
+          isTaskCompleted: true,
+        },
+      });
+
+      return session;
     }),
 });

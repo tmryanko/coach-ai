@@ -127,6 +127,10 @@ model ChatSession {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   
   title     String?
+  sessionType SessionType @default(GENERAL)
+  taskId    String?  // For task-specific sessions
+  systemPrompt String? // Task-specific AI instructions
+  isTaskCompleted Boolean @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   
@@ -162,6 +166,11 @@ enum TaskStatus {
   IN_PROGRESS
   COMPLETED
   SKIPPED
+}
+
+enum SessionType {
+  GENERAL
+  TASK_FOCUSED
 }
 
 enum MessageRole {

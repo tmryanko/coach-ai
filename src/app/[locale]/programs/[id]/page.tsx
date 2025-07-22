@@ -94,11 +94,15 @@ export default function ProgramDetailPage() {
   const handleStartTask = async (taskId: string) => {
     try {
       await startTaskMutation.mutateAsync({ taskId });
-      // Navigate to task or refresh to show updated status
-      window.location.reload();
+      // Navigate to task page
+      router.push(`/tasks/${taskId}`);
     } catch (error) {
       console.error('Failed to start task:', error);
     }
+  };
+
+  const handleContinueTask = (taskId: string) => {
+    router.push(`/tasks/${taskId}`);
   };
 
   const handleEnroll = () => {
@@ -282,11 +286,19 @@ export default function ProgramDetailPage() {
                                   Start Task
                                 </Button>
                               ) : isInProgress ? (
-                                <Button size="sm" variant="outline">
+                                <Button 
+                                  size="sm" 
+                                  variant="outline"
+                                  onClick={() => handleContinueTask(task.id)}
+                                >
                                   Continue Task
                                 </Button>
                               ) : (
-                                <Button size="sm" variant="outline">
+                                <Button 
+                                  size="sm" 
+                                  variant="outline"
+                                  onClick={() => handleContinueTask(task.id)}
+                                >
                                   Review Task
                                 </Button>
                               )}

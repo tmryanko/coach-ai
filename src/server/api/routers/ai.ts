@@ -1,7 +1,8 @@
 import { z } from 'zod';
 import { createTRPCRouter, protectedProcedure } from '@/server/api/trpc';
-import { generateCoachResponse, generateTaskFeedback } from '@/lib/openai';
-import { MessageRole } from '@prisma/client';
+import { generateCoachResponse, generateTaskFeedback, generateTaskCoachResponse } from '@/lib/openai';
+import { MessageRole, SessionType } from '@prisma/client';
+import { getTaskCompletionMessage } from '@/lib/task-prompts';
 
 export const aiRouter = createTRPCRouter({
   sendMessage: protectedProcedure
@@ -249,6 +250,113 @@ Format as a structured, encouraging response that feels personalized to their ex
           challenges: userProfile.currentChallenges,
           communicationStyle,
         },
+      };
+    }),
+
+  sendTaskMessage: protectedProcedure
+    .input(z.object({
+      sessionId: z.string(),
+      message: z.string(),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      // Get session and verify it's a task session
+      const session = await ctx.prisma.chatSession.findUnique({
+        where: { 
+          id: input.sessionId,
+          userId: ctx.userId,
+        },
+        include: {
+          messages: {
+            orderBy: { createdAt: 'desc' },
+            take: 20,
+          },
+        },
+      });
+
+      if (!session) {
+        throw new Error('Session not found');
+      }
+
+      if (session.sessionType !== SessionType.TASK_FOCUSED || !session.taskId) {
+        throw new Error('This is not a task-focused session');
+      }
+
+      // Get task details for context
+      const task = await ctx.prisma.task.findUnique({
+        where: { id: session.taskId },
+        include: {
+          phase: {
+            include: {
+              program: true,
+            },
+          },
+        },
+      });
+
+      if (!task) {
+        throw new Error('Task not found');
+      }
+
+      // Save user message
+      await ctx.prisma.chatMessage.create({
+        data: {
+          sessionId: input.sessionId,
+          content: input.message,
+          role: MessageRole.USER,
+        },
+      });
+
+      // Prepare conversation history
+      const conversationHistory = session.messages
+        .reverse()
+        .map(msg => ({
+          role: msg.role === MessageRole.USER ? 'user' as const : 'assistant' as const,
+          content: msg.content,
+        }));
+
+      // Get user context for personalization
+      const userProfile = await ctx.prisma.user.findUnique({
+        where: { id: ctx.userId },
+        select: {
+          relationshipStatus: true,
+          relationshipGoals: true,
+          currentChallenges: true,
+          preferredCommunicationStyle: true,
+          personalityTraits: true,
+        },
+      });
+
+      // Generate task-focused AI response
+      const aiResponse = await generateTaskCoachResponse(
+        input.message,
+        conversationHistory,
+        {
+          task,
+          userProfile,
+          systemPrompt: session.systemPrompt!,
+        }
+      );
+
+      // Save AI response
+      const aiMessage = await ctx.prisma.chatMessage.create({
+        data: {
+          sessionId: input.sessionId,
+          content: aiResponse,
+          role: MessageRole.ASSISTANT,
+        },
+      });
+
+      // Update session timestamp
+      await ctx.prisma.chatSession.update({
+        where: { id: input.sessionId },
+        data: { updatedAt: new Date() },
+      });
+
+      return {
+        userMessage: input.message,
+        aiResponse: aiResponse,
+        messageId: aiMessage.id,
+        taskTitle: task.title,
       };
     }),
 });
