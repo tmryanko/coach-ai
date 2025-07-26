@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
@@ -16,86 +17,86 @@ interface EmotionalIntelligenceStepProps {
   isLoading: boolean;
 }
 
-const ATTACHMENT_STYLES = [
+const getAttachmentStyles = (t: any) => [
   {
     value: 'secure',
-    label: 'Secure',
-    description: 'I find it easy to get close to others and am comfortable depending on them. I don&apos;t often worry about being abandoned.',
-    traits: ['Comfortable with intimacy', 'Good communication', 'Trusting']
+    label: t('attachmentStyles.secure.label'),
+    description: t('attachmentStyles.secure.description'),
+    traits: t('attachmentStyles.secure.traits')
   },
   {
     value: 'anxious',
-    label: 'Anxious',
-    description: 'I want to be very close to partners, but worry they don&apos;t feel the same. I fear being abandoned or unloved.',
-    traits: ['Seeks reassurance', 'Fears abandonment', 'Highly empathetic']
+    label: t('attachmentStyles.anxious.label'),
+    description: t('attachmentStyles.anxious.description'),
+    traits: t('attachmentStyles.anxious.traits')
   },
   {
     value: 'avoidant',
-    label: 'Avoidant',
-    description: 'I prefer independence and self-sufficiency. I sometimes find it difficult to trust others completely.',
-    traits: ['Values independence', 'Uncomfortable with emotions', 'Self-reliant']
+    label: t('attachmentStyles.avoidant.label'),
+    description: t('attachmentStyles.avoidant.description'),
+    traits: t('attachmentStyles.avoidant.traits')
   },
   {
     value: 'disorganized',
-    label: 'Fearful-Avoidant',
-    description: 'I want close relationships but worry about getting hurt. I have mixed feelings about depending on others.',
-    traits: ['Wants closeness but fears it', 'Inconsistent emotions', 'Past relationship trauma']
+    label: t('attachmentStyles.disorganized.label'),
+    description: t('attachmentStyles.disorganized.description'),
+    traits: t('attachmentStyles.disorganized.traits')
   },
   {
     value: 'unsure',
-    label: 'I\'m not sure',
-    description: 'I need to learn more about my attachment patterns.',
-    traits: ['Self-discovery needed']
+    label: t('attachmentStyles.unsure.label'),
+    description: t('attachmentStyles.unsure.description'),
+    traits: t('attachmentStyles.unsure.traits')
   }
 ];
 
-const FEAR_OPTIONS = [
-  { value: 'rejection', label: 'Fear of rejection', icon: '💔' },
-  { value: 'abandonment', label: 'Fear of abandonment', icon: '😰' },
-  { value: 'intimacy', label: 'Fear of intimacy', icon: '🚧' },
-  { value: 'vulnerability', label: 'Fear of being vulnerable', icon: '🛡️' },
-  { value: 'not-good-enough', label: 'Fear of not being good enough', icon: '😔' },
-  { value: 'losing-independence', label: 'Fear of losing independence', icon: '🔗' },
-  { value: 'commitment', label: 'Fear of commitment', icon: '⚰️' },
-  { value: 'repeating-mistakes', label: 'Fear of repeating past mistakes', icon: '🔄' },
-  { value: 'being-hurt', label: 'Fear of being hurt again', icon: '💔' },
-  { value: 'conflict', label: 'Fear of conflict', icon: '⚡' },
+const getFearOptions = (t: any) => [
+  { value: 'rejection', label: t('fearOptions.rejection'), icon: '💔' },
+  { value: 'abandonment', label: t('fearOptions.abandonment'), icon: '😰' },
+  { value: 'intimacy', label: t('fearOptions.intimacy'), icon: '🚧' },
+  { value: 'vulnerability', label: t('fearOptions.vulnerability'), icon: '🛡️' },
+  { value: 'not-good-enough', label: t('fearOptions.not-good-enough'), icon: '😔' },
+  { value: 'losing-independence', label: t('fearOptions.losing-independence'), icon: '🔗' },
+  { value: 'commitment', label: t('fearOptions.commitment'), icon: '⚰️' },
+  { value: 'repeating-mistakes', label: t('fearOptions.repeating-mistakes'), icon: '🔄' },
+  { value: 'being-hurt', label: t('fearOptions.being-hurt'), icon: '💔' },
+  { value: 'conflict', label: t('fearOptions.conflict'), icon: '⚡' },
 ];
 
-const STRENGTH_OPTIONS = [
-  { value: 'empathy', label: 'High empathy', icon: '❤️' },
-  { value: 'communication', label: 'Good communication', icon: '💬' },
-  { value: 'loyalty', label: 'Deep loyalty', icon: '🤝' },
-  { value: 'emotional-awareness', label: 'Emotional self-awareness', icon: '🧠' },
-  { value: 'resilience', label: 'Emotional resilience', icon: '💪' },
-  { value: 'compassion', label: 'Compassion for others', icon: '🤗' },
-  { value: 'patience', label: 'Patience', icon: '⏳' },
-  { value: 'authenticity', label: 'Authenticity', icon: '✨' },
-  { value: 'supportiveness', label: 'Being supportive', icon: '🫂' },
-  { value: 'forgiveness', label: 'Ability to forgive', icon: '🕊️' },
+const getStrengthOptions = (t: any) => [
+  { value: 'empathy', label: t('strengthOptions.empathy'), icon: '❤️' },
+  { value: 'communication', label: t('strengthOptions.communication'), icon: '💬' },
+  { value: 'loyalty', label: t('strengthOptions.loyalty'), icon: '🤝' },
+  { value: 'emotional-awareness', label: t('strengthOptions.emotional-awareness'), icon: '🧠' },
+  { value: 'resilience', label: t('strengthOptions.resilience'), icon: '💪' },
+  { value: 'compassion', label: t('strengthOptions.compassion'), icon: '🤗' },
+  { value: 'patience', label: t('strengthOptions.patience'), icon: '⏳' },
+  { value: 'authenticity', label: t('strengthOptions.authenticity'), icon: '✨' },
+  { value: 'supportiveness', label: t('strengthOptions.supportiveness'), icon: '🫂' },
+  { value: 'forgiveness', label: t('strengthOptions.forgiveness'), icon: '🕊️' },
 ];
 
-const CHALLENGE_OPTIONS = [
-  { value: 'setting-boundaries', label: 'Setting healthy boundaries', icon: '🚧' },
-  { value: 'expressing-emotions', label: 'Expressing emotions clearly', icon: '💭' },
-  { value: 'managing-anxiety', label: 'Managing relationship anxiety', icon: '😰' },
-  { value: 'trusting-others', label: 'Trusting new people', icon: '🤔' },
-  { value: 'conflict-resolution', label: 'Handling conflict', icon: '⚡' },
-  { value: 'self-confidence', label: 'Self-confidence in relationships', icon: '💪' },
-  { value: 'emotional-regulation', label: 'Managing intense emotions', icon: '🌊' },
-  { value: 'overthinking', label: 'Overthinking situations', icon: '🤯' },
-  { value: 'past-trauma', label: 'Processing past relationship trauma', icon: '🩹' },
-  { value: 'opening-up', label: 'Opening up to someone new', icon: '🔓' },
+const getChallengeOptions = (t: any) => [
+  { value: 'setting-boundaries', label: t('challengeOptions.setting-boundaries'), icon: '🚧' },
+  { value: 'expressing-emotions', label: t('challengeOptions.expressing-emotions'), icon: '💭' },
+  { value: 'managing-anxiety', label: t('challengeOptions.managing-anxiety'), icon: '😰' },
+  { value: 'trusting-others', label: t('challengeOptions.trusting-others'), icon: '🤔' },
+  { value: 'conflict-resolution', label: t('challengeOptions.conflict-resolution'), icon: '⚡' },
+  { value: 'self-confidence', label: t('challengeOptions.self-confidence'), icon: '💪' },
+  { value: 'emotional-regulation', label: t('challengeOptions.emotional-regulation'), icon: '🌊' },
+  { value: 'overthinking', label: t('challengeOptions.overthinking'), icon: '🤯' },
+  { value: 'past-trauma', label: t('challengeOptions.past-trauma'), icon: '🩹' },
+  { value: 'opening-up', label: t('challengeOptions.opening-up'), icon: '🔓' },
 ];
 
-const READINESS_LEVELS = [
-  { value: 1, label: 'Not ready', description: 'Still healing from past hurts' },
-  { value: 2, label: 'Mostly not ready', description: 'Working through some issues' },
-  { value: 3, label: 'Somewhat ready', description: 'Making progress but cautious' },
-  { value: 4, label: 'Getting ready', description: 'Feeling more confident' },
-  { value: 5, label: 'Ready', description: 'Open to finding the right person' },
-  { value: 6, label: 'Very ready', description: 'Actively seeking connection' },
-  { value: 7, label: 'Completely ready', description: 'Confident and optimistic' },
+const getReadinessLevels = (t: any) => [
+  { value: 1, label: t('readinessLevels.1.label'), description: t('readinessLevels.1.description') },
+  { value: 2, label: t('readinessLevels.2.label'), description: t('readinessLevels.2.description') },
+  { value: 3, label: t('readinessLevels.3.label'), description: t('readinessLevels.3.description') },
+  { value: 4, label: t('readinessLevels.4.label'), description: t('readinessLevels.4.description') },
+  { value: 5, label: t('readinessLevels.5.label'), description: t('readinessLevels.5.description') },
+  { value: 6, label: t('readinessLevels.6.label'), description: t('readinessLevels.6.description') },
+  { value: 7, label: t('readinessLevels.7.label'), description: t('readinessLevels.7.description') },
 ];
 
 export function EmotionalIntelligenceStep({ 
@@ -105,11 +106,18 @@ export function EmotionalIntelligenceStep({
   canGoBack, 
   isLoading 
 }: EmotionalIntelligenceStepProps) {
+  const t = useTranslations('assessment.emotionalIntelligence');
   const [attachmentStyle, setAttachmentStyle] = useState(data.attachmentStyle || '');
   const [primaryFears, setPrimaryFears] = useState<string[]>(data.primaryFears || []);
   const [topStrengths, setTopStrengths] = useState<string[]>(data.topStrengths || []);
   const [emotionalChallenges, setEmotionalChallenges] = useState<string[]>(data.emotionalChallenges || []);
   const [relationshipReadiness, setRelationshipReadiness] = useState(data.relationshipReadiness || 5);
+
+  const attachmentStyles = getAttachmentStyles(t);
+  const fearOptions = getFearOptions(t);
+  const strengthOptions = getStrengthOptions(t);
+  const challengeOptions = getChallengeOptions(t);
+  const readinessLevels = getReadinessLevels(t);
 
   const toggleSelection = (array: string[], setArray: (arr: string[]) => void, value: string, maxItems: number) => {
     if (array.includes(value)) {
@@ -142,11 +150,10 @@ export function EmotionalIntelligenceStep({
           <Brain className="w-8 h-8 text-white" />
         </div>
         <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
-          Understanding Your Emotional Landscape
+          {t('title')}
         </h2>
         <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-          Self-awareness is the foundation of healthy relationships. Let&apos;s explore your emotional patterns, 
-          strengths, and areas for growth.
+          {t('description')}
         </p>
       </div>
 
@@ -156,14 +163,14 @@ export function EmotionalIntelligenceStep({
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center gap-2">
               <Heart className="w-5 h-5 text-red-500" />
-              Attachment Style
+              {t('attachmentStyleTitle')}
             </CardTitle>
             <p className="text-sm text-gray-600 dark:text-gray-300">
-              How do you typically approach closeness and intimacy in relationships?
+              {t('attachmentStyleDescription')}
             </p>
           </CardHeader>
           <CardContent className="space-y-4">
-            {ATTACHMENT_STYLES.map((style) => (
+            {attachmentStyles.map((style) => (
               <Card
                 key={style.value}
                 className={`p-4 cursor-pointer transition-colors border-2 ${
@@ -205,21 +212,21 @@ export function EmotionalIntelligenceStep({
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center gap-2">
               <Shield className="w-5 h-5 text-yellow-500" />
-              Relationship Fears (Select up to 3)
+              {t('fearsTitle')}
             </CardTitle>
             <p className="text-sm text-gray-600 dark:text-gray-300">
-              What fears or anxieties do you notice in relationships? It&apos;s normal to have these.
+              {t('fearsDescription')}
             </p>
           </CardHeader>
           <CardContent>
             {primaryFears.length > 0 && (
               <div className="mb-4 p-3 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
                 <p className="text-sm font-medium text-yellow-900 dark:text-yellow-100 mb-2">
-                  Selected fears ({primaryFears.length}/3):
+                  {t('fearsSelected', { count: primaryFears.length })}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {primaryFears.map(fear => {
-                    const option = FEAR_OPTIONS.find(opt => opt.value === fear);
+                    const option = fearOptions.find(opt => opt.value === fear);
                     return (
                       <Badge key={fear} variant="secondary">
                         {option?.icon} {option?.label}
@@ -230,7 +237,7 @@ export function EmotionalIntelligenceStep({
               </div>
             )}
             <div className="grid gap-3 md:grid-cols-2">
-              {FEAR_OPTIONS.map((fear) => (
+              {fearOptions.map((fear) => (
                 <Card
                   key={fear.value}
                   className={`p-3 cursor-pointer transition-colors border-2 ${
@@ -258,21 +265,21 @@ export function EmotionalIntelligenceStep({
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center gap-2">
               <Star className="w-5 h-5 text-green-500" />
-              Your Emotional Strengths (Select up to 4)
+              {t('strengthsTitle')}
             </CardTitle>
             <p className="text-sm text-gray-600 dark:text-gray-300">
-              What are your superpowers when it comes to relationships and emotions?
+              {t('strengthsDescription')}
             </p>
           </CardHeader>
           <CardContent>
             {topStrengths.length > 0 && (
               <div className="mb-4 p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
                 <p className="text-sm font-medium text-green-900 dark:text-green-100 mb-2">
-                  Your strengths ({topStrengths.length}/4):
+                  {t('strengthsSelected', { count: topStrengths.length })}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {topStrengths.map(strength => {
-                    const option = STRENGTH_OPTIONS.find(opt => opt.value === strength);
+                    const option = strengthOptions.find(opt => opt.value === strength);
                     return (
                       <Badge key={strength} variant="secondary">
                         {option?.icon} {option?.label}
@@ -283,7 +290,7 @@ export function EmotionalIntelligenceStep({
               </div>
             )}
             <div className="grid gap-3 md:grid-cols-2">
-              {STRENGTH_OPTIONS.map((strength) => (
+              {strengthOptions.map((strength) => (
                 <Card
                   key={strength.value}
                   className={`p-3 cursor-pointer transition-colors border-2 ${
@@ -311,21 +318,21 @@ export function EmotionalIntelligenceStep({
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center gap-2">
               <Brain className="w-5 h-5 text-blue-500" />
-              Areas for Growth (Select up to 3)
+              {t('challengesTitle')}
             </CardTitle>
             <p className="text-sm text-gray-600 dark:text-gray-300">
-              What emotional skills would you like to develop or improve?
+              {t('challengesDescription')}
             </p>
           </CardHeader>
           <CardContent>
             {emotionalChallenges.length > 0 && (
               <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
                 <p className="text-sm font-medium text-blue-900 dark:text-blue-100 mb-2">
-                  Growth areas ({emotionalChallenges.length}/3):
+                  {t('challengesSelected', { count: emotionalChallenges.length })}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {emotionalChallenges.map(challenge => {
-                    const option = CHALLENGE_OPTIONS.find(opt => opt.value === challenge);
+                    const option = challengeOptions.find(opt => opt.value === challenge);
                     return (
                       <Badge key={challenge} variant="secondary">
                         {option?.icon} {option?.label}
@@ -336,7 +343,7 @@ export function EmotionalIntelligenceStep({
               </div>
             )}
             <div className="grid gap-3 md:grid-cols-2">
-              {CHALLENGE_OPTIONS.map((challenge) => (
+              {challengeOptions.map((challenge) => (
                 <Card
                   key={challenge.value}
                   className={`p-3 cursor-pointer transition-colors border-2 ${
@@ -364,10 +371,10 @@ export function EmotionalIntelligenceStep({
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center gap-2">
               <Heart className="w-5 h-5 text-pink-500" />
-              Relationship Readiness Scale
+              {t('readinessTitle')}
             </CardTitle>
             <p className="text-sm text-gray-600 dark:text-gray-300">
-              How ready do you feel to start or work on a romantic relationship right now?
+              {t('readinessDescription')}
             </p>
           </CardHeader>
           <CardContent>
@@ -378,17 +385,17 @@ export function EmotionalIntelligenceStep({
                     {relationshipReadiness}/7
                   </div>
                   <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    {READINESS_LEVELS.find(level => level.value === relationshipReadiness)?.label}
+                    {readinessLevels.find(level => level.value === relationshipReadiness)?.label}
                   </p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    {READINESS_LEVELS.find(level => level.value === relationshipReadiness)?.description}
+                    {readinessLevels.find(level => level.value === relationshipReadiness)?.description}
                   </p>
                 </div>
               </div>
               
               <div className="flex justify-center">
                 <div className="flex space-x-2">
-                  {READINESS_LEVELS.map((level) => (
+                  {readinessLevels.map((level) => (
                     <button
                       key={level.value}
                       onClick={() => setRelationshipReadiness(level.value)}
@@ -405,8 +412,8 @@ export function EmotionalIntelligenceStep({
               </div>
               
               <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 px-1">
-                <span>Not ready</span>
-                <span>Completely ready</span>
+                <span>{t('readinessScale.notReady')}</span>
+                <span>{t('readinessScale.completelyReady')}</span>
               </div>
             </div>
           </CardContent>
@@ -419,14 +426,14 @@ export function EmotionalIntelligenceStep({
           onClick={onBack}
           disabled={!canGoBack || isLoading}
         >
-          Back
+          {t('buttons.back')}
         </Button>
         <Button
           onClick={handleNext}
           disabled={!isFormValid || isLoading}
           className="px-8"
         >
-          {isLoading ? 'Saving...' : 'Continue'}
+          {isLoading ? t('buttons.saving') : t('buttons.continue')}
           <ArrowRight className="w-4 h-4 ml-2" />
         </Button>
       </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -36,6 +37,7 @@ export function EnhancedSummary({
   isLoading: isSubmitting,
   isLastStep 
 }: EnhancedSummaryProps) {
+  const t = useTranslations('assessment.enhancedSummary');
   const [insights, setInsights] = useState<ProfileInsights | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisComplete, setAnalysisComplete] = useState(false);
@@ -82,11 +84,10 @@ export function EnhancedSummary({
           <Trophy className="w-10 h-10 text-white" />
         </div>
         <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100">
-          Assessment Complete! 🎉
+          {t('title')}
         </h2>
         <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-          Thank you for taking this journey of self-discovery. Here&apos;s what we learned about you 
-          and how we can support your relationship goals.
+          {t('description')}
         </p>
       </div>
 
@@ -283,7 +284,7 @@ export function EnhancedSummary({
                 onClick={onBack}
                 disabled={!canGoBack || isSubmitting}
               >
-                Back to Review
+                {t('buttons.backToReview')}
               </Button>
               <Button
                 onClick={onNext}
@@ -294,11 +295,11 @@ export function EnhancedSummary({
                 {isSubmitting ? (
                   <>
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                    Completing...
+                    {t('buttons.completing')}
                   </>
                 ) : (
                   <>
-                    Start My Coaching Program
+                    {t('buttons.startProgram')}
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </>
                 )}

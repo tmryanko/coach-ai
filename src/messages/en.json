@@ -378,8 +378,304 @@
       }
     },
     "personality": {
-      "title": "Tell us about your personality",
-      "description": "Help us understand how you approach relationships and learning."
+      "title": "Tell us about your personality & preferences",
+      "description": "This helps us personalize your coaching style and recommendations.",
+      "socialEnergyLabel": "Social Energy: How do you recharge?",
+      "socialEnergyLabels": {
+        "extroverted": "Around people (Extroverted)",
+        "introverted": "Alone time (Introverted)"
+      },
+      "empathyLabel": "Empathy Level: How easily do you understand others' emotions?",
+      "empathyLabels": {
+        "logicFocused": "Logic-focused",
+        "highlyEmpathetic": "Highly empathetic"
+      },
+      "conflictStyleLabel": "How do you typically handle conflicts?",
+      "conflictStyles": {
+        "collaborator": {
+          "label": "Collaborator",
+          "description": "Work together to find win-win solutions"
+        },
+        "competitor": {
+          "label": "Competitor", 
+          "description": "Stand firm on important issues"
+        },
+        "accommodator": {
+          "label": "Accommodator",
+          "description": "Prefer to keep peace and compromise"
+        },
+        "avoider": {
+          "label": "Avoider",
+          "description": "Prefer to cool down before addressing conflicts"
+        },
+        "compromiser": {
+          "label": "Compromiser",
+          "description": "Find middle ground solutions"
+        }
+      },
+      "learningPreferenceLabel": "How do you prefer to learn new things?",
+      "learningPreferences": {
+        "visual": {
+          "label": "Visual Learning",
+          "description": "Charts, diagrams, and written materials"
+        },
+        "auditory": {
+          "label": "Auditory Learning", 
+          "description": "Discussions, podcasts, and verbal instruction"
+        },
+        "kinesthetic": {
+          "label": "Hands-on Learning",
+          "description": "Activities, exercises, and practical application"
+        },
+        "reading": {
+          "label": "Reading & Writing",
+          "description": "Articles, journaling, and written exercises"
+        }
+      },
+      "prioritiesLabel": "What are your top life priorities? (Select up to 3)",
+      "priorityOptions": {
+        "family-time": "Quality Family Time",
+        "career-growth": "Career Growth",
+        "personal-health": "Personal Health & Fitness", 
+        "financial-security": "Financial Security",
+        "social-connections": "Social Connections",
+        "personal-growth": "Personal Development",
+        "adventure": "Adventure & Travel",
+        "stability": "Stability & Routine"
+      },
+      "buttons": {
+        "back": "Back",
+        "continue": "Continue",
+        "saving": "Saving..."
+      }
+    },
+    "emotionalIntelligence": {
+      "title": "Understanding Your Emotional Landscape",
+      "description": "Self-awareness is the foundation of healthy relationships. Let's explore your emotional patterns, strengths, and areas for growth.",
+      "attachmentStyleTitle": "Attachment Style",
+      "attachmentStyleDescription": "How do you typically approach closeness and intimacy in relationships?",
+      "attachmentStyles": {
+        "secure": {
+          "label": "Secure",
+          "description": "I find it easy to get close to others and am comfortable depending on them. I don't often worry about being abandoned.",
+          "traits": ["Comfortable with intimacy", "Good communication", "Trusting"]
+        },
+        "anxious": {
+          "label": "Anxious",
+          "description": "I want to be very close to partners, but worry they don't feel the same. I fear being abandoned or unloved.",
+          "traits": ["Seeks reassurance", "Fears abandonment", "Highly empathetic"]
+        },
+        "avoidant": {
+          "label": "Avoidant",
+          "description": "I prefer independence and self-sufficiency. I sometimes find it difficult to trust others completely.",
+          "traits": ["Values independence", "Uncomfortable with emotions", "Self-reliant"]
+        },
+        "disorganized": {
+          "label": "Fearful-Avoidant",
+          "description": "I want close relationships but worry about getting hurt. I have mixed feelings about depending on others.",
+          "traits": ["Wants closeness but fears it", "Inconsistent emotions", "Past relationship trauma"]
+        },
+        "unsure": {
+          "label": "I'm not sure",
+          "description": "I need to learn more about my attachment patterns.",
+          "traits": ["Self-discovery needed"]
+        }
+      },
+      "fearsTitle": "Relationship Fears (Select up to 3)",
+      "fearsDescription": "What fears or anxieties do you notice in relationships? It's normal to have these.",
+      "fearsSelected": "Selected fears ({count}/3):",
+      "fearOptions": {
+        "rejection": "Fear of rejection",
+        "abandonment": "Fear of abandonment",
+        "intimacy": "Fear of intimacy",
+        "vulnerability": "Fear of being vulnerable",
+        "not-good-enough": "Fear of not being good enough",
+        "losing-independence": "Fear of losing independence",
+        "commitment": "Fear of commitment",
+        "repeating-mistakes": "Fear of repeating past mistakes",
+        "being-hurt": "Fear of being hurt again",
+        "conflict": "Fear of conflict"
+      },
+      "strengthsTitle": "Your Emotional Strengths (Select up to 4)",
+      "strengthsDescription": "What are your superpowers when it comes to relationships and emotions?",
+      "strengthsSelected": "Your strengths ({count}/4):",
+      "strengthOptions": {
+        "empathy": "High empathy",
+        "communication": "Good communication",
+        "loyalty": "Deep loyalty",
+        "emotional-awareness": "Emotional self-awareness",
+        "resilience": "Emotional resilience",
+        "compassion": "Compassion for others",
+        "patience": "Patience",
+        "authenticity": "Authenticity",
+        "supportiveness": "Being supportive",
+        "forgiveness": "Ability to forgive"
+      },
+      "challengesTitle": "Areas for Growth (Select up to 3)",
+      "challengesDescription": "What emotional skills would you like to develop or improve?",
+      "challengesSelected": "Growth areas ({count}/3):",
+      "challengeOptions": {
+        "setting-boundaries": "Setting healthy boundaries",
+        "expressing-emotions": "Expressing emotions clearly",
+        "managing-anxiety": "Managing relationship anxiety",
+        "trusting-others": "Trusting new people",
+        "conflict-resolution": "Handling conflict",
+        "self-confidence": "Self-confidence in relationships",
+        "emotional-regulation": "Managing intense emotions",
+        "overthinking": "Overthinking situations",
+        "past-trauma": "Processing past relationship trauma",
+        "opening-up": "Opening up to someone new"
+      },
+      "readinessTitle": "Relationship Readiness Scale",
+      "readinessDescription": "How ready do you feel to start or work on a romantic relationship right now?",
+      "readinessLevels": {
+        "1": { "label": "Not ready", "description": "Still healing from past hurts" },
+        "2": { "label": "Mostly not ready", "description": "Working through some issues" },
+        "3": { "label": "Somewhat ready", "description": "Making progress but cautious" },
+        "4": { "label": "Getting ready", "description": "Feeling more confident" },
+        "5": { "label": "Ready", "description": "Open to finding the right person" },
+        "6": { "label": "Very ready", "description": "Actively seeking connection" },
+        "7": { "label": "Completely ready", "description": "Confident and optimistic" }
+      },
+      "readinessScale": {
+        "notReady": "Not ready",
+        "completelyReady": "Completely ready"
+      },
+      "buttons": {
+        "back": "Back",
+        "continue": "Continue",
+        "saving": "Saving..."
+      }
+    },
+    "lifestyleCompatibility": {
+      "title": "Lifestyle & Compatibility",
+      "description": "Understanding how you live, communicate, and handle challenges helps us recommend coaching strategies that fit your natural patterns and preferences.",
+      "workLifeBalanceTitle": "Work-Life Balance Philosophy",
+      "workLifeBalanceDescription": "How do you approach the balance between career and personal life?",
+      "workLifeBalanceOptions": {
+        "work-focused": {
+          "label": "Career-Focused",
+          "description": "Work is a top priority, long hours are common"
+        },
+        "balanced": {
+          "label": "Balanced Approach",
+          "description": "Equal importance to work and personal life"
+        },
+        "life-focused": {
+          "label": "Life-Focused",
+          "description": "Personal life and relationships come first"
+        },
+        "flexible": {
+          "label": "Flexible & Adaptive",
+          "description": "Balance shifts based on life circumstances"
+        }
+      },
+      "socialEnergyTitle": "Social Energy Level",
+      "socialEnergyDescription": "How much do you enjoy being around people and social activities?",
+      "socialEnergyLabels": {
+        "preferSolitude": "Prefer solitude",
+        "loveBeingSocial": "Love being social"
+      },
+      "hobbiesTitle": "Hobbies & Interests (Select 3-6)",
+      "hobbiesDescription": "What activities do you enjoy? This helps us understand your lifestyle and what you might want to share with a partner.",
+      "hobbiesSelected": "Your interests ({count}/6):",
+      "hobbiesOptions": {
+        "fitness-sports": "Fitness & Sports",
+        "outdoor-adventure": "Outdoor Adventures",
+        "arts-culture": "Arts & Culture",
+        "cooking-food": "Cooking & Food",
+        "travel": "Travel & Exploration",
+        "music-concerts": "Music & Concerts",
+        "reading-learning": "Reading & Learning",
+        "gaming-tech": "Gaming & Technology",
+        "social-events": "Social Events & Parties",
+        "crafts-diy": "Crafts & DIY Projects",
+        "meditation-wellness": "Meditation & Wellness",
+        "volunteering": "Volunteering & Causes",
+        "photography": "Photography",
+        "gardening-nature": "Gardening & Nature",
+        "movies-tv": "Movies & TV Shows"
+      },
+      "communicationStyleTitle": "Communication Style",
+      "communicationStyleDescription": "How do you typically communicate in relationships?",
+      "communicationStyles": {
+        "direct-straightforward": {
+          "label": "Direct & Straightforward",
+          "description": "I say what I mean clearly and appreciate the same"
+        },
+        "gentle-diplomatic": {
+          "label": "Gentle & Diplomatic",
+          "description": "I choose words carefully to maintain harmony"
+        },
+        "expressive-emotional": {
+          "label": "Expressive & Emotional",
+          "description": "I share feelings openly and connect emotionally"
+        },
+        "analytical-logical": {
+          "label": "Analytical & Logical",
+          "description": "I prefer facts, reasoning, and structured discussions"
+        },
+        "playful-humorous": {
+          "label": "Playful & Humorous",
+          "description": "I use humor and lightness to connect and communicate"
+        }
+      },
+      "conflictStyleTitle": "Conflict Resolution Style",
+      "conflictStyleDescription": "How do you prefer to handle disagreements or conflicts?",
+      "conflictStyles": {
+        "address-immediately": {
+          "label": "Address Immediately",
+          "description": "I prefer to talk through issues right away"
+        },
+        "cool-down-first": {
+          "label": "Cool Down First",
+          "description": "I need space to process before discussing conflicts"
+        },
+        "collaborative-problem-solving": {
+          "label": "Collaborative Problem-Solving",
+          "description": "I focus on finding solutions together"
+        },
+        "avoid-if-possible": {
+          "label": "Avoid If Possible",
+          "description": "I prefer to let minor issues resolve naturally"
+        },
+        "seek-compromise": {
+          "label": "Seek Compromise",
+          "description": "I look for middle ground where both can be happy"
+        }
+      },
+      "buttons": {
+        "back": "Back",
+        "continue": "Continue",
+        "saving": "Saving..."
+      }
+    },
+    "selfReflection": {
+      "title": "Self-Reflection & Growth",
+      "description": "The final step in your journey of self-discovery. These insights help us understand how you see yourself and what you're working toward in relationships.",
+      "buttons": {
+        "back": "Back",
+        "continue": "Complete Assessment",
+        "saving": "Saving..."
+      }
+    },
+    "valuesVision": {
+      "title": "Your Values & Relationship Vision",
+      "description": "Understanding what matters most to you helps us match you with coaching strategies and insights that align with your deepest values and relationship dreams.",
+      "buttons": {
+        "back": "Back",
+        "continue": "Continue",
+        "saving": "Saving..."
+      }
+    },
+    "enhancedSummary": {
+      "title": "Assessment Complete! 🎉",
+      "description": "Thank you for taking this journey of self-discovery. Here's what we learned about you and how we can support your relationship goals.",
+      "buttons": {
+        "backToReview": "Back to Review",
+        "startProgram": "Start My Coaching Program",
+        "completing": "Completing..."
+      }
     },
     "relationshipStatus": {
       "title": "What's your current relationship status?",

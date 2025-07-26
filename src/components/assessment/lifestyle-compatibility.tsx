@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
@@ -16,49 +17,49 @@ interface LifestyleCompatibilityStepProps {
   isLoading: boolean;
 }
 
-const WORK_LIFE_BALANCE_OPTIONS = [
+const getWorkLifeBalanceOptions = (t: any) => [
   { 
     value: 'work-focused', 
-    label: 'Career-Focused', 
-    description: 'Work is a top priority, long hours are common',
+    label: t('workLifeBalanceOptions.work-focused.label'), 
+    description: t('workLifeBalanceOptions.work-focused.description'),
     icon: '💼'
   },
   { 
     value: 'balanced', 
-    label: 'Balanced Approach', 
-    description: 'Equal importance to work and personal life',
+    label: t('workLifeBalanceOptions.balanced.label'), 
+    description: t('workLifeBalanceOptions.balanced.description'),
     icon: '⚖️'
   },
   { 
     value: 'life-focused', 
-    label: 'Life-Focused', 
-    description: 'Personal life and relationships come first',
+    label: t('workLifeBalanceOptions.life-focused.label'), 
+    description: t('workLifeBalanceOptions.life-focused.description'),
     icon: '🏡'
   },
   { 
     value: 'flexible', 
-    label: 'Flexible & Adaptive', 
-    description: 'Balance shifts based on life circumstances',
+    label: t('workLifeBalanceOptions.flexible.label'), 
+    description: t('workLifeBalanceOptions.flexible.description'),
     icon: '🔄'
   },
 ];
 
-const HOBBIES_INTERESTS = [
-  { value: 'fitness-sports', label: 'Fitness & Sports', icon: '🏃‍♀️' },
-  { value: 'outdoor-adventure', label: 'Outdoor Adventures', icon: '🏔️' },
-  { value: 'arts-culture', label: 'Arts & Culture', icon: '🎭' },
-  { value: 'cooking-food', label: 'Cooking & Food', icon: '👨‍🍳' },
-  { value: 'travel', label: 'Travel & Exploration', icon: '✈️' },
-  { value: 'music-concerts', label: 'Music & Concerts', icon: '🎵' },
-  { value: 'reading-learning', label: 'Reading & Learning', icon: '📚' },
-  { value: 'gaming-tech', label: 'Gaming & Technology', icon: '🎮' },
-  { value: 'social-events', label: 'Social Events & Parties', icon: '🎉' },
-  { value: 'crafts-diy', label: 'Crafts & DIY Projects', icon: '🛠️' },
-  { value: 'meditation-wellness', label: 'Meditation & Wellness', icon: '🧘‍♀️' },
-  { value: 'volunteering', label: 'Volunteering & Causes', icon: '🤝' },
-  { value: 'photography', label: 'Photography', icon: '📸' },
-  { value: 'gardening-nature', label: 'Gardening & Nature', icon: '🌱' },
-  { value: 'movies-tv', label: 'Movies & TV Shows', icon: '🎬' },
+const getHobbiesInterests = (t: any) => [
+  { value: 'fitness-sports', label: t('hobbiesOptions.fitness-sports'), icon: '🏃‍♀️' },
+  { value: 'outdoor-adventure', label: t('hobbiesOptions.outdoor-adventure'), icon: '🏔️' },
+  { value: 'arts-culture', label: t('hobbiesOptions.arts-culture'), icon: '🎭' },
+  { value: 'cooking-food', label: t('hobbiesOptions.cooking-food'), icon: '👨‍🍳' },
+  { value: 'travel', label: t('hobbiesOptions.travel'), icon: '✈️' },
+  { value: 'music-concerts', label: t('hobbiesOptions.music-concerts'), icon: '🎵' },
+  { value: 'reading-learning', label: t('hobbiesOptions.reading-learning'), icon: '📚' },
+  { value: 'gaming-tech', label: t('hobbiesOptions.gaming-tech'), icon: '🎮' },
+  { value: 'social-events', label: t('hobbiesOptions.social-events'), icon: '🎉' },
+  { value: 'crafts-diy', label: t('hobbiesOptions.crafts-diy'), icon: '🛠️' },
+  { value: 'meditation-wellness', label: t('hobbiesOptions.meditation-wellness'), icon: '🧘‍♀️' },
+  { value: 'volunteering', label: t('hobbiesOptions.volunteering'), icon: '🤝' },
+  { value: 'photography', label: t('hobbiesOptions.photography'), icon: '📸' },
+  { value: 'gardening-nature', label: t('hobbiesOptions.gardening-nature'), icon: '🌱' },
+  { value: 'movies-tv', label: t('hobbiesOptions.movies-tv'), icon: '🎬' },
 ];
 
 const COMMUNICATION_STYLES = [
@@ -134,11 +135,15 @@ export function LifestyleCompatibilityStep({
   canGoBack, 
   isLoading 
 }: LifestyleCompatibilityStepProps) {
+  const t = useTranslations('assessment.lifestyleCompatibility');
   const [workLifeBalance, setWorkLifeBalance] = useState(data.workLifeBalance || '');
   const [socialEnergyLevel, setSocialEnergyLevel] = useState(data.socialEnergyLevel || 5);
   const [hobbiesAndInterests, setHobbiesAndInterests] = useState<string[]>(data.hobbiesAndInterests || []);
   const [communicationStyle, setCommunicationStyle] = useState(data.communicationStyle || '');
   const [conflictStyle, setConflictStyle] = useState(data.conflictStyle || '');
+
+  const workLifeBalanceOptions = getWorkLifeBalanceOptions(t);
+  const hobbiesInterests = getHobbiesInterests(t);
 
   const toggleHobby = (hobby: string) => {
     if (hobbiesAndInterests.includes(hobby)) {
@@ -178,11 +183,10 @@ export function LifestyleCompatibilityStep({
           <Home className="w-8 h-8 text-white" />
         </div>
         <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
-          Lifestyle & Compatibility
+          {t('title')}
         </h2>
         <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-          Understanding how you live, communicate, and handle challenges helps us recommend 
-          coaching strategies that fit your natural patterns and preferences.
+          {t('description')}
         </p>
       </div>
 
@@ -192,15 +196,15 @@ export function LifestyleCompatibilityStep({
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center gap-2">
               <Home className="w-5 h-5 text-blue-500" />
-              Work-Life Balance Philosophy
+              {t('workLifeBalanceTitle')}
             </CardTitle>
             <p className="text-sm text-gray-600 dark:text-gray-300">
-              How do you approach the balance between career and personal life?
+              {t('workLifeBalanceDescription')}
             </p>
           </CardHeader>
           <CardContent>
             <div className="grid gap-4 md:grid-cols-2">
-              {WORK_LIFE_BALANCE_OPTIONS.map((option) => (
+              {workLifeBalanceOptions.map((option) => (
                 <Card
                   key={option.value}
                   className={`p-4 cursor-pointer transition-colors border-2 ${
@@ -232,10 +236,10 @@ export function LifestyleCompatibilityStep({
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center gap-2">
               <Users className="w-5 h-5 text-green-500" />
-              Social Energy Level
+              {t('socialEnergyTitle')}
             </CardTitle>
             <p className="text-sm text-gray-600 dark:text-gray-300">
-              How much do you enjoy being around people and social activities?
+              {t('socialEnergyDescription')}
             </p>
           </CardHeader>
           <CardContent>
@@ -268,8 +272,8 @@ export function LifestyleCompatibilityStep({
               </div>
               
               <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 px-1">
-                <span>Prefer solitude</span>
-                <span>Love being social</span>
+                <span>{t('socialEnergyLabels.preferSolitude')}</span>
+                <span>{t('socialEnergyLabels.loveBeingSocial')}</span>
               </div>
             </div>
           </CardContent>
@@ -280,21 +284,21 @@ export function LifestyleCompatibilityStep({
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center gap-2">
               <Users className="w-5 h-5 text-purple-500" />
-              Hobbies & Interests (Select 3-6)
+              {t('hobbiesTitle')}
             </CardTitle>
             <p className="text-sm text-gray-600 dark:text-gray-300">
-              What activities do you enjoy? This helps us understand your lifestyle and what you might want to share with a partner.
+              {t('hobbiesDescription')}
             </p>
           </CardHeader>
           <CardContent>
             {hobbiesAndInterests.length > 0 && (
               <div className="mb-4 p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
                 <p className="text-sm font-medium text-purple-900 dark:text-purple-100 mb-2">
-                  Your interests ({hobbiesAndInterests.length}/6):
+                  {t('hobbiesSelected', { count: hobbiesAndInterests.length })}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {hobbiesAndInterests.map(hobby => {
-                    const option = HOBBIES_INTERESTS.find(opt => opt.value === hobby);
+                    const option = hobbiesInterests.find(opt => opt.value === hobby);
                     return (
                       <Badge key={hobby} variant="secondary">
                         {option?.icon} {option?.label}
@@ -305,7 +309,7 @@ export function LifestyleCompatibilityStep({
               </div>
             )}
             <div className="grid gap-3 md:grid-cols-3">
-              {HOBBIES_INTERESTS.map((hobby) => (
+              {hobbiesInterests.map((hobby) => (
                 <Card
                   key={hobby.value}
                   className={`p-3 cursor-pointer transition-colors border-2 ${
@@ -425,14 +429,14 @@ export function LifestyleCompatibilityStep({
           onClick={onBack}
           disabled={!canGoBack || isLoading}
         >
-          Back
+          {t('buttons.back')}
         </Button>
         <Button
           onClick={handleNext}
           disabled={!isFormValid || isLoading}
           className="px-8"
         >
-          {isLoading ? 'Saving...' : 'Continue'}
+          {isLoading ? t('buttons.saving') : t('buttons.continue')}
           <ArrowRight className="w-4 h-4 ml-2" />
         </Button>
       </div>

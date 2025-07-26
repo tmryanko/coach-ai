@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
@@ -13,38 +14,43 @@ interface PersonalityStepProps {
   isLoading: boolean;
 }
 
-const CONFLICT_STYLES = [
-  { value: 'collaborator', label: 'Collaborator', description: 'Work together to find win-win solutions' },
-  { value: 'competitor', label: 'Competitor', description: 'Stand firm on important issues' },
-  { value: 'accommodator', label: 'Accommodator', description: 'Prefer to keep peace and compromise' },
-  { value: 'avoider', label: 'Avoider', description: 'Prefer to cool down before addressing conflicts' },
-  { value: 'compromiser', label: 'Compromiser', description: 'Find middle ground solutions' },
+const getConflictStyles = (t: any) => [
+  { value: 'collaborator', label: t('conflictStyles.collaborator.label'), description: t('conflictStyles.collaborator.description') },
+  { value: 'competitor', label: t('conflictStyles.competitor.label'), description: t('conflictStyles.competitor.description') },
+  { value: 'accommodator', label: t('conflictStyles.accommodator.label'), description: t('conflictStyles.accommodator.description') },
+  { value: 'avoider', label: t('conflictStyles.avoider.label'), description: t('conflictStyles.avoider.description') },
+  { value: 'compromiser', label: t('conflictStyles.compromiser.label'), description: t('conflictStyles.compromiser.description') },
 ];
 
-const LEARNING_PREFERENCES = [
-  { value: 'visual', label: 'Visual Learning', description: 'Charts, diagrams, and written materials' },
-  { value: 'auditory', label: 'Auditory Learning', description: 'Discussions, podcasts, and verbal instruction' },
-  { value: 'kinesthetic', label: 'Hands-on Learning', description: 'Activities, exercises, and practical application' },
-  { value: 'reading', label: 'Reading & Writing', description: 'Articles, journaling, and written exercises' },
+const getLearningPreferences = (t: any) => [
+  { value: 'visual', label: t('learningPreferences.visual.label'), description: t('learningPreferences.visual.description') },
+  { value: 'auditory', label: t('learningPreferences.auditory.label'), description: t('learningPreferences.auditory.description') },
+  { value: 'kinesthetic', label: t('learningPreferences.kinesthetic.label'), description: t('learningPreferences.kinesthetic.description') },
+  { value: 'reading', label: t('learningPreferences.reading.label'), description: t('learningPreferences.reading.description') },
 ];
 
-const PRIORITY_OPTIONS = [
-  { value: 'family-time', label: 'Quality Family Time' },
-  { value: 'career-growth', label: 'Career Growth' },
-  { value: 'personal-health', label: 'Personal Health & Fitness' },
-  { value: 'financial-security', label: 'Financial Security' },
-  { value: 'social-connections', label: 'Social Connections' },
-  { value: 'personal-growth', label: 'Personal Development' },
-  { value: 'adventure', label: 'Adventure & Travel' },
-  { value: 'stability', label: 'Stability & Routine' },
+const getPriorityOptions = (t: any) => [
+  { value: 'family-time', label: t('priorityOptions.family-time') },
+  { value: 'career-growth', label: t('priorityOptions.career-growth') },
+  { value: 'personal-health', label: t('priorityOptions.personal-health') },
+  { value: 'financial-security', label: t('priorityOptions.financial-security') },
+  { value: 'social-connections', label: t('priorityOptions.social-connections') },
+  { value: 'personal-growth', label: t('priorityOptions.personal-growth') },
+  { value: 'adventure', label: t('priorityOptions.adventure') },
+  { value: 'stability', label: t('priorityOptions.stability') },
 ];
 
 export function PersonalityStep({ data, onNext, onBack, canGoBack, isLoading }: PersonalityStepProps) {
+  const t = useTranslations('assessment.personality');
   const [introversion, setIntroversion] = useState(data.personalityTraits?.introversion || 3);
   const [empathy, setEmpathy] = useState(data.personalityTraits?.empathy || 3);
   const [conflictStyle, setConflictStyle] = useState(data.personalityTraits?.conflictStyle || '');
   const [learningPreference, setLearningPreference] = useState(data.personalityTraits?.learningPreference || '');
   const [priorities, setPriorities] = useState<string[]>(data.personalityTraits?.priorities || []);
+
+  const conflictStyles = getConflictStyles(t);
+  const learningPreferences = getLearningPreferences(t);
+  const priorityOptions = getPriorityOptions(t);
 
   const togglePriority = (priority: string) => {
     setPriorities(prev => 
@@ -74,10 +80,10 @@ export function PersonalityStep({ data, onNext, onBack, canGoBack, isLoading }: 
     <div className="space-y-8">
       <div className="text-center space-y-2">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-          Tell us about your personality & preferences
+          {t('title')}
         </h2>
         <p className="text-gray-600 dark:text-gray-300">
-          This helps us personalize your coaching style and recommendations.
+          {t('description')}
         </p>
       </div>
 
@@ -85,12 +91,12 @@ export function PersonalityStep({ data, onNext, onBack, canGoBack, isLoading }: 
       <div className="space-y-6">
         <div>
           <Label className="text-base font-medium">
-            Social Energy: How do you recharge?
+            {t('socialEnergyLabel')}
           </Label>
           <div className="mt-3 space-y-2">
             <div className="flex justify-between text-sm text-gray-600 dark:text-gray-300">
-              <span>Around people (Extroverted)</span>
-              <span>Alone time (Introverted)</span>
+              <span>{t('socialEnergyLabels.extroverted')}</span>
+              <span>{t('socialEnergyLabels.introverted')}</span>
             </div>
             <div className="flex space-x-2">
               {[1, 2, 3, 4, 5].map((value) => (
@@ -112,12 +118,12 @@ export function PersonalityStep({ data, onNext, onBack, canGoBack, isLoading }: 
 
         <div>
           <Label className="text-base font-medium">
-            Empathy Level: How easily do you understand others&apos; emotions?
+            {t('empathyLabel')}
           </Label>
           <div className="mt-3 space-y-2">
             <div className="flex justify-between text-sm text-gray-600 dark:text-gray-300">
-              <span>Logic-focused</span>
-              <span>Highly empathetic</span>
+              <span>{t('empathyLabels.logicFocused')}</span>
+              <span>{t('empathyLabels.highlyEmpathetic')}</span>
             </div>
             <div className="flex space-x-2">
               {[1, 2, 3, 4, 5].map((value) => (
@@ -141,10 +147,10 @@ export function PersonalityStep({ data, onNext, onBack, canGoBack, isLoading }: 
       {/* Conflict Style */}
       <div>
         <Label className="text-base font-medium mb-3 block">
-          How do you typically handle conflicts?
+          {t('conflictStyleLabel')}
         </Label>
         <div className="grid gap-2 md:grid-cols-2">
-          {CONFLICT_STYLES.map((style) => (
+          {conflictStyles.map((style) => (
             <Card
               key={style.value}
               className={`p-3 cursor-pointer transition-colors border-2 ${
@@ -171,10 +177,10 @@ export function PersonalityStep({ data, onNext, onBack, canGoBack, isLoading }: 
       {/* Learning Preference */}
       <div>
         <Label className="text-base font-medium mb-3 block">
-          How do you prefer to learn new things?
+          {t('learningPreferenceLabel')}
         </Label>
         <div className="grid gap-2 md:grid-cols-2">
-          {LEARNING_PREFERENCES.map((pref) => (
+          {learningPreferences.map((pref) => (
             <Card
               key={pref.value}
               className={`p-3 cursor-pointer transition-colors border-2 ${
@@ -201,12 +207,12 @@ export function PersonalityStep({ data, onNext, onBack, canGoBack, isLoading }: 
       {/* Life Priorities */}
       <div>
         <Label className="text-base font-medium mb-3 block">
-          What are your top life priorities? (Select up to 3)
+          {t('prioritiesLabel')}
         </Label>
         {priorities.length > 0 && (
           <div className="mb-3 flex flex-wrap gap-2">
             {priorities.map(priority => {
-              const option = PRIORITY_OPTIONS.find(opt => opt.value === priority);
+              const option = priorityOptions.find(opt => opt.value === priority);
               return (
                 <Badge key={priority} variant="secondary">
                   {option?.label}
@@ -216,7 +222,7 @@ export function PersonalityStep({ data, onNext, onBack, canGoBack, isLoading }: 
           </div>
         )}
         <div className="grid gap-2 md:grid-cols-2">
-          {PRIORITY_OPTIONS.map((priority) => (
+          {priorityOptions.map((priority) => (
             <Card
               key={priority.value}
               className={`p-3 cursor-pointer transition-colors border-2 ${
@@ -245,13 +251,13 @@ export function PersonalityStep({ data, onNext, onBack, canGoBack, isLoading }: 
           onClick={onBack}
           disabled={!canGoBack || isLoading}
         >
-          Back
+          {t('buttons.back')}
         </Button>
         <Button
           onClick={handleNext}
           disabled={!isFormValid || isLoading}
         >
-          {isLoading ? 'Saving...' : 'Continue'}
+          {isLoading ? t('buttons.saving') : t('buttons.continue')}
         </Button>
       </div>
     </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
@@ -72,6 +73,7 @@ export function ValuesVisionStep({
   canGoBack, 
   isLoading 
 }: ValuesVisionStepProps) {
+  const t = useTranslations('assessment.valuesVision');
   const [coreValues, setCoreValues] = useState<string[]>(data.coreValues || []);
   const [relationshipVision, setRelationshipVision] = useState(data.relationshipVision || '');
   const [lifePriorities, setLifePriorities] = useState<string[]>(data.lifePriorities || []);
@@ -107,11 +109,10 @@ export function ValuesVisionStep({
           <Compass className="w-8 h-8 text-white" />
         </div>
         <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
-          Your Values & Relationship Vision
+          {t('title')}
         </h2>
         <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-          Understanding what matters most to you helps us match you with coaching strategies and 
-          insights that align with your deepest values and relationship dreams.
+          {t('description')}
         </p>
       </div>
 
@@ -321,14 +322,14 @@ export function ValuesVisionStep({
           onClick={onBack}
           disabled={!canGoBack || isLoading}
         >
-          Back
+          {t('buttons.back')}
         </Button>
         <Button
           onClick={handleNext}
           disabled={!isFormValid || isLoading}
           className="px-8"
         >
-          {isLoading ? 'Saving...' : 'Continue'}
+          {isLoading ? t('buttons.saving') : t('buttons.continue')}
           <ArrowRight className="w-4 h-4 ml-2" />
         </Button>
       </div>

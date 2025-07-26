@@ -378,8 +378,260 @@
       }
     },
     "personality": {
-      "title": "ספרו לנו על האישיות שלכם",
-      "description": "עזרו לנו להבין איך אתם ניגשים לזוגיות ולמידה."
+      "title": "ספרו לנו על האישיות וההעדפות שלכם",
+      "description": "זה עוזר לנו להתאים אישית את סגנון האימון וההמלצות שלכם.",
+      "socialEnergyLabel": "אנרגיה חברתית: איך אתם נטענים?",
+      "socialEnergyLabels": {
+        "extroverted": "בסביבת אנשים (חברותי)",
+        "introverted": "זמן לבד (מופנם)"
+      },
+      "empathyLabel": "רמת אמפתיה: כמה קל לכם להבין רגשות של אחרים?",
+      "empathyLabels": {
+        "logicFocused": "ממוקד היגיון",
+        "highlyEmpathetic": "אמפתי מאוד"
+      },
+      "conflictStyleLabel": "איך אתם בדרך כלל מתמודדים עם קונפליקטים?",
+      "conflictStyles": {
+        "collaborator": {
+          "label": "שיתופי",
+          "description": "עובדים יחד כדי למצוא פתרונות זוכה-זוכה"
+        },
+        "competitor": {
+          "label": "תחרותי", 
+          "description": "עומדים על הדעות בנושאים חשובים"
+        },
+        "accommodator": {
+          "label": "מתפשר",
+          "description": "מעדיפים לשמור על שלום ולהתפשר"
+        },
+        "avoider": {
+          "label": "נמנע",
+          "description": "מעדיפים להתקרר לפני שמתמודדים עם קונפליקטים"
+        },
+        "compromiser": {
+          "label": "מתפשר",
+          "description": "מוצאים פתרונות אמצע"
+        }
+      },
+      "learningPreferenceLabel": "איך אתם מעדיפים ללמוד דברים חדשים?",
+      "learningPreferences": {
+        "visual": {
+          "label": "למידה חזותית",
+          "description": "תרשימים, דיאגרמות וחומרים כתובים"
+        },
+        "auditory": {
+          "label": "למידה שמיעתית", 
+          "description": "דיונים, פודקאסטים והוראה מילולית"
+        },
+        "kinesthetic": {
+          "label": "למידה מעשית",
+          "description": "פעילויות, תרגילים ויישום מעשי"
+        },
+        "reading": {
+          "label": "קריאה וכתיבה",
+          "description": "מאמרים, יומן כתיבה ותרגילים כתובים"
+        }
+      },
+      "prioritiesLabel": "מה העדיפויות החיים העליונות שלכם? (בחרו עד 3)",
+      "priorityOptions": {
+        "family-time": "זמן איכות עם המשפחה",
+        "career-growth": "צמיחה בקריירה",
+        "personal-health": "בריאות ויכולת פיזית אישית", 
+        "financial-security": "ביטחון כלכלי",
+        "social-connections": "קשרים חברתיים",
+        "personal-growth": "פיתוח אישי",
+        "adventure": "הרפתקאות ונסיעות",
+        "stability": "יציבות ושגרה"
+      },
+      "buttons": {
+        "back": "חזרה",
+        "continue": "המשך",
+        "saving": "שומר..."
+      }
+    },
+    "emotionalIntelligence": {
+      "title": "הבנת הנוף הרגשי שלכם",
+      "description": "מודעות עצמית היא הבסיס ליחסים בריאים. בואו נחקור את הדפוסים הרגשיים, החוזקות ותחומי הצמיחה שלכם.",
+      "attachmentStyleTitle": "סגנון התקשרות",
+      "attachmentStyleDescription": "איך אתם בדרך כלל ניגשים לקרבה ואינטימיות במערכות יחסים?",
+      "attachmentStyles": {
+        "secure": {
+          "label": "בטוח",
+          "description": "קל לי להתקרב לאחרים ואני נוח להסתמך עליהם. אני לא דואג לעתים קרובות מנטישה.",
+          "traits": ["נוח עם אינטימיות", "תקשורת טובה", "אמון"]
+        },
+        "anxious": {
+          "label": "חרד",
+          "description": "אני רוצה להיות קרוב מאוד לבני זוג, אבל דואג שהם לא מרגישים אותו דבר. אני חושש מנטישה או מחוסר אהבה.",
+          "traits": ["מחפש הרגעה", "חושש מנטישה", "אמפתי מאוד"]
+        },
+        "avoidant": {
+          "label": "נמנע",
+          "description": "אני מעדיף עצמאות והסתמכות עצמית. לפעמים קשה לי לבטוח באחרים לחלוטין.",
+          "traits": ["מעריך עצמאות", "לא נוח עם רגשות", "מסתמך על עצמו"]
+        },
+        "disorganized": {
+          "label": "חרד-נמנע",
+          "description": "אני רוצה מערכות יחסים קרובות אבל דואג להיפגע. יש לי רגשות מעורבים לגבי הסתמכות על אחרים.",
+          "traits": ["רוצה קרבה אבל חושש ממנה", "רגשות לא עקביים", "טראומה מערכות יחסים קודמות"]
+        },
+        "unsure": {
+          "label": "אני לא בטוח/ה",
+          "description": "אני צריך/ה ללמוד יותר על דפוסי ההתקשרות שלי.",
+          "traits": ["נדרש גילוי עצמי"]
+        }
+      },
+      "fearsTitle": "פחדים במערכות יחסים (בחרו עד 3)",
+      "fearsDescription": "איזה פחדים או חרדות אתם מבחינים במערכות יחסים? זה נורמלי שיש כאלה.",
+      "fearsSelected": "פחדים נבחרים ({count}/3):",
+      "fearOptions": {
+        "rejection": "פחד מדחייה",
+        "abandonment": "פחד מנטישה",
+        "intimacy": "פחד מאינטימיות",
+        "vulnerability": "פחד מפגיעות",
+        "not-good-enough": "פחד מלא להיות מספיק טוב",
+        "losing-independence": "פחד מאיבוד עצמאות",
+        "commitment": "פחד מהתחייבות",
+        "repeating-mistakes": "פחד מחזרה על טעויות העבר",
+        "being-hurt": "פחד מלהיפגע שוב",
+        "conflict": "פחד מקונפליקט"
+      },
+      "strengthsTitle": "החוזקות הרגשיות שלכם (בחרו עד 4)",
+      "strengthsDescription": "מה הכוחות העל שלכם בכל הנוגע למערכות יחסים ורגשות?",
+      "strengthsSelected": "החוזקות שלכם ({count}/4):",
+      "strengthOptions": {
+        "empathy": "אמפתיה גבוהה",
+        "communication": "תקשורת טובה",
+        "loyalty": "נאמנות עמוקה",
+        "emotional-awareness": "מודעות רגשית עצמית",
+        "resilience": "חוסן רגשי",
+        "compassion": "חמלה כלפי אחרים",
+        "patience": "סבלנות",
+        "authenticity": "אותנטיות",
+        "supportiveness": "תמיכה",
+        "forgiveness": "יכולת לסלוח"
+      },
+      "challengesTitle": "תחומי צמיחה (בחרו עד 3)",
+      "challengesDescription": "איזה כישורים רגשיים הייתם רוצים לפתח או לשפר?",
+      "challengesSelected": "תחומי צמיחה ({count}/3):",
+      "challengeOptions": {
+        "setting-boundaries": "קביעת גבולות בריאים",
+        "expressing-emotions": "ביטוי רגשות בבירור",
+        "managing-anxiety": "ניהול חרדה במערכות יחסים",
+        "trusting-others": "אמון באנשים חדשים",
+        "conflict-resolution": "התמודדות עם קונפליקט",
+        "self-confidence": "ביטחון עצמי במערכות יחסים",
+        "emotional-regulation": "ניהול רגשות עזים",
+        "overthinking": "חשיבה יתר על מצבים",
+        "past-trauma": "עיבוד טראומה ממערכות יחסים קודמות",
+        "opening-up": "פתיחות למישהו חדש"
+      },
+      "readinessTitle": "סולם מוכנות למערכת יחסים",
+      "readinessDescription": "כמה מוכנים אתם מרגישים להתחיל או לעבוד על מערכת יחסים רומנטית עכשיו?",
+      "readinessLevels": {
+        "1": { "label": "לא מוכן", "description": "עדיין מחלים מפגיעות העבר" },
+        "2": { "label": "בעיקר לא מוכן", "description": "עובד על כמה בעיות" },
+        "3": { "label": "קצת מוכן", "description": "מתקדם אבל זהיר" },
+        "4": { "label": "מתכונן", "description": "מרגיש יותר בטוח" },
+        "5": { "label": "מוכן", "description": "פתוח למצוא את האדם הנכון" },
+        "6": { "label": "מאוד מוכן", "description": "מחפש בפעילות קשר" },
+        "7": { "label": "מוכן לחלוטין", "description": "בטוח ואופטימי" }
+      },
+      "readinessScale": {
+        "notReady": "לא מוכן",
+        "completelyReady": "מוכן לחלוטין"
+      },
+      "buttons": {
+        "back": "חזרה",
+        "continue": "המשך",
+        "saving": "שומר..."
+      }
+    },
+    "lifestyleCompatibility": {
+      "title": "סגנון חיים ותאימות",
+      "description": "הבנת איך אתם חיים, מתקשרים ומתמודדים עם אתגרים עוזרת לנו להמליץ על אסטרטגיות אימון שמתאימות לדפוסים הטבעיים וההעדפות שלכם.",
+      "workLifeBalanceTitle": "פילוסופיית איזון עבודה-חיים",
+      "workLifeBalanceDescription": "איך אתם ניגשים לאיזון בין קריירה לחיים אישיים?",
+      "workLifeBalanceOptions": {
+        "work-focused": {
+          "label": "ממוקד קריירה",
+          "description": "עבודה היא עדיפות עליונה, שעות ארוכות נפוצות"
+        },
+        "balanced": {
+          "label": "גישה מאוזנת",
+          "description": "חשיבות שווה לעבודה ולחיים האישיים"
+        },
+        "life-focused": {
+          "label": "ממוקד חיים",
+          "description": "חיים אישיים ומערכות יחסים במקום הראשון"
+        },
+        "flexible": {
+          "label": "גמיש ומסתגל",
+          "description": "האיזון משתנה בהתאם לנסיבות החיים"
+        }
+      },
+      "socialEnergyTitle": "רמת אנרגיה חברתית",
+      "socialEnergyDescription": "כמה אתם נהנים להיות בסביבת אנשים ופעילויות חברתיות?",
+      "socialEnergyLabels": {
+        "preferSolitude": "מעדיפים בדידות",
+        "loveBeingSocial": "אוהבים להיות חברתיים"
+      },
+      "hobbiesTitle": "תחביבים ותחומי עניין (בחרו 3-6)",
+      "hobbiesDescription": "באילו פעילויות אתם נהנים? זה עוזר לנו להבין את סגנון החיים שלכם ומה אתם עשויים לרצות לחלוק עם בן/בת זוג.",
+      "hobbiesSelected": "תחומי העניין שלכם ({count}/6):",
+      "hobbiesOptions": {
+        "fitness-sports": "כושר וספורט",
+        "outdoor-adventure": "הרפתקאות בחיק הטבע",
+        "arts-culture": "אמנויות ותרבות",
+        "cooking-food": "בישול ואוכל",
+        "travel": "נסיעות וחקירה",
+        "music-concerts": "מוזיקה וקונצרטים",
+        "reading-learning": "קריאה ולמידה",
+        "gaming-tech": "משחקים וטכנולוגיה",
+        "social-events": "אירועים חברתיים ומסיבות",
+        "crafts-diy": "יצירה ופרויקטי עשה זאת בעצמך",
+        "meditation-wellness": "מדיטציה ובריאות",
+        "volunteering": "התנדבות ומטרות",
+        "photography": "צילום",
+        "gardening-nature": "גינון וטבע",
+        "movies-tv": "סרטים ותוכניות טלוויזיה"
+      },
+      "communicationStyleTitle": "סגנון תקשורת",
+      "communicationStyleDescription": "איך אתם בדרך כלל מתקשרים במערכות יחסים?",
+      "conflictStyleTitle": "סגנון פתרון קונפליקטים",
+      "conflictStyleDescription": "איך אתם מעדיפים להתמודד עם חילוקי דעות או קונפליקטים?",
+      "buttons": {
+        "back": "חזרה",
+        "continue": "המשך",
+        "saving": "שומר..."
+      }
+    },
+    "selfReflection": {
+      "title": "שיקוף עצמי וצמיחה",
+      "description": "השלב האחרון במסע הגילוי העצמי שלכם. התובנות האלו עוזרות לנו להבין איך אתם רואים את עצמכם ולאן אתם שואפים במערכות יחסים.",
+      "buttons": {
+        "back": "חזרה",
+        "continue": "השלמת הערכה",
+        "saving": "שומר..."
+      }
+    },
+    "valuesVision": {
+      "title": "הערכים וחזון מערכת היחסים שלכם",
+      "description": "הבנת מה הכי חשוב לכם עוזרת לנו להתאים לכם אסטרטגיות אימון ותובנות שמתיישרות עם הערכים העמוקים וחלומות מערכת היחסים שלכם.",
+      "buttons": {
+        "back": "חזרה",
+        "continue": "המשך",
+        "saving": "שומר..."
+      }
+    },
+    "enhancedSummary": {
+      "title": "ההערכה הושלמה! 🎉",
+      "description": "תודה שלקחתם את המסע הזה של גילוי עצמי. הנה מה שלמדנו עליכם ואיך אנחנו יכולים לתמוך במטרות מערכת היחסים שלכם.",
+      "buttons": {
+        "backToReview": "חזרה לסקירה",
+        "startProgram": "התחלת תכנית האימון שלי",
+        "completing": "משלים..."
+      }
     },
     "relationshipStatus": {
       "title": "מה המצב הזוגי הנוכחי שלכם?",

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
@@ -57,6 +58,7 @@ export function SelfReflectionStep({
   canGoBack, 
   isLoading 
 }: SelfReflectionStepProps) {
+  const t = useTranslations('assessment.selfReflection');
   const [friendsDescription, setFriendsDescription] = useState(data.friendsDescription || '');
   const [proudestMoment, setProudestMoment] = useState(data.proudestMoment || '');
   const [biggestGrowthArea, setBiggestGrowthArea] = useState(data.biggestGrowthArea || '');
@@ -95,11 +97,10 @@ export function SelfReflectionStep({
           <Sparkles className="w-8 h-8 text-white" />
         </div>
         <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
-          Self-Reflection & Growth
+          {t('title')}
         </h2>
         <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-          The final step in your journey of self-discovery. These insights help us understand 
-          how you see yourself and what you're working toward in relationships.
+          {t('description')}
         </p>
       </div>
 
@@ -322,14 +323,14 @@ export function SelfReflectionStep({
           onClick={onBack}
           disabled={!canGoBack || isLoading}
         >
-          Back
+          {t('buttons.back')}
         </Button>
         <Button
           onClick={handleNext}
           disabled={!isFormValid || isLoading}
           className="px-8"
         >
-          {isLoading ? 'Saving...' : 'Complete Assessment'}
+          {isLoading ? t('buttons.saving') : t('buttons.continue')}
           <ArrowRight className="w-4 h-4 ml-2" />
         </Button>
       </div>
