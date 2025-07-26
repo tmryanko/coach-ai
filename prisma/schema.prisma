@@ -24,13 +24,32 @@ model User {
   preferredLanguage String  @default("en")
   locale            String  @default("en")
   
-  // Assessment profile fields
+  // Core Identity
+  age           Int?
+  location      String?
+  gender        String?
+  
+  // Assessment profile fields (legacy - keeping for compatibility)
   relationshipStatus        String?
   relationshipGoals         String[]  @default([])
   currentChallenges         String[]  @default([])
   preferredCommunicationStyle String?
   personalityTraits         Json?
   assessmentCompletedAt     DateTime?
+  
+  // Enhanced Profile Data
+  relationshipHistory       Json?     // Past relationships, lessons learned
+  emotionalProfile          Json?     // Attachment style, fears, strengths
+  coreValues               String[]   @default([])
+  relationshipVision       String?    // Ideal relationship description
+  lifestylePriorities      Json?     // Work-life balance, hobbies, boundaries
+  selfReflection           Json?     // How friends see them, proudest moments, growth areas
+  relationshipReadiness    Int?      // 1-10 scale
+  dealBreakers             String[]  @default([])
+  
+  // Assessment Progress
+  assessmentProgress        Json?     // Step completion tracking
+  profileInsights          Json?     // AI-generated insights
   
   // User progress and sessions
   userProgress  UserProgress[]

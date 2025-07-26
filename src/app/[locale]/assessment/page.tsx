@@ -7,23 +7,47 @@ import { SimpleAppLayout } from '@/components/layout/app-layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
-import { AssessmentWelcome } from '@/components/assessment/welcome';
-import { RelationshipStatusStep } from '@/components/assessment/relationship-status';
-import { GoalsStep } from '@/components/assessment/goals';
-import { ChallengesStep } from '@/components/assessment/challenges';
-import { CommunicationStep } from '@/components/assessment/communication';
-import { PersonalityStep } from '@/components/assessment/personality';
-import { SummaryStep } from '@/components/assessment/summary';
-import { AssessmentData } from '@/types/assessment';
+// Enhanced Assessment Components
+import { EnhancedWelcome, IdentityStep } from '@/components/assessment/enhanced-welcome';
+import { RelationshipHistoryStep } from '@/components/assessment/relationship-history';
+import { EmotionalIntelligenceStep } from '@/components/assessment/emotional-intelligence';
+import { ValuesVisionStep } from '@/components/assessment/values-vision';
+import { LifestyleCompatibilityStep } from '@/components/assessment/lifestyle-compatibility';
+import { SelfReflectionStep } from '@/components/assessment/self-reflection';
+import { EnhancedSummary } from '@/components/assessment/enhanced-summary';
+import { 
+  EnhancedAssessmentData, 
+  RelationshipHistoryData,
+  EmotionalProfileData,
+  LifestyleCompatibilityData,
+  SelfReflectionData,
+  ValuesVisionData,
+  IdentityStepData
+} from '@/types/assessment';
+
+// Combined type for step component props
+type StepComponentData = Partial<RelationshipHistoryData> & 
+  Partial<EmotionalProfileData> & 
+  Partial<LifestyleCompatibilityData> & 
+  Partial<SelfReflectionData> & 
+  Partial<ValuesVisionData> & 
+  Partial<IdentityStepData> & 
+  Partial<Omit<EnhancedAssessmentData, 'relationshipStatus' | 'relationshipGoals' | 'currentChallenges' | 'preferredCommunicationStyle'>> & {
+    relationshipStatus?: string;
+    relationshipGoals?: string[];
+    currentChallenges?: string[];
+    preferredCommunicationStyle?: string;
+  };
 
 const STEPS = [
-  { id: 'welcome', title: 'Welcome', component: AssessmentWelcome },
-  { id: 'relationship-status', title: 'Relationship Status', component: RelationshipStatusStep },
-  { id: 'goals', title: 'Goals & Priorities', component: GoalsStep },
-  { id: 'challenges', title: 'Current Challenges', component: ChallengesStep },
-  { id: 'communication', title: 'Communication Style', component: CommunicationStep },
-  { id: 'personality', title: 'Personality & Learning', component: PersonalityStep },
-  { id: 'summary', title: 'Summary', component: SummaryStep },
+  { id: 'welcome', title: 'Welcome', component: EnhancedWelcome },
+  { id: 'identity', title: 'About You', component: IdentityStep },
+  { id: 'relationship-history', title: 'Relationship History', component: RelationshipHistoryStep },
+  { id: 'emotional-intelligence', title: 'Emotional Profile', component: EmotionalIntelligenceStep },
+  { id: 'values-vision', title: 'Values & Vision', component: ValuesVisionStep },
+  { id: 'lifestyle-compatibility', title: 'Lifestyle & Communication', component: LifestyleCompatibilityStep },
+  { id: 'self-reflection', title: 'Self-Reflection', component: SelfReflectionStep },
+  { id: 'summary', title: 'Summary', component: EnhancedSummary },
 ];
 
 export default function AssessmentPage() {
@@ -31,7 +55,7 @@ export default function AssessmentPage() {
   const searchParams = useSearchParams();
   const isEditMode = searchParams.get('edit') === 'true';
   const [currentStep, setCurrentStep] = useState(0);
-  const [assessmentData, setAssessmentData] = useState<Partial<AssessmentData>>({});
+  const [assessmentData, setAssessmentData] = useState<StepComponentData>({});
   
   const { data: assessmentStatus } = api.assessment.getStatus.useQuery();
   const { data: existingProfile } = api.assessment.getProfile.useQuery(undefined, {
@@ -39,6 +63,16 @@ export default function AssessmentPage() {
   });
   
   const submitAssessment = api.assessment.submit.useMutation({
+    onSuccess: () => {
+      if (isEditMode) {
+        router.push('/profile');
+      } else {
+        router.push('/dashboard');
+      }
+    },
+  });
+
+  const submitEnhancedAssessment = api.assessment.submitEnhanced.useMutation({
     onSuccess: () => {
       if (isEditMode) {
         router.push('/profile');
@@ -61,11 +95,38 @@ export default function AssessmentPage() {
   useEffect(() => {
     if (isEditMode && existingProfile) {
       setAssessmentData({
+        // Core identity
+        name: existingProfile.name || undefined,
+        age: existingProfile.age || undefined,
+        location: existingProfile.location || undefined,
+        gender: existingProfile.gender || undefined,
+        
+        // Relationship data
         relationshipStatus: existingProfile.relationshipStatus || undefined,
+        relationshipHistory: (existingProfile.relationshipHistory as any) || undefined,
         relationshipGoals: existingProfile.relationshipGoals || undefined,
-        currentChallenges: existingProfile.currentChallenges || undefined,
+        relationshipReadiness: existingProfile.relationshipReadiness || undefined,
+        
+        // Emotional profile
+        emotionalProfile: (existingProfile.emotionalProfile as any) || undefined,
+        
+        // Values and vision
+        coreValues: existingProfile.coreValues || undefined,
+        relationshipVision: existingProfile.relationshipVision || undefined,
+        dealBreakers: existingProfile.dealBreakers || undefined,
+        
+        // Communication
         preferredCommunicationStyle: existingProfile.preferredCommunicationStyle || undefined,
-        personalityTraits: existingProfile.personalityTraits || undefined,
+        
+        // Lifestyle
+        lifestylePriorities: (existingProfile.lifestylePriorities as any) || undefined,
+        
+        // Self-reflection
+        selfReflection: (existingProfile.selfReflection as any) || undefined,
+        
+        // Legacy compatibility
+        currentChallenges: existingProfile.currentChallenges || undefined,
+        personalityTraits: (existingProfile.personalityTraits as any) || undefined,
       });
     }
   }, [isEditMode, existingProfile]);
@@ -95,15 +156,56 @@ export default function AssessmentPage() {
     if (currentStep < STEPS.length - 1) {
       setCurrentStep(currentStep + 1);
     } else {
-      // Final submission - only send required fields
-      const cleanData = {
-        relationshipStatus: assessmentData.relationshipStatus!,
-        relationshipGoals: assessmentData.relationshipGoals!,
-        currentChallenges: assessmentData.currentChallenges!,
-        preferredCommunicationStyle: assessmentData.preferredCommunicationStyle!,
-        personalityTraits: assessmentData.personalityTraits!,
-      };
-      await submitAssessment.mutateAsync(cleanData);
+      // Final submission - check if we have enhanced data
+      const hasEnhancedData = assessmentData.name || 
+        assessmentData.emotionalProfile || 
+        assessmentData.coreValues || 
+        assessmentData.selfReflection;
+        
+      if (hasEnhancedData) {
+        // Submit enhanced assessment
+        const enhancedData = {
+          // Core identity
+          name: assessmentData.name,
+          age: assessmentData.age,
+          location: assessmentData.location,
+          gender: assessmentData.gender,
+          
+          // Required fields
+          relationshipStatus: assessmentData.relationshipStatus!,
+          relationshipGoals: assessmentData.relationshipGoals!,
+          currentChallenges: assessmentData.currentChallenges || [],
+          preferredCommunicationStyle: assessmentData.preferredCommunicationStyle!,
+          personalityTraits: assessmentData.personalityTraits || {
+            introversion: 3,
+            empathy: 3,
+            conflictStyle: 'collaborative',
+            learningPreference: 'mixed',
+            priorities: [],
+          },
+          
+          // Enhanced fields
+          relationshipHistory: assessmentData.relationshipHistory,
+          relationshipReadiness: assessmentData.relationshipReadiness,
+          emotionalProfile: assessmentData.emotionalProfile,
+          coreValues: assessmentData.coreValues || [],
+          relationshipVision: assessmentData.relationshipVision || '',
+          dealBreakers: assessmentData.dealBreakers || [],
+          lifestylePriorities: assessmentData.lifestylePriorities,
+          selfReflection: assessmentData.selfReflection,
+        };
+        await submitEnhancedAssessment.mutateAsync(enhancedData);
+      } else {
+        // Fallback to legacy submission
+        const cleanData = {
+          relationshipStatus: assessmentData.relationshipStatus!,
+          relationshipGoals: assessmentData.relationshipGoals!,
+          currentChallenges: assessmentData.currentChallenges!,
+          preferredCommunicationStyle: assessmentData.preferredCommunicationStyle!,
+          personalityTraits: assessmentData.personalityTraits!,
+        };
+        await submitAssessment.mutateAsync(cleanData);
+      }
     }
   };
 
@@ -150,7 +252,7 @@ export default function AssessmentPage() {
                 onNext={handleNext}
                 onBack={handleBack}
                 canGoBack={currentStep > 1}
-                isLoading={submitAssessment.isPending || updateStep.isPending}
+                isLoading={submitAssessment.isPending || submitEnhancedAssessment.isPending || updateStep.isPending}
                 isLastStep={isSummaryStep}
               />
             )}

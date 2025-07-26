@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { AssessmentData } from '@/types/assessment';
 
 interface SummaryStepProps {
-  data: Partial<AssessmentData>;
+  data: any;
   onNext: () => void;
   onBack: () => void;
   canGoBack: boolean;

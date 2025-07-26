@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/card';
 import { AssessmentData } from '@/types/assessment';
 
 interface CommunicationStepProps {
-  data: Partial<AssessmentData>;
+  data: any;
   onNext: (data: any) => void;
   onBack: () => void;
   canGoBack: boolean;

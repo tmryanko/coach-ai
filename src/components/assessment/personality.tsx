@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { AssessmentData } from '@/types/assessment';
 
 interface PersonalityStepProps {
-  data: Partial<AssessmentData>;
+  data: any;
   onNext: (data: any) => void;
   onBack: () => void;
   canGoBack: boolean;
