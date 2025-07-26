@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
@@ -17,67 +18,6 @@ interface RelationshipHistoryStepProps {
   isLoading: boolean;
 }
 
-const RELATIONSHIP_STATUS_OPTIONS = [
-  { 
-    value: 'single-never-married', 
-    label: 'Single (never married)', 
-    description: 'Ready to explore new connections',
-    followUp: true
-  },
-  { 
-    value: 'single-dating', 
-    label: 'Single but dating', 
-    description: 'Actively meeting people',
-    followUp: true
-  },
-  { 
-    value: 'recently-single', 
-    label: 'Recently single', 
-    description: 'Recently ended a relationship',
-    followUp: true
-  },
-  { 
-    value: 'divorced', 
-    label: 'Divorced', 
-    description: 'Learning from past marriage',
-    followUp: true
-  },
-  { 
-    value: 'widowed', 
-    label: 'Widowed', 
-    description: 'Navigating love after loss',
-    followUp: true
-  },
-  { 
-    value: 'its-complicated', 
-    label: 'It&apos;s complicated', 
-    description: 'Unclear or complex situation',
-    followUp: true
-  },
-  { 
-    value: 'in-relationship', 
-    label: 'In a relationship', 
-    description: 'Working on current partnership',
-    followUp: false
-  },
-];
-
-const DURATION_OPTIONS = [
-  { value: 'few-months', label: '6 months or less' },
-  { value: 'one-year', label: '6 months - 1 year' },
-  { value: 'two-years', label: '1-2 years' },
-  { value: 'long-term', label: '2-5 years' },
-  { value: 'very-long-term', label: '5+ years' },
-  { value: 'no-significant', label: 'No significant relationships' },
-];
-
-const TIME_SINCE_OPTIONS = [
-  { value: 'very-recent', label: 'Less than 3 months' },
-  { value: 'recent', label: '3-6 months' },
-  { value: 'moderate', label: '6 months - 1 year' },
-  { value: 'longer', label: '1-2 years' },
-  { value: 'long-ago', label: '2+ years ago' },
-];
 
 export function RelationshipHistoryStep({ 
   data, 
@@ -86,6 +26,71 @@ export function RelationshipHistoryStep({
   canGoBack, 
   isLoading 
 }: RelationshipHistoryStepProps) {
+  const t = useTranslations('assessment.enhanced.relationshipHistory');
+  const tCommon = useTranslations('common');
+  
+  const RELATIONSHIP_STATUS_OPTIONS = [
+    { 
+      value: 'single-never-married', 
+      label: t('statusOptions.single-never-married.label'), 
+      description: t('statusOptions.single-never-married.description'),
+      followUp: true
+    },
+    { 
+      value: 'single-dating', 
+      label: t('statusOptions.single-dating.label'), 
+      description: t('statusOptions.single-dating.description'),
+      followUp: true
+    },
+    { 
+      value: 'recently-single', 
+      label: t('statusOptions.recently-single.label'), 
+      description: t('statusOptions.recently-single.description'),
+      followUp: true
+    },
+    { 
+      value: 'divorced', 
+      label: t('statusOptions.divorced.label'), 
+      description: t('statusOptions.divorced.description'),
+      followUp: true
+    },
+    { 
+      value: 'widowed', 
+      label: t('statusOptions.widowed.label'), 
+      description: t('statusOptions.widowed.description'),
+      followUp: true
+    },
+    { 
+      value: 'its-complicated', 
+      label: t('statusOptions.its-complicated.label'), 
+      description: t('statusOptions.its-complicated.description'),
+      followUp: true
+    },
+    { 
+      value: 'in-relationship', 
+      label: t('statusOptions.in-relationship.label'), 
+      description: t('statusOptions.in-relationship.description'),
+      followUp: false
+    },
+  ];
+
+  const DURATION_OPTIONS = [
+    { value: 'few-months', label: t('durationOptions.few-months') },
+    { value: 'one-year', label: t('durationOptions.one-year') },
+    { value: 'two-years', label: t('durationOptions.two-years') },
+    { value: 'long-term', label: t('durationOptions.long-term') },
+    { value: 'very-long-term', label: t('durationOptions.very-long-term') },
+    { value: 'no-significant', label: t('durationOptions.no-significant') },
+  ];
+
+  const TIME_SINCE_OPTIONS = [
+    { value: 'very-recent', label: t('timeSinceOptions.very-recent') },
+    { value: 'recent', label: t('timeSinceOptions.recent') },
+    { value: 'moderate', label: t('timeSinceOptions.moderate') },
+    { value: 'longer', label: t('timeSinceOptions.longer') },
+    { value: 'long-ago', label: t('timeSinceOptions.long-ago') },
+  ];
+  
   const [relationshipStatus, setRelationshipStatus] = useState(data.relationshipStatus || '');
   const [hasSignificantPast, setHasSignificantPast] = useState(data.hasSignificantPast ?? true);
   const [lastRelationshipDuration, setLastRelationshipDuration] = useState(data.lastRelationshipDuration || '');
@@ -121,11 +126,10 @@ export function RelationshipHistoryStep({
           <Heart className="w-8 h-8 text-white" />
         </div>
         <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
-          Your Relationship Story
+          {t('title')}
         </h2>
         <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-          Understanding your relationship history helps us provide coaching that honors your journey 
-          and builds on what you've learned.
+          {t('description')}
         </p>
       </div>
 
@@ -133,7 +137,7 @@ export function RelationshipHistoryStep({
         <div className="space-y-8">
           {/* Current Status */}
           <div className="space-y-4">
-            <Label className="text-lg font-semibold">What's your current relationship status?</Label>
+            <Label className="text-lg font-semibold">{t('statusQuestion')}</Label>
             <div className="grid gap-3 md:grid-cols-2">
               {RELATIONSHIP_STATUS_OPTIONS.map((option) => (
                 <Card
@@ -169,7 +173,7 @@ export function RelationshipHistoryStep({
           {needsFollowUp && (
             <div className="space-y-4">
               <Label className="text-lg font-semibold">
-                Have you had any significant romantic relationships in the past?
+                {t('significantPastQuestion')}
               </Label>
               <div className="flex gap-4">
                 <Card
@@ -181,8 +185,8 @@ export function RelationshipHistoryStep({
                   onClick={() => setHasSignificantPast(true)}
                 >
                   <div className="text-center">
-                    <h3 className="font-medium">Yes</h3>
-                    <p className="text-sm text-gray-500">I've had meaningful relationships</p>
+                    <h3 className="font-medium">{t('significantPastOptions.yes.label')}</h3>
+                    <p className="text-sm text-gray-500">{t('significantPastOptions.yes.description')}</p>
                   </div>
                 </Card>
                 <Card
@@ -194,8 +198,8 @@ export function RelationshipHistoryStep({
                   onClick={() => setHasSignificantPast(false)}
                 >
                   <div className="text-center">
-                    <h3 className="font-medium">No</h3>
-                    <p className="text-sm text-gray-500">I&apos;m new to serious relationships</p>
+                    <h3 className="font-medium">{t('significantPastOptions.no.label')}</h3>
+                    <p className="text-sm text-gray-500">{t('significantPastOptions.no.description')}</p>
                   </div>
                 </Card>
               </div>
@@ -206,7 +210,7 @@ export function RelationshipHistoryStep({
           {showDurationQuestion && (
             <div className="space-y-4">
               <Label className="text-lg font-semibold">
-                How long was your most significant relationship?
+                {t('durationQuestion')}
               </Label>
               <div className="grid gap-3 md:grid-cols-3">
                 {DURATION_OPTIONS.map((option) => (
@@ -232,7 +236,7 @@ export function RelationshipHistoryStep({
           {showTimeQuestion && (
             <div className="space-y-4">
               <Label className="text-lg font-semibold">
-                How long has it been since your last relationship ended?
+                {t('timeSinceQuestion')}
               </Label>
               <div className="grid gap-3 md:grid-cols-3">
                 {TIME_SINCE_OPTIONS.map((option) => (
@@ -261,15 +265,15 @@ export function RelationshipHistoryStep({
                 <Lightbulb className="w-6 h-6 text-yellow-500 mt-1 flex-shrink-0" />
                 <div className="flex-1">
                   <Label className="text-lg font-semibold">
-                    What's one important lesson you've learned from your past relationships?
+                    {t('lessonsQuestion')}
                   </Label>
                   <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
-                    This could be about communication, boundaries, red flags, or what you need in a partner.
+                    {t('lessonsDescription')}
                   </p>
                 </div>
               </div>
               <Textarea
-                placeholder="I learned that..."
+                placeholder={t('lessonsPlaceholder')}
                 value={keyLessonsLearned}
                 onChange={(e) => setKeyLessonsLearned(e.target.value)}
                 className="min-h-24"
@@ -289,15 +293,15 @@ export function RelationshipHistoryStep({
                 <Heart className="w-6 h-6 text-pink-500 mt-1 flex-shrink-0" />
                 <div className="flex-1">
                   <Label className="text-lg font-semibold">
-                    How are you feeling about this past relationship now?
+                    {t('healingQuestion')}
                   </Label>
                   <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
-                    Are you still processing, feeling healed, or somewhere in between?
+                    {t('healingDescription')}
                   </p>
                 </div>
               </div>
               <Textarea
-                placeholder="I&apos;m feeling..."
+                placeholder={t('healingPlaceholder')}
                 value={healingProgress}
                 onChange={(e) => setHealingProgress(e.target.value)}
                 className="min-h-24"
@@ -317,14 +321,14 @@ export function RelationshipHistoryStep({
           onClick={onBack}
           disabled={!canGoBack || isLoading}
         >
-          Back
+          {tCommon('back')}
         </Button>
         <Button
           onClick={handleNext}
           disabled={!isFormValid || isLoading}
           className="px-8"
         >
-          {isLoading ? 'Saving...' : 'Continue'}
+          {isLoading ? tCommon('loading') : tCommon('continue')}
           <ArrowRight className="w-4 h-4 ml-2" />
         </Button>
       </div>

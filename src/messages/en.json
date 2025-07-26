@@ -523,6 +523,175 @@
       "analytical-logical": "Your coach will use fact-based approaches with clear reasoning.",
       "emotional-expressive": "Your coach will help you explore and express emotions openly.",
       "notComplete": "Complete your assessment to get personalized coaching style."
+    },
+    "enhanced": {
+      "welcome": {
+        "title": "Welcome to Your Love Journey",
+        "description": "You're about to embark on a personalized journey of self-discovery and relationship growth. This assessment helps us understand who you are, what you want, and how we can best support you.",
+        "timeCommitment": "This will take about 8-12 minutes",
+        "confidentiality": "Your responses are private and confidential",
+        "getStarted": "Begin Assessment"
+      },
+      "identity": {
+        "title": "Tell Us About You",
+        "description": "Let's start with some basic information to personalize your experience.",
+        "nameLabel": "What's your name?",
+        "namePlaceholder": "Enter your name",
+        "ageLabel": "How old are you?",
+        "agePlaceholder": "Your age",
+        "locationLabel": "Where are you located?",
+        "locationPlaceholder": "City, Country",
+        "genderLabel": "How do you identify?",
+        "genderOptions": {
+          "woman": "Woman",
+          "man": "Man",
+          "non-binary": "Non-binary",
+          "prefer-not-to-say": "Prefer not to say"
+        }
+      },
+      "relationshipHistory": {
+        "title": "Your Relationship Story",
+        "description": "Understanding your relationship history helps us provide coaching that honors your journey and builds on what you've learned.",
+        "statusQuestion": "What's your current relationship status?",
+        "statusOptions": {
+          "single-never-married": {
+            "label": "Single (never married)",
+            "description": "Ready to explore new connections"
+          },
+          "single-dating": {
+            "label": "Single but dating",
+            "description": "Actively meeting people"
+          },
+          "recently-single": {
+            "label": "Recently single",
+            "description": "Recently ended a relationship"
+          },
+          "divorced": {
+            "label": "Divorced",
+            "description": "Learning from past marriage"
+          },
+          "widowed": {
+            "label": "Widowed",
+            "description": "Navigating love after loss"
+          },
+          "its-complicated": {
+            "label": "It's complicated",
+            "description": "Unclear or complex situation"
+          },
+          "in-relationship": {
+            "label": "In a relationship",
+            "description": "Working on current partnership"
+          }
+        },
+        "significantPastQuestion": "Have you had any significant romantic relationships in the past?",
+        "significantPastOptions": {
+          "yes": {
+            "label": "Yes",
+            "description": "I've had meaningful relationships"
+          },
+          "no": {
+            "label": "No",
+            "description": "I'm new to serious relationships"
+          }
+        },
+        "durationQuestion": "How long was your most significant relationship?",
+        "durationOptions": {
+          "few-months": "6 months or less",
+          "one-year": "6 months - 1 year",
+          "two-years": "1-2 years",
+          "long-term": "2-5 years",
+          "very-long-term": "5+ years",
+          "no-significant": "No significant relationships"
+        },
+        "timeSinceQuestion": "How long has it been since your last relationship ended?",
+        "timeSinceOptions": {
+          "very-recent": "Less than 3 months",
+          "recent": "3-6 months",
+          "moderate": "6 months - 1 year",
+          "longer": "1-2 years",
+          "long-ago": "2+ years ago"
+        },
+        "lessonsQuestion": "What's one important lesson you've learned from your past relationships?",
+        "lessonsDescription": "This could be about communication, boundaries, red flags, or what you need in a partner.",
+        "lessonsPlaceholder": "I learned that...",
+        "healingQuestion": "How are you feeling about this past relationship now?",
+        "healingDescription": "Are you still processing, feeling healed, or somewhere in between?",
+        "healingPlaceholder": "I'm feeling..."
+      },
+      "emotionalIntelligence": {
+        "title": "Your Emotional Landscape",
+        "description": "Understanding your emotional patterns helps us provide more effective coaching.",
+        "attachmentStyleQuestion": "How do you typically feel in close relationships?",
+        "attachmentStyleOptions": {
+          "secure": {
+            "label": "Secure",
+            "description": "I feel comfortable with intimacy and independence"
+          },
+          "anxious": {
+            "label": "Anxious",
+            "description": "I worry about being abandoned or not being enough"
+          },
+          "avoidant": {
+            "label": "Avoidant",
+            "description": "I value independence and sometimes feel uncomfortable with closeness"
+          },
+          "disorganized": {
+            "label": "Mixed/Unclear",
+            "description": "My feelings about relationships vary a lot"
+          }
+        },
+        "fearsQuestion": "What fears or concerns do you have about relationships?",
+        "strengthsQuestion": "What are your greatest strengths in relationships?",
+        "challengesQuestion": "What emotional challenges do you face in relationships?",
+        "readinessQuestion": "On a scale of 1-10, how ready do you feel for a serious relationship?",
+        "readinessDescription": "1 = Not ready at all, 10 = Completely ready"
+      },
+      "valuesVision": {
+        "title": "Your Values & Vision",
+        "description": "Understanding what matters most to you helps us guide you toward compatible connections.",
+        "coreValuesQuestion": "What values are most important to you?",
+        "visionQuestion": "Describe your ideal relationship",
+        "visionPlaceholder": "In my ideal relationship...",
+        "dealBreakersQuestion": "What are your absolute deal-breakers?"
+      },
+      "lifestyleCompatibility": {
+        "title": "Your Lifestyle & Communication",
+        "description": "Let's understand how you live and communicate to find the best matches.",
+        "workLifeBalanceQuestion": "How would you describe your work-life balance?",
+        "socialEnergyQuestion": "How social are you?",
+        "socialEnergyDescription": "1 = Very introverted, 10 = Very extroverted",
+        "hobbiesQuestion": "What are your main hobbies and interests?",
+        "communicationStyleQuestion": "How do you prefer to communicate?",
+        "conflictStyleQuestion": "How do you handle disagreements?"
+      },
+      "selfReflection": {
+        "title": "Self-Reflection & Growth",
+        "description": "These deeper questions help us understand your self-awareness and growth mindset.",
+        "friendsDescriptionQuestion": "How would your closest friends describe you?",
+        "friendsDescriptionPlaceholder": "My friends would say I'm...",
+        "proudestMomentQuestion": "What's a moment you're really proud of?",
+        "proudestMomentPlaceholder": "I'm proud of the time when...",
+        "growthAreaQuestion": "What's the biggest area you want to grow in?",
+        "growthAreaPlaceholder": "I want to improve my...",
+        "strengthsQuestion": "What are your top 3 personal strengths?",
+        "futureGoalsQuestion": "What are your relationship goals for the future?"
+      },
+      "summary": {
+        "title": "Your Personal Profile",
+        "description": "Here's what we've learned about you. This helps us create your personalized coaching experience.",
+        "coreIdentity": "Core Identity",
+        "relationshipJourney": "Relationship Journey",
+        "emotionalProfile": "Emotional Profile",
+        "valuesAndVision": "Values & Vision",
+        "lifestyle": "Lifestyle",
+        "personalGrowth": "Personal Growth",
+        "topStrengths": "Your Top Strengths",
+        "coreValues": "Your Core Values",
+        "analyzing": "Analyzing your responses...",
+        "generatingInsights": "Generating personalized insights...",
+        "almostReady": "Almost ready!",
+        "startCoaching": "Start Your Coaching Journey"
+      }
     }
   },
   "common": {

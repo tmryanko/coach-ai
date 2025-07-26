@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -12,6 +13,7 @@ interface EnhancedWelcomeProps {
 }
 
 export function EnhancedWelcome({ onNext }: EnhancedWelcomeProps) {
+  const t = useTranslations('assessment.enhanced.welcome');
   const [showGetStarted, setShowGetStarted] = useState(false);
 
   return (
@@ -23,11 +25,10 @@ export function EnhancedWelcome({ onNext }: EnhancedWelcomeProps) {
             <Heart className="w-10 h-10 text-white" />
           </div>
           <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100">
-            Welcome to Your Love Journey
+            {t('title')}
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            You&apos;re about to embark on a personalized journey of self-discovery and relationship growth. 
-            This assessment helps us understand who you are, what you want, and how we can best support you.
+            {t('description')}
           </p>
         </div>
       </div>

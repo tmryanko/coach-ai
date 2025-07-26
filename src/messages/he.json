@@ -523,6 +523,175 @@
       "analytical-logical": "המאמן שלכם ישתמש בגישות מבוססות עובדות עם נימוק ברור.",
       "emotional-expressive": "המאמן שלכם יעזור לכם לחקור ולבטא רגשות בפתיחות.",
       "notComplete": "השלימו את ההערכה שלכם כדי לקבל סגנון אימון אישי."
+    },
+    "enhanced": {
+      "welcome": {
+        "title": "ברוכים הבאים למסע האהבה שלכם",
+        "description": "אתם עומדים לצאת למסע אישי של גילוי עצמי וצמיחה זוגית. הערכה זו עוזרת לנו להבין מי אתם, מה אתם רוצים, ואיך אנחנו יכולים לתמוך בכם בצורה הטובה ביותר.",
+        "timeCommitment": "זה ייקח בין 8-12 דקות",
+        "confidentiality": "התגובות שלכם פרטיות וסודיות",
+        "getStarted": "התחלת הערכה"
+      },
+      "identity": {
+        "title": "ספרו לנו עליכם",
+        "description": "בואו נתחיל עם מידע בסיסי כדי להתאים אישית את החוויה שלכם.",
+        "nameLabel": "איך קוראים לכם?",
+        "namePlaceholder": "הכניסו את השם שלכם",
+        "ageLabel": "בן/בת כמה אתם?",
+        "agePlaceholder": "הגיל שלכם",
+        "locationLabel": "איפה אתם גרים?",
+        "locationPlaceholder": "עיר, מדינה",
+        "genderLabel": "איך אתם מגדירים את עצמכם?",
+        "genderOptions": {
+          "woman": "אישה",
+          "man": "גבר",
+          "non-binary": "לא בינארי",
+          "prefer-not-to-say": "מעדיף לא לומר"
+        }
+      },
+      "relationshipHistory": {
+        "title": "הסיפור הזוגי שלכם",
+        "description": "הבנת ההיסטוריה הזוגית שלכם עוזרת לנו לספק אימון שמכבד את המסע שלכם ובונה על מה שלמדתם.",
+        "statusQuestion": "מה המצב הזוגי הנוכחי שלכם?",
+        "statusOptions": {
+          "single-never-married": {
+            "label": "רווק/ה (מעולם לא נשוי/ה)",
+            "description": "מוכן/ה לחקור קשרים חדשים"
+          },
+          "single-dating": {
+            "label": "רווק/ה אבל יוצא/ת עם מישהו",
+            "description": "פוגש/ת אנשים באופן פעיל"
+          },
+          "recently-single": {
+            "label": "רווק/ה לאחרונה",
+            "description": "סיים/ה מערכת יחסים לאחרונה"
+          },
+          "divorced": {
+            "label": "גרוש/ה",
+            "description": "לומד/ת מנישואים בעבר"
+          },
+          "widowed": {
+            "label": "אלמן/ה",
+            "description": "מנווט/ת אהבה אחרי אובדן"
+          },
+          "its-complicated": {
+            "label": "זה מסובך",
+            "description": "מצב לא ברור או מורכב"
+          },
+          "in-relationship": {
+            "label": "במערכת יחסים",
+            "description": "עובד/ת על השותפות הנוכחית"
+          }
+        },
+        "significantPastQuestion": "האם היו לכם מערכות יחסים רומנטיות משמעותיות בעבר?",
+        "significantPastOptions": {
+          "yes": {
+            "label": "כן",
+            "description": "היו לי מערכות יחסים משמעותיות"
+          },
+          "no": {
+            "label": "לא",
+            "description": "אני חדש/ה למערכות יחסים רציניות"
+          }
+        },
+        "durationQuestion": "כמה זמן נמשכה מערכת היחסים הכי משמעותית שלכם?",
+        "durationOptions": {
+          "few-months": "6 חודשים או פחות",
+          "one-year": "6 חודשים - שנה",
+          "two-years": "1-2 שנים",
+          "long-term": "2-5 שנים",
+          "very-long-term": "5+ שנים",
+          "no-significant": "לא היו מערכות יחסים משמעותיות"
+        },
+        "timeSinceQuestion": "כמה זמן עבר מאז שמערכת היחסים האחרונה שלכם הסתיימה?",
+        "timeSinceOptions": {
+          "very-recent": "פחות מ-3 חודשים",
+          "recent": "3-6 חודשים",
+          "moderate": "6 חודשים - שנה",
+          "longer": "1-2 שנים",
+          "long-ago": "לפני 2+ שנים"
+        },
+        "lessonsQuestion": "מה השיעור החשוב אחד שלמדתם ממערכות היחסים בעבר?",
+        "lessonsDescription": "זה יכול להיות על תקשורת, גבולות, דגלים אדומים, או מה שאתם צריכים בבן/בת זוג.",
+        "lessonsPlaceholder": "למדתי ש...",
+        "healingQuestion": "איך אתם מרגישים לגבי מערכת היחסים הזו מהעבר עכשיו?",
+        "healingDescription": "האם אתם עדיין מעבדים, מרגישים שחלמתם, או איפושהו באמצע?",
+        "healingPlaceholder": "אני מרגיש/ה..."
+      },
+      "emotionalIntelligence": {
+        "title": "הנוף הרגשי שלכם",
+        "description": "הבנת הדפוסים הרגשיים שלכם עוזרת לנו לספק אימון יעיל יותר.",
+        "attachmentStyleQuestion": "איך אתם בדרך כלל מרגישים במערכות יחסים קרובות?",
+        "attachmentStyleOptions": {
+          "secure": {
+            "label": "בטוח/ה",
+            "description": "אני מרגיש/ה נוח/ה עם קרבה ועצמאות"
+          },
+          "anxious": {
+            "label": "חרד/ה",
+            "description": "אני דואג/ת שינטשו אותי או שאני לא מספיק/ה"
+          },
+          "avoidant": {
+            "label": "נמנע/ת",
+            "description": "אני מעריך/ה עצמאות ולפעמים מרגיש/ה לא נוח/ה עם קרבה"
+          },
+          "disorganized": {
+            "label": "מעורב/לא ברור",
+            "description": "הרגשות שלי לגבי מערכות יחסים משתנים הרבה"
+          }
+        },
+        "fearsQuestion": "אילו פחדים או חששות יש לכם לגבי מערכות יחסים?",
+        "strengthsQuestion": "מהם הכוחות הגדולים ביותר שלכם במערכות יחסים?",
+        "challengesQuestion": "אילו אתגרים רגשיים אתם מתמודדים איתם במערכות יחסים?",
+        "readinessQuestion": "בסולם של 1-10, כמה מוכנים אתם מרגישים למערכת יחסים רצינית?",
+        "readinessDescription": "1 = בכלל לא מוכן/ה, 10 = מוכן/ה לחלוטין"
+      },
+      "valuesVision": {
+        "title": "הערכים והחזון שלכם",
+        "description": "הבנה של מה שהכי חשוב לכם עוזרת לנו להדריך אתכם לקשרים תואמים.",
+        "coreValuesQuestion": "אילו ערכים הכי חשובים לכם?",
+        "visionQuestion": "תארו את מערכת היחסים האידיאלית שלכם",
+        "visionPlaceholder": "במערכת היחסים האידיאלית שלי...",
+        "dealBreakersQuestion": "מהם הדברים שבאופן מוחלט לא תוכלו לקבל?"
+      },
+      "lifestyleCompatibility": {
+        "title": "אורח החיים והתקשורת שלכם",
+        "description": "בואו נבין איך אתם חיים ומתקשרים כדי למצוא את ההתאמות הטובות ביותר.",
+        "workLifeBalanceQuestion": "איך הייתם מתארים את האיזון בין העבודה לחיים שלכם?",
+        "socialEnergyQuestion": "כמה חברתיים אתם?",
+        "socialEnergyDescription": "1 = מאוד מופנם/ת, 10 = מאוד חברותי/ת",
+        "hobbiesQuestion": "מהם התחביבים והתחומי העניין העיקריים שלכם?",
+        "communicationStyleQuestion": "איך אתם מעדיפים להתקשר?",
+        "conflictStyleQuestion": "איך אתם מתמודדים עם חילוקי דעות?"
+      },
+      "selfReflection": {
+        "title": "הרהור עצמי וצמיחה",
+        "description": "השאלות העמוקות האלה עוזרות לנו להבין את המודעות העצמית שלכם ואת החשיבה הצמיחה שלכם.",
+        "friendsDescriptionQuestion": "איך החברים הכי קרובים שלכם היו מתארים אתכם?",
+        "friendsDescriptionPlaceholder": "החברים שלי היו אומרים שאני...",
+        "proudestMomentQuestion": "מה הרגע שאתם הכי גאים בו?",
+        "proudestMomentPlaceholder": "אני גאה ברגע שבו...",
+        "growthAreaQuestion": "מה התחום הכי גדול שאתם רוצים לצמוח בו?",
+        "growthAreaPlaceholder": "אני רוצה לשפר את...",
+        "strengthsQuestion": "מהם 3 הכוחות האישיים העליונים שלכם?",
+        "futureGoalsQuestion": "מהן המטרות הזוגיות שלכם לעתיד?"
+      },
+      "summary": {
+        "title": "הפרופיל האישי שלכם",
+        "description": "הנה מה שלמדנו עליכם. זה עוזר לנו ליצור את חוויית האימון האישית שלכם.",
+        "coreIdentity": "זהות ליבה",
+        "relationshipJourney": "מסע זוגי",
+        "emotionalProfile": "פרופיל רגשי",
+        "valuesAndVision": "ערכים וחזון",
+        "lifestyle": "אורח חיים",
+        "personalGrowth": "צמיחה אישית",
+        "topStrengths": "הכוחות העליונים שלכם",
+        "coreValues": "הערכים הליבה שלכם",
+        "analyzing": "מנתח את התגובות שלכם...",
+        "generatingInsights": "מייצר תובנות אישיות...",
+        "almostReady": "כמעט מוכן!",
+        "startCoaching": "התחלת מסע האימון שלכם"
+      }
     }
   },
   "common": {
