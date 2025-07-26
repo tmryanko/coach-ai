@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { api } from '@/utils/api';
@@ -24,9 +24,23 @@ export default function ProfilePage() {
   const { data: assessmentStatus } = api.assessment.getStatus.useQuery();
 
   // If user hasn't completed assessment, redirect to assessment
+  useEffect(() => {
+    if (assessmentStatus && !assessmentStatus.isCompleted) {
+      router.push('/assessment');
+    }
+  }, [assessmentStatus, router]);
+
+  // Show loading while redirecting
   if (assessmentStatus && !assessmentStatus.isCompleted) {
-    router.push('/assessment');
-    return null;
+    return (
+      <SimpleAppLayout>
+        <div className="max-w-2xl mx-auto p-4">
+          <div className="flex items-center justify-center h-64">
+            <Loader2 className="h-8 w-8 animate-spin" />
+          </div>
+        </div>
+      </SimpleAppLayout>
+    );
   }
 
   if (isLoading) {
