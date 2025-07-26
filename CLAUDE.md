@@ -121,4 +121,18 @@ OpenAI integration for coaching conversations and task feedback. Configuration i
 - OpenAI API key for AI features
 - PostgreSQL database connection
 
-always check translations in `src/messages/en.json` and `src/messages/he.json`
+#### Internationalization (i18n)
+
+- _ALWAYS_ use next-intl for all user-facing text
+- _NEVER_ hardcode strings in components
+- Use useTranslations() hook in components
+- Use getTranslations() in server components
+- All text must be defined in /messages/[locale].json
+- Default locale is [your default locale]
+- Supported locales: [list your locales]
+
+### Translation Requirements
+
+- Every new feature MUST include translations
+- Every text string MUST use translation keys
+- Example: t('dashboard.welcome') not "Welcome"

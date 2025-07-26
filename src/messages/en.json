@@ -1053,5 +1053,15 @@
     "startConversation": "Start a Conversation",
     "startDescription": "Create a new conversation to begin chatting with your AI relationship coach.",
     "startNewConversation": "Start New Conversation"
+  },
+  "Error": {
+    "title": "Something went wrong",
+    "description": "We encountered an unexpected error. Please try again.",
+    "tryAgain": "Try again",
+    "goHome": "Go Home"
+  },
+  "metadata": {
+    "title": "Coach AI - Personal Relationship Coach",
+    "description": "AI-powered personal relationship coaching with structured programs"
   }
 }

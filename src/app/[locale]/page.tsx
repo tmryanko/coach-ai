@@ -3,6 +3,7 @@
 import { useAuth } from "@/contexts/auth-context";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { LandingNav } from "@/components/landing/landing-nav";
 import { HeroSection } from "@/components/landing/hero-section";
 import { HowItWorks } from "@/components/landing/how-it-works";
@@ -13,6 +14,7 @@ import { CTASection } from "@/components/landing/cta-section";
 export default function Home() {
   const { user, loading } = useAuth();
   const router = useRouter();
+  const t = useTranslations('common');
 
   useEffect(() => {
     if (!loading && user) {
@@ -25,7 +27,7 @@ export default function Home() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-lg">Loading...</div>
+        <div className="text-lg">{t('loading')}</div>
       </div>
     );
   }
@@ -47,7 +49,7 @@ export default function Home() {
   // Show loading while redirecting authenticated users
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <div className="text-lg">Redirecting to your dashboard...</div>
+      <div className="text-lg">{t('redirectingToDashboard')}</div>
     </div>
   );
 }

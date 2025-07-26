@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { api } from '@/utils/api';
 import { SimpleAppLayout } from '@/components/layout/app-layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -53,6 +54,7 @@ const STEPS = [
 export default function AssessmentPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const t = useTranslations('assessment');
   const isEditMode = searchParams.get('edit') === 'true';
   const [currentStep, setCurrentStep] = useState(0);
   const [assessmentData, setAssessmentData] = useState<StepComponentData>({});
@@ -225,14 +227,14 @@ export default function AssessmentPage() {
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle>{isEditMode ? 'Edit Your Profile' : 'Personal Coaching Profile'}</CardTitle>
+                <CardTitle>{isEditMode ? t('editProfileTitle') : t('profileTitle')}</CardTitle>
                 <CardDescription>
-                  {isEditMode ? 'Update your information to keep your coaching personalized' : 'Help us understand you better to provide personalized coaching'}
+                  {isEditMode ? t('editProfileDescription') : t('profileDescription')}
                 </CardDescription>
               </div>
               {!isWelcomeStep && (
                 <div className="text-sm text-gray-500">
-                  Step {currentStep} of {STEPS.length - 1}
+                  {t('step', { current: currentStep, total: STEPS.length - 1 })}
                 </div>
               )}
             </div>

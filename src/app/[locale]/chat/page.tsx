@@ -84,8 +84,8 @@ export default function ChatPage() {
 
   return (
     <AppLayout 
-      title="AI Coaching Chat"
-      description="Have a conversation with your personal AI relationship coach"
+      title={t('pageTitle')}
+      description={t('pageDescription')}
       showBackButton={true}
     >
       <div className="flex h-[calc(100vh-200px)] bg-gray-50 dark:bg-gray-900 rounded-lg border">

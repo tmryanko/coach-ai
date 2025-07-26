@@ -1009,5 +1009,15 @@
     "startConversation": "התחילו שיחה",
     "startDescription": "צרו שיחה חדשה כדי להתחיל לדבר עם המאמן AI לזוגיות שלכם.",
     "startNewConversation": "התחילו שיחה חדשה"
+  },
+  "Error": {
+    "title": "משהו השתבש",
+    "description": "נתקלנו בשגיאה לא צפויה. אנא נסו שוב.",
+    "tryAgain": "נסו שוב",
+    "goHome": "חזור הביתה"
+  },
+  "metadata": {
+    "title": "מאמן אישי - מאמן זוגיות AI",
+    "description": "אימון זוגיות אישי מבוסס AI עם תכניות מובנות"
   }
 }
