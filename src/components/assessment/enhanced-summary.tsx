@@ -149,7 +149,7 @@ export function EnhancedSummary({
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {data.emotionalProfile?.topStrengths?.slice(0, 4).map((strength, index) => (
+              {data.emotionalProfile?.topStrengths?.slice(0, 4).map((strength: string, index: number) => (
                 <div key={strength} className="flex items-center gap-3">
                   <div className="w-6 h-6 bg-yellow-100 dark:bg-yellow-900/20 rounded-full flex items-center justify-center">
                     <span className="text-sm font-bold text-yellow-600">{index + 1}</span>
@@ -175,7 +175,7 @@ export function EnhancedSummary({
           </CardHeader>
           <CardContent>
             <div className="flex flex-wrap gap-2">
-              {data.coreValues.map((value) => (
+              {data.coreValues.map((value: string) => (
                 <Badge key={value} variant="secondary" className="text-sm">
                   {value.replace('-', ' ').toLowerCase()}
                 </Badge>
