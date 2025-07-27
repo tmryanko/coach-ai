@@ -96,15 +96,15 @@ export function EnhancedSummary({
         <CardContent className="p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-green-900 dark:text-green-100">
-              Profile Completion
+              {t('profileCompletion.title')}
             </h3>
             <Badge className="bg-green-600 text-white">
-              {stats.percentage}% Complete
+              {t('profileCompletion.percentage', { percentage: stats.percentage })}
             </Badge>
           </div>
           <Progress value={stats.percentage} className="h-3 mb-2" />
           <p className="text-sm text-green-800 dark:text-green-200">
-            You&apos;ve completed {stats.completed} out of {stats.total} sections - excellent depth!
+            {t('profileCompletion.description', { completed: stats.completed, total: stats.total })}
           </p>
         </CardContent>
       </Card>
@@ -115,28 +115,28 @@ export function EnhancedSummary({
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center gap-2">
               <Heart className="w-5 h-5 text-red-500" />
-              Your Profile Snapshot
+              {t('profileSnapshot.title')}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <Label className="text-sm font-medium text-gray-600 dark:text-gray-300">Name</Label>
-              <p className="font-semibold">{data.name || 'Not provided'}</p>
+              <Label className="text-sm font-medium text-gray-600 dark:text-gray-300">{t('profileSnapshot.name')}</Label>
+              <p className="font-semibold">{data.name || t('profileSnapshot.notProvided')}</p>
             </div>
             
             <div>
-              <Label className="text-sm font-medium text-gray-600 dark:text-gray-300">Relationship Status</Label>
-              <p className="font-semibold capitalize">{data.relationshipStatus?.replace('-', ' ') || 'Not specified'}</p>
+              <Label className="text-sm font-medium text-gray-600 dark:text-gray-300">{t('profileSnapshot.relationshipStatus')}</Label>
+              <p className="font-semibold capitalize">{data.relationshipStatus?.replace('-', ' ') || t('profileSnapshot.notSpecified')}</p>
             </div>
             
             <div>
-              <Label className="text-sm font-medium text-gray-600 dark:text-gray-300">Attachment Style</Label>
-              <p className="font-semibold capitalize">{data.emotionalProfile?.attachmentStyle || 'Not assessed'}</p>
+              <Label className="text-sm font-medium text-gray-600 dark:text-gray-300">{t('profileSnapshot.attachmentStyle')}</Label>
+              <p className="font-semibold capitalize">{data.emotionalProfile?.attachmentStyle || t('profileSnapshot.notAssessed')}</p>
             </div>
             
             <div>
-              <Label className="text-sm font-medium text-gray-600 dark:text-gray-300">Relationship Readiness</Label>
-              <p className="font-semibold">{data.relationshipReadiness || 'Not rated'}/7</p>
+              <Label className="text-sm font-medium text-gray-600 dark:text-gray-300">{t('profileSnapshot.relationshipReadiness')}</Label>
+              <p className="font-semibold">{data.relationshipReadiness || t('profileSnapshot.notRated')}/7</p>
             </div>
           </CardContent>
         </Card>
@@ -145,7 +145,7 @@ export function EnhancedSummary({
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center gap-2">
               <Star className="w-5 h-5 text-yellow-500" />
-              Your Top Strengths
+              {t('topStrengths.title')}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -158,7 +158,7 @@ export function EnhancedSummary({
                   <span className="capitalize">{strength.replace('-', ' ')}</span>
                 </div>
               )) || (
-                <p className="text-gray-500 dark:text-gray-400">Strengths to be identified</p>
+                <p className="text-gray-500 dark:text-gray-400">{t('topStrengths.toBeIdentified')}</p>
               )}
             </div>
           </CardContent>
@@ -171,7 +171,7 @@ export function EnhancedSummary({
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center gap-2">
               <Target className="w-5 h-5 text-blue-500" />
-              Your Core Values
+              {t('coreValues.title')}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -192,7 +192,7 @@ export function EnhancedSummary({
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-purple-500" />
-              Your Relationship Vision
+              {t('relationshipVision.title')}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -208,7 +208,7 @@ export function EnhancedSummary({
         <CardHeader className="pb-4">
           <CardTitle className="flex items-center gap-2">
             <Brain className="w-5 h-5 text-indigo-500" />
-            AI-Powered Insights
+            {t('aiInsights.title')}
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -217,7 +217,7 @@ export function EnhancedSummary({
               <div className="text-center space-y-3">
                 <Loader2 className="w-8 h-8 animate-spin text-indigo-600 mx-auto" />
                 <p className="text-sm text-gray-600 dark:text-gray-300">
-                  Analyzing your responses and generating personalized insights...
+                  {t('aiInsights.analyzing')}
                 </p>
               </div>
             </div>
@@ -225,7 +225,7 @@ export function EnhancedSummary({
             <div className="space-y-4">
               <div className="bg-indigo-50 dark:bg-indigo-900/20 p-4 rounded-lg">
                 <h4 className="font-semibold text-indigo-900 dark:text-indigo-100 mb-2">
-                  Attachment Style Analysis
+                  {t('aiInsights.attachmentAnalysis')}
                 </h4>
                 <p className="text-sm text-indigo-800 dark:text-indigo-200">
                   {insights.attachmentStyleAnalysis}
@@ -234,7 +234,7 @@ export function EnhancedSummary({
               
               <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
                 <h4 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">
-                  Communication Style
+                  {t('aiInsights.communicationStyle')}
                 </h4>
                 <p className="text-sm text-blue-800 dark:text-blue-200">
                   {insights.communicationStyleAnalysis}
@@ -244,7 +244,7 @@ export function EnhancedSummary({
               {insights.personalizedRecommendations && insights.personalizedRecommendations.length > 0 && (
                 <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
                   <h4 className="font-semibold text-green-900 dark:text-green-100 mb-3">
-                    Personalized Recommendations
+                    {t('aiInsights.recommendations')}
                   </h4>
                   <ul className="space-y-2">
                     {insights.personalizedRecommendations.slice(0, 3).map((rec, index) => (
@@ -260,7 +260,7 @@ export function EnhancedSummary({
           ) : (
             <div className="text-center py-8">
               <p className="text-gray-500 dark:text-gray-400">
-                Unable to generate insights at this time. Your profile has been saved and you can continue to your coaching program.
+                {t('aiInsights.unableToGenerate')}
               </p>
             </div>
           )}
@@ -272,11 +272,10 @@ export function EnhancedSummary({
         <CardContent>
           <div className="text-center space-y-4">
             <h3 className="text-xl font-bold text-pink-900 dark:text-pink-100">
-              Ready to Begin Your Coaching Journey?
+              {t('nextSteps.title')}
             </h3>
             <p className="text-pink-800 dark:text-pink-200">
-              Your personalized coaching program is ready! Based on your assessment, 
-              we&apos;ll guide you through targeted exercises and insights designed specifically for your goals and style.
+              {t('nextSteps.description')}
             </p>
             <div className="flex justify-center gap-4 pt-4">
               <Button

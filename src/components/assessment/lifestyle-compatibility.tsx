@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { LifestyleCompatibilityData } from '@/types/assessment';
 import { Home, Users, MessageCircle, Zap, ArrowRight } from 'lucide-react';
@@ -62,68 +61,68 @@ const getHobbiesInterests = (t: any) => [
   { value: 'movies-tv', label: t('hobbiesOptions.movies-tv'), icon: '🎬' },
 ];
 
-const COMMUNICATION_STYLES = [
+const getCommunicationStyles = (t: any) => [
   {
     value: 'direct-straightforward',
-    label: 'Direct & Straightforward',
-    description: 'I say what I mean clearly and appreciate the same',
+    label: t('communicationStyles.direct-straightforward.label'),
+    description: t('communicationStyles.direct-straightforward.description'),
     icon: '🎯'
   },
   {
     value: 'gentle-diplomatic',
-    label: 'Gentle & Diplomatic',
-    description: 'I choose words carefully to maintain harmony',
+    label: t('communicationStyles.gentle-diplomatic.label'),
+    description: t('communicationStyles.gentle-diplomatic.description'),
     icon: '🕊️'
   },
   {
     value: 'expressive-emotional',
-    label: 'Expressive & Emotional',
-    description: 'I share feelings openly and connect emotionally',
+    label: t('communicationStyles.expressive-emotional.label'),
+    description: t('communicationStyles.expressive-emotional.description'),
     icon: '💭'
   },
   {
     value: 'analytical-logical',
-    label: 'Analytical & Logical',
-    description: 'I prefer facts, reasoning, and structured discussions',
+    label: t('communicationStyles.analytical-logical.label'),
+    description: t('communicationStyles.analytical-logical.description'),
     icon: '🧠'
   },
   {
     value: 'playful-humorous',
-    label: 'Playful & Humorous',
-    description: 'I use humor and lightness to connect and communicate',
+    label: t('communicationStyles.playful-humorous.label'),
+    description: t('communicationStyles.playful-humorous.description'),
     icon: '😄'
   },
 ];
 
-const CONFLICT_STYLES = [
+const getConflictStyles = (t: any) => [
   {
     value: 'address-immediately',
-    label: 'Address Immediately',
-    description: 'I prefer to talk through issues right away',
+    label: t('conflictStyles.address-immediately.label'),
+    description: t('conflictStyles.address-immediately.description'),
     icon: '⚡'
   },
   {
     value: 'cool-down-first',
-    label: 'Cool Down First',
-    description: 'I need space to process before discussing conflicts',
+    label: t('conflictStyles.cool-down-first.label'),
+    description: t('conflictStyles.cool-down-first.description'),
     icon: '❄️'
   },
   {
     value: 'collaborative-problem-solving',
-    label: 'Collaborative Problem-Solving',
-    description: 'I focus on finding solutions together',
+    label: t('conflictStyles.collaborative-problem-solving.label'),
+    description: t('conflictStyles.collaborative-problem-solving.description'),
     icon: '🤝'
   },
   {
     value: 'avoid-if-possible',
-    label: 'Avoid If Possible',
-    description: 'I prefer to let minor issues resolve naturally',
+    label: t('conflictStyles.avoid-if-possible.label'),
+    description: t('conflictStyles.avoid-if-possible.description'),
     icon: '🌊'
   },
   {
     value: 'seek-compromise',
-    label: 'Seek Compromise',
-    description: 'I look for middle ground where both can be happy',
+    label: t('conflictStyles.seek-compromise.label'),
+    description: t('conflictStyles.seek-compromise.description'),
     icon: '⚖️'
   },
 ];
@@ -144,6 +143,8 @@ export function LifestyleCompatibilityStep({
 
   const workLifeBalanceOptions = getWorkLifeBalanceOptions(t);
   const hobbiesInterests = getHobbiesInterests(t);
+  const communicationStyles = getCommunicationStyles(t);
+  const conflictStyles = getConflictStyles(t);
 
   const toggleHobby = (hobby: string) => {
     if (hobbiesAndInterests.includes(hobby)) {
@@ -337,15 +338,15 @@ export function LifestyleCompatibilityStep({
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center gap-2">
               <MessageCircle className="w-5 h-5 text-blue-500" />
-              Communication Style
+              {t('communicationStyleTitle')}
             </CardTitle>
             <p className="text-sm text-gray-600 dark:text-gray-300">
-              How do you typically communicate in relationships?
+              {t('communicationStyleDescription')}
             </p>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {COMMUNICATION_STYLES.map((style) => (
+              {communicationStyles.map((style) => (
                 <Card
                   key={style.value}
                   className={`p-4 cursor-pointer transition-colors border-2 ${
@@ -382,15 +383,15 @@ export function LifestyleCompatibilityStep({
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center gap-2">
               <Zap className="w-5 h-5 text-yellow-500" />
-              Conflict Resolution Style
+              {t('conflictStyleTitle')}
             </CardTitle>
             <p className="text-sm text-gray-600 dark:text-gray-300">
-              How do you prefer to handle disagreements or conflicts?
+              {t('conflictStyleDescription')}
             </p>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {CONFLICT_STYLES.map((style) => (
+              {conflictStyles.map((style) => (
                 <Card
                   key={style.value}
                   className={`p-4 cursor-pointer transition-colors border-2 ${

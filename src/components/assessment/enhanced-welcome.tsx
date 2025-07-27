@@ -38,7 +38,7 @@ export function EnhancedWelcome({ onNext }: EnhancedWelcomeProps) {
         <CardHeader>
           <CardTitle className="text-center text-blue-900 dark:text-blue-100 flex items-center justify-center gap-2">
             <Users className="w-6 h-6" />
-            What to Expect
+            {t('whatToExpect.title')}
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -49,9 +49,9 @@ export function EnhancedWelcome({ onNext }: EnhancedWelcomeProps) {
                   <Clock className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-blue-900 dark:text-blue-100">15-20 Minutes</h3>
+                  <h3 className="font-semibold text-blue-900 dark:text-blue-100">{t('whatToExpect.duration.title')}</h3>
                   <p className="text-sm text-blue-800 dark:text-blue-200">
-                    Take your time - this isn&apos;t a race. You can save and return anytime.
+                    {t('whatToExpect.duration.description')}
                   </p>
                 </div>
               </div>
@@ -61,9 +61,9 @@ export function EnhancedWelcome({ onNext }: EnhancedWelcomeProps) {
                   <Heart className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-blue-900 dark:text-blue-100">Deeply Personal</h3>
+                  <h3 className="font-semibold text-blue-900 dark:text-blue-100">{t('whatToExpect.personal.title')}</h3>
                   <p className="text-sm text-blue-800 dark:text-blue-200">
-                    We&apos;ll explore your values, fears, dreams, and relationship patterns.
+                    {t('whatToExpect.personal.description')}
                   </p>
                 </div>
               </div>
@@ -75,9 +75,9 @@ export function EnhancedWelcome({ onNext }: EnhancedWelcomeProps) {
                   <Users className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-blue-900 dark:text-blue-100">AI-Powered Insights</h3>
+                  <h3 className="font-semibold text-blue-900 dark:text-blue-100">{t('whatToExpect.aiInsights.title')}</h3>
                   <p className="text-sm text-blue-800 dark:text-blue-200">
-                    Get personalized coaching tailored to your unique personality and goals.
+                    {t('whatToExpect.aiInsights.description')}
                   </p>
                 </div>
               </div>
@@ -87,9 +87,9 @@ export function EnhancedWelcome({ onNext }: EnhancedWelcomeProps) {
                   <Shield className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-blue-900 dark:text-blue-100">Completely Private</h3>
+                  <h3 className="font-semibold text-blue-900 dark:text-blue-100">{t('whatToExpect.private.title')}</h3>
                   <p className="text-sm text-blue-800 dark:text-blue-200">
-                    Your responses are confidential and used only to personalize your experience.
+                    {t('whatToExpect.private.description')}
                   </p>
                 </div>
               </div>
@@ -104,9 +104,9 @@ export function EnhancedWelcome({ onNext }: EnhancedWelcomeProps) {
           <div className="w-12 h-12 bg-pink-100 dark:bg-pink-900/20 rounded-lg flex items-center justify-center mx-auto mb-4">
             <Heart className="w-6 h-6 text-pink-600" />
           </div>
-          <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Self-Discovery</h3>
+          <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">{t('approach.selfDiscovery.title')}</h3>
           <p className="text-sm text-gray-600 dark:text-gray-300">
-            Understand your values, attachment style, and what makes you uniquely you.
+            {t('approach.selfDiscovery.description')}
           </p>
         </Card>
         
@@ -114,9 +114,9 @@ export function EnhancedWelcome({ onNext }: EnhancedWelcomeProps) {
           <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/20 rounded-lg flex items-center justify-center mx-auto mb-4">
             <Users className="w-6 h-6 text-blue-600" />
           </div>
-          <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Relationship Readiness</h3>
+          <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">{t('approach.relationshipReadiness.title')}</h3>
           <p className="text-sm text-gray-600 dark:text-gray-300">
-            Assess where you are emotionally and what you need to build healthy connections.
+            {t('approach.relationshipReadiness.description')}
           </p>
         </Card>
         
@@ -124,9 +124,9 @@ export function EnhancedWelcome({ onNext }: EnhancedWelcomeProps) {
           <div className="w-12 h-12 bg-green-100 dark:bg-green-900/20 rounded-lg flex items-center justify-center mx-auto mb-4">
             <ArrowRight className="w-6 h-6 text-green-600" />
           </div>
-          <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Personalized Growth</h3>
+          <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">{t('approach.personalizedGrowth.title')}</h3>
           <p className="text-sm text-gray-600 dark:text-gray-300">
-            Get a coaching program designed specifically for your goals and learning style.
+            {t('approach.personalizedGrowth.description')}
           </p>
         </Card>
       </div>
@@ -135,11 +135,10 @@ export function EnhancedWelcome({ onNext }: EnhancedWelcomeProps) {
       <div className="text-center space-y-6">
         <div className="space-y-4">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-            Ready to Begin?
+            {t('readyToBegin.title')}
           </h2>
           <p className="text-gray-600 dark:text-gray-300 max-w-lg mx-auto">
-            This journey is about you - your growth, your goals, and your path to meaningful connection. 
-            Be honest, be curious, and trust the process.
+            {t('readyToBegin.description')}
           </p>
         </div>
         
@@ -148,12 +147,12 @@ export function EnhancedWelcome({ onNext }: EnhancedWelcomeProps) {
           size="lg" 
           className="px-8 py-4 text-lg bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600"
         >
-          Start My Assessment
+          {t('startAssessment')}
           <ArrowRight className="w-5 h-5 ml-2" />
         </Button>
         
         <p className="text-sm text-gray-500 dark:text-gray-400">
-          Takes 15-20 minutes • Save and resume anytime • Completely confidential
+          {t('disclaimer')}
         </p>
       </div>
     </div>
@@ -169,6 +168,7 @@ interface IdentityStepProps {
 }
 
 export function IdentityStep({ data, onNext, onBack, canGoBack, isLoading }: IdentityStepProps) {
+  const t = useTranslations('assessment.enhanced.welcome');
   const [name, setName] = useState(data.name || '');
   const [age, setAge] = useState(data.age?.toString() || '');
   const [location, setLocation] = useState(data.location || '');
@@ -193,10 +193,10 @@ export function IdentityStep({ data, onNext, onBack, canGoBack, isLoading }: Ide
           <Users className="w-8 h-8 text-white" />
         </div>
         <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
-          Let&apos;s Get to Know You
+          {t('identity.title')}
         </h2>
         <p className="text-lg text-gray-600 dark:text-gray-300">
-          Help us personalize your experience by sharing a bit about yourself.
+          {t('identity.description')}
         </p>
       </div>
 
@@ -204,25 +204,25 @@ export function IdentityStep({ data, onNext, onBack, canGoBack, isLoading }: Ide
         <div className="space-y-6">
           <div className="space-y-2">
             <Label htmlFor="name" className="text-base font-medium">
-              What should we call you? *
+              {t('identity.nameLabel')}
             </Label>
             <Input
               id="name"
               type="text"
-              placeholder="Your first name or preferred name"
+              placeholder={t('identity.namePlaceholder')}
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="text-lg"
             />
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              This helps us make the coaching feel more personal and welcoming.
+              {t('identity.nameDescription')}
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <Label htmlFor="age" className="text-base font-medium">
-                Age (optional)
+                {t('identity.ageLabel')}
               </Label>
               <Input
                 id="age"
@@ -234,30 +234,30 @@ export function IdentityStep({ data, onNext, onBack, canGoBack, isLoading }: Ide
                 max="100"
               />
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                Helps us tailor advice for your life stage.
+                {t('identity.ageDescription')}
               </p>
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="location" className="text-base font-medium">
-                Location (optional)
+                {t('identity.locationLabel')}
               </Label>
               <Input
                 id="location"
                 type="text"
-                placeholder="City, Country"
+                placeholder={t('identity.locationPlaceholder')}
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
               />
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                For cultural context in coaching.
+                {t('identity.locationDescription')}
               </p>
             </div>
           </div>
 
           <div className="space-y-3">
             <Label className="text-base font-medium">
-              Gender (optional)
+              {t('identity.genderLabel')}
             </Label>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {['woman', 'man', 'non-binary', 'prefer-not-to-say'].map((option) => (
@@ -279,7 +279,7 @@ export function IdentityStep({ data, onNext, onBack, canGoBack, isLoading }: Ide
               ))}
             </div>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              This helps us use appropriate language and examples in your coaching.
+              {t('identity.genderDescription')}
             </p>
           </div>
         </div>
@@ -291,14 +291,14 @@ export function IdentityStep({ data, onNext, onBack, canGoBack, isLoading }: Ide
           onClick={onBack}
           disabled={!canGoBack || isLoading}
         >
-          Back
+          {t('identity.back')}
         </Button>
         <Button
           onClick={handleNext}
           disabled={!isFormValid || isLoading}
           className="px-8"
         >
-          {isLoading ? 'Saving...' : 'Continue'}
+          {isLoading ? t('identity.saving') : t('identity.continue')}
           <ArrowRight className="w-4 h-4 ml-2" />
         </Button>
       </div>

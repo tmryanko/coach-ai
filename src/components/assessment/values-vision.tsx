@@ -18,52 +18,52 @@ interface ValuesVisionStepProps {
   isLoading: boolean;
 }
 
-const CORE_VALUES = [
-  { value: 'honesty', label: 'Honesty & Authenticity', icon: '💎', description: 'Being genuine and truthful' },
-  { value: 'loyalty', label: 'Loyalty & Commitment', icon: '🤝', description: 'Staying dedicated through challenges' },
-  { value: 'respect', label: 'Mutual Respect', icon: '🙏', description: 'Valuing each other\'s boundaries' },
-  { value: 'communication', label: 'Open Communication', icon: '💬', description: 'Sharing thoughts and feelings freely' },
-  { value: 'trust', label: 'Trust & Reliability', icon: '🔒', description: 'Being dependable and trustworthy' },
-  { value: 'independence', label: 'Independence', icon: '🦋', description: 'Maintaining individual identity' },
-  { value: 'family', label: 'Family & Togetherness', icon: '👨‍👩‍👧‍👦', description: 'Prioritizing family bonds' },
-  { value: 'adventure', label: 'Adventure & Growth', icon: '🌟', description: 'Exploring life together' },
-  { value: 'stability', label: 'Stability & Security', icon: '🏠', description: 'Creating a safe foundation' },
-  { value: 'passion', label: 'Passion & Romance', icon: '🔥', description: 'Maintaining spark and intimacy' },
-  { value: 'humor', label: 'Humor & Playfulness', icon: '😄', description: 'Laughing and enjoying life' },
-  { value: 'spirituality', label: 'Spiritual Connection', icon: '🕯️', description: 'Sharing deeper meaning' },
-  { value: 'equality', label: 'Equality & Partnership', icon: '⚖️', description: 'Being equal partners' },
-  { value: 'ambition', label: 'Shared Ambition', icon: '🎯', description: 'Supporting each other\'s goals' },
-  { value: 'kindness', label: 'Kindness & Compassion', icon: '💕', description: 'Treating each other with care' },
+const getCoreValues = (t: any) => [
+  { value: 'honesty', label: t('coreValues.honesty.label'), icon: '💎', description: t('coreValues.honesty.description') },
+  { value: 'loyalty', label: t('coreValues.loyalty.label'), icon: '🤝', description: t('coreValues.loyalty.description') },
+  { value: 'respect', label: t('coreValues.respect.label'), icon: '🙏', description: t('coreValues.respect.description') },
+  { value: 'communication', label: t('coreValues.communication.label'), icon: '💬', description: t('coreValues.communication.description') },
+  { value: 'trust', label: t('coreValues.trust.label'), icon: '🔒', description: t('coreValues.trust.description') },
+  { value: 'independence', label: t('coreValues.independence.label'), icon: '🦋', description: t('coreValues.independence.description') },
+  { value: 'family', label: t('coreValues.family.label'), icon: '👨‍👩‍👧‍👦', description: t('coreValues.family.description') },
+  { value: 'adventure', label: t('coreValues.adventure.label'), icon: '🌟', description: t('coreValues.adventure.description') },
+  { value: 'stability', label: t('coreValues.stability.label'), icon: '🏠', description: t('coreValues.stability.description') },
+  { value: 'passion', label: t('coreValues.passion.label'), icon: '🔥', description: t('coreValues.passion.description') },
+  { value: 'humor', label: t('coreValues.humor.label'), icon: '😄', description: t('coreValues.humor.description') },
+  { value: 'spirituality', label: t('coreValues.spirituality.label'), icon: '🕯️', description: t('coreValues.spirituality.description') },
+  { value: 'equality', label: t('coreValues.equality.label'), icon: '⚖️', description: t('coreValues.equality.description') },
+  { value: 'ambition', label: t('coreValues.ambition.label'), icon: '🎯', description: t('coreValues.ambition.description') },
+  { value: 'kindness', label: t('coreValues.kindness.label'), icon: '💕', description: t('coreValues.kindness.description') },
 ];
 
-const LIFE_PRIORITIES = [
-  { value: 'career-success', label: 'Career Success', icon: '💼' },
-  { value: 'family-time', label: 'Quality Family Time', icon: '👨‍👩‍👧‍👦' },
-  { value: 'personal-growth', label: 'Personal Development', icon: '🌱' },
-  { value: 'health-fitness', label: 'Health & Fitness', icon: '💪' },
-  { value: 'financial-security', label: 'Financial Security', icon: '💰' },
-  { value: 'travel-adventure', label: 'Travel & Adventure', icon: '✈️' },
-  { value: 'social-connections', label: 'Social Relationships', icon: '👥' },
-  { value: 'creativity', label: 'Creative Expression', icon: '🎨' },
-  { value: 'learning', label: 'Continuous Learning', icon: '📚' },
-  { value: 'community-service', label: 'Community Service', icon: '🤲' },
-  { value: 'spiritual-practice', label: 'Spiritual Practice', icon: '🧘' },
-  { value: 'work-life-balance', label: 'Work-Life Balance', icon: '⚖️' },
+const getLifePriorities = (t: any) => [
+  { value: 'career-success', label: t('lifePriorities.career-success'), icon: '💼' },
+  { value: 'family-time', label: t('lifePriorities.family-time'), icon: '👨‍👩‍👧‍👦' },
+  { value: 'personal-growth', label: t('lifePriorities.personal-growth'), icon: '🌱' },
+  { value: 'health-fitness', label: t('lifePriorities.health-fitness'), icon: '💪' },
+  { value: 'financial-security', label: t('lifePriorities.financial-security'), icon: '💰' },
+  { value: 'travel-adventure', label: t('lifePriorities.travel-adventure'), icon: '✈️' },
+  { value: 'social-connections', label: t('lifePriorities.social-connections'), icon: '👥' },
+  { value: 'creativity', label: t('lifePriorities.creativity'), icon: '🎨' },
+  { value: 'learning', label: t('lifePriorities.learning'), icon: '📚' },
+  { value: 'community-service', label: t('lifePriorities.community-service'), icon: '🤲' },
+  { value: 'spiritual-practice', label: t('lifePriorities.spiritual-practice'), icon: '🧘' },
+  { value: 'work-life-balance', label: t('lifePriorities.work-life-balance'), icon: '⚖️' },
 ];
 
-const DEAL_BREAKERS = [
-  { value: 'dishonesty', label: 'Dishonesty or lying', icon: '🚫' },
-  { value: 'disrespect', label: 'Disrespectful behavior', icon: '❌' },
-  { value: 'infidelity', label: 'Cheating or infidelity', icon: '💔' },
-  { value: 'abuse', label: 'Any form of abuse', icon: '🛑' },
-  { value: 'addiction', label: 'Substance abuse problems', icon: '🚫' },
-  { value: 'different-values', label: 'Fundamentally different values', icon: '🔀' },
-  { value: 'no-commitment', label: 'Fear of commitment', icon: '🏃‍♂️' },
-  { value: 'poor-communication', label: 'Unwillingness to communicate', icon: '🤐' },
-  { value: 'different-goals', label: 'Incompatible life goals', icon: '↔️' },
-  { value: 'financial-irresponsibility', label: 'Financial irresponsibility', icon: '💸' },
-  { value: 'no-growth', label: 'Unwillingness to grow', icon: '🚧' },
-  { value: 'jealousy', label: 'Extreme jealousy or possessiveness', icon: '👁️' },
+const getDealBreakers = (t: any) => [
+  { value: 'dishonesty', label: t('dealBreakers.dishonesty'), icon: '🚫' },
+  { value: 'disrespect', label: t('dealBreakers.disrespect'), icon: '❌' },
+  { value: 'infidelity', label: t('dealBreakers.infidelity'), icon: '💔' },
+  { value: 'abuse', label: t('dealBreakers.abuse'), icon: '🛑' },
+  { value: 'addiction', label: t('dealBreakers.addiction'), icon: '🚫' },
+  { value: 'different-values', label: t('dealBreakers.different-values'), icon: '🔀' },
+  { value: 'no-commitment', label: t('dealBreakers.no-commitment'), icon: '🏃‍♂️' },
+  { value: 'poor-communication', label: t('dealBreakers.poor-communication'), icon: '🤐' },
+  { value: 'different-goals', label: t('dealBreakers.different-goals'), icon: '↔️' },
+  { value: 'financial-irresponsibility', label: t('dealBreakers.financial-irresponsibility'), icon: '💸' },
+  { value: 'no-growth', label: t('dealBreakers.no-growth'), icon: '🚧' },
+  { value: 'jealousy', label: t('dealBreakers.jealousy'), icon: '👁️' },
 ];
 
 export function ValuesVisionStep({ 
@@ -78,6 +78,10 @@ export function ValuesVisionStep({
   const [relationshipVision, setRelationshipVision] = useState(data.relationshipVision || '');
   const [lifePriorities, setLifePriorities] = useState<string[]>(data.lifePriorities || []);
   const [dealBreakers, setDealBreakers] = useState<string[]>(data.dealBreakers || []);
+
+  const coreValueOptions = getCoreValues(t);
+  const lifePriorityOptions = getLifePriorities(t);
+  const dealBreakerOptions = getDealBreakers(t);
 
   const toggleSelection = (array: string[], setArray: (arr: string[]) => void, value: string, maxItems: number) => {
     if (array.includes(value)) {
@@ -122,21 +126,21 @@ export function ValuesVisionStep({
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center gap-2">
               <Heart className="w-5 h-5 text-red-500" />
-              Your Core Values (Select 3-5)
+              {t('coreValuesTitle')}
             </CardTitle>
             <p className="text-sm text-gray-600 dark:text-gray-300">
-              What values are absolutely essential in your relationships? These guide your decisions and define what matters most.
+              {t('coreValuesDescription')}
             </p>
           </CardHeader>
           <CardContent>
             {coreValues.length > 0 && (
               <div className="mb-4 p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
                 <p className="text-sm font-medium text-green-900 dark:text-green-100 mb-2">
-                  Your core values ({coreValues.length}/5):
+                  {t('coreValuesSelected', { count: coreValues.length })}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {coreValues.map(value => {
-                    const option = CORE_VALUES.find(opt => opt.value === value);
+                    const option = coreValueOptions.find(opt => opt.value === value);
                     return (
                       <Badge key={value} variant="secondary" className="text-sm">
                         {option?.icon} {option?.label}
@@ -147,7 +151,7 @@ export function ValuesVisionStep({
               </div>
             )}
             <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-              {CORE_VALUES.map((valueOption) => (
+              {coreValueOptions.map((valueOption) => (
                 <Card
                   key={valueOption.value}
                   className={`p-3 cursor-pointer transition-colors border-2 ${
@@ -180,16 +184,16 @@ export function ValuesVisionStep({
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center gap-2">
               <Target className="w-5 h-5 text-blue-500" />
-              Your Ideal Relationship Vision
+              {t('relationshipVisionTitle')}
             </CardTitle>
             <p className="text-sm text-gray-600 dark:text-gray-300">
-              Describe your ideal relationship in 3-5 sentences. What would it feel like? How would you and your partner interact? What would your daily life together look like?
+              {t('relationshipVisionDescription')}
             </p>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
               <Textarea
-                placeholder="In my ideal relationship, we would... We'd spend our time... I'd feel... Together we would..."
+                placeholder={t('relationshipVisionPlaceholder')}
                 value={relationshipVision}
                 onChange={(e) => setRelationshipVision(e.target.value)}
                 className="min-h-32 resize-none"
@@ -197,11 +201,11 @@ export function ValuesVisionStep({
               />
               <div className="flex justify-between items-center">
                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                  {relationshipVision.length}/1000 characters • Minimum 50 characters
+                  {t('characterCount', { current: relationshipVision.length, max: 1000, min: 50 })}
                 </p>
                 {relationshipVision.length >= 50 && (
                   <Badge variant="secondary" className="text-green-600">
-                    ✓ Great detail!
+                    {t('validationMessage.greatDetail')}
                   </Badge>
                 )}
               </div>
@@ -214,21 +218,21 @@ export function ValuesVisionStep({
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center gap-2">
               <Target className="w-5 h-5 text-purple-500" />
-              Life Priorities (Select 3-4)
+              {t('lifePrioritiesTitle')}
             </CardTitle>
             <p className="text-sm text-gray-600 dark:text-gray-300">
-              What are the most important areas of life for you right now? This helps us understand your current focus.
+              {t('lifePrioritiesDescription')}
             </p>
           </CardHeader>
           <CardContent>
             {lifePriorities.length > 0 && (
               <div className="mb-4 p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
                 <p className="text-sm font-medium text-purple-900 dark:text-purple-100 mb-2">
-                  Your priorities ({lifePriorities.length}/4):
+                  {t('prioritiesSelected', { count: lifePriorities.length })}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {lifePriorities.map(priority => {
-                    const option = LIFE_PRIORITIES.find(opt => opt.value === priority);
+                    const option = lifePriorityOptions.find(opt => opt.value === priority);
                     return (
                       <Badge key={priority} variant="secondary">
                         {option?.icon} {option?.label}
@@ -239,7 +243,7 @@ export function ValuesVisionStep({
               </div>
             )}
             <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-              {LIFE_PRIORITIES.map((priority) => (
+              {lifePriorityOptions.map((priority) => (
                 <Card
                   key={priority.value}
                   className={`p-3 cursor-pointer transition-colors border-2 ${
@@ -267,21 +271,21 @@ export function ValuesVisionStep({
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center gap-2">
               <AlertTriangle className="w-5 h-5 text-red-500" />
-              Relationship Deal-Breakers (Select 2-4)
+              {t('dealBreakersTitle')}
             </CardTitle>
             <p className="text-sm text-gray-600 dark:text-gray-300">
-              What behaviors or qualities would be absolutely unacceptable in a relationship? Knowing your boundaries is crucial.
+              {t('dealBreakersDescription')}
             </p>
           </CardHeader>
           <CardContent>
             {dealBreakers.length > 0 && (
               <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 rounded-lg">
                 <p className="text-sm font-medium text-red-900 dark:text-red-100 mb-2">
-                  Your deal-breakers ({dealBreakers.length}/4):
+                  {t('dealBreakersSelected', { count: dealBreakers.length })}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {dealBreakers.map(dealBreaker => {
-                    const option = DEAL_BREAKERS.find(opt => opt.value === dealBreaker);
+                    const option = dealBreakerOptions.find(opt => opt.value === dealBreaker);
                     return (
                       <Badge key={dealBreaker} variant="secondary">
                         {option?.icon} {option?.label}
@@ -292,7 +296,7 @@ export function ValuesVisionStep({
               </div>
             )}
             <div className="grid gap-3 md:grid-cols-2">
-              {DEAL_BREAKERS.map((dealBreaker) => (
+              {dealBreakerOptions.map((dealBreaker) => (
                 <Card
                   key={dealBreaker.value}
                   className={`p-3 cursor-pointer transition-colors border-2 ${

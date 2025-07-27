@@ -598,6 +598,53 @@
       },
       "communicationStyleTitle": "סגנון תקשורת",
       "communicationStyleDescription": "איך אתם בדרך כלל מתקשרים במערכות יחסים?",
+      "conflictStyleTitle": "סגנון פתרון קונפליקטים", 
+      "conflictStyleDescription": "איך אתם מעדיפים להתמודד עם חילוקי דעות או קונפליקטים?",
+      "communicationStyles": {
+        "direct-straightforward": {
+          "label": "ישיר וחד-משמעי",
+          "description": "אני אומר מה שאני מתכוון בבירור ומעריך את אותו הדבר"
+        },
+        "gentle-diplomatic": {
+          "label": "עדין ודיפלומטי", 
+          "description": "אני בוחר מילים בזהירות כדי לשמור על הרמוניה"
+        },
+        "expressive-emotional": {
+          "label": "אקספרסיבי ורגשי",
+          "description": "אני חולק רגשות באופן פתוח ומתחבר רגשית"
+        },
+        "analytical-logical": {
+          "label": "אנליטי והגיוני",
+          "description": "אני מעדיף עובדות, הגיון ודיונים מובנים"
+        },
+        "playful-humorous": {
+          "label": "שובב והומוריסטי", 
+          "description": "אני משתמש בהומור וקלילות כדי להתחבר ולתקשר"
+        }
+      },
+      "conflictStyles": {
+        "address-immediately": {
+          "label": "להתמודד מיד",
+          "description": "אני מעדיף לדבר על בעיות מיד"
+        },
+        "cool-down-first": {
+          "label": "להירגע קודם",
+          "description": "אני צריך מרחב לעבד לפני שמדברים על קונפליקטים"
+        },
+        "collaborative-problem-solving": {
+          "label": "פתרון בעיות שיתופי",
+          "description": "אני מתמקד במציאת פתרונות יחד"
+        },
+        "avoid-if-possible": {
+          "label": "להימנע אם אפשר",
+          "description": "אני מעדיף לתת לבעיות קטנות להיפתר באופן טבעי"
+        },
+        "seek-compromise": {
+          "label": "לחפש פשרה",
+          "description": "אני מחפש דרך אמצע שבה שניהם יכולים להיות מרוצים"
+        }
+      },
+      "communicationStyleDescription": "איך אתם בדרך כלל מתקשרים במערכות יחסים?",
       "conflictStyleTitle": "סגנון פתרון קונפליקטים",
       "conflictStyleDescription": "איך אתם מעדיפים להתמודד עם חילוקי דעות או קונפליקטים?",
       "buttons": {
@@ -609,6 +656,58 @@
     "selfReflection": {
       "title": "שיקוף עצמי וצמיחה",
       "description": "השלב האחרון במסע הגילוי העצמי שלכם. התובנות האלו עוזרות לנו להבין איך אתם רואים את עצמכם ולאן אתם שואפים במערכות יחסים.",
+      "friendsDescriptionTitle": "איך החברים שלכם היו מתארים אתכם",
+      "friendsDescriptionDescription": "אם החברים הקרובים ביותר שלכם היו מתארים אתכם בפני מישהו חדש, מה הם היו אומרים?",
+      "friendsDescriptionPlaceholder": "החברים שלי כנראה היו אומרים שאני...",
+      "proudestMomentTitle": "הרגע האישי שהכי גאים בו",
+      "proudestMomentDescription": "חישבו על רגע שהרגשתם גאים בעצמכם - לא בהכרח הישג גדול, אלא רגע שהראה את האופי, הערכים או הצמיחה שלכם.",
+      "proudestMomentPlaceholder": "אני הכי גאה בפעם שבה...",
+      "growthAreaTitle": "התחום הגדול ביותר לצמיחה",
+      "growthAreaDescription": "באיזה תחום הכי הייתם רוצים לצמוח או להשתפר כאדם?",
+      "growthAreaPlaceholder": "הכי הייתי רוצה לצמוח ב...",
+      "personalStrengthsTitle": "הכוחות האישיים שלכם (בחרו 3-5)",
+      "personalStrengthsDescription": "מה הם הכוחות העל שלכם כאדם?",
+      "relationshipGoalsTitle": "המטרות הזוגיות שלכם (בחרו 2-4)",
+      "relationshipGoalsDescription": "מה הכי הייתם רוצים להשיג או לשפר במערכות יחסים עתידיות?",
+      "characterCount": "{current}/{max} תווים • מינימום {min} תווים",
+      "validationMessage": {
+        "greatInsight": "✓ תובנה נהדרת!",
+        "inspiring": "✓ מעורר השראה!",
+        "selfAware": "✓ מודעות עצמית!"
+      },
+      "strengthsSelected": "הכוחות שלכם ({count}/5):",
+      "goalsSelected": "המטרות הזוגיות שלכם ({count}/4):",
+      "personalStrengths": {
+        "empathy": "אמפתיה והבנה",
+        "loyalty": "נאמנות והתמסרות",
+        "humor": "חוש הומור",
+        "intelligence": "אינטליגנציה וחוכמה",
+        "creativity": "יצירתיות ודמיון",
+        "resilience": "חוסן ועוצמה",
+        "kindness": "אדיבות וחמלה",
+        "authenticity": "אותנטיות וכנות",
+        "patience": "סבלנות והבנה",
+        "adventure": "רוח הרפתקנית",
+        "reliability": "אמינות ובטחון",
+        "communication": "תקשורת טובה",
+        "independence": "עצמאות והסתמכות עצמית",
+        "ambition": "שאפתנות ומתמדה",
+        "emotional-intelligence": "אינטליגנציה רגשית"
+      },
+      "relationshipGoals": {
+        "deep-connection": "בניית קשר רגשי עמוק",
+        "effective-communication": "תקשורת יעילה יותר",
+        "healthy-boundaries": "הצבת גבולות בריאים",
+        "conflict-resolution": "התמודדות טובה יותר עם קונפליקטים",
+        "trust-building": "בניה ושמירה על אמון",
+        "intimacy": "יצירת אינטימיות עמוקה יותר",
+        "support-partnership": "להיות שותף תומך",
+        "personal-growth": "להמשיך לצמוח יחד",
+        "life-balance": "איזון בין זוגיות לעצמאות",
+        "shared-goals": "עבודה לקראת מטרות משותפות",
+        "emotional-security": "יצירת בטחון רגשי",
+        "fun-connection": "לשמור על דברים מהנים ושובבים"
+      },
       "buttons": {
         "back": "חזרה",
         "continue": "השלמת הערכה",
@@ -618,6 +717,67 @@
     "valuesVision": {
       "title": "הערכים וחזון מערכת היחסים שלכם",
       "description": "הבנת מה הכי חשוב לכם עוזרת לנו להתאים לכם אסטרטגיות אימון ותובנות שמתיישרות עם הערכים העמוקים וחלומות מערכת היחסים שלכם.",
+      "coreValuesTitle": "הערכים הליבה שלכם (בחרו 3-5)",
+      "coreValuesDescription": "אילו ערכים הכי חיוניים במערכות היחסים שלכם?",
+      "relationshipVisionTitle": "חזון מערכת היחסים האידיאלית",
+      "relationshipVisionDescription": "תארו את מערכת היחסים האידיאלית שלכם.",
+      "relationshipVisionPlaceholder": "במערכת היחסים האידיאלית שלי, אנחנו...",
+      "lifePrioritiesTitle": "סדרי עדיפויות בחיים (בחרו 3-4)",
+      "lifePrioritiesDescription": "מה התחומים הכי חשובים בחיים בשבילכם עכשיו?",
+      "dealBreakersTitle": "עוצרי עסקה ביחסים (בחרו 2-4)",
+      "dealBreakersDescription": "אילו התנהגויות או תכונות יהיו בלתי מקבלות לחלוטין במערכת יחסים?",
+      "coreValuesSelected": "הערכים הליבה שלכם ({count}/5):",
+      "prioritiesSelected": "הסדרי עדיפויות שלכם ({count}/4):",
+      "dealBreakersSelected": "עוצרי העסקה שלכם ({count}/4):",
+      "characterCount": "{current}/{max} תווים • מינימום {min} תווים",
+      "validationMessage": {
+        "greatDetail": "✓ פירוט נהדר!"
+      },
+      "coreValues": {
+        "honesty": { "label": "כנות ואותנטיות", "description": "להיות אמיתי וכנה" },
+        "loyalty": { "label": "נאמנות והתחייבות", "description": "להישאר מסורים דרך אתגרים" },
+        "respect": { "label": "כבוד הדדי", "description": "להעריך את הגבולות של זה את זה" },
+        "communication": { "label": "תקשורת פתוחה", "description": "חלוקת מחשבות ורגשות בחופשיות" },
+        "trust": { "label": "אמון ואמינות", "description": "להיות ניתן להסתמכות ואמין" },
+        "independence": { "label": "עצמאות", "description": "שמירה על זהות אינדיבידואלית" },
+        "family": { "label": "משפחה ויחד", "description": "עדיפות לקשרי משפחה" },
+        "adventure": { "label": "הרפתקה וצמיחה", "description": "חקירת החיים יחד" },
+        "stability": { "label": "יציבות ובטחון", "description": "יצירת יסוד בטוח" },
+        "passion": { "label": "תשוקה ורומנטיקה", "description": "שמירה על ניצוץ ואינטימיות" },
+        "humor": { "label": "הומור ושובבות", "description": "צחוק ונהנה מהחיים" },
+        "spirituality": { "label": "קשר רוחני", "description": "חלוקת משמעות עמוקה יותר" },
+        "equality": { "label": "שוויון ושותפות", "description": "להיות שותפים שווים" },
+        "ambition": { "label": "שאפתנות משותפת", "description": "תמיכה במטרות של זה את זה" },
+        "kindness": { "label": "אדיבות וחמלה", "description": "להתייחס זה לזה בטיפול" }
+      },
+      "lifePriorities": {
+        "career-success": "הצלחה בקריירה",
+        "family-time": "זמן איכות עם המשפחה",
+        "personal-growth": "פיתוח אישי",
+        "health-fitness": "בריאות וכושר",
+        "financial-security": "ביטחון כלכלי",
+        "travel-adventure": "נסיעות והרפתקאות",
+        "social-connections": "קשרים חברתיים",
+        "creativity": "ביטוי יצירתי",
+        "learning": "למידה מתמשכת",
+        "community-service": "שירות קהילתי",
+        "spiritual-practice": "תרגול רוחני",
+        "work-life-balance": "איזון עבודה-חיים"
+      },
+      "dealBreakers": {
+        "dishonesty": "חוסר כנות או שקר",
+        "disrespect": "התנהגות חסרת כבוד",
+        "infidelity": "בגידה או חוסר נאמנות",
+        "abuse": "כל צורה של התעללות",
+        "addiction": "בעיות התמכרות לחומרים",
+        "different-values": "ערכים שונים מהיסוד",
+        "no-commitment": "פחד מהתחייבות",
+        "poor-communication": "חוסר רצון לתקשר",
+        "different-goals": "מטרות חיים לא תואמות",
+        "financial-irresponsibility": "חוסר אחריות כלכלית",
+        "no-growth": "חוסר רצון לצמוח",
+        "jealousy": "קנאה קיצונית או רכושנות"
+      },
       "buttons": {
         "back": "חזרה",
         "continue": "המשך",
@@ -627,6 +787,44 @@
     "enhancedSummary": {
       "title": "ההערכה הושלמה! 🎉",
       "description": "תודה שלקחתם את המסע הזה של גילוי עצמי. הנה מה שלמדנו עליכם ואיך אנחנו יכולים לתמוך במטרות מערכת היחסים שלכם.",
+      "profileCompletion": {
+        "title": "השלמת הפרופיל",
+        "percentage": "{percentage}% הושלם",
+        "description": "השלמתם {completed} מתוך {total} חלקים - עומק מצוין!"
+      },
+      "profileSnapshot": {
+        "title": "צילום מסך של הפרופיל שלכם",
+        "name": "שם",
+        "relationshipStatus": "מצב זוגי",
+        "attachmentStyle": "סגנון התקשרות",
+        "relationshipReadiness": "מוכנות למערכת יחסים",
+        "notProvided": "לא צוין",
+        "notSpecified": "לא הוגדר",
+        "notAssessed": "לא הוערך",
+        "notRated": "לא דורג"
+      },
+      "topStrengths": {
+        "title": "הכוחות העליונים שלכם",
+        "toBeIdentified": "כוחות לזיהוי"
+      },
+      "coreValues": {
+        "title": "הערכים הליבה שלכם"
+      },
+      "relationshipVision": {
+        "title": "חזון מערכת היחסים שלכם"
+      },
+      "aiInsights": {
+        "title": "תובנות מבוססות AI",
+        "analyzing": "מנתח את התגובות שלכם ומייצר תובנות אישיות...",
+        "attachmentAnalysis": "ניתוח סגנון התקשרות",
+        "communicationStyle": "סגנון תקשורת",
+        "recommendations": "המלצות אישיות",
+        "unableToGenerate": "לא ניתן ליצור תובנות כרגע. הפרופיל שלכם נשמר ותוכלו להמשיך לתכנית האימון שלכם."
+      },
+      "nextSteps": {
+        "title": "מוכנים להתחיל את מסע האימון שלכם?",
+        "description": "תכנית האימון האישית שלכם מוכנה! על בסיס ההערכה שלכם, נדריך אתכם דרך תרגילים ותובנות ממוקדים שתוכננו במיוחד למטרות ולסגנון שלכם."
+      },
       "buttons": {
         "backToReview": "חזרה לסקירה",
         "startProgram": "התחלת תכנית האימון שלי",
@@ -782,7 +980,63 @@
         "description": "אתם עומדים לצאת למסע אישי של גילוי עצמי וצמיחה זוגית. הערכה זו עוזרת לנו להבין מי אתם, מה אתם רוצים, ואיך אנחנו יכולים לתמוך בכם בצורה הטובה ביותר.",
         "timeCommitment": "זה ייקח בין 8-12 דקות",
         "confidentiality": "התגובות שלכם פרטיות וסודיות",
-        "getStarted": "התחלת הערכה"
+        "getStarted": "התחלת הערכה",
+        "whatToExpect": {
+          "title": "למה לצפות",
+          "duration": {
+            "title": "15-20 דקות",
+            "description": "קחו את הזמן שלכם - זה לא מירוץ. אתם יכולים לשמור ולחזור בכל עת."
+          },
+          "personal": {
+            "title": "אישי עמוק",
+            "description": "נחקור את הערכים, הפחדים, החלומות ודפוסי המערכות יחסים שלכם."
+          },
+          "aiInsights": {
+            "title": "תובנות מבוססות AI",
+            "description": "קבלו אימון אישי המותאם לאישיות ולמטרות הייחודיות שלכם."
+          },
+          "private": {
+            "title": "פרטי לחלוטין",
+            "description": "התגובות שלכם מאובטחות ולעולם לא משותפות."
+          }
+        },
+        "approach": {
+          "selfDiscovery": {
+            "title": "גילוי עצמי",
+            "description": "הבינו את הערכים, סגנון ההתקשרות וההיבטים הייחודיים שלכם."
+          },
+          "relationshipReadiness": {
+            "title": "מוכנות למערכת יחסים",
+            "description": "העריכו איפה אתם רגשית ומה אתם צריכים כדי לבנות קשרים בריאים."
+          },
+          "personalizedGrowth": {
+            "title": "צמיחה אישית",
+            "description": "קבלו הדרכה וכלים שמתאימים למטרות ולאתגרים הספציפיים שלכם."
+          }
+        },
+        "readyToBegin": {
+          "title": "מוכנים להתחיל?",
+          "description": "המסע הזה הוא עליכם - הצמיחה שלכם, המטרות שלכם והדרך שלכם לקשר משמעותי. היו כנים, היו סקרנים וסמכו על התהליך."
+        },
+        "startAssessment": "התחלת ההערכה שלי",
+        "disclaimer": "לוקח 15-20 דקות • שמירה והמשך בכל עת • סודי לחלוטין",
+        "identity": {
+          "title": "בואו נכיר אתכם",
+          "description": "עזרו לנו להתאים אישית את החוויה שלכם על ידי שיתוף קצת על עצמכם.",
+          "nameLabel": "איך נקרא לכם? *",
+          "namePlaceholder": "השם הפרטי או השם המועדף עליכם",
+          "nameDescription": "זה עוזר לנו להפוך את האימון לאישי ומזמין יותר.",
+          "ageLabel": "גיל (אופציונלי)",
+          "ageDescription": "עוזר לנו להתאים עצות לשלב החיים שלכם.",
+          "locationLabel": "מיקום (אופציונלי)",
+          "locationPlaceholder": "עיר, מדינה",
+          "locationDescription": "להקשר תרבותי באימון.",
+          "genderLabel": "איך אתם מגדירים את עצמכם?",
+          "genderDescription": "עוזר לנו להתאים את השפה והגישה שלנו.",
+          "back": "חזרה",
+          "continue": "המשך",
+          "saving": "שומר..."
+        }
       },
       "identity": {
         "title": "ספרו לנו עליכם",

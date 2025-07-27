@@ -653,6 +653,58 @@
     "selfReflection": {
       "title": "Self-Reflection & Growth",
       "description": "The final step in your journey of self-discovery. These insights help us understand how you see yourself and what you're working toward in relationships.",
+      "friendsDescriptionTitle": "How Your Friends Would Describe You",
+      "friendsDescriptionDescription": "If your closest friends were describing you to someone new, what would they say? Think about the qualities they admire and the way you show up in their lives.",
+      "friendsDescriptionPlaceholder": "My friends would probably say I'm... They'd mention that I... When they think of me, they think of someone who...",
+      "proudestMomentTitle": "Your Proudest Personal Moment",
+      "proudestMomentDescription": "Think of a time when you felt really proud of yourself - not necessarily a big achievement, but a moment that showed your character, values, or growth.",
+      "proudestMomentPlaceholder": "I'm most proud of the time when I... This showed me that I... It made me realize...",
+      "growthAreaTitle": "Your Biggest Area for Growth",
+      "growthAreaDescription": "What's one area where you'd most like to grow or improve as a person? This could be a skill, habit, mindset, or way of being in relationships.",
+      "growthAreaPlaceholder": "I'd most like to grow in... This would help me because... I'm working on this by...",
+      "personalStrengthsTitle": "Your Personal Strengths (Select 3-5)",
+      "personalStrengthsDescription": "What are your superpowers as a person? Choose the qualities that you feel represent you best.",
+      "relationshipGoalsTitle": "Your Relationship Goals (Select 2-4)",
+      "relationshipGoalsDescription": "What do you most want to achieve or improve in your future relationships?",
+      "characterCount": "{current}/{max} characters • Minimum {min} characters",
+      "validationMessage": {
+        "greatInsight": "✓ Great insight!",
+        "inspiring": "✓ Inspiring!",
+        "selfAware": "✓ Self-aware!"
+      },
+      "strengthsSelected": "Your strengths ({count}/5):",
+      "goalsSelected": "Your relationship goals ({count}/4):",
+      "personalStrengths": {
+        "empathy": "Empathy & Understanding",
+        "loyalty": "Loyalty & Dedication",
+        "humor": "Sense of Humor",
+        "intelligence": "Intelligence & Wisdom",
+        "creativity": "Creativity & Imagination",
+        "resilience": "Resilience & Strength",
+        "kindness": "Kindness & Compassion",
+        "authenticity": "Authenticity & Honesty",
+        "patience": "Patience & Understanding",
+        "adventure": "Adventurous Spirit",
+        "reliability": "Reliability & Trustworthiness",
+        "communication": "Good Communication",
+        "independence": "Independence & Self-Reliance",
+        "ambition": "Ambition & Drive",
+        "emotional-intelligence": "Emotional Intelligence"
+      },
+      "relationshipGoals": {
+        "deep-connection": "Build deep emotional connection",
+        "effective-communication": "Communicate more effectively",
+        "healthy-boundaries": "Set healthy boundaries",
+        "conflict-resolution": "Handle conflicts better",
+        "trust-building": "Build and maintain trust",
+        "intimacy": "Create deeper intimacy",
+        "support-partnership": "Be a supportive partner",
+        "personal-growth": "Continue growing together",
+        "life-balance": "Balance relationship and independence",
+        "shared-goals": "Work toward shared goals",
+        "emotional-security": "Create emotional security",
+        "fun-connection": "Keep things fun and playful"
+      },
       "buttons": {
         "back": "Back",
         "continue": "Complete Assessment",
@@ -662,6 +714,112 @@
     "valuesVision": {
       "title": "Your Values & Relationship Vision",
       "description": "Understanding what matters most to you helps us match you with coaching strategies and insights that align with your deepest values and relationship dreams.",
+      "coreValuesTitle": "Your Core Values (Select 3-5)",
+      "coreValuesDescription": "What values are absolutely essential in your relationships? These guide your decisions and define what matters most.",
+      "relationshipVisionTitle": "Your Ideal Relationship Vision",
+      "relationshipVisionDescription": "Describe your ideal relationship in 3-5 sentences. What would it feel like? How would you and your partner interact? What would your daily life together look like?",
+      "relationshipVisionPlaceholder": "In my ideal relationship, we would... We'd spend our time... I'd feel... Together we would...",
+      "lifePrioritiesTitle": "Life Priorities (Select 3-4)",
+      "lifePrioritiesDescription": "What are the most important areas of life for you right now? This helps us understand your current focus.",
+      "dealBreakersTitle": "Relationship Deal-Breakers (Select 2-4)",
+      "dealBreakersDescription": "What behaviors or qualities would be absolutely unacceptable in a relationship? Knowing your boundaries is crucial.",
+      "coreValuesSelected": "Your core values ({count}/5):",
+      "prioritiesSelected": "Your priorities ({count}/4):",
+      "dealBreakersSelected": "Your deal-breakers ({count}/4):",
+      "characterCount": "{current}/{max} characters • Minimum {min} characters",
+      "validationMessage": {
+        "greatDetail": "✓ Great detail!"
+      },
+      "coreValues": {
+        "honesty": {
+          "label": "Honesty & Authenticity",
+          "description": "Being genuine and truthful"
+        },
+        "loyalty": {
+          "label": "Loyalty & Commitment", 
+          "description": "Staying dedicated through challenges"
+        },
+        "respect": {
+          "label": "Mutual Respect",
+          "description": "Valuing each other's boundaries"
+        },
+        "communication": {
+          "label": "Open Communication",
+          "description": "Sharing thoughts and feelings freely"
+        },
+        "trust": {
+          "label": "Trust & Reliability",
+          "description": "Being dependable and trustworthy"
+        },
+        "independence": {
+          "label": "Independence",
+          "description": "Maintaining individual identity"
+        },
+        "family": {
+          "label": "Family & Togetherness",
+          "description": "Prioritizing family bonds"
+        },
+        "adventure": {
+          "label": "Adventure & Growth",
+          "description": "Exploring life together"
+        },
+        "stability": {
+          "label": "Stability & Security",
+          "description": "Creating a safe foundation"
+        },
+        "passion": {
+          "label": "Passion & Romance",
+          "description": "Maintaining spark and intimacy"
+        },
+        "humor": {
+          "label": "Humor & Playfulness",
+          "description": "Laughing and enjoying life"
+        },
+        "spirituality": {
+          "label": "Spiritual Connection",
+          "description": "Sharing deeper meaning"
+        },
+        "equality": {
+          "label": "Equality & Partnership",
+          "description": "Being equal partners"
+        },
+        "ambition": {
+          "label": "Shared Ambition",
+          "description": "Supporting each other's goals"
+        },
+        "kindness": {
+          "label": "Kindness & Compassion",
+          "description": "Treating each other with care"
+        }
+      },
+      "lifePriorities": {
+        "career-success": "Career Success",
+        "family-time": "Quality Family Time",
+        "personal-growth": "Personal Development",
+        "health-fitness": "Health & Fitness",
+        "financial-security": "Financial Security",
+        "travel-adventure": "Travel & Adventure",
+        "social-connections": "Social Relationships",
+        "creativity": "Creative Expression",
+        "learning": "Continuous Learning",
+        "community-service": "Community Service",
+        "spiritual-practice": "Spiritual Practice",
+        "work-life-balance": "Work-Life Balance"
+      },
+      "dealBreakers": {
+        "dishonesty": "Dishonesty or lying",
+        "disrespect": "Disrespectful behavior",
+        "infidelity": "Cheating or infidelity",
+        "abuse": "Any form of abuse",
+        "addiction": "Substance abuse problems",
+        "different-values": "Fundamentally different values",
+        "no-commitment": "Fear of commitment",
+        "poor-communication": "Unwillingness to communicate",
+        "different-goals": "Incompatible life goals",
+        "financial-irresponsibility": "Financial irresponsibility",
+        "no-growth": "Unwillingness to grow",
+        "jealousy": "Extreme jealousy or possessiveness"
+      },
       "buttons": {
         "back": "Back",
         "continue": "Continue",
@@ -671,6 +829,44 @@
     "enhancedSummary": {
       "title": "Assessment Complete! 🎉",
       "description": "Thank you for taking this journey of self-discovery. Here's what we learned about you and how we can support your relationship goals.",
+      "profileCompletion": {
+        "title": "Profile Completion",
+        "percentage": "{percentage}% Complete",
+        "description": "You've completed {completed} out of {total} sections - excellent depth!"
+      },
+      "profileSnapshot": {
+        "title": "Your Profile Snapshot",
+        "name": "Name",
+        "relationshipStatus": "Relationship Status",
+        "attachmentStyle": "Attachment Style", 
+        "relationshipReadiness": "Relationship Readiness",
+        "notProvided": "Not provided",
+        "notSpecified": "Not specified",
+        "notAssessed": "Not assessed",
+        "notRated": "Not rated"
+      },
+      "topStrengths": {
+        "title": "Your Top Strengths",
+        "toBeIdentified": "Strengths to be identified"
+      },
+      "coreValues": {
+        "title": "Your Core Values"
+      },
+      "relationshipVision": {
+        "title": "Your Relationship Vision"
+      },
+      "aiInsights": {
+        "title": "AI-Powered Insights",
+        "analyzing": "Analyzing your responses and generating personalized insights...",
+        "attachmentAnalysis": "Attachment Style Analysis",
+        "communicationStyle": "Communication Style",
+        "recommendations": "Personalized Recommendations",
+        "unableToGenerate": "Unable to generate insights at this time. Your profile has been saved and you can continue to your coaching program."
+      },
+      "nextSteps": {
+        "title": "Ready to Begin Your Coaching Journey?",
+        "description": "Your personalized coaching program is ready! Based on your assessment, we'll guide you through targeted exercises and insights designed specifically for your goals and style."
+      },
       "buttons": {
         "backToReview": "Back to Review",
         "startProgram": "Start My Coaching Program",
@@ -826,7 +1022,63 @@
         "description": "You're about to embark on a personalized journey of self-discovery and relationship growth. This assessment helps us understand who you are, what you want, and how we can best support you.",
         "timeCommitment": "This will take about 8-12 minutes",
         "confidentiality": "Your responses are private and confidential",
-        "getStarted": "Begin Assessment"
+        "getStarted": "Begin Assessment",
+        "whatToExpect": {
+          "title": "What to Expect",
+          "duration": {
+            "title": "15-20 Minutes",
+            "description": "Take your time - this isn't a race. You can save and return anytime."
+          },
+          "personal": {
+            "title": "Deeply Personal",
+            "description": "We'll explore your values, fears, dreams, and relationship patterns."
+          },
+          "aiInsights": {
+            "title": "AI-Powered Insights",
+            "description": "Get personalized coaching tailored to your unique personality and goals."
+          },
+          "private": {
+            "title": "Completely Private",
+            "description": "Your responses are confidential and used only to personalize your experience."
+          }
+        },
+        "approach": {
+          "selfDiscovery": {
+            "title": "Self-Discovery",
+            "description": "Understand your values, attachment style, and what makes you uniquely you."
+          },
+          "relationshipReadiness": {
+            "title": "Relationship Readiness",
+            "description": "Assess where you are emotionally and what you need to build healthy connections."
+          },
+          "personalizedGrowth": {
+            "title": "Personalized Growth",
+            "description": "Get a coaching program designed specifically for your goals and learning style."
+          }
+        },
+        "readyToBegin": {
+          "title": "Ready to Begin?",
+          "description": "This journey is about you - your growth, your goals, and your path to meaningful connection. Be honest, be curious, and trust the process."
+        },
+        "startAssessment": "Start My Assessment",
+        "disclaimer": "Takes 15-20 minutes • Save and resume anytime • Completely confidential",
+        "identity": {
+          "title": "Let's Get to Know You",
+          "description": "Help us personalize your experience by sharing a bit about yourself.",
+          "nameLabel": "What should we call you? *",
+          "namePlaceholder": "Your first name or preferred name",
+          "nameDescription": "This helps us make the coaching feel more personal and welcoming.",
+          "ageLabel": "Age (optional)",
+          "ageDescription": "Helps us tailor advice for your life stage.",
+          "locationLabel": "Location (optional)",
+          "locationPlaceholder": "City, Country",
+          "locationDescription": "For cultural context in coaching.",
+          "genderLabel": "Gender (optional)",
+          "genderDescription": "This helps us use appropriate language and examples in your coaching.",
+          "back": "Back",
+          "continue": "Continue",
+          "saving": "Saving..."
+        }
       },
       "identity": {
         "title": "Tell Us About You",
