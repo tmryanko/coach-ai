@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { api } from '@/utils/api';
@@ -17,8 +17,6 @@ export default function ProfilePage() {
   const tChallenges = useTranslations('assessment.challenges.challengeOptions');
   const tComm = useTranslations('assessment.communication.communicationStyles');
   const tStatus = useTranslations('assessment.relationshipStatus.statusOptions');
-  const tCommon = useTranslations('common');
-  const [isEditing, setIsEditing] = useState(false);
 
   const { data: profile, isLoading } = api.assessment.getProfile.useQuery();
   const { data: assessmentStatus } = api.assessment.getStatus.useQuery();
@@ -73,7 +71,7 @@ export default function ProfilePage() {
   }
 
   const getPersonalityDescription = () => {
-    const traits = profile.personalityTraits;
+    const traits = profile.personalityTraits as any;
     if (!traits) return t('notSpecified');
     
     const socialStyle = traits.introversion <= 2 ? t('personalityValues.extroverted') : traits.introversion >= 4 ? t('personalityValues.introverted') : t('personalityValues.balanced');
@@ -175,29 +173,29 @@ export default function ProfilePage() {
                   {getPersonalityDescription()}
                 </span>
               </div>
-              {profile.personalityTraits?.conflictStyle && (
+              {(profile.personalityTraits as any)?.conflictStyle && (
                 <div>
                   <span className="text-sm font-medium">{t('personalityFields.conflictStyle')}</span>
                   <span className="ml-2 text-sm text-gray-600 dark:text-gray-300 capitalize">
-                    {profile.personalityTraits.conflictStyle}
+                    {(profile.personalityTraits as any).conflictStyle}
                   </span>
                 </div>
               )}
-              {profile.personalityTraits?.learningPreference && (
+              {(profile.personalityTraits as any)?.learningPreference && (
                 <div>
                   <span className="text-sm font-medium">{t('personalityFields.learningStyle')}</span>
                   <span className="ml-2 text-sm text-gray-600 dark:text-gray-300 capitalize">
-                    {profile.personalityTraits.learningPreference.replace('-', ' ')}
+                    {(profile.personalityTraits as any).learningPreference.replace('-', ' ')}
                   </span>
                 </div>
               )}
-              {profile.personalityTraits?.priorities && profile.personalityTraits.priorities.length > 0 && (
+              {(profile.personalityTraits as any)?.priorities && (profile.personalityTraits as any).priorities.length > 0 && (
                 <div>
                   <span className="text-sm font-medium">{t('personalityFields.lifePriorities')}</span>
                   <div className="mt-1 flex flex-wrap gap-1">
-                    {profile.personalityTraits.priorities.map(priority => (
+                    {(profile.personalityTraits as any).priorities.map((priority: any) => (
                       <Badge key={priority} variant="outline" className="text-xs">
-                        {priority.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                        {priority.replace('-', ' ').replace(/\b\w/g, (l: any) => l.toUpperCase())}
                       </Badge>
                     ))}
                   </div>
