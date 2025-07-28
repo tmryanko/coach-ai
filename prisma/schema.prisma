@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -12,112 +9,93 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  email         String    @unique
-  name          String?
-  avatar        String?
-  googleId      String?   @unique
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  
-  // Language and localization
-  preferredLanguage String  @default("en")
-  locale            String  @default("en")
-  
-  // Core Identity
-  age           Int?
-  location      String?
-  gender        String?
-  
-  // Assessment profile fields (legacy - keeping for compatibility)
-  relationshipStatus        String?
-  relationshipGoals         String[]  @default([])
-  currentChallenges         String[]  @default([])
+  id                          String         @id @default(cuid())
+  email                       String         @unique
+  name                        String?
+  avatar                      String?
+  googleId                    String?        @unique
+  createdAt                   DateTime       @default(now())
+  updatedAt                   DateTime       @updatedAt
+  relationshipStatus          String?
+  relationshipGoals           String[]       @default([])
+  currentChallenges           String[]       @default([])
   preferredCommunicationStyle String?
-  personalityTraits         Json?
-  assessmentCompletedAt     DateTime?
-  
-  // Enhanced Profile Data
-  relationshipHistory       Json?     // Past relationships, lessons learned
-  emotionalProfile          Json?     // Attachment style, fears, strengths
-  coreValues               String[]   @default([])
-  relationshipVision       String?    // Ideal relationship description
-  lifestylePriorities      Json?     // Work-life balance, hobbies, boundaries
-  selfReflection           Json?     // How friends see them, proudest moments, growth areas
-  relationshipReadiness    Int?      // 1-10 scale
-  dealBreakers             String[]  @default([])
-  
-  // Assessment Progress
-  assessmentProgress        Json?     // Step completion tracking
-  profileInsights          Json?     // AI-generated insights
-  
-  // User progress and sessions
-  userProgress  UserProgress[]
-  chatSessions  ChatSession[]
-  taskProgress  TaskProgress[]
-  
+  personalityTraits           Json?
+  assessmentCompletedAt       DateTime?
+  locale                      String         @default("en")
+  preferredLanguage           String         @default("en")
+  age                         Int?
+  assessmentProgress          Json?
+  coreValues                  String[]       @default([])
+  dealBreakers                String[]       @default([])
+  emotionalProfile            Json?
+  gender                      String?
+  lifestylePriorities         Json?
+  location                    String?
+  profileInsights             Json?
+  relationshipHistory         Json?
+  relationshipReadiness       Int?
+  relationshipVision          String?
+  selfReflection              Json?
+  chatSessions                ChatSession[]
+  taskProgress                TaskProgress[]
+  userProgress                UserProgress[]
+
   @@map("users")
 }
 
 model CoachingProgram {
-  id          String   @id @default(cuid())
-  name        String
-  description String
-  duration    Int      // in days
-  phases      Phase[]
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  
-  // User progress for this program
+  id           String         @id @default(cuid())
+  name         String
+  description  String
+  duration     Int
+  isActive     Boolean        @default(true)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  phases       Phase[]
   userProgress UserProgress[]
-  
+
   @@map("coaching_programs")
 }
 
 model Phase {
-  id          String   @id @default(cuid())
+  id          String          @id @default(cuid())
   name        String
   description String
   order       Int
   programId   String
   program     CoachingProgram @relation(fields: [programId], references: [id], onDelete: Cascade)
-  
-  // Tasks within this phase
   tasks       Task[]
-  
+
   @@map("phases")
 }
 
 model Task {
-  id          String   @id @default(cuid())
-  title       String
-  description String
-  type        TaskType
-  content     Json?    // Flexible content for different task types
-  order       Int
-  phaseId     String
-  phase       Phase    @relation(fields: [phaseId], references: [id], onDelete: Cascade)
-  
-  // User progress for this task
+  id           String         @id @default(cuid())
+  title        String
+  description  String
+  type         TaskType
+  content      Json?
+  order        Int
+  phaseId      String
   taskProgress TaskProgress[]
-  
+  phase        Phase          @relation(fields: [phaseId], references: [id], onDelete: Cascade)
+
   @@map("tasks")
 }
 
 model UserProgress {
-  id              String   @id @default(cuid())
-  userId          String
-  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  programId       String
-  program         CoachingProgram @relation(fields: [programId], references: [id], onDelete: Cascade)
-  
-  currentPhase    Int      @default(1)
-  completedTasks  Int      @default(0)
-  totalTasks      Int      @default(0)
-  startedAt       DateTime @default(now())
-  completedAt     DateTime?
-  
+  id             String          @id @default(cuid())
+  userId         String
+  programId      String
+  currentPhase   Int             @default(1)
+  completedTasks Int             @default(0)
+  totalTasks     Int             @default(0)
+  startedAt      DateTime        @default(now())
+  completedAt    DateTime?
+  program        CoachingProgram @relation(fields: [programId], references: [id], onDelete: Cascade)
+  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@unique([userId, programId])
   @@map("user_progress")
 }
@@ -125,50 +103,45 @@ model UserProgress {
 model TaskProgress {
   id          String     @id @default(cuid())
   userId      String
-  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   taskId      String
-  task        Task       @relation(fields: [taskId], references: [id], onDelete: Cascade)
-  
   status      TaskStatus @default(NOT_STARTED)
-  response    String?    // User's response to the task
-  feedback    String?    // AI feedback on the response
+  response    String?
+  feedback    String?
   completedAt DateTime?
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
-  
+  task        Task       @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@unique([userId, taskId])
   @@map("task_progress")
 }
 
 model ChatSession {
-  id        String   @id @default(cuid())
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
-  title     String?
-  sessionType SessionType @default(GENERAL)
-  taskId    String?  // For task-specific sessions
-  systemPrompt String? // Task-specific AI instructions
-  isTaskCompleted Boolean @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  
-  // Messages in this chat session
-  messages  ChatMessage[]
-  
+  id              String        @id @default(cuid())
+  userId          String
+  title           String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  isTaskCompleted Boolean       @default(false)
+  sessionType     SessionType   @default(GENERAL)
+  systemPrompt    String?
+  taskId          String?
+  messages        ChatMessage[]
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@map("chat_sessions")
 }
 
 model ChatMessage {
-  id        String   @id @default(cuid())
+  id        String      @id @default(cuid())
   sessionId String
-  session   ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
-  
   role      MessageRole
   content   String
-  metadata  Json?       // Additional metadata like task references, etc.
+  metadata  Json?
   createdAt DateTime    @default(now())
-  
+  session   ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
   @@map("chat_messages")
 }
 

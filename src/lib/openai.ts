@@ -1,12 +1,14 @@
 import OpenAI from 'openai';
 
 if (!process.env.OPENAI_API_KEY) {
-  throw new Error('Missing OPENAI_API_KEY environment variable');
+  console.warn('Missing OPENAI_API_KEY environment variable - AI features will be disabled');
 }
 
-export const openai = new OpenAI({
+const isOpenAIConfigured = !!process.env.OPENAI_API_KEY;
+
+export const openai = isOpenAIConfigured ? new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
-});
+}) : null;
 
 export const SYSTEM_PROMPT = `You are an expert AI relationship coach with deep expertise in psychology, communication, and relationship dynamics. Your role is to provide personalized, empathetic, and actionable guidance to help users improve their romantic relationships.
 
@@ -56,6 +58,10 @@ export async function generateCoachResponse(
     programPhase?: string;
   }
 ) {
+  if (!openai) {
+    throw new Error('AI features are currently unavailable. Please contact support to enable OpenAI integration.');
+  }
+  
   try {
     const messages: OpenAI.Chat.Completions.ChatCompletionMessageParam[] = [
       { role: 'system', content: SYSTEM_PROMPT },
@@ -164,6 +170,10 @@ export async function generateTaskFeedback(
   userResponse: string,
   taskType: string
 ) {
+  if (!openai) {
+    throw new Error('AI features are currently unavailable. Please contact support to enable OpenAI integration.');
+  }
+  
   try {
     const feedbackPrompt = `As a relationship coach, provide constructive feedback on the user's response to this ${taskType.toLowerCase()} task.
 
@@ -205,6 +215,10 @@ export async function generateTaskCoachResponse(
     systemPrompt: string;
   }
 ) {
+  if (!openai) {
+    throw new Error('AI features are currently unavailable. Please contact support to enable OpenAI integration.');
+  }
+  
   try {
     const messages: OpenAI.Chat.Completions.ChatCompletionMessageParam[] = [
       { role: 'system', content: context.systemPrompt },

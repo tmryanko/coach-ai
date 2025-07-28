@@ -20,14 +20,26 @@ export default function ProfilePage() {
   const tStatus = useTranslations('assessment.relationshipStatus.statusOptions');
 
   const { data: profile, isLoading } = api.assessment.getProfile.useQuery();
-  const { data: assessmentStatus } = api.assessment.getStatus.useQuery();
+  const { data: assessmentStatus, refetch: refetchStatus } = api.assessment.getStatus.useQuery();
+  const repairAssessment = api.assessment.repairAssessmentCompletion.useMutation({
+    onSuccess: () => {
+      refetchStatus();
+    },
+  });
 
-  // If user hasn't completed assessment, redirect to assessment
+  // If user hasn't completed assessment, try to repair or redirect to assessment
   useEffect(() => {
     if (assessmentStatus && !assessmentStatus.isCompleted) {
-      router.push(`/${locale}/assessment`);
+      // If user has substantial data but no completion timestamp, try to repair
+      if (profile && (profile.name || profile.emotionalProfile || profile.coreValues?.length)) {
+        console.log('🔧 User has data but no completion timestamp, attempting repair...');
+        repairAssessment.mutate();
+      } else {
+        // Otherwise redirect to assessment
+        router.push(`/${locale}/assessment`);
+      }
     }
-  }, [assessmentStatus, router, locale]);
+  }, [assessmentStatus, profile, router, locale, repairAssessment]);
 
   // Show loading while redirecting
   if (assessmentStatus && !assessmentStatus.isCompleted) {

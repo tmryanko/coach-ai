@@ -61,9 +61,7 @@ export default function AssessmentPage() {
   const [assessmentData, setAssessmentData] = useState<StepComponentData>({});
   
   const { data: assessmentStatus } = api.assessment.getStatus.useQuery();
-  const { data: existingProfile } = api.assessment.getProfile.useQuery(undefined, {
-    enabled: isEditMode
-  });
+  const { data: existingProfile, isLoading: profileLoading } = api.assessment.getProfile.useQuery();
   
   const submitAssessment = api.assessment.submit.useMutation({
     onSuccess: () => {
@@ -96,7 +94,12 @@ export default function AssessmentPage() {
 
   // Pre-populate assessment data with existing profile when in edit mode
   useEffect(() => {
-    if (isEditMode && existingProfile) {
+    console.log('🔍 Assessment Debug - isEditMode:', isEditMode);
+    console.log('🔍 Assessment Debug - profileLoading:', profileLoading);
+    console.log('🔍 Assessment Debug - existingProfile:', existingProfile);
+    
+    if (isEditMode && existingProfile && !profileLoading) {
+      console.log('🔍 Assessment Debug - Loading existing profile data:', existingProfile);
       setAssessmentData({
         // Core identity
         name: existingProfile.name || undefined,
@@ -113,7 +116,7 @@ export default function AssessmentPage() {
         keyLessonsLearned: (existingProfile.relationshipHistory as any)?.keyLessonsLearned,
         healingProgress: (existingProfile.relationshipHistory as any)?.healingProgress,
         relationshipHistory: (existingProfile.relationshipHistory as any) || undefined,
-        relationshipGoals: existingProfile.relationshipGoals || undefined,
+        relationshipGoals: existingProfile.relationshipGoals?.length ? existingProfile.relationshipGoals : undefined,
         relationshipReadiness: existingProfile.relationshipReadiness || undefined,
         
         // Emotional profile - flatten for component compatibility
@@ -130,6 +133,8 @@ export default function AssessmentPage() {
         
         // Communication
         preferredCommunicationStyle: existingProfile.preferredCommunicationStyle || undefined,
+        // Add a default communication style if missing
+        communicationStyle: existingProfile.preferredCommunicationStyle || undefined,
         
         // Lifestyle - flatten for component compatibility
         workLifeBalance: (existingProfile.lifestylePriorities as any)?.workLifeBalance,
@@ -146,15 +151,52 @@ export default function AssessmentPage() {
         selfReflection: (existingProfile.selfReflection as any) || undefined,
         
         // Legacy compatibility
-        currentChallenges: existingProfile.currentChallenges || undefined,
+        currentChallenges: existingProfile.currentChallenges?.length ? existingProfile.currentChallenges : undefined,
         personalityTraits: (existingProfile.personalityTraits as any) || undefined,
       });
+      
+      console.log('🔍 Assessment Debug - Assessment data set successfully');
+      
+      // Log what data was actually set
+      setTimeout(() => {
+        console.log('🔍 Assessment Debug - Current assessmentData state after setting:', {
+          name: existingProfile.name,
+          relationshipStatus: existingProfile.relationshipStatus,
+          relationshipGoals: existingProfile.relationshipGoals,
+          attachmentStyle: (existingProfile.emotionalProfile as any)?.attachmentStyle,
+          hasEmotionalProfile: !!(existingProfile.emotionalProfile),
+          hasSelfReflection: !!(existingProfile.selfReflection),
+        });
+      }, 100);
+    } else {
+      console.log('🔍 Assessment Debug - Conditions not met for loading profile data');
+      console.log('  - isEditMode:', isEditMode);
+      console.log('  - existingProfile exists:', !!existingProfile);
+      console.log('  - profileLoading:', profileLoading);
     }
-  }, [isEditMode, existingProfile]);
+  }, [isEditMode, existingProfile, profileLoading]);
 
   // Show loading while checking assessment status or redirecting
   if (assessmentStatus?.isCompleted && !isEditMode) {
     return null;
+  }
+
+  // Show loading while profile data is being loaded in edit mode
+  if (isEditMode && profileLoading) {
+    return (
+      <SimpleAppLayout>
+        <div className="max-w-2xl mx-auto p-4">
+          <div className="flex items-center justify-center h-64">
+            <div className="text-center space-y-3">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto"></div>
+              <p className="text-sm text-gray-600 dark:text-gray-300">
+                Loading your profile data...
+              </p>
+            </div>
+          </div>
+        </div>
+      </SimpleAppLayout>
+    );
   }
 
   const progress = ((currentStep + 1) / STEPS.length) * 100;
@@ -205,15 +247,36 @@ export default function AssessmentPage() {
             priorities: [],
           },
           
-          // Enhanced fields
-          relationshipHistory: assessmentData.relationshipHistory,
+          // Enhanced fields - create clean objects to avoid circular references
+          relationshipHistory: assessmentData.hasSignificantPast !== undefined ? {
+            hasSignificantPast: assessmentData.hasSignificantPast,
+            lastRelationshipDuration: assessmentData.lastRelationshipDuration,
+            timeSinceLastRelationship: assessmentData.timeSinceLastRelationship,
+            keyLessonsLearned: assessmentData.keyLessonsLearned,
+            healingProgress: assessmentData.healingProgress,
+          } : undefined,
           relationshipReadiness: assessmentData.relationshipReadiness,
-          emotionalProfile: assessmentData.emotionalProfile,
+          emotionalProfile: assessmentData.attachmentStyle ? {
+            attachmentStyle: assessmentData.attachmentStyle,
+            primaryFears: assessmentData.primaryFears,
+            topStrengths: assessmentData.topStrengths,
+            emotionalChallenges: assessmentData.emotionalChallenges,
+          } : undefined,
           coreValues: assessmentData.coreValues || [],
           relationshipVision: assessmentData.relationshipVision || '',
           dealBreakers: assessmentData.dealBreakers || [],
-          lifestylePriorities: assessmentData.lifestylePriorities,
-          selfReflection: assessmentData.selfReflection,
+          lifestylePriorities: assessmentData.workLifeBalance ? {
+            workLifeBalance: assessmentData.workLifeBalance,
+            socialEnergyLevel: assessmentData.socialEnergyLevel,
+            hobbiesAndInterests: assessmentData.hobbiesAndInterests,
+          } : undefined,
+          selfReflection: assessmentData.friendsDescription ? {
+            friendsDescription: assessmentData.friendsDescription,
+            proudestMoment: assessmentData.proudestMoment,
+            biggestGrowthArea: assessmentData.biggestGrowthArea,
+            personalStrengths: assessmentData.personalStrengths,
+            areasForImprovement: assessmentData.areasForImprovement,
+          } : undefined,
         };
         await submitEnhancedAssessment.mutateAsync(enhancedData);
       } else {

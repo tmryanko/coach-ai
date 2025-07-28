@@ -208,11 +208,16 @@ export const assessmentRouter = createTRPCRouter({
       data: z.record(z.string(), z.any()).optional(),
     }))
     .mutation(async ({ ctx, input }) => {
+      console.log('🔍 UpdateStep Debug - User ID:', ctx.userId);
+      console.log('🔍 UpdateStep Debug - Step:', input.step);
+      console.log('🔍 UpdateStep Debug - Input Data:', JSON.stringify(input.data, null, 2));
+      
       // Progressive saving of assessment data
       const updateData: any = {};
       
       // Early return if no data provided
       if (!input.data) {
+        console.log('🔍 UpdateStep Debug - No data provided, returning early');
         return { success: true, message: 'No data to save' };
       }
       
@@ -316,16 +321,24 @@ export const assessmentRouter = createTRPCRouter({
       }
 
       if (Object.keys(updateData).length > 0) {
-        await ctx.prisma.user.update({
+        console.log('🔍 UpdateStep Debug - About to save updateData:', JSON.stringify(updateData, null, 2));
+        
+        const updatedUser = await ctx.prisma.user.update({
           where: { id: ctx.userId },
           data: updateData,
         });
+        
+        console.log('🔍 UpdateStep Debug - Successfully updated user. User ID:', updatedUser.id);
+      } else {
+        console.log('🔍 UpdateStep Debug - No data to update, updateData is empty');
       }
 
       return { success: true };
     }),
 
   getProfile: protectedProcedure.query(async ({ ctx }) => {
+    console.log('🔍 GetProfile Debug - User ID:', ctx.userId);
+    
     const user = await ctx.prisma.user.findUnique({
       where: { id: ctx.userId },
       select: {
@@ -353,7 +366,66 @@ export const assessmentRouter = createTRPCRouter({
       },
     });
 
+    console.log('🔍 GetProfile Debug - Retrieved user:', user ? 'User found' : 'User not found');
+    if (user) {
+      console.log('🔍 GetProfile Debug - User data summary:');
+      console.log('  - Name:', user.name);
+      console.log('  - Relationship Status:', user.relationshipStatus);
+      console.log('  - Relationship Goals:', user.relationshipGoals);
+      console.log('  - Emotional Profile:', user.emotionalProfile ? 'Has data' : 'Empty');
+      console.log('  - Self Reflection:', user.selfReflection ? 'Has data' : 'Empty');
+      console.log('  - Assessment Completed At:', user.assessmentCompletedAt);
+      console.log('🔍 GetProfile Debug - Full user data:', JSON.stringify(user, null, 2));
+    }
+
     return user;
+  }),
+
+  // Repair assessment completion status for users with data but no completion timestamp
+  repairAssessmentCompletion: protectedProcedure.mutation(async ({ ctx }) => {
+    console.log('🔧 Repairing assessment completion for user:', ctx.userId);
+    
+    const user = await ctx.prisma.user.findUnique({
+      where: { id: ctx.userId },
+      select: {
+        id: true,
+        assessmentCompletedAt: true,
+        name: true,
+        relationshipStatus: true,
+        emotionalProfile: true,
+        coreValues: true,
+        lifestylePriorities: true,
+        selfReflection: true,
+      },
+    });
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    // Check if user has substantial data but no completion timestamp
+    const hasSubstantialData = !!(
+      user.name && 
+      user.relationshipStatus && 
+      (user.emotionalProfile || user.coreValues?.length || user.lifestylePriorities || user.selfReflection)
+    );
+
+    if (hasSubstantialData && !user.assessmentCompletedAt) {
+      console.log('🔧 User has substantial data but no completion timestamp, fixing...');
+      
+      const updatedUser = await ctx.prisma.user.update({
+        where: { id: ctx.userId },
+        data: {
+          assessmentCompletedAt: new Date(),
+        },
+      });
+
+      console.log('🔧 Assessment completion repaired successfully');
+      return { repaired: true, completedAt: updatedUser.assessmentCompletedAt };
+    }
+
+    console.log('🔧 No repair needed');
+    return { repaired: false, reason: 'User either lacks data or already has completion timestamp' };
   }),
 
   // Get enhanced profile with AI analysis

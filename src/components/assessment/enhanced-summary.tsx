@@ -56,6 +56,17 @@ export function EnhancedSummary({
     onError: (error) => {
       console.error('Failed to generate insights:', error);
       setIsAnalyzing(false);
+      // Set a default message when AI is unavailable
+      setInsights({
+        attachmentStyleAnalysis: "AI analysis is currently unavailable. Please contact support to enable this feature.",
+        communicationStyleAnalysis: "Communication analysis requires AI integration to be enabled.",
+        personalizedRecommendations: ["Complete your profile to unlock personalized insights", "Consider working with a relationship coach", "Focus on self-reflection and growth"],
+        relationshipReadinessScore: 7,
+        recommendedCoachingApproach: "Self-directed learning with regular check-ins",
+        keyStrengths: ["Self-awareness", "Growth mindset"],
+        growthAreas: ["Various areas based on your assessment"],
+        generatedAt: new Date(),
+      });
     },
   });
 
@@ -76,10 +87,10 @@ export function EnhancedSummary({
     if (data.name) completed++;
     if (data.relationshipStatus) completed++;
     if (data.relationshipGoals?.length) completed++;
-    if (data.emotionalProfile?.attachmentStyle) completed++;
+    if (data.attachmentStyle) completed++;
     if (data.coreValues?.length) completed++;
-    if (data.lifestylePriorities) completed++;
-    if (data.selfReflection?.friendsDescription) completed++;
+    if (data.workLifeBalance || data.socialEnergyLevel || data.hobbiesAndInterests?.length) completed++;
+    if (data.friendsDescription) completed++;
     
     return { completed, total, percentage: Math.round((completed / total) * 100) };
   };
