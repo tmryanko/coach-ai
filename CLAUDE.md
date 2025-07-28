@@ -130,6 +130,8 @@ OpenAI integration for coaching conversations and task feedback. Configuration i
 - All text must be defined in /messages/[locale].json
 - Default locale is [your default locale]
 - Supported locales: [list your locales]
+- ALLWAYS use the same keys for translations
+- ALLWAYS make sure you added the translations in all locales
 
 ### Translation Requirements
 

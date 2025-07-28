@@ -22,31 +22,31 @@ const getAttachmentStyles = (t: any) => [
     value: "secure",
     label: t("attachmentStyles.secure.label"),
     description: t("attachmentStyles.secure.description"),
-    traits: t("attachmentStyles.secure.traits"),
+    traits: Array.isArray(t("attachmentStyles.secure.traits")) ? t("attachmentStyles.secure.traits") : [],
   },
   {
     value: "anxious",
     label: t("attachmentStyles.anxious.label"),
     description: t("attachmentStyles.anxious.description"),
-    traits: t("attachmentStyles.anxious.traits"),
+    traits: Array.isArray(t("attachmentStyles.anxious.traits")) ? t("attachmentStyles.anxious.traits") : [],
   },
   {
     value: "avoidant",
     label: t("attachmentStyles.avoidant.label"),
     description: t("attachmentStyles.avoidant.description"),
-    traits: t("attachmentStyles.avoidant.traits"),
+    traits: Array.isArray(t("attachmentStyles.avoidant.traits")) ? t("attachmentStyles.avoidant.traits") : [],
   },
   {
     value: "disorganized",
     label: t("attachmentStyles.disorganized.label"),
     description: t("attachmentStyles.disorganized.description"),
-    traits: t("attachmentStyles.disorganized.traits"),
+    traits: Array.isArray(t("attachmentStyles.disorganized.traits")) ? t("attachmentStyles.disorganized.traits") : [],
   },
   {
     value: "unsure",
     label: t("attachmentStyles.unsure.label"),
     description: t("attachmentStyles.unsure.description"),
-    traits: t("attachmentStyles.unsure.traits"),
+    traits: Array.isArray(t("attachmentStyles.unsure.traits")) ? t("attachmentStyles.unsure.traits") : [],
   },
 ];
 
