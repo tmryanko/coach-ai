@@ -63,8 +63,14 @@ export default function AssessmentPage() {
   const { data: assessmentStatus } = api.assessment.getStatus.useQuery();
   const { data: existingProfile, isLoading: profileLoading } = api.assessment.getProfile.useQuery();
   
+  const utils = api.useUtils();
+  
   const submitAssessment = api.assessment.submit.useMutation({
-    onSuccess: () => {
+    onSuccess: async () => {
+      // Invalidate related caches to ensure fresh data
+      await utils.assessment.getProfile.invalidate();
+      await utils.assessment.getStatus.invalidate();
+      
       if (isEditMode) {
         router.push(`/${locale}/profile`);
       } else {
@@ -72,9 +78,13 @@ export default function AssessmentPage() {
       }
     },
   });
-
+  
   const submitEnhancedAssessment = api.assessment.submitEnhanced.useMutation({
-    onSuccess: () => {
+    onSuccess: async () => {
+      // Invalidate related caches to ensure fresh data
+      await utils.assessment.getProfile.invalidate();
+      await utils.assessment.getStatus.invalidate();
+      
       if (isEditMode) {
         router.push(`/${locale}/profile`);
       } else {
@@ -83,7 +93,14 @@ export default function AssessmentPage() {
     },
   });
 
-  const updateStep = api.assessment.updateStep.useMutation();
+  const updateStep = api.assessment.updateStep.useMutation({
+    onSuccess: async () => {
+      // Invalidate profile cache when individual steps are updated in edit mode
+      if (isEditMode) {
+        await utils.assessment.getProfile.invalidate();
+      }
+    },
+  });
 
   // If user has already completed assessment and not in edit mode, redirect to profile
   useEffect(() => {

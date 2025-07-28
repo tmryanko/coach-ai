@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslations, useLocale } from 'next-intl';
 import { api } from '@/utils/api';
@@ -8,24 +8,37 @@ import { SimpleAppLayout } from '@/components/layout/app-layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Loader2, Edit, ArrowLeft } from 'lucide-react';
+import { Loader2, Edit, ArrowLeft, RefreshCw } from 'lucide-react';
 
 export default function ProfilePage() {
   const router = useRouter();
   const locale = useLocale();
   const t = useTranslations('profile');
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const tGoals = useTranslations('assessment.goals.goalOptions');
   const tChallenges = useTranslations('assessment.challenges.challengeOptions');
   const tComm = useTranslations('assessment.lifestyleCompatibility.communicationStyles');
   const tStatus = useTranslations('assessment.relationshipStatus.statusOptions');
 
-  const { data: profile, isLoading } = api.assessment.getProfile.useQuery();
+  const { data: profile, isLoading, refetch: refetchProfile } = api.assessment.getProfile.useQuery();
   const { data: assessmentStatus, refetch: refetchStatus } = api.assessment.getStatus.useQuery();
   const repairAssessment = api.assessment.repairAssessmentCompletion.useMutation({
     onSuccess: () => {
       refetchStatus();
+      refetchProfile();
     },
   });
+
+  // Manual refresh function
+  const handleRefresh = async () => {
+    setIsRefreshing(true);
+    try {
+      await refetchProfile();
+      await refetchStatus();
+    } finally {
+      setIsRefreshing(false);
+    }
+  };
 
   // If user hasn't completed assessment, try to repair or redirect to assessment
   useEffect(() => {
@@ -40,6 +53,40 @@ export default function ProfilePage() {
       }
     }
   }, [assessmentStatus, profile, router, locale, repairAssessment]);
+
+  // Refresh profile data when user might be returning from edit mode
+  useEffect(() => {
+    const handleFocus = async () => {
+      // When user focuses back to this page, refresh profile data
+      // This catches cases where they navigated back from assessment edit
+      setIsRefreshing(true);
+      try {
+        await refetchProfile();
+      } finally {
+        setIsRefreshing(false);
+      }
+    };
+
+    // Listen for when user focuses back to this page
+    window.addEventListener('focus', handleFocus);
+    
+    // Also refresh on component mount in case of direct navigation back
+    const timeoutId = setTimeout(async () => {
+      if (!isLoading) {
+        setIsRefreshing(true);
+        try {
+          await refetchProfile();
+        } finally {
+          setIsRefreshing(false);
+        }
+      }
+    }, 100);
+
+    return () => {
+      window.removeEventListener('focus', handleFocus);
+      clearTimeout(timeoutId);
+    };
+  }, [refetchProfile, isLoading]);
 
   // Show loading while redirecting
   if (assessmentStatus && !assessmentStatus.isCompleted) {
@@ -105,14 +152,25 @@ export default function ProfilePage() {
                   {t('description')}
                 </CardDescription>
               </div>
-              <Button
-                onClick={() => router.push(`/${locale}/assessment?edit=true`)}
-                variant="outline"
-                size="sm"
-              >
-                <Edit className="h-4 w-4 mr-2" />
-                {t('editProfile')}
-              </Button>
+              <div className="flex gap-2">
+                <Button
+                  onClick={handleRefresh}
+                  variant="outline"
+                  size="sm"
+                  disabled={isRefreshing}
+                >
+                  <RefreshCw className={`h-4 w-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
+                  {isRefreshing ? 'Refreshing...' : 'Refresh'}
+                </Button>
+                <Button
+                  onClick={() => router.push(`/${locale}/assessment?edit=true`)}
+                  variant="outline"
+                  size="sm"
+                >
+                  <Edit className="h-4 w-4 mr-2" />
+                  {t('editProfile')}
+                </Button>
+              </div>
             </div>
           </CardHeader>
         </Card>
@@ -125,39 +183,74 @@ export default function ProfilePage() {
             </CardHeader>
             <CardContent>
               <Badge variant="outline" className="text-sm">
-                {profile.relationshipStatus ? tStatus(`${profile.relationshipStatus}.label`) : t('notSpecified')}
+                {profile.relationshipStatus ? (
+                  // Try direct translation first, fallback to adding .label
+                  tStatus(profile.relationshipStatus) || tStatus(`${profile.relationshipStatus}.label`) || profile.relationshipStatus
+                ) : t('notSpecified')}
               </Badge>
             </CardContent>
           </Card>
 
-          {/* Goals */}
+          {/* Goals and Core Values */}
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-lg">{t('goals')} ({profile.relationshipGoals?.length || 0})</CardTitle>
+              <CardTitle className="text-lg">
+                {t('goals')} 
+                ({(profile.relationshipGoals?.length || 0) + (profile.coreValues?.length || 0)})
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex flex-wrap gap-2">
+                {/* Legacy relationship goals */}
                 {profile.relationshipGoals?.map(goal => (
                   <Badge key={goal} variant="secondary">
                     {tGoals(goal)}
                   </Badge>
-                )) || <span className="text-gray-500">{t('noGoalsSpecified')}</span>}
+                ))}
+                {/* Core values from rich assessment */}
+                {profile.coreValues?.map((value, index) => (
+                  <Badge key={`core-value-${index}`} variant="secondary">
+                    {value}
+                  </Badge>
+                ))}
+                {(!profile.relationshipGoals?.length && !profile.coreValues?.length) && (
+                  <span className="text-gray-500">{t('noGoalsSpecified')}</span>
+                )}
               </div>
             </CardContent>
           </Card>
 
-          {/* Challenges */}
+          {/* Challenges and Deal Breakers */}
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-lg">{t('challenges')} ({profile.currentChallenges?.length || 0})</CardTitle>
+              <CardTitle className="text-lg">
+                {t('challenges')}
+                ({(profile.currentChallenges?.length || 0) + (profile.dealBreakers?.length || 0) + ((profile.emotionalProfile as any)?.emotionalChallenges?.length || 0)})
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex flex-wrap gap-2">
+                {/* Legacy challenges */}
                 {profile.currentChallenges?.map(challenge => (
                   <Badge key={challenge} variant="destructive">
-                    {tChallenges(`${challenge}.label`)}
+                    {tChallenges(challenge) || tChallenges(`${challenge}.label`) || challenge}
                   </Badge>
-                )) || <span className="text-gray-500">{t('noChallengesSpecified')}</span>}
+                ))}
+                {/* Deal breakers from rich assessment */}
+                {profile.dealBreakers?.map((dealBreaker, index) => (
+                  <Badge key={`deal-breaker-${index}`} variant="destructive">
+                    {dealBreaker}
+                  </Badge>
+                ))}
+                {/* Emotional challenges from rich assessment */}
+                {((profile.emotionalProfile as any)?.emotionalChallenges || []).map((challenge: string, index: number) => (
+                  <Badge key={`emotional-challenge-${index}`} variant="outline">
+                    {challenge}
+                  </Badge>
+                ))}
+                {(!profile.currentChallenges?.length && !profile.dealBreakers?.length && !((profile.emotionalProfile as any)?.emotionalChallenges?.length)) && (
+                  <span className="text-gray-500">{t('noChallengesSpecified')}</span>
+                )}
               </div>
             </CardContent>
           </Card>
@@ -169,23 +262,66 @@ export default function ProfilePage() {
             </CardHeader>
             <CardContent>
               <Badge variant="outline">
-                {profile.preferredCommunicationStyle ? tComm(`${profile.preferredCommunicationStyle}.label`) : t('notSpecified')}
+                {profile.preferredCommunicationStyle ? (
+                  // Try direct translation first, fallback to adding .label
+                  tComm(profile.preferredCommunicationStyle) || tComm(`${profile.preferredCommunicationStyle}.label`) || profile.preferredCommunicationStyle
+                ) : t('notSpecified')}
               </Badge>
             </CardContent>
           </Card>
 
-          {/* Personality */}
+          {/* Emotional Profile and Personality */}
           <Card>
             <CardHeader className="pb-3">
               <CardTitle className="text-lg">{t('personality')}</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-2">
+            <CardContent className="space-y-4">
+              {/* Basic personality traits */}
               <div>
                 <span className="text-sm font-medium">{t('personalityFields.personality')}</span>
                 <span className="ml-2 text-sm text-gray-600 dark:text-gray-300">
                   {getPersonalityDescription()}
                 </span>
               </div>
+              
+              {/* Attachment style from emotional profile */}
+              {(profile.emotionalProfile as any)?.attachmentStyle && (
+                <div>
+                  <span className="text-sm font-medium">Attachment Style:</span>
+                  <span className="ml-2 text-sm text-gray-600 dark:text-gray-300 capitalize">
+                    {(profile.emotionalProfile as any).attachmentStyle.replace('_', ' ')}
+                  </span>
+                </div>
+              )}
+              
+              {/* Top strengths from emotional profile */}
+              {((profile.emotionalProfile as any)?.topStrengths?.length > 0) && (
+                <div>
+                  <span className="text-sm font-medium">Top Strengths:</span>
+                  <div className="mt-1 flex flex-wrap gap-1">
+                    {(profile.emotionalProfile as any).topStrengths.map((strength: string, index: number) => (
+                      <Badge key={`strength-${index}`} variant="secondary" className="text-xs">
+                        {strength}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              )}
+              
+              {/* Primary fears from emotional profile */}
+              {((profile.emotionalProfile as any)?.primaryFears?.length > 0) && (
+                <div>
+                  <span className="text-sm font-medium">Primary Concerns:</span>
+                  <div className="mt-1 flex flex-wrap gap-1">
+                    {(profile.emotionalProfile as any).primaryFears.map((fear: string, index: number) => (
+                      <Badge key={`fear-${index}`} variant="outline" className="text-xs">
+                        {fear}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              )}
+              
               {(profile.personalityTraits as any)?.conflictStyle && (
                 <div>
                   <span className="text-sm font-medium">{t('personalityFields.conflictStyle')}</span>
@@ -216,6 +352,59 @@ export default function ProfilePage() {
               )}
             </CardContent>
           </Card>
+
+          {/* Relationship Vision */}
+          {profile.relationshipVision && (
+            <Card>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg">Relationship Vision</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-gray-600 dark:text-gray-300">
+                  {profile.relationshipVision}
+                </p>
+              </CardContent>
+            </Card>
+          )}
+          
+          {/* Self Reflection */}
+          {(profile.selfReflection as any)?.friendsDescription && (
+            <Card>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg">Self Reflection</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                {(profile.selfReflection as any).friendsDescription && (
+                  <div>
+                    <span className="text-sm font-medium">How friends describe you:</span>
+                    <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                      {(profile.selfReflection as any).friendsDescription}
+                    </p>
+                  </div>
+                )}
+                {(profile.selfReflection as any).proudestMoment && (
+                  <div>
+                    <span className="text-sm font-medium">Proudest moment:</span>
+                    <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                      {(profile.selfReflection as any).proudestMoment}
+                    </p>
+                  </div>
+                )}
+                {(profile.selfReflection as any).personalStrengths?.length > 0 && (
+                  <div>
+                    <span className="text-sm font-medium">Personal strengths:</span>
+                    <div className="mt-1 flex flex-wrap gap-1">
+                      {(profile.selfReflection as any).personalStrengths.map((strength: string, index: number) => (
+                        <Badge key={`personal-strength-${index}`} variant="secondary" className="text-xs">
+                          {strength}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          )}
 
           {/* Profile Completion Date */}
           {profile.assessmentCompletedAt && (

@@ -130,6 +130,7 @@ export interface SelfReflectionData {
   proudestMoment?: string;
   biggestGrowthArea?: string;
   personalStrengths?: string[];
+  areasForImprovement?: string[];
   futureRelationshipGoals?: string[];
 }
 
