@@ -235,6 +235,11 @@
     }
   },
   "assessment": {
+    "step": "Step {current} of {total}",
+    "profileTitle": "Create Your Relationship Profile",
+    "editProfileTitle": "Update Your Relationship Profile",
+    "profileDescription": "Help us understand your relationship goals and preferences",
+    "editProfileDescription": "Update your relationship goals and preferences",
     "welcome": {
       "title": "Welcome to Your Personal Coaching Journey!",
       "description": "Before we begin, let's get to know you better. This assessment will help us create a personalized coaching experience tailored to your unique relationship goals and communication style.",
@@ -951,70 +956,6 @@
       },
       "completingAssessment": "Completing Assessment...",
       "completeButton": "Complete Assessment & Start Coaching!"
-    }
-  },
-  "dashboard": {
-    "loading": "Loading your dashboard...",
-    "welcomeBack": "Welcome back, {name}!",
-    "welcomeMessages": {
-      "single": "Ready to build meaningful connections?",
-      "dating": "Let's strengthen your dating journey!",
-      "committed": "Time to deepen your relationship!",
-      "default": "Welcome to your personal coaching journey!"
-    },
-    "sections": {
-      "progress": "Your Progress",
-      "style": "Your Style", 
-      "quickActions": "Quick Actions",
-      "recommendedPrograms": "Recommended Programs",
-      "yourAiCoach": "Your AI Coach"
-    },
-    "progressLabels": {
-      "programsStarted": "Programs Started:",
-      "primaryGoal": "Primary Goal:",
-      "challenges": "Challenges:",
-      "communication": "Communication:",
-      "learning": "Learning:",
-      "notSet": "Not set"
-    },
-    "goalLabels": {
-      "improve-communication": "improve communication",
-      "build-trust": "build trust",
-      "resolve-conflicts": "resolve conflicts",
-      "increase-intimacy": "increase intimacy",
-      "work-life-balance": "achieve work-life balance",
-      "personal-growth": "personal growth",
-      "default": "personal growth"
-    },
-    "buttons": {
-      "startCoaching": "Start Coaching Session",
-      "updateProfile": "Update Profile",
-      "startProgram": "Start Program",
-      "startCoachingChat": "Start Coaching Chat"
-    },
-    "programs": {
-      "communicationMastery": {
-        "title": "Communication Mastery",
-        "description": "Learn effective communication techniques"
-      },
-      "trustBuilding": {
-        "title": "Trust Building",
-        "description": "Strengthen trust and emotional bonds"
-      },
-      "relationshipFoundations": {
-        "title": "Relationship Foundations",
-        "description": "Essential skills for healthy relationships"
-      },
-      "basedOnGoals": "Based on your goals to {goal}"
-    },
-    "coachingStyles": {
-      "title": "Coaching Style Matched for You:",
-      "personalizedGuidance": "Personalized guidance based on your profile",
-      "direct-honest": "Your coach will be straightforward and honest, focusing on practical solutions.",
-      "gentle-supportive": "Your coach will be warm and encouraging, providing supportive guidance.",
-      "analytical-logical": "Your coach will use fact-based approaches with clear reasoning.",
-      "emotional-expressive": "Your coach will help you explore and express emotions openly.",
-      "notComplete": "Complete your assessment to get personalized coaching style."
     },
     "enhanced": {
       "welcome": {
@@ -1078,23 +1019,6 @@
           "back": "Back",
           "continue": "Continue",
           "saving": "Saving..."
-        }
-      },
-      "identity": {
-        "title": "Tell Us About You",
-        "description": "Let's start with some basic information to personalize your experience.",
-        "nameLabel": "What's your name?",
-        "namePlaceholder": "Enter your name",
-        "ageLabel": "How old are you?",
-        "agePlaceholder": "Your age",
-        "locationLabel": "Where are you located?",
-        "locationPlaceholder": "City, Country",
-        "genderLabel": "How do you identify?",
-        "genderOptions": {
-          "woman": "Woman",
-          "man": "Man",
-          "non-binary": "Non-binary",
-          "prefer-not-to-say": "Prefer not to say"
         }
       },
       "relationshipHistory": {
@@ -1242,6 +1166,70 @@
       }
     }
   },
+  "dashboard": {
+    "loading": "Loading your dashboard...",
+    "welcomeBack": "Welcome back, {name}!",
+    "welcomeMessages": {
+      "single": "Ready to build meaningful connections?",
+      "dating": "Let's strengthen your dating journey!",
+      "committed": "Time to deepen your relationship!",
+      "default": "Welcome to your personal coaching journey!"
+    },
+    "sections": {
+      "progress": "Your Progress",
+      "style": "Your Style", 
+      "quickActions": "Quick Actions",
+      "recommendedPrograms": "Recommended Programs",
+      "yourAiCoach": "Your AI Coach"
+    },
+    "progressLabels": {
+      "programsStarted": "Programs Started:",
+      "primaryGoal": "Primary Goal:",
+      "challenges": "Challenges:",
+      "communication": "Communication:",
+      "learning": "Learning:",
+      "notSet": "Not set"
+    },
+    "goalLabels": {
+      "improve-communication": "improve communication",
+      "build-trust": "build trust",
+      "resolve-conflicts": "resolve conflicts",
+      "increase-intimacy": "increase intimacy",
+      "work-life-balance": "achieve work-life balance",
+      "personal-growth": "personal growth",
+      "default": "personal growth"
+    },
+    "buttons": {
+      "startCoaching": "Start Coaching Session",
+      "updateProfile": "Update Profile",
+      "startProgram": "Start Program",
+      "startCoachingChat": "Start Coaching Chat"
+    },
+    "programs": {
+      "communicationMastery": {
+        "title": "Communication Mastery",
+        "description": "Learn effective communication techniques"
+      },
+      "trustBuilding": {
+        "title": "Trust Building",
+        "description": "Strengthen trust and emotional bonds"
+      },
+      "relationshipFoundations": {
+        "title": "Relationship Foundations",
+        "description": "Essential skills for healthy relationships"
+      },
+      "basedOnGoals": "Based on your goals to {goal}"
+    },
+    "coachingStyles": {
+      "title": "Coaching Style Matched for You:",
+      "personalizedGuidance": "Personalized guidance based on your profile",
+      "direct-honest": "Your coach will be straightforward and honest, focusing on practical solutions.",
+      "gentle-supportive": "Your coach will be warm and encouraging, providing supportive guidance.",
+      "analytical-logical": "Your coach will use fact-based approaches with clear reasoning.",
+      "emotional-expressive": "Your coach will help you explore and express emotions openly.",
+      "notComplete": "Complete your assessment to get personalized coaching style."
+    }
+  },
   "common": {
     "loading": "Loading...",
     "error": "Error",
@@ -1260,7 +1248,8 @@
     "success": "Success",
     "warning": "Warning",
     "info": "Info",
-    "saving": "Saving..."
+    "saving": "Saving...",
+    "redirectingToDashboard": "Redirecting to dashboard..."
   },
   "errors": {
     "notFound": {

@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { EnhancedAssessmentData, ProfileInsights } from '@/types/assessment';
-import { generateProfileInsights, formatInsightsForDisplay } from '@/lib/profile-analysis';
+import { api } from '@/utils/api';
 import { 
   Heart, 
   Brain, 
@@ -47,15 +47,24 @@ export function EnhancedSummary({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const generateInsightsMutation = api.ai.generateProfileInsights.useMutation({
+    onSuccess: (profileInsights) => {
+      setInsights(profileInsights);
+      setAnalysisComplete(true);
+      setIsAnalyzing(false);
+    },
+    onError: (error) => {
+      console.error('Failed to generate insights:', error);
+      setIsAnalyzing(false);
+    },
+  });
+
   const generateInsights = async () => {
     setIsAnalyzing(true);
     try {
-      const profileInsights = await generateProfileInsights(data);
-      setInsights(profileInsights);
-      setAnalysisComplete(true);
+      await generateInsightsMutation.mutateAsync({ assessmentData: data });
     } catch (error) {
       console.error('Failed to generate insights:', error);
-    } finally {
       setIsAnalyzing(false);
     }
   };

@@ -15,7 +15,7 @@ export default function ProfilePage() {
   const t = useTranslations('profile');
   const tGoals = useTranslations('assessment.goals.goalOptions');
   const tChallenges = useTranslations('assessment.challenges.challengeOptions');
-  const tComm = useTranslations('assessment.communication.communicationStyles');
+  const tComm = useTranslations('assessment.lifestyleCompatibility.communicationStyles');
   const tStatus = useTranslations('assessment.relationshipStatus.statusOptions');
 
   const { data: profile, isLoading } = api.assessment.getProfile.useQuery();

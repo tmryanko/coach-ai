@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { createTRPCRouter, protectedProcedure } from '@/server/api/trpc';
 import { generateCoachResponse, generateTaskFeedback, generateTaskCoachResponse } from '@/lib/openai';
+import { generateProfileInsights } from '@/lib/profile-analysis';
 import { MessageRole, SessionType } from '@prisma/client';
 import { getTaskCompletionMessage } from '@/lib/task-prompts';
 
@@ -358,5 +359,19 @@ Format as a structured, encouraging response that feels personalized to their ex
         messageId: aiMessage.id,
         taskTitle: task.title,
       };
+    }),
+
+  generateProfileInsights: protectedProcedure
+    .input(z.object({
+      assessmentData: z.any(),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      try {
+        const insights = await generateProfileInsights(input.assessmentData);
+        return insights;
+      } catch (error) {
+        console.error('Error generating profile insights:', error);
+        throw new Error('Failed to generate profile insights');
+      }
     }),
 });
