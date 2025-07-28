@@ -1371,6 +1371,8 @@
     "signInRequired": "אנא היכנסו כדי לגשת לצ'אט."
   },
   "chat": {
+    "pageTitle": "דברו עם המאמן AI שלכם",
+    "pageDescription": "קבלו הדרכה וליווי אישי לזוגיות מהמאמן AI שלכם",
     "newConversation": "שיחה חדשה",
     "recentConversations": "שיחות אחרונות",
     "untitledConversation": "שיחה ללא כותרת",

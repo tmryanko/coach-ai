@@ -1284,6 +1284,8 @@
     "signInRequired": "Please sign in to access chat."
   },
   "chat": {
+    "pageTitle": "Chat with Your AI Coach",
+    "pageDescription": "Get personalized relationship guidance and support from your AI coach",
     "newConversation": "New Conversation",
     "recentConversations": "Recent Conversations",
     "untitledConversation": "Untitled Conversation",
