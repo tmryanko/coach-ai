@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { api } from '@/utils/api';
 import { SimpleAppLayout } from '@/components/layout/app-layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -54,6 +54,7 @@ const STEPS = [
 export default function AssessmentPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const locale = useLocale();
   const t = useTranslations('assessment');
   const isEditMode = searchParams.get('edit') === 'true';
   const [currentStep, setCurrentStep] = useState(0);
@@ -67,9 +68,9 @@ export default function AssessmentPage() {
   const submitAssessment = api.assessment.submit.useMutation({
     onSuccess: () => {
       if (isEditMode) {
-        router.push('/profile');
+        router.push(`/${locale}/profile`);
       } else {
-        router.push('/dashboard');
+        router.push(`/${locale}/dashboard`);
       }
     },
   });
@@ -77,9 +78,9 @@ export default function AssessmentPage() {
   const submitEnhancedAssessment = api.assessment.submitEnhanced.useMutation({
     onSuccess: () => {
       if (isEditMode) {
-        router.push('/profile');
+        router.push(`/${locale}/profile`);
       } else {
-        router.push('/dashboard');
+        router.push(`/${locale}/dashboard`);
       }
     },
   });
@@ -89,9 +90,9 @@ export default function AssessmentPage() {
   // If user has already completed assessment and not in edit mode, redirect to profile
   useEffect(() => {
     if (assessmentStatus?.isCompleted && !isEditMode) {
-      router.push('/profile');
+      router.push(`/${locale}/profile`);
     }
-  }, [assessmentStatus?.isCompleted, isEditMode, router]);
+  }, [assessmentStatus?.isCompleted, isEditMode, router, locale]);
 
   // Pre-populate assessment data with existing profile when in edit mode
   useEffect(() => {
@@ -105,11 +106,21 @@ export default function AssessmentPage() {
         
         // Relationship data
         relationshipStatus: existingProfile.relationshipStatus || undefined,
+        // Relationship history - flatten for component compatibility
+        hasSignificantPast: (existingProfile.relationshipHistory as any)?.hasSignificantPast,
+        lastRelationshipDuration: (existingProfile.relationshipHistory as any)?.lastRelationshipDuration,
+        timeSinceLastRelationship: (existingProfile.relationshipHistory as any)?.timeSinceLastRelationship,
+        keyLessonsLearned: (existingProfile.relationshipHistory as any)?.keyLessonsLearned,
+        healingProgress: (existingProfile.relationshipHistory as any)?.healingProgress,
         relationshipHistory: (existingProfile.relationshipHistory as any) || undefined,
         relationshipGoals: existingProfile.relationshipGoals || undefined,
         relationshipReadiness: existingProfile.relationshipReadiness || undefined,
         
-        // Emotional profile
+        // Emotional profile - flatten for component compatibility
+        attachmentStyle: (existingProfile.emotionalProfile as any)?.attachmentStyle,
+        primaryFears: (existingProfile.emotionalProfile as any)?.primaryFears,
+        topStrengths: (existingProfile.emotionalProfile as any)?.topStrengths,
+        emotionalChallenges: (existingProfile.emotionalProfile as any)?.emotionalChallenges,
         emotionalProfile: (existingProfile.emotionalProfile as any) || undefined,
         
         // Values and vision
@@ -120,10 +131,18 @@ export default function AssessmentPage() {
         // Communication
         preferredCommunicationStyle: existingProfile.preferredCommunicationStyle || undefined,
         
-        // Lifestyle
+        // Lifestyle - flatten for component compatibility
+        workLifeBalance: (existingProfile.lifestylePriorities as any)?.workLifeBalance,
+        socialEnergyLevel: (existingProfile.lifestylePriorities as any)?.socialEnergyLevel,
+        hobbiesAndInterests: (existingProfile.lifestylePriorities as any)?.hobbiesAndInterests,
         lifestylePriorities: (existingProfile.lifestylePriorities as any) || undefined,
         
-        // Self-reflection
+        // Self-reflection - flatten for component compatibility
+        friendsDescription: (existingProfile.selfReflection as any)?.friendsDescription,
+        proudestMoment: (existingProfile.selfReflection as any)?.proudestMoment,
+        biggestGrowthArea: (existingProfile.selfReflection as any)?.biggestGrowthArea,
+        personalStrengths: (existingProfile.selfReflection as any)?.personalStrengths,
+        areasForImprovement: (existingProfile.selfReflection as any)?.areasForImprovement,
         selfReflection: (existingProfile.selfReflection as any) || undefined,
         
         // Legacy compatibility

@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { AppLayout } from "@/components/layout/app-layout";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,6 +21,7 @@ export default function Dashboard() {
   const t = useTranslations("dashboard");
   const { user } = useAuth();
   const router = useRouter();
+  const locale = useLocale();
   const { data: profile, isLoading: profileLoading } =
     api.assessment.getProfile.useQuery();
   const { data: userProfile } = api.user.getProfile.useQuery();
@@ -30,9 +31,9 @@ export default function Dashboard() {
   // Check if user has completed assessment
   useEffect(() => {
     if (!profileLoading && !profile && user) {
-      router.push("/assessment");
+      router.push(`/${locale}/assessment`);
     }
-  }, [profile, profileLoading, user, router]);
+  }, [profile, profileLoading, user, router, locale]);
 
   if (profileLoading) {
     return (

@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { api } from '@/utils/api';
 import { SimpleAppLayout } from '@/components/layout/app-layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -12,6 +12,7 @@ import { Loader2, Edit, ArrowLeft } from 'lucide-react';
 
 export default function ProfilePage() {
   const router = useRouter();
+  const locale = useLocale();
   const t = useTranslations('profile');
   const tGoals = useTranslations('assessment.goals.goalOptions');
   const tChallenges = useTranslations('assessment.challenges.challengeOptions');
@@ -24,9 +25,9 @@ export default function ProfilePage() {
   // If user hasn't completed assessment, redirect to assessment
   useEffect(() => {
     if (assessmentStatus && !assessmentStatus.isCompleted) {
-      router.push('/assessment');
+      router.push(`/${locale}/assessment`);
     }
-  }, [assessmentStatus, router]);
+  }, [assessmentStatus, router, locale]);
 
   // Show loading while redirecting
   if (assessmentStatus && !assessmentStatus.isCompleted) {
@@ -93,7 +94,7 @@ export default function ProfilePage() {
                 </CardDescription>
               </div>
               <Button
-                onClick={() => router.push('/assessment?edit=true')}
+                onClick={() => router.push(`/${locale}/assessment?edit=true`)}
                 variant="outline"
                 size="sm"
               >

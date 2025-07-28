@@ -94,11 +94,30 @@ export const assessmentRouter = createTRPCRouter({
         currentChallenges: true,
         preferredCommunicationStyle: true,
         personalityTraits: true,
+        // Enhanced fields
+        name: true,
+        emotionalProfile: true,
+        coreValues: true,
+        selfReflection: true,
       },
     });
 
+    // Check if assessment is formally completed OR has sufficient profile data
+    const hasEssentialData = !!(
+      user?.relationshipStatus && 
+      user?.relationshipGoals?.length && 
+      (user?.currentChallenges?.length || user?.preferredCommunicationStyle)
+    );
+    
+    const hasEnhancedData = !!(
+      user?.name || 
+      user?.emotionalProfile || 
+      user?.coreValues?.length || 
+      user?.selfReflection
+    );
+
     return {
-      isCompleted: !!user?.assessmentCompletedAt,
+      isCompleted: !!user?.assessmentCompletedAt || (hasEssentialData && hasEnhancedData),
       hasPartialData: !!(user?.relationshipStatus || user?.relationshipGoals?.length),
       data: user,
     };
