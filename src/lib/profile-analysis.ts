@@ -60,7 +60,7 @@ Provide a compassionate, insightful analysis (150-200 words) that helps them und
 
 Be encouraging and non-judgmental.`;
 
-  return await generateCoachResponse(prompt, [], {});
+  return await generateCoachResponse(prompt, []);
 }
 
 function calculateRelationshipReadiness(data: EnhancedAssessmentData): number {
@@ -99,7 +99,7 @@ Provide a supportive analysis (150-200 words) covering:
 
 Be practical and encouraging.`;
 
-  return await generateCoachResponse(prompt, [], {});
+  return await generateCoachResponse(prompt, []);
 }
 
 async function generateCoachingApproach(data: EnhancedAssessmentData): Promise<string> {
@@ -119,7 +119,7 @@ Recommend specific coaching strategies (100-150 words):
 
 Be specific and actionable.`;
 
-  return await generateCoachResponse(prompt, [], {});
+  return await generateCoachResponse(prompt, []);
 }
 
 function extractKeyStrengths(data: EnhancedAssessmentData): string[] {

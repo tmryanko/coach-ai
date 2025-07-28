@@ -6,6 +6,25 @@ import { MessageRole, SessionType } from '@prisma/client';
 import { getTaskCompletionMessage } from '@/lib/task-prompts';
 
 export const aiRouter = createTRPCRouter({
+  testOpenAI: protectedProcedure
+    .mutation(async () => {
+      try {
+        console.log('🧪 Testing OpenAI connection...');
+        const response = await generateCoachResponse(
+          "Hello, this is a connection test. Please respond with a brief greeting.",
+          []
+        );
+        console.log('✅ OpenAI test successful:', response);
+        return { success: true, response };
+      } catch (error) {
+        console.error('❌ OpenAI test failed:', error);
+        return { 
+          success: false, 
+          error: error instanceof Error ? error.message : 'Unknown error',
+          details: error instanceof Error ? error.stack : undefined
+        };
+      }
+    }),
   sendMessage: protectedProcedure
     .input(z.object({
       sessionId: z.string(),
@@ -119,8 +138,18 @@ export const aiRouter = createTRPCRouter({
         };
       }
 
-      // Generate AI response - temporarily disabled due to quota limits
-      const aiResponse = "I'm temporarily unavailable due to API quota limits. Your coaching features are being restored. Please try again later or contact support for immediate assistance.";
+      // Generate AI response
+      let aiResponse;
+      try {
+        aiResponse = await generateCoachResponse(
+          input.message,
+          conversationHistory,
+          context
+        );
+      } catch (error) {
+        console.error('Error generating AI response:', error);
+        aiResponse = "I'm having trouble connecting to my AI service right now. This might be due to high demand or a temporary issue. Please try again in a moment, or feel free to continue our conversation - I'll do my best to help!";
+      }
 
       // Save AI response
       const aiMessage = await ctx.prisma.chatMessage.create({
@@ -166,8 +195,18 @@ export const aiRouter = createTRPCRouter({
         throw new Error('Task not found');
       }
 
-      // Generate feedback - temporarily disabled due to quota limits
-      const feedback = "Thank you for completing this task! Your response shows thoughtful reflection. AI feedback is temporarily unavailable due to quota limits, but your progress has been saved.";
+      // Generate feedback
+      let feedback;
+      try {
+        feedback = await generateTaskFeedback(
+          task.description,
+          input.userResponse,
+          task.type
+        );
+      } catch (error) {
+        console.error('Error generating task feedback:', error);
+        feedback = "Thank you for completing this task! Your response shows thoughtful reflection. I'm having trouble generating detailed feedback right now, but your progress has been saved and you're doing great work.";
+      }
 
       // Update task progress with feedback
       await ctx.prisma.taskProgress.update({
@@ -228,7 +267,13 @@ Please provide:
 
 Format as a structured, encouraging response that feels personalized to their exact situation.`;
 
-      const suggestion = "Based on your assessment, I recommend focusing on building emotional security and communication skills. A personalized coaching program would help you develop trust-building strategies and work through relationship anxiety. AI-powered recommendations are temporarily unavailable due to quota limits.";
+      let suggestion;
+      try {
+        suggestion = await generateCoachResponse(prompt);
+      } catch (error) {
+        console.error('Error generating personalized program:', error);
+        suggestion = `Based on your assessment, I recommend a personalized coaching program focused on ${goals.toLowerCase()}. While I'm having trouble generating detailed recommendations right now, your profile shows strong potential for growth in building meaningful relationships. Consider focusing on communication skills and emotional awareness as starting points.`;
+      }
 
       return {
         suggestion,
@@ -314,8 +359,34 @@ Format as a structured, encouraging response that feels personalized to their ex
         },
       });
 
-      // Generate task-focused AI response - temporarily disabled due to quota limits
-      const aiResponse = "I'm here to help with your task, but AI responses are temporarily unavailable due to quota limits. Please continue with your task and your progress will be saved. Contact support if you need immediate assistance.";
+      // Generate task-focused AI response
+      let aiResponse;
+      try {
+        aiResponse = await generateTaskCoachResponse(
+          input.message,
+          conversationHistory,
+          {
+            task,
+            userProfile,
+            systemPrompt: `You are an AI relationship coach helping the user with a specific task: "${task.title}".
+            
+Task Description: ${task.description}
+Task Type: ${task.type}
+
+Your role is to:
+1. Keep the user focused on completing this specific task
+2. Provide encouragement and guidance related to the task
+3. Ask clarifying questions to help them think deeper about the task
+4. Gently redirect if they go off-topic
+5. Recognize when they've made good progress and encourage completion
+
+Be supportive, specific to the task, and help them get the most value from this exercise.`
+          }
+        );
+      } catch (error) {
+        console.error('Error generating task coach response:', error);
+        aiResponse = `I'm here to help you with "${task.title}". While I'm having trouble with my AI service right now, I can still support you with this task. Feel free to share your thoughts or ask questions about the task, and I'll do my best to guide you through it.`;
+      }
 
       // Save AI response
       const aiMessage = await ctx.prisma.chatMessage.create({
@@ -345,21 +416,28 @@ Format as a structured, encouraging response that feels personalized to their ex
       assessmentData: z.any(),
     }))
     .mutation(async ({ ctx, input }) => {
-      // Return mock insights due to quota limits
-      return {
-        attachmentStyleAnalysis: "AI analysis temporarily unavailable due to API quota limits. Your assessment data shows strong self-awareness and emotional intelligence.",
-        communicationStyleAnalysis: "Based on your assessment, you show thoughtful communication patterns and good emotional awareness.",
-        personalizedRecommendations: [
-          "Focus on building trust and emotional security in relationships",
-          "Practice open communication about your needs and boundaries", 
-          "Continue developing your emotional intelligence skills",
-          "Consider working with a relationship coach for personalized guidance"
-        ],
-        relationshipReadinessScore: input.assessmentData.relationshipReadiness || 7,
-        recommendedCoachingApproach: "Gradual, supportive approach focusing on building confidence",
-        keyStrengths: ["Self-awareness", "Emotional intelligence", "Growth mindset"],
-        growthAreas: ["Building trust", "Communication", "Managing relationship anxiety"],
-        generatedAt: new Date(),
-      };
+      // Generate real AI insights
+      try {
+        const insights = await generateProfileInsights(input.assessmentData);
+        return insights;
+      } catch (error) {
+        console.error('Error generating profile insights:', error);
+        // Return fallback insights
+        return {
+          attachmentStyleAnalysis: "Your assessment data shows strong self-awareness and emotional intelligence. While I'm having trouble generating detailed analysis right now, your responses indicate thoughtful reflection on relationships.",
+          communicationStyleAnalysis: "Based on your assessment, you show thoughtful communication patterns and good emotional awareness.",
+          personalizedRecommendations: [
+            "Focus on building trust and emotional security in relationships",
+            "Practice open communication about your needs and boundaries", 
+            "Continue developing your emotional intelligence skills",
+            "Consider working with a relationship coach for personalized guidance"
+          ],
+          relationshipReadinessScore: input.assessmentData.relationshipReadiness || 7,
+          recommendedCoachingApproach: "Gradual, supportive approach focusing on building confidence",
+          keyStrengths: ["Self-awareness", "Emotional intelligence", "Growth mindset"],
+          growthAreas: ["Building trust", "Communication", "Managing relationship anxiety"],
+          generatedAt: new Date(),
+        };
+      }
     }),
 });

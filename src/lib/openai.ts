@@ -10,6 +10,14 @@ export const openai = isOpenAIConfigured ? new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 }) : null;
 
+// Test OpenAI connection on startup
+if (openai) {
+  console.log('✅ OpenAI client initialized successfully');
+  console.log('🔑 API key format:', process.env.OPENAI_API_KEY?.substring(0, 7) + '...');
+} else {
+  console.log('❌ OpenAI not configured - missing API key');
+}
+
 export const SYSTEM_PROMPT = `You are an expert AI relationship coach with deep expertise in psychology, communication, and relationship dynamics. Your role is to provide personalized, empathetic, and actionable guidance to help users improve their romantic relationships.
 
 Core Principles:
@@ -161,6 +169,11 @@ export async function generateCoachResponse(
     return completion.choices[0]?.message?.content || 'I apologize, but I had trouble generating a response. Could you please try again?';
   } catch (error) {
     console.error('Error generating AI response:', error);
+    console.error('Error details:', {
+      message: error instanceof Error ? error.message : 'Unknown error',
+      stack: error instanceof Error ? error.stack : undefined,
+      name: error instanceof Error ? error.name : undefined,
+    });
     throw new Error('Failed to generate AI response');
   }
 }
@@ -202,6 +215,11 @@ Keep the feedback supportive, specific, and actionable. Limit to 200 words.`;
     return completion.choices[0]?.message?.content || 'Thank you for completing this task. Keep up the great work!';
   } catch (error) {
     console.error('Error generating task feedback:', error);
+    console.error('Task feedback error details:', {
+      message: error instanceof Error ? error.message : 'Unknown error',
+      stack: error instanceof Error ? error.stack : undefined,
+      name: error instanceof Error ? error.name : undefined,
+    });
     throw new Error('Failed to generate task feedback');
   }
 }
@@ -290,6 +308,11 @@ export async function generateTaskCoachResponse(
     return response;
   } catch (error) {
     console.error('Error generating task coach response:', error);
+    console.error('Task coach response error details:', {
+      message: error instanceof Error ? error.message : 'Unknown error',
+      stack: error instanceof Error ? error.stack : undefined,
+      name: error instanceof Error ? error.name : undefined,
+    });
     throw new Error('Failed to generate task coach response');
   }
 }

@@ -25,7 +25,7 @@ export default function ChatPage() {
   const { data: sessions, refetch: refetchSessions } = api.chat.getSessions.useQuery(undefined, {
     enabled: typeof window !== 'undefined',
   });
-  const { data: currentSession } = api.chat.getSession.useQuery(
+  const { data: currentSession, refetch: refetchCurrentSession } = api.chat.getSession.useQuery(
     { sessionId: currentSessionId! },
     { enabled: !!currentSessionId && typeof window !== 'undefined' }
   );
@@ -37,10 +37,15 @@ export default function ChatPage() {
     },
   });
 
+  const utils = api.useUtils();
+  
   const sendMessageMutation = api.ai.sendMessage.useMutation({
-    onSuccess: () => {
+    onSuccess: async () => {
       setMessage('');
       setIsLoading(false);
+      // Invalidate and refetch the current session to show new messages immediately
+      await utils.chat.getSession.invalidate({ sessionId: currentSessionId! });
+      await refetchCurrentSession();
     },
     onError: () => {
       setIsLoading(false);

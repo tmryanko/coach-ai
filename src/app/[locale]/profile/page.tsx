@@ -183,10 +183,23 @@ export default function ProfilePage() {
             </CardHeader>
             <CardContent>
               <Badge variant="outline" className="text-sm">
-                {profile.relationshipStatus ? (
-                  // Try direct translation first, fallback to adding .label
-                  tStatus(profile.relationshipStatus) || tStatus(`${profile.relationshipStatus}.label`) || profile.relationshipStatus
-                ) : t('notSpecified')}
+                {profile.relationshipStatus ? (() => {
+                  // Handle specific known values with hardcoded translations
+                  const statusMap: { [key: string]: string } = {
+                    'its-complicated': "It's complicated",
+                    'single': 'Single',
+                    'dating': 'Dating',
+                    'in-relationship': 'In a relationship',
+                    'engaged': 'Engaged',
+                    'married': 'Married',
+                    'divorced': 'Divorced',
+                    'separated': 'Separated',
+                    'widowed': 'Widowed'
+                  };
+                  
+                  return statusMap[profile.relationshipStatus] || 
+                         profile.relationshipStatus.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase());
+                })() : t('notSpecified')}
               </Badge>
             </CardContent>
           </Card>
