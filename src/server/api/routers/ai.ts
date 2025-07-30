@@ -1,53 +1,56 @@
-import { z } from 'zod';
-import { createTRPCRouter, protectedProcedure } from '@/server/api/trpc';
-import { generateCoachResponse, generateTaskFeedback, generateTaskCoachResponse } from '@/lib/openai';
-import { generateProfileInsights } from '@/lib/profile-analysis';
-import { MessageRole, SessionType } from '@prisma/client';
-import { getTaskCompletionMessage } from '@/lib/task-prompts';
+import { z } from "zod";
+import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
+import {
+  generateCoachResponse,
+  generateTaskFeedback,
+  generateTaskCoachResponse,
+} from "@/lib/openai";
+import { generateProfileInsights } from "@/lib/profile-analysis";
+import { MessageRole, SessionType } from "@prisma/client";
+import { getTaskCompletionMessage } from "@/lib/task-prompts";
 
 export const aiRouter = createTRPCRouter({
-  testOpenAI: protectedProcedure
-    .mutation(async () => {
-      try {
-        console.log('🧪 Testing OpenAI connection...');
-        const response = await generateCoachResponse(
-          "Hello, this is a connection test. Please respond with a brief greeting.",
-          []
-        );
-        console.log('✅ OpenAI test successful:', response);
-        return { success: true, response };
-      } catch (error) {
-        console.error('❌ OpenAI test failed:', error);
-        return { 
-          success: false, 
-          error: error instanceof Error ? error.message : 'Unknown error',
-          details: error instanceof Error ? error.stack : undefined
-        };
-      }
-    }),
+  testOpenAI: protectedProcedure.mutation(async () => {
+    try {
+      const response = await generateCoachResponse(
+        "Hello, this is a connection test. Please respond with a brief greeting.",
+        []
+      );
+      return { success: true, response };
+    } catch (error) {
+      console.error("❌ OpenAI test failed:", error);
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : "Unknown error",
+        details: error instanceof Error ? error.stack : undefined,
+      };
+    }
+  }),
   sendMessage: protectedProcedure
-    .input(z.object({
-      sessionId: z.string(),
-      message: z.string(),
-      includeContext: z.boolean().default(true),
-    }))
+    .input(
+      z.object({
+        sessionId: z.string(),
+        message: z.string(),
+        includeContext: z.boolean().default(true),
+      })
+    )
     .mutation(async ({ ctx, input }) => {
       // Get session and verify ownership
       const session = await ctx.prisma.chatSession.findUnique({
-        where: { 
+        where: {
           id: input.sessionId,
           userId: ctx.userId,
         },
         include: {
           messages: {
-            orderBy: { createdAt: 'desc' },
+            orderBy: { createdAt: "desc" },
             take: 20,
           },
         },
       });
 
       if (!session) {
-        throw new Error('Session not found');
+        throw new Error("Session not found");
       }
 
       // Save user message
@@ -60,12 +63,13 @@ export const aiRouter = createTRPCRouter({
       });
 
       // Prepare conversation history
-      const conversationHistory = session.messages
-        .reverse()
-        .map(msg => ({
-          role: msg.role === MessageRole.USER ? 'user' as const : 'assistant' as const,
-          content: msg.content,
-        }));
+      const conversationHistory = session.messages.reverse().map((msg) => ({
+        role:
+          msg.role === MessageRole.USER
+            ? ("user" as const)
+            : ("assistant" as const),
+        content: msg.content,
+      }));
 
       // Get user context if requested
       let context;
@@ -123,12 +127,12 @@ export const aiRouter = createTRPCRouter({
               },
             },
           },
-          orderBy: { startedAt: 'desc' },
+          orderBy: { startedAt: "desc" },
         });
 
         // Get current phase name safely
         const currentPhase = userProgress?.program?.phases?.find(
-          phase => phase.order === userProgress.currentPhase
+          (phase) => phase.order === userProgress.currentPhase
         );
 
         context = {
@@ -147,8 +151,9 @@ export const aiRouter = createTRPCRouter({
           context
         );
       } catch (error) {
-        console.error('Error generating AI response:', error);
-        aiResponse = "I'm having trouble connecting to my AI service right now. This might be due to high demand or a temporary issue. Please try again in a moment, or feel free to continue our conversation - I'll do my best to help!";
+        console.error("Error generating AI response:", error);
+        aiResponse =
+          "I'm having trouble connecting to my AI service right now. This might be due to high demand or a temporary issue. Please try again in a moment, or feel free to continue our conversation - I'll do my best to help!";
       }
 
       // Save AI response
@@ -174,10 +179,12 @@ export const aiRouter = createTRPCRouter({
     }),
 
   generateTaskFeedback: protectedProcedure
-    .input(z.object({
-      taskId: z.string(),
-      userResponse: z.string(),
-    }))
+    .input(
+      z.object({
+        taskId: z.string(),
+        userResponse: z.string(),
+      })
+    )
     .mutation(async ({ ctx, input }) => {
       // Get task details
       const task = await ctx.prisma.task.findUnique({
@@ -192,7 +199,7 @@ export const aiRouter = createTRPCRouter({
       });
 
       if (!task) {
-        throw new Error('Task not found');
+        throw new Error("Task not found");
       }
 
       // Generate feedback
@@ -204,8 +211,9 @@ export const aiRouter = createTRPCRouter({
           task.type
         );
       } catch (error) {
-        console.error('Error generating task feedback:', error);
-        feedback = "Thank you for completing this task! Your response shows thoughtful reflection. I'm having trouble generating detailed feedback right now, but your progress has been saved and you're doing great work.";
+        console.error("Error generating task feedback:", error);
+        feedback =
+          "Thank you for completing this task! Your response shows thoughtful reflection. I'm having trouble generating detailed feedback right now, but your progress has been saved and you're doing great work.";
       }
 
       // Update task progress with feedback
@@ -227,36 +235,43 @@ export const aiRouter = createTRPCRouter({
       };
     }),
 
-  generatePersonalizedProgram: protectedProcedure
-    .mutation(async ({ ctx }) => {
-      // Get user's assessment profile
-      const userProfile = await ctx.prisma.user.findUnique({
-        where: { id: ctx.userId },
-        select: {
-          relationshipStatus: true,
-          relationshipGoals: true,
-          currentChallenges: true,
-          preferredCommunicationStyle: true,
-          personalityTraits: true,
-        },
-      });
+  generatePersonalizedProgram: protectedProcedure.mutation(async ({ ctx }) => {
+    // Get user's assessment profile
+    const userProfile = await ctx.prisma.user.findUnique({
+      where: { id: ctx.userId },
+      select: {
+        relationshipStatus: true,
+        relationshipGoals: true,
+        currentChallenges: true,
+        preferredCommunicationStyle: true,
+        personalityTraits: true,
+      },
+    });
 
-      if (!userProfile || !userProfile.relationshipGoals?.length) {
-        throw new Error('User assessment profile not found. Please complete your assessment first.');
-      }
+    if (!userProfile || !userProfile.relationshipGoals?.length) {
+      throw new Error(
+        "User assessment profile not found. Please complete your assessment first."
+      );
+    }
 
-      const goals = userProfile.relationshipGoals.join(', ');
-      const challenges = userProfile.currentChallenges?.join(', ') || 'None specified';
-      const status = userProfile.relationshipStatus || 'Not specified';
-      const communicationStyle = userProfile.preferredCommunicationStyle || 'Not specified';
+    const goals = userProfile.relationshipGoals.join(", ");
+    const challenges =
+      userProfile.currentChallenges?.join(", ") || "None specified";
+    const status = userProfile.relationshipStatus || "Not specified";
+    const communicationStyle =
+      userProfile.preferredCommunicationStyle || "Not specified";
 
-      const prompt = `Based on this user's relationship assessment, suggest a personalized coaching program:
+    const prompt = `Based on this user's relationship assessment, suggest a personalized coaching program:
 
 Relationship Status: ${status}
 Relationship Goals: ${goals}
 Current Challenges: ${challenges}
 Communication Style: ${communicationStyle}
-${userProfile.personalityTraits ? `Personality Traits: ${JSON.stringify(userProfile.personalityTraits)}` : ''}
+${
+  userProfile.personalityTraits
+    ? `Personality Traits: ${JSON.stringify(userProfile.personalityTraits)}`
+    : ""
+}
 
 Please provide:
 1. A specific program title tailored to their needs
@@ -267,51 +282,53 @@ Please provide:
 
 Format as a structured, encouraging response that feels personalized to their exact situation.`;
 
-      let suggestion;
-      try {
-        suggestion = await generateCoachResponse(prompt);
-      } catch (error) {
-        console.error('Error generating personalized program:', error);
-        suggestion = `Based on your assessment, I recommend a personalized coaching program focused on ${goals.toLowerCase()}. While I'm having trouble generating detailed recommendations right now, your profile shows strong potential for growth in building meaningful relationships. Consider focusing on communication skills and emotional awareness as starting points.`;
-      }
+    let suggestion;
+    try {
+      suggestion = await generateCoachResponse(prompt);
+    } catch (error) {
+      console.error("Error generating personalized program:", error);
+      suggestion = `Based on your assessment, I recommend a personalized coaching program focused on ${goals.toLowerCase()}. While I'm having trouble generating detailed recommendations right now, your profile shows strong potential for growth in building meaningful relationships. Consider focusing on communication skills and emotional awareness as starting points.`;
+    }
 
-      return {
-        suggestion,
-        userProfile: {
-          relationshipStatus: status,
-          goals: userProfile.relationshipGoals,
-          challenges: userProfile.currentChallenges,
-          communicationStyle,
-        },
-      };
-    }),
+    return {
+      suggestion,
+      userProfile: {
+        relationshipStatus: status,
+        goals: userProfile.relationshipGoals,
+        challenges: userProfile.currentChallenges,
+        communicationStyle,
+      },
+    };
+  }),
 
   sendTaskMessage: protectedProcedure
-    .input(z.object({
-      sessionId: z.string(),
-      message: z.string(),
-    }))
+    .input(
+      z.object({
+        sessionId: z.string(),
+        message: z.string(),
+      })
+    )
     .mutation(async ({ ctx, input }) => {
       // Get session and verify it's a task session
       const session = await ctx.prisma.chatSession.findUnique({
-        where: { 
+        where: {
           id: input.sessionId,
           userId: ctx.userId,
         },
         include: {
           messages: {
-            orderBy: { createdAt: 'desc' },
+            orderBy: { createdAt: "desc" },
             take: 20,
           },
         },
       });
 
       if (!session) {
-        throw new Error('Session not found');
+        throw new Error("Session not found");
       }
 
       if (session.sessionType !== SessionType.TASK_FOCUSED || !session.taskId) {
-        throw new Error('This is not a task-focused session');
+        throw new Error("This is not a task-focused session");
       }
 
       // Get task details for context
@@ -327,7 +344,7 @@ Format as a structured, encouraging response that feels personalized to their ex
       });
 
       if (!task) {
-        throw new Error('Task not found');
+        throw new Error("Task not found");
       }
 
       // Save user message
@@ -340,12 +357,13 @@ Format as a structured, encouraging response that feels personalized to their ex
       });
 
       // Prepare conversation history
-      const conversationHistory = session.messages
-        .reverse()
-        .map(msg => ({
-          role: msg.role === MessageRole.USER ? 'user' as const : 'assistant' as const,
-          content: msg.content,
-        }));
+      const conversationHistory = session.messages.reverse().map((msg) => ({
+        role:
+          msg.role === MessageRole.USER
+            ? ("user" as const)
+            : ("assistant" as const),
+        content: msg.content,
+      }));
 
       // Get user context for personalization
       const userProfile = await ctx.prisma.user.findUnique({
@@ -380,11 +398,11 @@ Your role is to:
 4. Gently redirect if they go off-topic
 5. Recognize when they've made good progress and encourage completion
 
-Be supportive, specific to the task, and help them get the most value from this exercise.`
+Be supportive, specific to the task, and help them get the most value from this exercise.`,
           }
         );
       } catch (error) {
-        console.error('Error generating task coach response:', error);
+        console.error("Error generating task coach response:", error);
         aiResponse = `I'm here to help you with "${task.title}". While I'm having trouble with my AI service right now, I can still support you with this task. Feel free to share your thoughts or ask questions about the task, and I'll do my best to guide you through it.`;
       }
 
@@ -412,30 +430,44 @@ Be supportive, specific to the task, and help them get the most value from this 
     }),
 
   generateProfileInsights: protectedProcedure
-    .input(z.object({
-      assessmentData: z.any(),
-    }))
+    .input(
+      z.object({
+        assessmentData: z.any(),
+      })
+    )
     .mutation(async ({ ctx, input }) => {
       // Generate real AI insights
       try {
         const insights = await generateProfileInsights(input.assessmentData);
         return insights;
       } catch (error) {
-        console.error('Error generating profile insights:', error);
+        console.error("Error generating profile insights:", error);
         // Return fallback insights
         return {
-          attachmentStyleAnalysis: "Your assessment data shows strong self-awareness and emotional intelligence. While I'm having trouble generating detailed analysis right now, your responses indicate thoughtful reflection on relationships.",
-          communicationStyleAnalysis: "Based on your assessment, you show thoughtful communication patterns and good emotional awareness.",
+          attachmentStyleAnalysis:
+            "Your assessment data shows strong self-awareness and emotional intelligence. While I'm having trouble generating detailed analysis right now, your responses indicate thoughtful reflection on relationships.",
+          communicationStyleAnalysis:
+            "Based on your assessment, you show thoughtful communication patterns and good emotional awareness.",
           personalizedRecommendations: [
             "Focus on building trust and emotional security in relationships",
-            "Practice open communication about your needs and boundaries", 
+            "Practice open communication about your needs and boundaries",
             "Continue developing your emotional intelligence skills",
-            "Consider working with a relationship coach for personalized guidance"
+            "Consider working with a relationship coach for personalized guidance",
           ],
-          relationshipReadinessScore: input.assessmentData.relationshipReadiness || 7,
-          recommendedCoachingApproach: "Gradual, supportive approach focusing on building confidence",
-          keyStrengths: ["Self-awareness", "Emotional intelligence", "Growth mindset"],
-          growthAreas: ["Building trust", "Communication", "Managing relationship anxiety"],
+          relationshipReadinessScore:
+            input.assessmentData.relationshipReadiness || 7,
+          recommendedCoachingApproach:
+            "Gradual, supportive approach focusing on building confidence",
+          keyStrengths: [
+            "Self-awareness",
+            "Emotional intelligence",
+            "Growth mindset",
+          ],
+          growthAreas: [
+            "Building trust",
+            "Communication",
+            "Managing relationship anxiety",
+          ],
           generatedAt: new Date(),
         };
       }

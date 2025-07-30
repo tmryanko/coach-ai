@@ -30,11 +30,19 @@ export default function ProfilePage() {
     "assessment.relationshipStatus.statusOptions"
   );
   const tCoreValues = useTranslations("assessment.valuesVision.coreValues");
-  const tPersonalStrengths = useTranslations("assessment.selfReflection.personalStrengths");
-  const tEmotionalStrengths = useTranslations("assessment.emotionalIntelligence.strengthOptions");
-  const tEmotionalChallenges = useTranslations("assessment.emotionalIntelligence.challengeOptions");
+  const tPersonalStrengths = useTranslations(
+    "assessment.selfReflection.personalStrengths"
+  );
+  const tEmotionalStrengths = useTranslations(
+    "assessment.emotionalIntelligence.strengthOptions"
+  );
+  const tEmotionalChallenges = useTranslations(
+    "assessment.emotionalIntelligence.challengeOptions"
+  );
   const tDealBreakers = useTranslations("assessment.valuesVision.dealBreakers");
-  const tFears = useTranslations("assessment.emotionalIntelligence.fearOptions");
+  const tFears = useTranslations(
+    "assessment.emotionalIntelligence.fearOptions"
+  );
 
   const {
     data: profile,
@@ -70,9 +78,6 @@ export default function ProfilePage() {
         profile &&
         (profile.name || profile.emotionalProfile || profile.coreValues?.length)
       ) {
-        console.log(
-          "🔧 User has data but no completion timestamp, attempting repair..."
-        );
         repairAssessment.mutate();
       } else {
         // Otherwise redirect to assessment
@@ -177,46 +182,74 @@ export default function ProfilePage() {
     return `${socialStyle}, ${empathyLevel}`;
   };
 
-  const translateValue = (value: string, category?: 'coreValues' | 'personalStrengths' | 'emotionalStrengths' | 'challenges' | 'dealBreakers' | 'fears') => {
+  const translateValue = (
+    value: string,
+    category?:
+      | "coreValues"
+      | "personalStrengths"
+      | "emotionalStrengths"
+      | "challenges"
+      | "dealBreakers"
+      | "fears"
+  ) => {
     try {
       // If category is specified, try that category first
       if (category) {
         let categoryTranslation;
-        
+
         switch (category) {
-          case 'coreValues':
+          case "coreValues":
             categoryTranslation = tCoreValues(`${value}.label`);
-            if (categoryTranslation && !categoryTranslation.includes('assessment.valuesVision')) {
+            if (
+              categoryTranslation &&
+              !categoryTranslation.includes("assessment.valuesVision")
+            ) {
               return categoryTranslation;
             }
             break;
-          case 'personalStrengths':
+          case "personalStrengths":
             categoryTranslation = tPersonalStrengths(value);
-            if (categoryTranslation && !categoryTranslation.includes('assessment.selfReflection')) {
+            if (
+              categoryTranslation &&
+              !categoryTranslation.includes("assessment.selfReflection")
+            ) {
               return categoryTranslation;
             }
             break;
-          case 'emotionalStrengths':
+          case "emotionalStrengths":
             categoryTranslation = tEmotionalStrengths(value);
-            if (categoryTranslation && !categoryTranslation.includes('assessment.emotionalIntelligence')) {
+            if (
+              categoryTranslation &&
+              !categoryTranslation.includes("assessment.emotionalIntelligence")
+            ) {
               return categoryTranslation;
             }
             break;
-          case 'challenges':
-            categoryTranslation = tChallenges(`${value}.label`) || tEmotionalChallenges(value);
-            if (categoryTranslation && !categoryTranslation.includes('assessment.')) {
+          case "challenges":
+            categoryTranslation =
+              tChallenges(`${value}.label`) || tEmotionalChallenges(value);
+            if (
+              categoryTranslation &&
+              !categoryTranslation.includes("assessment.")
+            ) {
               return categoryTranslation;
             }
             break;
-          case 'dealBreakers':
+          case "dealBreakers":
             categoryTranslation = tDealBreakers(value);
-            if (categoryTranslation && !categoryTranslation.includes('assessment.valuesVision')) {
+            if (
+              categoryTranslation &&
+              !categoryTranslation.includes("assessment.valuesVision")
+            ) {
               return categoryTranslation;
             }
             break;
-          case 'fears':
+          case "fears":
             categoryTranslation = tFears(value);
-            if (categoryTranslation && !categoryTranslation.includes('assessment.emotionalIntelligence')) {
+            if (
+              categoryTranslation &&
+              !categoryTranslation.includes("assessment.emotionalIntelligence")
+            ) {
               return categoryTranslation;
             }
             break;
@@ -226,48 +259,67 @@ export default function ProfilePage() {
       // If no category specified or category-specific translation failed, try all categories
       // 1. Core Values (from values & vision section)
       const coreValueTranslation = tCoreValues(`${value}.label`);
-      if (coreValueTranslation && !coreValueTranslation.includes('assessment.valuesVision')) {
+      if (
+        coreValueTranslation &&
+        !coreValueTranslation.includes("assessment.valuesVision")
+      ) {
         return coreValueTranslation;
       }
 
       // 2. Personal Strengths (from self-reflection section)
       const personalStrengthTranslation = tPersonalStrengths(value);
-      if (personalStrengthTranslation && !personalStrengthTranslation.includes('assessment.selfReflection')) {
+      if (
+        personalStrengthTranslation &&
+        !personalStrengthTranslation.includes("assessment.selfReflection")
+      ) {
         return personalStrengthTranslation;
       }
 
       // 3. Emotional Strengths (from emotional intelligence section)
       const emotionalStrengthTranslation = tEmotionalStrengths(value);
-      if (emotionalStrengthTranslation && !emotionalStrengthTranslation.includes('assessment.emotionalIntelligence')) {
+      if (
+        emotionalStrengthTranslation &&
+        !emotionalStrengthTranslation.includes(
+          "assessment.emotionalIntelligence"
+        )
+      ) {
         return emotionalStrengthTranslation;
       }
 
       // 4. Challenges (try both emotional and general challenges)
-      const challengeTranslation = tChallenges(`${value}.label`) || tEmotionalChallenges(value);
-      if (challengeTranslation && !challengeTranslation.includes('assessment.')) {
+      const challengeTranslation =
+        tChallenges(`${value}.label`) || tEmotionalChallenges(value);
+      if (
+        challengeTranslation &&
+        !challengeTranslation.includes("assessment.")
+      ) {
         return challengeTranslation;
       }
 
       // 5. Deal Breakers
       const dealBreakerTranslation = tDealBreakers(value);
-      if (dealBreakerTranslation && !dealBreakerTranslation.includes('assessment.valuesVision')) {
+      if (
+        dealBreakerTranslation &&
+        !dealBreakerTranslation.includes("assessment.valuesVision")
+      ) {
         return dealBreakerTranslation;
       }
 
       // 6. Fears
       const fearTranslation = tFears(value);
-      if (fearTranslation && !fearTranslation.includes('assessment.emotionalIntelligence')) {
+      if (
+        fearTranslation &&
+        !fearTranslation.includes("assessment.emotionalIntelligence")
+      ) {
         return fearTranslation;
       }
-
     } catch (error) {
       // If translation fails, continue to fallback
     }
 
     // Fallback to formatted value
-    return value.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase());
+    return value.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
   };
-  console.log("profile:", profile);
 
   return (
     <SimpleAppLayout>
@@ -365,7 +417,7 @@ export default function ProfilePage() {
                 {/* Core values from rich assessment */}
                 {profile.coreValues?.map((value, index) => (
                   <Badge key={`core-value-${index}`} variant="secondary">
-                    {translateValue(value, 'coreValues')}
+                    {translateValue(value, "coreValues")}
                   </Badge>
                 ))}
                 {!profile.relationshipGoals?.length &&
@@ -403,7 +455,7 @@ export default function ProfilePage() {
                 {/* Deal breakers from rich assessment */}
                 {profile.dealBreakers?.map((dealBreaker, index) => (
                   <Badge key={`deal-breaker-${index}`} variant="destructive">
-                    {translateValue(dealBreaker, 'dealBreakers')}
+                    {translateValue(dealBreaker, "dealBreakers")}
                   </Badge>
                 ))}
                 {/* Emotional challenges from rich assessment */}
@@ -411,7 +463,7 @@ export default function ProfilePage() {
                   (profile.emotionalProfile as any)?.emotionalChallenges || []
                 ).map((challenge: string, index: number) => (
                   <Badge key={`emotional-challenge-${index}`} variant="outline">
-                    {translateValue(challenge, 'challenges')}
+                    {translateValue(challenge, "challenges")}
                   </Badge>
                 ))}
                 {!profile.currentChallenges?.length &&
@@ -490,7 +542,7 @@ export default function ProfilePage() {
                           variant="secondary"
                           className="text-xs"
                         >
-                          {translateValue(strength, 'emotionalStrengths')}
+                          {translateValue(strength, "emotionalStrengths")}
                         </Badge>
                       )
                     )}
@@ -512,7 +564,7 @@ export default function ProfilePage() {
                           variant="outline"
                           className="text-xs"
                         >
-                          {translateValue(fear, 'fears')}
+                          {translateValue(fear, "fears")}
                         </Badge>
                       )
                     )}
@@ -627,7 +679,7 @@ export default function ProfilePage() {
                             variant="secondary"
                             className="text-xs"
                           >
-                            {translateValue(strength, 'personalStrengths')}
+                            {translateValue(strength, "personalStrengths")}
                           </Badge>
                         )
                       )}

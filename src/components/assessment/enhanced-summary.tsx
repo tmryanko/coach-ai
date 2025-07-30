@@ -1,24 +1,24 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { useTranslations } from 'next-intl';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
-import { EnhancedAssessmentData, ProfileInsights } from '@/types/assessment';
-import { api } from '@/utils/api';
-import { 
-  Heart, 
-  Brain, 
-  Star, 
-  Target, 
-  Sparkles, 
-  CheckCircle, 
+import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { EnhancedAssessmentData, ProfileInsights } from "@/types/assessment";
+import { api } from "@/utils/api";
+import {
+  Heart,
+  Brain,
+  Star,
+  Target,
+  Sparkles,
+  CheckCircle,
   ArrowRight,
   Loader2,
-  Trophy
-} from 'lucide-react';
+  Trophy,
+} from "lucide-react";
 
 interface EnhancedSummaryProps {
   data: any;
@@ -29,22 +29,22 @@ interface EnhancedSummaryProps {
   isLastStep?: boolean;
 }
 
-export function EnhancedSummary({ 
-  data, 
-  onNext, 
-  onBack, 
-  canGoBack, 
+export function EnhancedSummary({
+  data,
+  onNext,
+  onBack,
+  canGoBack,
   isLoading: isSubmitting,
-  isLastStep 
+  isLastStep,
 }: EnhancedSummaryProps) {
-  const t = useTranslations('assessment.enhancedSummary');
+  const t = useTranslations("assessment.enhancedSummary");
   const [insights, setInsights] = useState<ProfileInsights | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisComplete, setAnalysisComplete] = useState(false);
 
   useEffect(() => {
     generateInsights();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const generateInsightsMutation = api.ai.generateProfileInsights.useMutation({
@@ -54,15 +54,22 @@ export function EnhancedSummary({
       setIsAnalyzing(false);
     },
     onError: (error) => {
-      console.error('Failed to generate insights:', error);
+      console.error("Failed to generate insights:", error);
       setIsAnalyzing(false);
       // Set a default message when AI is unavailable
       setInsights({
-        attachmentStyleAnalysis: "AI analysis is currently unavailable. Please contact support to enable this feature.",
-        communicationStyleAnalysis: "Communication analysis requires AI integration to be enabled.",
-        personalizedRecommendations: ["Complete your profile to unlock personalized insights", "Consider working with a relationship coach", "Focus on self-reflection and growth"],
+        attachmentStyleAnalysis:
+          "AI analysis is currently unavailable. Please contact support to enable this feature.",
+        communicationStyleAnalysis:
+          "Communication analysis requires AI integration to be enabled.",
+        personalizedRecommendations: [
+          "Complete your profile to unlock personalized insights",
+          "Consider working with a relationship coach",
+          "Focus on self-reflection and growth",
+        ],
         relationshipReadinessScore: 7,
-        recommendedCoachingApproach: "Self-directed learning with regular check-ins",
+        recommendedCoachingApproach:
+          "Self-directed learning with regular check-ins",
         keyStrengths: ["Self-awareness", "Growth mindset"],
         growthAreas: ["Various areas based on your assessment"],
         generatedAt: new Date(),
@@ -73,21 +80,31 @@ export function EnhancedSummary({
   const generateInsights = async () => {
     setIsAnalyzing(true);
     // Temporarily skip AI analysis due to quota limits
-    console.log('⚠️ Skipping AI analysis due to OpenAI quota limits');
     setTimeout(() => {
       setInsights({
-        attachmentStyleAnalysis: "AI analysis temporarily unavailable due to API quota limits. Your assessment data shows strong self-awareness and emotional intelligence.",
-        communicationStyleAnalysis: "Based on your assessment, you show thoughtful communication patterns and good emotional awareness.",
+        attachmentStyleAnalysis:
+          "AI analysis temporarily unavailable due to API quota limits. Your assessment data shows strong self-awareness and emotional intelligence.",
+        communicationStyleAnalysis:
+          "Based on your assessment, you show thoughtful communication patterns and good emotional awareness.",
         personalizedRecommendations: [
           "Focus on building trust and emotional security in relationships",
-          "Practice open communication about your needs and boundaries", 
+          "Practice open communication about your needs and boundaries",
           "Continue developing your emotional intelligence skills",
-          "Consider working with a relationship coach for personalized guidance"
+          "Consider working with a relationship coach for personalized guidance",
         ],
         relationshipReadinessScore: data.relationshipReadiness || 7,
-        recommendedCoachingApproach: "Gradual, supportive approach focusing on building confidence",
-        keyStrengths: ["Self-awareness", "Emotional intelligence", "Growth mindset"],
-        growthAreas: ["Building trust", "Communication", "Managing relationship anxiety"],
+        recommendedCoachingApproach:
+          "Gradual, supportive approach focusing on building confidence",
+        keyStrengths: [
+          "Self-awareness",
+          "Emotional intelligence",
+          "Growth mindset",
+        ],
+        growthAreas: [
+          "Building trust",
+          "Communication",
+          "Managing relationship anxiety",
+        ],
         generatedAt: new Date(),
       });
       setAnalysisComplete(true);
@@ -98,16 +115,25 @@ export function EnhancedSummary({
   const getCompletionStats = () => {
     let completed = 0;
     let total = 7;
-    
+
     if (data.name) completed++;
     if (data.relationshipStatus) completed++;
     if (data.relationshipGoals?.length) completed++;
     if (data.attachmentStyle) completed++;
     if (data.coreValues?.length) completed++;
-    if (data.workLifeBalance || data.socialEnergyLevel || data.hobbiesAndInterests?.length) completed++;
+    if (
+      data.workLifeBalance ||
+      data.socialEnergyLevel ||
+      data.hobbiesAndInterests?.length
+    )
+      completed++;
     if (data.friendsDescription) completed++;
-    
-    return { completed, total, percentage: Math.round((completed / total) * 100) };
+
+    return {
+      completed,
+      total,
+      percentage: Math.round((completed / total) * 100),
+    };
   };
 
   const stats = getCompletionStats();
@@ -119,10 +145,10 @@ export function EnhancedSummary({
           <Trophy className="w-10 h-10 text-white" />
         </div>
         <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100">
-          {t('title')}
+          {t("title")}
         </h2>
         <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-          {t('description')}
+          {t("description")}
         </p>
       </div>
 
@@ -131,15 +157,20 @@ export function EnhancedSummary({
         <CardContent className="p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-green-900 dark:text-green-100">
-              {t('profileCompletion.title')}
+              {t("profileCompletion.title")}
             </h3>
             <Badge className="bg-green-600 text-white">
-              {t('profileCompletion.percentage', { percentage: stats.percentage })}
+              {t("profileCompletion.percentage", {
+                percentage: stats.percentage,
+              })}
             </Badge>
           </div>
           <Progress value={stats.percentage} className="h-3 mb-2" />
           <p className="text-sm text-green-800 dark:text-green-200">
-            {t('profileCompletion.description', { completed: stats.completed, total: stats.total })}
+            {t("profileCompletion.description", {
+              completed: stats.completed,
+              total: stats.total,
+            })}
           </p>
         </CardContent>
       </Card>
@@ -150,28 +181,46 @@ export function EnhancedSummary({
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center gap-2">
               <Heart className="w-5 h-5 text-red-500" />
-              {t('profileSnapshot.title')}
+              {t("profileSnapshot.title")}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <Label className="text-sm font-medium text-gray-600 dark:text-gray-300">{t('profileSnapshot.name')}</Label>
-              <p className="font-semibold">{data.name || t('profileSnapshot.notProvided')}</p>
+              <Label className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                {t("profileSnapshot.name")}
+              </Label>
+              <p className="font-semibold">
+                {data.name || t("profileSnapshot.notProvided")}
+              </p>
             </div>
-            
+
             <div>
-              <Label className="text-sm font-medium text-gray-600 dark:text-gray-300">{t('profileSnapshot.relationshipStatus')}</Label>
-              <p className="font-semibold capitalize">{data.relationshipStatus?.replace('-', ' ') || t('profileSnapshot.notSpecified')}</p>
+              <Label className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                {t("profileSnapshot.relationshipStatus")}
+              </Label>
+              <p className="font-semibold capitalize">
+                {data.relationshipStatus?.replace("-", " ") ||
+                  t("profileSnapshot.notSpecified")}
+              </p>
             </div>
-            
+
             <div>
-              <Label className="text-sm font-medium text-gray-600 dark:text-gray-300">{t('profileSnapshot.attachmentStyle')}</Label>
-              <p className="font-semibold capitalize">{data.emotionalProfile?.attachmentStyle || t('profileSnapshot.notAssessed')}</p>
+              <Label className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                {t("profileSnapshot.attachmentStyle")}
+              </Label>
+              <p className="font-semibold capitalize">
+                {data.emotionalProfile?.attachmentStyle ||
+                  t("profileSnapshot.notAssessed")}
+              </p>
             </div>
-            
+
             <div>
-              <Label className="text-sm font-medium text-gray-600 dark:text-gray-300">{t('profileSnapshot.relationshipReadiness')}</Label>
-              <p className="font-semibold">{data.relationshipReadiness || t('profileSnapshot.notRated')}/7</p>
+              <Label className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                {t("profileSnapshot.relationshipReadiness")}
+              </Label>
+              <p className="font-semibold">
+                {data.relationshipReadiness || t("profileSnapshot.notRated")}/7
+              </p>
             </div>
           </CardContent>
         </Card>
@@ -180,20 +229,28 @@ export function EnhancedSummary({
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center gap-2">
               <Star className="w-5 h-5 text-yellow-500" />
-              {t('topStrengths.title')}
+              {t("topStrengths.title")}
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {data.emotionalProfile?.topStrengths?.slice(0, 4).map((strength: string, index: number) => (
-                <div key={strength} className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-yellow-100 dark:bg-yellow-900/20 rounded-full flex items-center justify-center">
-                    <span className="text-sm font-bold text-yellow-600">{index + 1}</span>
+              {data.emotionalProfile?.topStrengths
+                ?.slice(0, 4)
+                .map((strength: string, index: number) => (
+                  <div key={strength} className="flex items-center gap-3">
+                    <div className="w-6 h-6 bg-yellow-100 dark:bg-yellow-900/20 rounded-full flex items-center justify-center">
+                      <span className="text-sm font-bold text-yellow-600">
+                        {index + 1}
+                      </span>
+                    </div>
+                    <span className="capitalize">
+                      {strength.replace("-", " ")}
+                    </span>
                   </div>
-                  <span className="capitalize">{strength.replace('-', ' ')}</span>
-                </div>
-              )) || (
-                <p className="text-gray-500 dark:text-gray-400">{t('topStrengths.toBeIdentified')}</p>
+                )) || (
+                <p className="text-gray-500 dark:text-gray-400">
+                  {t("topStrengths.toBeIdentified")}
+                </p>
               )}
             </div>
           </CardContent>
@@ -206,14 +263,14 @@ export function EnhancedSummary({
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center gap-2">
               <Target className="w-5 h-5 text-blue-500" />
-              {t('coreValues.title')}
+              {t("coreValues.title")}
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex flex-wrap gap-2">
               {data.coreValues.map((value: string) => (
                 <Badge key={value} variant="secondary" className="text-sm">
-                  {value.replace('-', ' ').toLowerCase()}
+                  {value.replace("-", " ").toLowerCase()}
                 </Badge>
               ))}
             </div>
@@ -227,7 +284,7 @@ export function EnhancedSummary({
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-purple-500" />
-              {t('relationshipVision.title')}
+              {t("relationshipVision.title")}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -243,7 +300,7 @@ export function EnhancedSummary({
         <CardHeader className="pb-4">
           <CardTitle className="flex items-center gap-2">
             <Brain className="w-5 h-5 text-indigo-500" />
-            {t('aiInsights.title')}
+            {t("aiInsights.title")}
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -252,7 +309,7 @@ export function EnhancedSummary({
               <div className="text-center space-y-3">
                 <Loader2 className="w-8 h-8 animate-spin text-indigo-600 mx-auto" />
                 <p className="text-sm text-gray-600 dark:text-gray-300">
-                  {t('aiInsights.analyzing')}
+                  {t("aiInsights.analyzing")}
                 </p>
               </div>
             </div>
@@ -260,42 +317,48 @@ export function EnhancedSummary({
             <div className="space-y-4">
               <div className="bg-indigo-50 dark:bg-indigo-900/20 p-4 rounded-lg">
                 <h4 className="font-semibold text-indigo-900 dark:text-indigo-100 mb-2">
-                  {t('aiInsights.attachmentAnalysis')}
+                  {t("aiInsights.attachmentAnalysis")}
                 </h4>
                 <p className="text-sm text-indigo-800 dark:text-indigo-200">
                   {insights.attachmentStyleAnalysis}
                 </p>
               </div>
-              
+
               <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
                 <h4 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">
-                  {t('aiInsights.communicationStyle')}
+                  {t("aiInsights.communicationStyle")}
                 </h4>
                 <p className="text-sm text-blue-800 dark:text-blue-200">
                   {insights.communicationStyleAnalysis}
                 </p>
               </div>
-              
-              {insights.personalizedRecommendations && insights.personalizedRecommendations.length > 0 && (
-                <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
-                  <h4 className="font-semibold text-green-900 dark:text-green-100 mb-3">
-                    {t('aiInsights.recommendations')}
-                  </h4>
-                  <ul className="space-y-2">
-                    {insights.personalizedRecommendations.slice(0, 3).map((rec, index) => (
-                      <li key={index} className="flex items-start gap-2 text-sm text-green-800 dark:text-green-200">
-                        <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
-                        <span>{rec}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+
+              {insights.personalizedRecommendations &&
+                insights.personalizedRecommendations.length > 0 && (
+                  <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
+                    <h4 className="font-semibold text-green-900 dark:text-green-100 mb-3">
+                      {t("aiInsights.recommendations")}
+                    </h4>
+                    <ul className="space-y-2">
+                      {insights.personalizedRecommendations
+                        .slice(0, 3)
+                        .map((rec, index) => (
+                          <li
+                            key={index}
+                            className="flex items-start gap-2 text-sm text-green-800 dark:text-green-200"
+                          >
+                            <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <span>{rec}</span>
+                          </li>
+                        ))}
+                    </ul>
+                  </div>
+                )}
             </div>
           ) : (
             <div className="text-center py-8">
               <p className="text-gray-500 dark:text-gray-400">
-                {t('aiInsights.unableToGenerate')}
+                {t("aiInsights.unableToGenerate")}
               </p>
             </div>
           )}
@@ -307,10 +370,10 @@ export function EnhancedSummary({
         <CardContent>
           <div className="text-center space-y-4">
             <h3 className="text-xl font-bold text-pink-900 dark:text-pink-100">
-              {t('nextSteps.title')}
+              {t("nextSteps.title")}
             </h3>
             <p className="text-pink-800 dark:text-pink-200">
-              {t('nextSteps.description')}
+              {t("nextSteps.description")}
             </p>
             <div className="flex justify-center gap-4 pt-4">
               <Button
@@ -318,7 +381,7 @@ export function EnhancedSummary({
                 onClick={onBack}
                 disabled={!canGoBack || isSubmitting}
               >
-                {t('buttons.backToReview')}
+                {t("buttons.backToReview")}
               </Button>
               <Button
                 onClick={onNext}
@@ -329,11 +392,11 @@ export function EnhancedSummary({
                 {isSubmitting ? (
                   <>
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                    {t('buttons.completing')}
+                    {t("buttons.completing")}
                   </>
                 ) : (
                   <>
-                    {t('buttons.startProgram')}
+                    {t("buttons.startProgram")}
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </>
                 )}
@@ -346,9 +409,17 @@ export function EnhancedSummary({
   );
 }
 
-function Label({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+function Label({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
-    <div className={`text-sm font-medium text-gray-600 dark:text-gray-300 ${className}`}>
+    <div
+      className={`text-sm font-medium text-gray-600 dark:text-gray-300 ${className}`}
+    >
       {children}
     </div>
   );

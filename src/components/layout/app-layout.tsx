@@ -5,6 +5,7 @@ import { MainNavigation } from '@/components/navigation/main-nav';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -20,15 +21,17 @@ export function AppLayout({
   title, 
   description, 
   showBackButton = false,
-  backButtonText = 'Back to Dashboard',
+  backButtonText,
   backButtonHref = '/dashboard'
 }: AppLayoutProps) {
+  const t = useTranslations('appLayout');
   const { user, loading } = useAuth();
+  const defaultBackButtonText = t('backToDashboard');
 
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-lg">Loading...</div>
+        <div className="text-lg">{t('loading')}</div>
       </div>
     );
   }
@@ -38,14 +41,14 @@ export function AppLayout({
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
         <Card className="w-full max-w-md">
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl font-bold">Welcome to Coach AI</CardTitle>
+            <CardTitle className="text-2xl font-bold">{t('welcome')}</CardTitle>
             <CardDescription>
-              Your personal AI relationship coach. Sign in to get started with personalized coaching programs.
+              {t('description')}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Button asChild className="w-full" size="lg">
-              <Link href="/login">Sign In with Google</Link>
+              <Link href="/login">{t('signInWithGoogle')}</Link>
             </Button>
           </CardContent>
         </Card>
@@ -71,7 +74,7 @@ export function AppLayout({
                 </div>
                 {showBackButton && (
                   <Button variant="outline" asChild>
-                    <Link href={backButtonHref}>{backButtonText}</Link>
+                    <Link href={backButtonHref}>{backButtonText || defaultBackButtonText}</Link>
                   </Button>
                 )}
               </div>
@@ -88,12 +91,13 @@ export function AppLayout({
 
 // Wrapper for pages that need a simpler layout (like assessment)
 export function SimpleAppLayout({ children }: { children: React.ReactNode }) {
+  const t = useTranslations('appLayout');
   const { user, loading } = useAuth();
 
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-lg">Loading...</div>
+        <div className="text-lg">{t('loading')}</div>
       </div>
     );
   }
@@ -103,14 +107,14 @@ export function SimpleAppLayout({ children }: { children: React.ReactNode }) {
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
         <Card className="w-full max-w-md">
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl font-bold">Welcome to Coach AI</CardTitle>
+            <CardTitle className="text-2xl font-bold">{t('welcome')}</CardTitle>
             <CardDescription>
-              Your personal AI relationship coach. Sign in to get started with personalized coaching programs.
+              {t('description')}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Button asChild className="w-full" size="lg">
-              <Link href="/login">Sign In with Google</Link>
+              <Link href="/login">{t('signInWithGoogle')}</Link>
             </Button>
           </CardContent>
         </Card>

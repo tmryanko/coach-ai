@@ -15,37 +15,6 @@ export const openai = isOpenAIConfigured
   : null;
 
 // Test OpenAI connection on startup
-console.log("🔍 Environment Debug Info:");
-console.log("  - NODE_ENV:", process.env.NODE_ENV);
-console.log("  - OPENAI_API_KEY exists:", !!process.env.OPENAI_API_KEY);
-console.log(
-  "  - OPENAI_API_KEY length:",
-  process.env.OPENAI_API_KEY?.length || 0
-);
-console.log(
-  "  - OPENAI_API_KEY starts with sk-:",
-  process.env.OPENAI_API_KEY?.startsWith("sk-")
-);
-console.log(
-  "  - OPENAI_API_KEY prefix:",
-  process.env.OPENAI_API_KEY?.substring(0, 12) + "..."
-);
-
-if (openai) {
-  console.log("✅ OpenAI client initialized successfully");
-  console.log("🔑 Full API key format verification:", {
-    length: process.env.OPENAI_API_KEY?.length,
-    prefix: process.env.OPENAI_API_KEY?.substring(0, 15),
-    hasSpecialChars: /[^a-zA-Z0-9\-_]/.test(process.env.OPENAI_API_KEY || ""),
-    endsCorrectly: process.env.OPENAI_API_KEY?.length === 164,
-  });
-} else {
-  console.log("❌ OpenAI not configured - missing API key");
-  console.log(
-    '❌ Debug: process.env keys containing "OPENAI":',
-    Object.keys(process.env).filter((key) => key.includes("OPENAI"))
-  );
-}
 
 export const SYSTEM_PROMPT = `You are an expert AI relationship coach with deep expertise in psychology, communication, and relationship dynamics. Your role is to provide personalized, empathetic, and actionable guidance to help users improve their romantic relationships.
 
@@ -97,11 +66,6 @@ async function tryOpenAICompletion(
   }
 
   const model = MODEL_FALLBACKS[modelIndex];
-  console.log(
-    `🎯 Trying model: ${model} (attempt ${modelIndex + 1}/${
-      MODEL_FALLBACKS.length
-    })`
-  );
 
   try {
     const startTime = Date.now();
@@ -116,21 +80,10 @@ async function tryOpenAICompletion(
     });
 
     const endTime = Date.now();
-    console.log(`✅ Success with ${model} in ${endTime - startTime}ms`);
-    console.log("📊 Response details:", {
-      choices: completion.choices?.length || 0,
-      usage: completion.usage,
-      model: completion.model,
-      responseLength: completion.choices?.[0]?.message?.content?.length || 0,
-    });
 
     const responseContent =
       completion.choices[0]?.message?.content ||
       "I apologize, but I had trouble generating a response. Could you please try again?";
-    console.log(
-      "💬 Response preview:",
-      responseContent.substring(0, 150) + "..."
-    );
 
     return responseContent;
   } catch (error: any) {
@@ -138,7 +91,6 @@ async function tryOpenAICompletion(
 
     // If it's a 404 (model not found) or 403 (no access), try next model
     if (error.status === 404 || error.status === 403) {
-      console.log(`🔄 Model ${model} not accessible, trying next fallback...`);
       return tryOpenAICompletion(messages, modelIndex + 1);
     }
 
@@ -167,13 +119,6 @@ export async function generateCoachResponse(
   }
 
   try {
-    console.log("🚀 Starting OpenAI API request...");
-    console.log("📝 Request details:", {
-      userMessage: userMessage.substring(0, 100) + "...",
-      historyLength: conversationHistory.length,
-      hasContext: !!context,
-    });
-
     const messages: OpenAI.Chat.Completions.ChatCompletionMessageParam[] = [
       { role: "system", content: SYSTEM_PROMPT },
     ];
@@ -277,25 +222,11 @@ export async function generateCoachResponse(
     // Add current user message
     messages.push({ role: "user", content: userMessage });
 
-    console.log("📨 Final request payload:", {
-      messageCount: messages.length,
-      totalTokensEstimate: messages.reduce(
-        (acc, msg) => acc + msg.content.length,
-        0
-      ),
-      maxTokens: 800,
-      fallbackModels: MODEL_FALLBACKS,
-    });
-
-    console.log("⏳ Attempting OpenAI request with model fallbacks...");
-
     // Use the fallback system
     const responseContent = await tryOpenAICompletion(messages);
 
     return responseContent;
   } catch (error) {
-    console.error("❌ OpenAI API Error occurred:", error);
-
     // Enhanced error logging for different error types
     if (error && typeof error === "object") {
       const err = error as any;

@@ -1576,6 +1576,13 @@
       "sessionCompleted": "✅ סשן האימון הושלם! כעת תוכל לסיים את המשימה שלך."
     }
   },
+  "appLayout": {
+    "loading": "טוען...",
+    "welcome": "ברוכים הבאים ל-Coach AI",
+    "description": "המאמן האישי שלכם לזוגיות. היכנסו כדי להתחיל עם תכניות אימון אישיות.",
+    "signInWithGoogle": "היכנס עם Google",
+    "backToDashboard": "חזרה ללוח הבקרה"
+  },
   "taskPage": {
     "taskNotFound": "המשימה לא נמצאה או שאין לך גישה למשימה זו.",
     "goBack": "חזור",
