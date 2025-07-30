@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import { SimpleAppLayout } from '@/components/layout/app-layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -35,6 +36,7 @@ interface TaskLayoutProps {
 }
 
 export function TaskLayout({ task, taskProgress, onBack, onTaskComplete, children }: TaskLayoutProps) {
+  const t = useTranslations('taskLayout');
   const [coachMessage, setCoachMessage] = useState<string>('');
 
   useEffect(() => {
@@ -52,22 +54,22 @@ export function TaskLayout({ task, taskProgress, onBack, onTaskComplete, childre
     
     switch (task.type) {
       case TaskType.REFLECTION:
-        message = `Let's do this together. I'll guide you step by step through this reflection. First — take a deep breath and think about what truly matters to you. This is a safe space to explore your thoughts and feelings.`;
+        message = t('coachMessages.reflection');
         break;
       case TaskType.ASSESSMENT:
-        message = `Welcome to your assessment! I'm here to help you explore important aspects of yourself. Take your time with each question — there are no right or wrong answers, only honest insights about who you are.`;
+        message = t('coachMessages.assessment');
         break;
       case TaskType.EXERCISE:
-        message = `Ready for some practical work? I'll guide you through this exercise step by step. Remember, this is about progress, not perfection. Let's take this journey together.`;
+        message = t('coachMessages.exercise');
         break;
       case TaskType.JOURNALING:
-        message = `Time for some personal reflection through writing. I'll be here to support you as you explore your thoughts and feelings. Let your authentic voice flow onto the page.`;
+        message = t('coachMessages.journaling');
         break;
       case TaskType.COMMUNICATION:
-        message = `Let's practice some communication skills together! This is a safe space to try new approaches and build your confidence. I'll provide guidance as you work through the exercises.`;
+        message = t('coachMessages.communication');
         break;
       default:
-        message = `I'm here to support you through this task. Take your time, be honest with yourself, and remember — every step forward is progress worth celebrating.`;
+        message = t('coachMessages.default');
     }
 
     setCoachMessage(message);
@@ -112,7 +114,7 @@ export function TaskLayout({ task, taskProgress, onBack, onTaskComplete, childre
             className="mb-4"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Program
+            {t('backToProgram')}
           </Button>
 
           {task && (
@@ -125,11 +127,11 @@ export function TaskLayout({ task, taskProgress, onBack, onTaskComplete, childre
               <div className="flex items-center gap-3 mb-4">
                 <h1 className="text-2xl font-bold">{task.title}</h1>
                 <Badge className={getTaskTypeColor(task.type)}>
-                  {task.type.toLowerCase()}
+                  {t(`taskTypes.${task.type.toLowerCase()}`)}
                 </Badge>
                 {taskProgress && (
                   <Badge className={getStatusColor(taskProgress.status)}>
-                    {taskProgress.status.toLowerCase().replace('_', ' ')}
+                    {t(`taskStatuses.${taskProgress.status.toLowerCase().replace('_', '_')}`)}
                   </Badge>
                 )}
               </div>
@@ -152,7 +154,7 @@ export function TaskLayout({ task, taskProgress, onBack, onTaskComplete, childre
                 </div>
                 <div>
                   <p className="text-sm font-medium text-blue-900 dark:text-blue-100 mb-1">
-                    Your AI Coach
+                    {t('yourAiCoach')}
                   </p>
                   <p className="text-sm text-blue-800 dark:text-blue-200 leading-relaxed">
                     {coachMessage}
@@ -172,7 +174,7 @@ export function TaskLayout({ task, taskProgress, onBack, onTaskComplete, childre
                   <div className="flex items-start gap-2">
                     <Target className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="text-sm font-medium text-gray-700 dark:text-gray-300">Goal</p>
+                      <p className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('goal')}</p>
                       <p className="text-sm text-gray-600 dark:text-gray-400">{task.content.goal}</p>
                     </div>
                   </div>
@@ -181,7 +183,7 @@ export function TaskLayout({ task, taskProgress, onBack, onTaskComplete, childre
                   <div className="flex items-start gap-2">
                     <Focus className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="text-sm font-medium text-gray-700 dark:text-gray-300">Focus</p>
+                      <p className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('focus')}</p>
                       <p className="text-sm text-gray-600 dark:text-gray-400">{task.content.focus}</p>
                     </div>
                   </div>
@@ -215,7 +217,7 @@ export function TaskLayout({ task, taskProgress, onBack, onTaskComplete, childre
             <CardHeader>
               <CardTitle className="text-lg text-green-900 dark:text-green-100 flex items-center gap-2">
                 <Bot className="w-5 h-5" />
-                Coach Feedback
+                {t('coachFeedback')}
               </CardTitle>
             </CardHeader>
             <CardContent>

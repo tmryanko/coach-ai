@@ -1508,11 +1508,104 @@
       "comingSoonDescription": "ממשק משימת ההערכה בפיתוח. בינתיים, באפשרותך לסמן משימה זו כהושלמה.",
       "completing": "משלים...",
       "markAsComplete": "סמן כהושלם"
+    },
+    "communicationTask": {
+      "completedTitle": "תרגול תקשורת הושלם!",
+      "completedDescription": "השלמת בהצלחה את משימת התקשורת הזו.",
+      "comingSoonTitle": "תרגול תקשורת בקרוב",
+      "comingSoonDescription": "ממשק משימת התקשורת בפיתוח. בינתיים, באפשרותך לסמן משימה זו כהושלמה.",
+      "completing": "משלים...",
+      "markAsComplete": "סמן כהושלם"
+    },
+    "exerciseTask": {
+      "completedTitle": "התרגיל הושלם!",
+      "completedDescription": "השלמת בהצלחה את התרגיל הזה.",
+      "comingSoonTitle": "תרגיל בקרוב",
+      "comingSoonDescription": "ממשק משימת התרגיל בפיתוח. בינתיים, באפשרותך לסמן משימה זו כהושלמה.",
+      "completing": "משלים...",
+      "markAsComplete": "סמן כהושלם"
+    },
+    "journalingTask": {
+      "completedTitle": "רשומת יומן הושלמה!",
+      "completedDescription": "השלמת בהצלחה את משימת היומן הזו.",
+      "comingSoonTitle": "יומן בקרוב",
+      "comingSoonDescription": "ממשק משימת היומן בפיתוח. בינתיים, באפשרותך לסמן משימה זו כהושלמה.",
+      "completing": "משלים...",
+      "markAsComplete": "סמן כהושלם"
+    },
+    "reflectionTask": {
+      "completedTitle": "השתקפות הושלמה!",
+      "completedDescription": "השלמת בהצלחה את משימת ההשתקפות הזו. תשובותיך נשמרו.",
+      "yourResponses": "התשובות שלך:",
+      "noResponse": "לא תועדה תגובה",
+      "additionalReflection": "השתקפות נוספת",
+      "stepOf": "שלב {current} מתוך {total}",
+      "percentComplete": "{percent}% הושלם",
+      "placeholder": "קח את הזמן להרהר ולשתף את מחשבותיך...",
+      "previous": "הקודם",
+      "continueToSummary": "המשך לסיכום",
+      "nextPrompt": "הנחיה הבאה",
+      "prompt": "הנחיה {number}",
+      "reviewTitle": "סקור את ההשתקפות שלך",
+      "reviewDescription": "סקור את תשובותיך למטה והוסף מחשבות אחרונות לפני השליחה.",
+      "additionalReflectionOptional": "השתקפות נוספת (אופציונלי)",
+      "additionalReflectionPlaceholder": "יש לך מחשבות או תובנות נוספות שתרצה לשתף?",
+      "backToPrompts": "חזרה להנחיות",
+      "submitting": "שולח...",
+      "completeReflection": "השלם השתקפות"
+    },
+    "taskChat": {
+      "aiCoachAvailable": "מאמן AI זמין",
+      "getPersonalizedGuidance": "קבל הדרכה אישית למשימה זו",
+      "starting": "מתחיל...",
+      "startChat": "התחל צ'אט",
+      "loadingChat": "טוען צ'אט...",
+      "coachChatReady": "צ'אט המאמן מוכן",
+      "messages": "{count} הודעות",
+      "readyToGuide": "מוכן להדריך אותך",
+      "openChat": "פתח צ'אט",
+      "completeTask": "השלם משימה",
+      "aiCoachSession": "סשן מאמן AI",
+      "completed": "הושלם",
+      "minimize": "מזער",
+      "focusedCoachingFor": "אימון ממוקד עבור: {taskTitle}",
+      "coachIsTyping": "המאמן מקליד...",
+      "placeholder": "שתף את מחשבותיך או בקש הדרכה...",
+      "completing": "משלים...",
+      "readyToCompleteTask": "מוכן להשלים את המשימה",
+      "sessionCompleted": "✅ סשן האימון הושלם! כעת תוכל לסיים את המשימה שלך."
     }
   },
   "taskPage": {
     "taskNotFound": "המשימה לא נמצאה או שאין לך גישה למשימה זו.",
     "goBack": "חזור",
     "unsupportedTaskType": "סוג משימה \"{taskType}\" אינו נתמך עדיין."
+  },
+  "taskLayout": {
+    "backToProgram": "חזרה לתכנית",
+    "yourAiCoach": "המאמן AI שלך",
+    "goal": "מטרה",
+    "focus": "מיקוד",
+    "coachFeedback": "משוב מהמאמן",
+    "taskTypes": {
+      "reflection": "השתקפות",
+      "assessment": "הערכה",
+      "exercise": "תרגיל",
+      "journaling": "כתיבת יומן",
+      "communication": "תקשורת"
+    },
+    "taskStatuses": {
+      "completed": "הושלם",
+      "in_progress": "בתהליך",
+      "pending": "בהמתנה"
+    },
+    "coachMessages": {
+      "reflection": "בואו נעשה את זה יחד. אני אדריך אותך שלב אחר שלב דרך ההשתקפות הזו. ראשית — קח נשימה עמוקה וחשוב על מה שבאמת חשוב לך. זה מקום בטוח לחקור את המחשבות והרגשות שלך.",
+      "assessment": "ברוכים הבאים להערכה שלכם! אני כאן כדי לעזור לכם לחקור היבטים חשובים של עצמכם. קחו את הזמן עם כל שאלה — אין תשובות נכונות או שגויות, רק תובנות כנות על מי שאתם.",
+      "exercise": "מוכנים לעבודה מעשית? אני אדריך אותך דרך התרגיל הזה שלב אחר שלב. זכור, זה עניין של התקדמות, לא שלמות. בואו ננסע במסע הזה יחד.",
+      "journaling": "זמן להשתקפות אישית דרך כתיבה. אני אהיה כאן לתמוך בך בזמן שאתה חוקר את המחשבות והרגשות שלך. תן לקול האותנטי שלך לזרום על הדף.",
+      "communication": "בואו נתרגל כישורי תקשורת יחד! זה מקום בטוח לנסות גישות חדשות ולבנות את הביטחון שלך. אני אספק הדרכה בזמן שאתה עובד על התרגילים.",
+      "default": "אני כאן לתמוך בך במשימה הזו. קח את הזמן שלך, היה כנה עם עצמך, וזכור — כל צעד קדימה הוא התקדמות שמגיעה לה חגיגה."
+    }
   }
 }

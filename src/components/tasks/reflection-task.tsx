@@ -10,6 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { api } from '@/utils/api';
 import { TaskStatus } from '@prisma/client';
 import { CheckCircle, Clock, Lightbulb, Send } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface ReflectionTaskProps {
   task: {
@@ -30,6 +31,7 @@ interface ReflectionTaskProps {
 }
 
 export function ReflectionTask({ task, taskProgress, onComplete }: ReflectionTaskProps) {
+  const t = useTranslations('taskComponents.reflectionTask');
   const [responses, setResponses] = useState<{ [key: string]: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
@@ -134,16 +136,16 @@ export function ReflectionTask({ task, taskProgress, onComplete }: ReflectionTas
         <div className="text-center py-8">
           <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
           <h3 className="text-xl font-semibold text-green-900 dark:text-green-100 mb-2">
-            Reflection Completed!
+            {t('completedTitle')}
           </h3>
           <p className="text-green-700 dark:text-green-300">
-            You&apos;ve successfully completed this reflection task. Your responses have been saved.
+            {t('completedDescription')}
           </p>
         </div>
 
         {/* Show completed responses */}
         <div className="space-y-4">
-          <h4 className="font-medium text-gray-900 dark:text-gray-100">Your Responses:</h4>
+          <h4 className="font-medium text-gray-900 dark:text-gray-100">{t('yourResponses')}</h4>
           {prompts.map((prompt, index) => (
             <Card key={index}>
               <CardHeader className="pb-3">
@@ -153,7 +155,7 @@ export function ReflectionTask({ task, taskProgress, onComplete }: ReflectionTas
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  {responses[`prompt_${index}`] || 'No response recorded'}
+                  {responses[`prompt_${index}`] || t('noResponse')}
                 </p>
               </CardContent>
             </Card>
@@ -162,7 +164,7 @@ export function ReflectionTask({ task, taskProgress, onComplete }: ReflectionTas
             <Card>
               <CardHeader className="pb-3">
                 <CardTitle className="text-sm text-gray-700 dark:text-gray-300">
-                  Additional Reflection
+                  {t('additionalReflection')}
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -188,12 +190,12 @@ export function ReflectionTask({ task, taskProgress, onComplete }: ReflectionTas
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Badge variant="outline">
-              Step {currentStep + 1} of {prompts.length}
+              {t('stepOf', { current: currentStep + 1, total: prompts.length })}
             </Badge>
             <Clock className="w-4 h-4 text-gray-400" />
           </div>
           <div className="text-sm text-gray-500">
-            {Math.round(((currentStep) / prompts.length) * 100)}% complete
+            {t('percentComplete', { percent: Math.round(((currentStep) / prompts.length) * 100) })}
           </div>
         </div>
 
@@ -207,7 +209,7 @@ export function ReflectionTask({ task, taskProgress, onComplete }: ReflectionTas
           </CardHeader>
           <CardContent className="space-y-4">
             <Textarea
-              placeholder="Take your time to reflect and share your thoughts..."
+              placeholder={t('placeholder')}
               value={responses[currentPromptKey] || ''}
               onChange={(e) => handleResponseChange(currentPromptKey, e.target.value)}
               className="min-h-32"
@@ -220,13 +222,13 @@ export function ReflectionTask({ task, taskProgress, onComplete }: ReflectionTas
                 onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}
                 disabled={currentStep === 0 || isSubmitting}
               >
-                Previous
+                {t('previous')}
               </Button>
               <Button
                 onClick={handleStepComplete}
                 disabled={!canProceed() || isSubmitting}
               >
-                {currentStep === prompts.length - 1 ? 'Continue to Summary' : 'Next Prompt'}
+                {currentStep === prompts.length - 1 ? t('continueToSummary') : t('nextPrompt')}
               </Button>
             </div>
           </CardContent>
@@ -247,7 +249,7 @@ export function ReflectionTask({ task, taskProgress, onComplete }: ReflectionTas
               }`}
             >
               <div className="flex items-center gap-2 mb-1">
-                <span className="font-medium">Prompt {index + 1}</span>
+                <span className="font-medium">{t('prompt', { number: index + 1 })}</span>
                 {responses[`prompt_${index}`] && (
                   <CheckCircle className="w-3 h-3 text-green-500" />
                 )}
@@ -266,9 +268,9 @@ export function ReflectionTask({ task, taskProgress, onComplete }: ReflectionTas
   return (
     <div className="space-y-6">
       <div className="text-center py-4">
-        <h3 className="text-lg font-semibold mb-2">Review Your Reflection</h3>
+        <h3 className="text-lg font-semibold mb-2">{t('reviewTitle')}</h3>
         <p className="text-gray-600 dark:text-gray-300">
-          Review your responses below and add any final thoughts before submitting.
+          {t('reviewDescription')}
         </p>
       </div>
 
@@ -296,11 +298,11 @@ export function ReflectionTask({ task, taskProgress, onComplete }: ReflectionTas
       {/* Additional reflection */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-sm">Additional Reflection (Optional)</CardTitle>
+          <CardTitle className="text-sm">{t('additionalReflectionOptional')}</CardTitle>
         </CardHeader>
         <CardContent>
           <Textarea
-            placeholder="Any additional thoughts or insights you'd like to share?"
+            placeholder={t('additionalReflectionPlaceholder')}
             value={responses.reflection || ''}
             onChange={(e) => handleResponseChange('reflection', e.target.value)}
             className="min-h-24"
@@ -316,7 +318,7 @@ export function ReflectionTask({ task, taskProgress, onComplete }: ReflectionTas
           onClick={() => setShowSubmitForm(false)}
           disabled={isSubmitting}
         >
-          Back to Prompts
+          {t('backToPrompts')}
         </Button>
         <Button
           onClick={handleSubmit}
@@ -326,12 +328,12 @@ export function ReflectionTask({ task, taskProgress, onComplete }: ReflectionTas
           {isSubmitting ? (
             <>
               <Clock className="w-4 h-4 mr-2 animate-spin" />
-              Submitting...
+              {t('submitting')}
             </>
           ) : (
             <>
               <Send className="w-4 h-4 mr-2" />
-              Complete Reflection
+              {t('completeReflection')}
             </>
           )}
         </Button>

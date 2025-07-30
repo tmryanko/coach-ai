@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { TaskStatus } from '@prisma/client';
 import { CheckCircle, Clock } from 'lucide-react';
 import { api } from '@/utils/api';
+import { useTranslations } from 'next-intl';
 
 interface ExerciseTaskProps {
   task: {
@@ -22,6 +23,7 @@ interface ExerciseTaskProps {
 }
 
 export function ExerciseTask({ task, taskProgress, onComplete }: ExerciseTaskProps) {
+  const t = useTranslations('taskComponents.exerciseTask');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const isCompleted = taskProgress?.status === TaskStatus.COMPLETED;
 
@@ -41,10 +43,10 @@ export function ExerciseTask({ task, taskProgress, onComplete }: ExerciseTaskPro
       <div className="text-center py-8">
         <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
         <h3 className="text-xl font-semibold text-green-900 dark:text-green-100 mb-2">
-          Exercise Completed!
+          {t('completedTitle')}
         </h3>
         <p className="text-green-700 dark:text-green-300">
-          You&apos;ve successfully completed this exercise.
+          {t('completedDescription')}
         </p>
       </div>
     );
@@ -54,13 +56,13 @@ export function ExerciseTask({ task, taskProgress, onComplete }: ExerciseTaskPro
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>Exercise Coming Soon</CardTitle>
+          <CardTitle>{t('comingSoonTitle')}</CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-gray-600 dark:text-gray-300 mb-4">
-            Exercise task interface is being developed. For now, you can mark this task as complete.
+            {t('comingSoonDescription')}
           </p>
-          <Button 
+          <Button
             onClick={async () => {
               setIsSubmitting(true);
               try {
@@ -69,7 +71,7 @@ export function ExerciseTask({ task, taskProgress, onComplete }: ExerciseTaskPro
                   response: JSON.stringify({
                     completed: true,
                     completedAt: new Date().toISOString(),
-                    type: 'exercise_placeholder'
+                    type: 'exercise_placeholder',
                   }),
                 });
               } catch (error) {
@@ -82,10 +84,10 @@ export function ExerciseTask({ task, taskProgress, onComplete }: ExerciseTaskPro
             {isSubmitting ? (
               <>
                 <Clock className="w-4 h-4 mr-2 animate-spin" />
-                Completing...
+                {t('completing')}
               </>
             ) : (
-              'Mark as Complete'
+              t('markAsComplete')
             )}
           </Button>
         </CardContent>

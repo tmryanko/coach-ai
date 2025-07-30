@@ -10,6 +10,7 @@ import { api } from '@/utils/api';
 import { MessageRole } from '@prisma/client';
 import { Bot, User, Send, MessageCircle, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 
 interface TaskChatProps {
   taskId: string;
@@ -25,10 +26,12 @@ interface ChatMessage {
 }
 
 export function TaskChat({ taskId, taskTitle, onTaskCompletion }: TaskChatProps) {
+  const t = useTranslations('taskComponents.taskChat');
   const [message, setMessage] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const utils = api.useUtils();
   
   const { data: session, isLoading: sessionLoading } = api.chat.getTaskSession.useQuery(
     { taskId },
@@ -38,7 +41,7 @@ export function TaskChat({ taskId, taskTitle, onTaskCompletion }: TaskChatProps)
   const createSessionMutation = api.chat.createTaskSession.useMutation({
     onSuccess: () => {
       // Refetch session after creation
-      api.chat.getTaskSession.invalidate({ taskId });
+      utils.chat.getTaskSession.invalidate({ taskId });
     },
   });
 
@@ -46,7 +49,7 @@ export function TaskChat({ taskId, taskTitle, onTaskCompletion }: TaskChatProps)
     onSuccess: () => {
       setMessage('');
       // Refetch session to get new messages
-      api.chat.getTaskSession.invalidate({ taskId });
+      utils.chat.getTaskSession.invalidate({ taskId });
     },
   });
 
@@ -122,10 +125,10 @@ export function TaskChat({ taskId, taskTitle, onTaskCompletion }: TaskChatProps)
               </div>
               <div>
                 <h4 className="font-medium text-blue-900 dark:text-blue-100">
-                  AI Coach Available
+                  {t('aiCoachAvailable')}
                 </h4>
                 <p className="text-sm text-blue-700 dark:text-blue-300">
-                  Get personalized guidance for this task
+                  {t('getPersonalizedGuidance')}
                 </p>
               </div>
             </div>
@@ -137,12 +140,12 @@ export function TaskChat({ taskId, taskTitle, onTaskCompletion }: TaskChatProps)
               {createSessionMutation.isPending ? (
                 <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Starting...
+                  {t('starting')}
                 </>
               ) : (
                 <>
                   <MessageCircle className="w-4 h-4 mr-2" />
-                  Start Chat
+                  {t('startChat')}
                 </>
               )}
             </Button>
@@ -158,7 +161,7 @@ export function TaskChat({ taskId, taskTitle, onTaskCompletion }: TaskChatProps)
         <CardContent className="p-4">
           <div className="flex items-center justify-center py-4">
             <Loader2 className="w-6 h-6 animate-spin text-blue-600" />
-            <span className="ml-2 text-blue-700 dark:text-blue-300">Loading chat...</span>
+            <span className="ml-2 text-blue-700 dark:text-blue-300">{t('loadingChat')}</span>
           </div>
         </CardContent>
       </Card>
@@ -176,10 +179,10 @@ export function TaskChat({ taskId, taskTitle, onTaskCompletion }: TaskChatProps)
               </div>
               <div>
                 <h4 className="font-medium text-blue-900 dark:text-blue-100">
-                  Coach Chat Ready
+                  {t('coachChatReady')}
                 </h4>
                 <p className="text-sm text-blue-700 dark:text-blue-300">
-                  {hasMessages ? `${messages.length} messages` : 'Ready to guide you'}
+                  {hasMessages ? t('messages', { count: messages.length }) : t('readyToGuide')}
                 </p>
               </div>
             </div>
@@ -189,7 +192,7 @@ export function TaskChat({ taskId, taskTitle, onTaskCompletion }: TaskChatProps)
                 size="sm"
                 onClick={() => setIsExpanded(true)}
               >
-                Open Chat
+                {t('openChat')}
               </Button>
               {hasMessages && !session?.isTaskCompleted && (
                 <Button 
@@ -198,7 +201,7 @@ export function TaskChat({ taskId, taskTitle, onTaskCompletion }: TaskChatProps)
                   disabled={completeSessionMutation.isPending}
                   className="bg-green-600 hover:bg-green-700"
                 >
-                  Complete Task
+                  {t('completeTask')}
                 </Button>
               )}
             </div>
@@ -214,12 +217,12 @@ export function TaskChat({ taskId, taskTitle, onTaskCompletion }: TaskChatProps)
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg flex items-center gap-2">
             <Bot className="w-5 h-5 text-blue-600" />
-            AI Coach Session
+            {t('aiCoachSession')}
           </CardTitle>
           <div className="flex items-center gap-2">
             {session?.isTaskCompleted && (
               <Badge className="bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400">
-                Completed
+                {t('completed')}
               </Badge>
             )}
             <Button 
@@ -227,12 +230,12 @@ export function TaskChat({ taskId, taskTitle, onTaskCompletion }: TaskChatProps)
               size="sm"
               onClick={() => setIsExpanded(false)}
             >
-              Minimize
+              {t('minimize')}
             </Button>
           </div>
         </div>
         <p className="text-sm text-gray-600 dark:text-gray-300">
-          Focused coaching for: {taskTitle}
+          {t('focusedCoachingFor', { taskTitle })}
         </p>
       </CardHeader>
       
@@ -284,7 +287,7 @@ export function TaskChat({ taskId, taskTitle, onTaskCompletion }: TaskChatProps)
                   <div className="flex items-center gap-2">
                     <Loader2 className="w-4 h-4 animate-spin" />
                     <span className="text-sm text-gray-600 dark:text-gray-400">
-                      Coach is typing...
+                      {t('coachIsTyping')}
                     </span>
                   </div>
                 </div>
@@ -303,7 +306,7 @@ export function TaskChat({ taskId, taskTitle, onTaskCompletion }: TaskChatProps)
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder="Share your thoughts or ask for guidance..."
+                placeholder={t('placeholder')}
                 disabled={sendMessageMutation.isPending}
                 className="flex-1"
               />
@@ -328,10 +331,10 @@ export function TaskChat({ taskId, taskTitle, onTaskCompletion }: TaskChatProps)
                   {completeSessionMutation.isPending ? (
                     <>
                       <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      Completing...
+                      {t('completing')}
                     </>
                   ) : (
-                    'Ready to Complete Task'
+                    t('readyToCompleteTask')
                   )}
                 </Button>
               </div>
@@ -342,7 +345,7 @@ export function TaskChat({ taskId, taskTitle, onTaskCompletion }: TaskChatProps)
         {session?.isTaskCompleted && (
           <div className="border-t p-4 bg-green-50 dark:bg-green-900/20">
             <p className="text-sm text-green-800 dark:text-green-200 text-center">
-              ✅ Coaching session completed! You can now finalize your task.
+              {t('sessionCompleted')}
             </p>
           </div>
         )}

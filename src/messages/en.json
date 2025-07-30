@@ -1408,10 +1408,103 @@
       "completing": "Completing...",
       "markAsComplete": "Mark as Complete"
     },
-    "taskPage": {
-      "taskNotFound": "Task not found or you don't have access to this task.",
-      "goBack": "Go back",
-      "unsupportedTaskType": "Task type \"{taskType}\" is not yet supported."
+    "communicationTask": {
+      "completedTitle": "Communication Practice Completed!",
+      "completedDescription": "You've successfully completed this communication task.",
+      "comingSoonTitle": "Communication Practice Coming Soon",
+      "comingSoonDescription": "Communication task interface is being developed. For now, you can mark this task as complete.",
+      "completing": "Completing...",
+      "markAsComplete": "Mark as Complete"
+    },
+    "exerciseTask": {
+      "completedTitle": "Exercise Completed!",
+      "completedDescription": "You've successfully completed this exercise.",
+      "comingSoonTitle": "Exercise Coming Soon",
+      "comingSoonDescription": "Exercise task interface is being developed. For now, you can mark this task as complete.",
+      "completing": "Completing...",
+      "markAsComplete": "Mark as Complete"
+    },
+    "journalingTask": {
+      "completedTitle": "Journal Entry Completed!",
+      "completedDescription": "You've successfully completed this journaling task.",
+      "comingSoonTitle": "Journaling Coming Soon",
+      "comingSoonDescription": "Journaling task interface is being developed. For now, you can mark this task as complete.",
+      "completing": "Completing...",
+      "markAsComplete": "Mark as Complete"
+    },
+    "reflectionTask": {
+      "completedTitle": "Reflection Completed!",
+      "completedDescription": "You've successfully completed this reflection task. Your responses have been saved.",
+      "yourResponses": "Your Responses:",
+      "noResponse": "No response recorded",
+      "additionalReflection": "Additional Reflection",
+      "stepOf": "Step {current} of {total}",
+      "percentComplete": "{percent}% complete",
+      "placeholder": "Take your time to reflect and share your thoughts...",
+      "previous": "Previous",
+      "continueToSummary": "Continue to Summary",
+      "nextPrompt": "Next Prompt",
+      "prompt": "Prompt {number}",
+      "reviewTitle": "Review Your Reflection",
+      "reviewDescription": "Review your responses below and add any final thoughts before submitting.",
+      "additionalReflectionOptional": "Additional Reflection (Optional)",
+      "additionalReflectionPlaceholder": "Any additional thoughts or insights you'd like to share?",
+      "backToPrompts": "Back to Prompts",
+      "submitting": "Submitting...",
+      "completeReflection": "Complete Reflection"
+    },
+    "taskChat": {
+      "aiCoachAvailable": "AI Coach Available",
+      "getPersonalizedGuidance": "Get personalized guidance for this task",
+      "starting": "Starting...",
+      "startChat": "Start Chat",
+      "loadingChat": "Loading chat...",
+      "coachChatReady": "Coach Chat Ready",
+      "messages": "{count} messages",
+      "readyToGuide": "Ready to guide you",
+      "openChat": "Open Chat",
+      "completeTask": "Complete Task",
+      "aiCoachSession": "AI Coach Session",
+      "completed": "Completed",
+      "minimize": "Minimize",
+      "focusedCoachingFor": "Focused coaching for: {taskTitle}",
+      "coachIsTyping": "Coach is typing...",
+      "placeholder": "Share your thoughts or ask for guidance...",
+      "completing": "Completing...",
+      "readyToCompleteTask": "Ready to Complete Task",
+      "sessionCompleted": "✅ Coaching session completed! You can now finalize your task."
+    }
+  },
+  "taskPage": {
+    "taskNotFound": "Task not found or you don't have access to this task.",
+    "goBack": "Go back",
+    "unsupportedTaskType": "Task type \"{taskType}\" is not yet supported."
+  },
+  "taskLayout": {
+    "backToProgram": "Back to Program",
+    "yourAiCoach": "Your AI Coach",
+    "goal": "Goal",
+    "focus": "Focus",
+    "coachFeedback": "Coach Feedback",
+    "taskTypes": {
+      "reflection": "reflection",
+      "assessment": "assessment",
+      "exercise": "exercise",
+      "journaling": "journaling",
+      "communication": "communication"
+    },
+    "taskStatuses": {
+      "completed": "completed",
+      "in_progress": "in progress",
+      "pending": "pending"
+    },
+    "coachMessages": {
+      "reflection": "Let's do this together. I'll guide you step by step through this reflection. First — take a deep breath and think about what truly matters to you. This is a safe space to explore your thoughts and feelings.",
+      "assessment": "Welcome to your assessment! I'm here to help you explore important aspects of yourself. Take your time with each question — there are no right or wrong answers, only honest insights about who you are.",
+      "exercise": "Ready for some practical work? I'll guide you through this exercise step by step. Remember, this is about progress, not perfection. Let's take this journey together.",
+      "journaling": "Time for some personal reflection through writing. I'll be here to support you as you explore your thoughts and feelings. Let your authentic voice flow onto the page.",
+      "communication": "Let's practice some communication skills together! This is a safe space to try new approaches and build your confidence. I'll provide guidance as you work through the exercises.",
+      "default": "I'm here to support you through this task. Take your time, be honest with yourself, and remember — every step forward is progress worth celebrating."
     }
   }
 }
