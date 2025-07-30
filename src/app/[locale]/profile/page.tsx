@@ -34,6 +34,7 @@ export default function ProfilePage() {
   const tEmotionalStrengths = useTranslations("assessment.emotionalIntelligence.strengthOptions");
   const tEmotionalChallenges = useTranslations("assessment.emotionalIntelligence.challengeOptions");
   const tDealBreakers = useTranslations("assessment.valuesVision.dealBreakers");
+  const tFears = useTranslations("assessment.emotionalIntelligence.fearOptions");
 
   const {
     data: profile,
@@ -176,7 +177,7 @@ export default function ProfilePage() {
     return `${socialStyle}, ${empathyLevel}`;
   };
 
-  const translateValue = (value: string, category?: 'coreValues' | 'personalStrengths' | 'emotionalStrengths' | 'challenges' | 'dealBreakers') => {
+  const translateValue = (value: string, category?: 'coreValues' | 'personalStrengths' | 'emotionalStrengths' | 'challenges' | 'dealBreakers' | 'fears') => {
     try {
       // Try different translation sources based on category or value patterns
       
@@ -208,6 +209,12 @@ export default function ProfilePage() {
       const dealBreakerTranslation = tDealBreakers(value);
       if (dealBreakerTranslation && !dealBreakerTranslation.includes('assessment.valuesVision')) {
         return dealBreakerTranslation;
+      }
+
+      // 6. Fears
+      const fearTranslation = tFears(value);
+      if (fearTranslation && !fearTranslation.includes('assessment.emotionalIntelligence')) {
+        return fearTranslation;
       }
 
     } catch (error) {
@@ -462,7 +469,7 @@ export default function ProfilePage() {
                           variant="outline"
                           className="text-xs"
                         >
-                          {fear}
+                          {translateValue(fear, 'fears')}
                         </Badge>
                       )
                     )}

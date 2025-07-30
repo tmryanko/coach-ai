@@ -353,6 +353,30 @@
         "commitment-fears": {
           "label": "פחדי מחויבות",
           "description": "חרדה לגבי רמת המחויבות"
+        },
+        "disrespect": {
+          "label": "חוסר כבוד",
+          "description": "התנהגות חסרת כבוד במערכת היחסים"
+        },
+        "abuse": {
+          "label": "התעללות",
+          "description": "כל צורה של התעללות במערכת היחסים"
+        },
+        "different-goals": {
+          "label": "מטרות שונות",
+          "description": "מטרות חיים לא תואמות"
+        },
+        "expressing-emotions": {
+          "label": "קושי בביטוי רגשות",
+          "description": "קושי לבטא רגשות בצורה ברורה"
+        },
+        "conflict-resolution": {
+          "label": "פתרון קונפליקטים",
+          "description": "קושי להתמודד עם קונפליקטים"
+        },
+        "managing-anxiety": {
+          "label": "ניהול חרדה",
+          "description": "קושי לנהל חרדה במערכות יחסים"
         }
       }
     },
@@ -543,7 +567,16 @@
         "patience": "סבלנות",
         "authenticity": "אותנטיות",
         "supportiveness": "תמיכה",
-        "forgiveness": "יכולת לסלוח"
+        "forgiveness": "יכולת לסלוח",
+        "disrespect": "יכולת לשמור על כבוד עצמי",
+        "abuse": "יכולת להגן על עצמי",
+        "poor-communication": "תקשורת יעילה",
+        "different-goals": "גמישות במטרות",
+        "expressing-emotions": "ביטוי רגשות ברור",
+        "conflict-resolution": "פתרון קונפליקטים",
+        "managing-anxiety": "ניהול חרדה",
+        "creativity": "יצירתיות",
+        "emotional-intelligence": "אינטליגנציה רגשית"
       },
       "challengesTitle": "תחומי צמיחה (בחרו עד 3)",
       "challengesDescription": "איזה כישורים רגשיים הייתם רוצים לפתח או לשפר?",
@@ -744,7 +777,16 @@
         "communication": "תקשורת טובה",
         "independence": "עצמאות והסתמכות עצמית",
         "ambition": "שאפתנות ומתמדה",
-        "emotional-intelligence": "אינטליגנציה רגשית"
+        "emotional-intelligence": "אינטליגנציה רגשית",
+        "disrespect": "יכולת לשמור על כבוד",
+        "abuse": "יכולת להגן על עצמי",
+        "poor-communication": "תקשורת יעילה",
+        "different-goals": "גמישות במטרות",
+        "expressing-emotions": "ביטוי רגשות",
+        "conflict-resolution": "פתרון קונפליקטים",
+        "managing-anxiety": "ניהול חרדה",
+        "supportiveness": "תמיכה באחרים",
+        "emotional-awareness": "מודעות רגשית"
       },
       "relationshipGoals": {
         "deep-connection": "בניית קשר רגשי עמוק",
@@ -845,6 +887,62 @@
         "kindness": {
           "label": "אדיבות וחמלה",
           "description": "להתייחס זה לזה בטיפול"
+        },
+        "disrespect": {
+          "label": "חוסר כבוד",
+          "description": "התנהגות חסרת כבוד או מזלזלת"
+        },
+        "abuse": {
+          "label": "התעללות",
+          "description": "כל צורה של התעללות פיזית או רגשית"
+        },
+        "poor-communication": {
+          "label": "תקשורת לקויה",
+          "description": "חוסר יכולת או רצון לתקשר בצורה יעילה"
+        },
+        "different-goals": {
+          "label": "מטרות שונות",
+          "description": "מטרות חיים לא תואמות או סותרות"
+        },
+        "expressing-emotions": {
+          "label": "ביטוי רגשות",
+          "description": "יכולת לבטא רגשות באופן ברור ובריא"
+        },
+        "conflict-resolution": {
+          "label": "פתרון קונפליקטים",
+          "description": "כישורים בטיפול ופתרון מחלוקות"
+        },
+        "managing-anxiety": {
+          "label": "ניהול חרדה",
+          "description": "יכולת להתמודד עם חרדה במערכות יחסים"
+        },
+        "empathy": {
+          "label": "אמפתיה",
+          "description": "יכולת להבין ולהרגיש עם האחר"
+        },
+        "supportiveness": {
+          "label": "תמיכה",
+          "description": "להיות תומך ומעודד"
+        },
+        "authenticity": {
+          "label": "אותנטיות",
+          "description": "להיות אמיתי וכנה לעצמי"
+        },
+        "emotional-awareness": {
+          "label": "מודעות רגשית",
+          "description": "הבנה ומודעות לרגשות שלי ושל אחרים"
+        },
+        "creativity": {
+          "label": "יצירתיות",
+          "description": "יכולת לחשוב ולפעול בצורה יצירתית"
+        },
+        "resilience": {
+          "label": "חוסן",
+          "description": "יכולת להתמודד עם קשיים ולהתאושש"
+        },
+        "emotional-intelligence": {
+          "label": "אינטליגנציה רגשית",
+          "description": "יכולת להבין ולנהל רגשות בצורה חכמה"
         }
       },
       "lifePriorities": {
@@ -873,7 +971,10 @@
         "different-goals": "מטרות חיים לא תואמות",
         "financial-irresponsibility": "חוסר אחריות כלכלית",
         "no-growth": "חוסר רצון לצמוח",
-        "jealousy": "קנאה קיצונית או רכושנות"
+        "jealousy": "קנאה קיצונית או רכושנות",
+        "expressing-emotions": "חוסר יכולת לבטא רגשות",
+        "conflict-resolution": "חוסר יכולת להתמודד עם קונפליקטים",
+        "managing-anxiety": "חוסר יכולת לנהל חרדה במערכות יחסים"
       },
       "buttons": {
         "back": "חזרה",
