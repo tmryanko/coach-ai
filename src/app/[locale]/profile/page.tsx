@@ -179,8 +179,51 @@ export default function ProfilePage() {
 
   const translateValue = (value: string, category?: 'coreValues' | 'personalStrengths' | 'emotionalStrengths' | 'challenges' | 'dealBreakers' | 'fears') => {
     try {
-      // Try different translation sources based on category or value patterns
-      
+      // If category is specified, try that category first
+      if (category) {
+        let categoryTranslation;
+        
+        switch (category) {
+          case 'coreValues':
+            categoryTranslation = tCoreValues(`${value}.label`);
+            if (categoryTranslation && !categoryTranslation.includes('assessment.valuesVision')) {
+              return categoryTranslation;
+            }
+            break;
+          case 'personalStrengths':
+            categoryTranslation = tPersonalStrengths(value);
+            if (categoryTranslation && !categoryTranslation.includes('assessment.selfReflection')) {
+              return categoryTranslation;
+            }
+            break;
+          case 'emotionalStrengths':
+            categoryTranslation = tEmotionalStrengths(value);
+            if (categoryTranslation && !categoryTranslation.includes('assessment.emotionalIntelligence')) {
+              return categoryTranslation;
+            }
+            break;
+          case 'challenges':
+            categoryTranslation = tChallenges(`${value}.label`) || tEmotionalChallenges(value);
+            if (categoryTranslation && !categoryTranslation.includes('assessment.')) {
+              return categoryTranslation;
+            }
+            break;
+          case 'dealBreakers':
+            categoryTranslation = tDealBreakers(value);
+            if (categoryTranslation && !categoryTranslation.includes('assessment.valuesVision')) {
+              return categoryTranslation;
+            }
+            break;
+          case 'fears':
+            categoryTranslation = tFears(value);
+            if (categoryTranslation && !categoryTranslation.includes('assessment.emotionalIntelligence')) {
+              return categoryTranslation;
+            }
+            break;
+        }
+      }
+
+      // If no category specified or category-specific translation failed, try all categories
       // 1. Core Values (from values & vision section)
       const coreValueTranslation = tCoreValues(`${value}.label`);
       if (coreValueTranslation && !coreValueTranslation.includes('assessment.valuesVision')) {
