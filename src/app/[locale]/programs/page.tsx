@@ -1,24 +1,34 @@
-'use client';
+"use client";
 
-import { api } from '@/utils/api';
-import { AppLayout } from '@/components/layout/app-layout';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
-import { Clock, Target, CheckCircle } from 'lucide-react';
-import { useAuth } from '@/contexts/auth-context';
-import { useState } from 'react';
+import { api } from "@/utils/api";
+import { AppLayout } from "@/components/layout/app-layout";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Clock, Target, CheckCircle } from "lucide-react";
+import { useAuth } from "@/contexts/auth-context";
+import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export default function ProgramsPage() {
   const { user } = useAuth();
   const [selectedProgram, setSelectedProgram] = useState<string | null>(null);
-  
-  const { data: programs, isLoading } = api.programs.getAll.useQuery(undefined, {
-    enabled: typeof window !== 'undefined',
-  });
+
+  const { data: programs, isLoading } = api.programs.getAll.useQuery(
+    undefined,
+    {
+      enabled: typeof window !== "undefined",
+    }
+  );
   const { data: userProgress } = api.user.getProgress.useQuery(undefined, {
-    enabled: !!user && typeof window !== 'undefined',
+    enabled: !!user && typeof window !== "undefined",
   });
 
   const enrollMutation = api.programs.enroll.useMutation({
@@ -32,35 +42,37 @@ export default function ProgramsPage() {
   };
 
   const getUserProgressForProgram = (programId: string) => {
-    return userProgress?.find(p => p.programId === programId);
+    return userProgress?.find((p) => p.programId === programId);
   };
+
+  const t = useTranslations("programsPage");
 
   if (isLoading) {
     return (
-      <AppLayout 
-        title="Coaching Programs"
-        description="Choose from our structured programs designed to help you build stronger relationships"
+      <AppLayout
+        title={t("title")}
+        description={t("description")}
         showBackButton={true}
       >
         <div className="flex items-center justify-center py-12">
-          <div className="text-lg">Loading programs...</div>
+          <div className="text-lg">{t("loading")}</div>
         </div>
       </AppLayout>
     );
   }
 
   return (
-    <AppLayout 
-      title="Coaching Programs"
-      description="Choose from our structured programs designed to help you build stronger relationships"
+    <AppLayout
+      title={t("title")}
+      description={t("description")}
       showBackButton={true}
     >
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {programs?.map((program) => {
           const userProg = getUserProgressForProgram(program.id);
           const isEnrolled = !!userProg;
-          const progressPercentage = userProg 
-            ? (userProg.completedTasks / userProg.totalTasks) * 100 
+          const progressPercentage = userProg
+            ? (userProg.completedTasks / userProg.totalTasks) * 100
             : 0;
 
           return (
@@ -75,7 +87,7 @@ export default function ProgramsPage() {
                   </div>
                   {isEnrolled && (
                     <Badge variant="default" className="ml-2">
-                      Enrolled
+                      {t("enrolled")}
                     </Badge>
                   )}
                 </div>
@@ -85,18 +97,22 @@ export default function ProgramsPage() {
                   <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-300">
                     <div className="flex items-center gap-1">
                       <Clock className="w-4 h-4" />
-                      <span>{program.duration} days</span>
+                      <span>
+                        {program.duration} {t("days")}
+                      </span>
                     </div>
                     <div className="flex items-center gap-1">
                       <Target className="w-4 h-4" />
-                      <span>{program.phases?.length || 0} phases</span>
+                      <span>
+                        {program.phases?.length || 0} {t("phases")}
+                      </span>
                     </div>
                   </div>
 
                   {isEnrolled && (
                     <div className="space-y-2">
                       <div className="flex items-center justify-between text-sm">
-                        <span>Progress</span>
+                        <span>{t("progress")}</span>
                         <span>{Math.round(progressPercentage)}%</span>
                       </div>
                       <Progress value={progressPercentage} className="h-2" />
@@ -104,15 +120,20 @@ export default function ProgramsPage() {
                   )}
 
                   <div className="space-y-2">
-                    <h4 className="font-medium text-sm">Program Structure:</h4>
+                    <h4 className="font-medium text-sm">
+                      {t("programStructure")}
+                    </h4>
                     <div className="space-y-1">
                       {program.phases?.map((phase, index) => (
-                        <div key={phase.id} className="flex items-center justify-between text-xs">
+                        <div
+                          key={phase.id}
+                          className="flex items-center justify-between text-xs"
+                        >
                           <span className="text-gray-600 dark:text-gray-300">
                             {index + 1}. {phase.name}
                           </span>
                           <span className="text-xs text-gray-500">
-                            ({phase.tasks.length} tasks)
+                            ({phase.tasks.length} {t("tasks")})
                           </span>
                         </div>
                       ))}
@@ -123,16 +144,18 @@ export default function ProgramsPage() {
                     {isEnrolled ? (
                       <Button variant="outline" className="w-full" asChild>
                         <a href={`/programs/${program.id}`}>
-                          Continue Program
+                          {t("continueProgram")}
                         </a>
                       </Button>
                     ) : (
-                      <Button 
+                      <Button
                         onClick={() => handleEnroll(program.id)}
                         className="w-full"
                         disabled={enrollMutation.isPending}
                       >
-                        {enrollMutation.isPending ? 'Enrolling...' : 'Start Program'}
+                        {enrollMutation.isPending
+                          ? t("enrolling")
+                          : t("startProgram")}
                       </Button>
                     )}
                   </div>
@@ -145,9 +168,7 @@ export default function ProgramsPage() {
 
       {programs?.length === 0 && (
         <div className="text-center py-12">
-          <p className="text-gray-600 dark:text-gray-300">
-            No coaching programs are currently available. Check back soon!
-          </p>
+          <p className="text-gray-600 dark:text-gray-300">{t("noPrograms")}</p>
         </div>
       )}
     </AppLayout>

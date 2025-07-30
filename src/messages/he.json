@@ -1379,6 +1379,11 @@
       "analytical-logical": "המאמן שלכם ישתמש בגישות מבוססות עובדות עם נימוק ברור.",
       "emotional-expressive": "המאמן שלכם יעזור לכם לחקור ולבטא רגשות בפתיחות.",
       "notComplete": "השלימו את ההערכה שלכם כדי לקבל סגנון אימון אישי."
+    },
+    "recommendations": {
+      "personalizedFor": "מותאם אישית עבור מסע זוגיות {status}",
+      "loading": "טוען המלצות...",
+      "completeAssessment": "השלם הערכה"
     }
   },
   "common": {
@@ -1457,5 +1462,22 @@
   "metadata": {
     "title": "מאמן אישי - מאמן זוגיות AI",
     "description": "אימון זוגיות אישי מבוסס AI עם תכניות מובנות"
+  },
+  "programsPage": {
+    "title": "תוכניות אימון",
+    "description": "בחרו מתוך התוכניות המובנות שלנו שנועדו לעזור לכם לבנות מערכות יחסים חזקות יותר",
+    "loading": "טוען תוכניות...",
+    "enrolled": "נרשמתם",
+    "days": "ימים",
+    "phases": "שלבים",
+    "progress": "התקדמות",
+    "continueProgram": "המשך תוכנית",
+    "startProgram": "התחל תוכנית",
+    "enrolling": "נרשם...",
+    "programStructure": "מבנה התוכנית:",
+    "tasks": "משימות",
+    "keyStages": "שלבים עיקריים עבורך:",
+    "recommended": "מומלץ",
+    "noPrograms": "אין כרגע תוכניות אימון זמינות. חזור בקרוב!"
   }
 }

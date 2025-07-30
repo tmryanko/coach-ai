@@ -1278,6 +1278,11 @@
       "analytical-logical": "Your coach will use fact-based approaches with clear reasoning.",
       "emotional-expressive": "Your coach will help you explore and express emotions openly.",
       "notComplete": "Complete your assessment to get personalized coaching style."
+    },
+    "recommendations": {
+      "personalizedFor": "Personalized for {status} relationship journey",
+      "loading": "Loading recommendations...",
+      "completeAssessment": "Complete Assessment"
     }
   },
   "common": {
@@ -1356,5 +1361,22 @@
   "metadata": {
     "title": "Coach AI - Personal Relationship Coach",
     "description": "AI-powered personal relationship coaching with structured programs"
+  },
+  "programsPage": {
+    "title": "Coaching Programs",
+    "description": "Choose from our structured programs designed to help you build stronger relationships",
+    "loading": "Loading programs...",
+    "enrolled": "Enrolled",
+    "days": "days",
+    "phases": "phases",
+    "progress": "Progress",
+    "continueProgram": "Continue Program",
+    "startProgram": "Start Program",
+    "enrolling": "Enrolling...",
+    "programStructure": "Program Structure:",
+    "tasks": "tasks",
+    "keyStages": "Key stages for you:",
+    "recommended": "Recommended",
+    "noPrograms": "No coaching programs are currently available. Check back soon!"
   }
 }
