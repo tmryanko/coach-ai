@@ -28,6 +28,20 @@
       "logicFocused": "Logic-focused",
       "highlyEmpathetic": "Highly empathetic",
       "balancedEmpathy": "Balanced empathy"
+    },
+    "sections": {
+      "relationshipVision": "Relationship Vision",
+      "selfReflection": "Self Reflection",
+      "attachmentStyle": "Attachment Style",
+      "topStrengths": "Top Strengths",
+      "primaryConcerns": "Primary Concerns",
+      "friendsDescription": "How friends describe you",
+      "proudestMoment": "Proudest moment",
+      "personalStrengths": "Personal strengths"
+    },
+    "buttons": {
+      "refresh": "Refresh",
+      "refreshing": "Refreshing..."
     }
   },
   "navigation": {
@@ -166,10 +180,7 @@
           "General coaching programs",
           "Community support"
         ],
-        "limitations": [
-          "Limited session history",
-          "Basic progress tracking"
-        ]
+        "limitations": ["Limited session history", "Basic progress tracking"]
       },
       "monthly": {
         "name": "Monthly",
@@ -284,7 +295,7 @@
           "description": "We don't communicate well"
         },
         "frequent-arguments": {
-          "label": "Frequent Arguments", 
+          "label": "Frequent Arguments",
           "description": "We argue too often"
         },
         "trust-issues": {
@@ -402,7 +413,7 @@
           "description": "Work together to find win-win solutions"
         },
         "competitor": {
-          "label": "Competitor", 
+          "label": "Competitor",
           "description": "Stand firm on important issues"
         },
         "accommodator": {
@@ -425,7 +436,7 @@
           "description": "Charts, diagrams, and written materials"
         },
         "auditory": {
-          "label": "Auditory Learning", 
+          "label": "Auditory Learning",
           "description": "Discussions, podcasts, and verbal instruction"
         },
         "kinesthetic": {
@@ -441,7 +452,7 @@
       "priorityOptions": {
         "family-time": "Quality Family Time",
         "career-growth": "Career Growth",
-        "personal-health": "Personal Health & Fitness", 
+        "personal-health": "Personal Health & Fitness",
         "financial-security": "Financial Security",
         "social-connections": "Social Connections",
         "personal-growth": "Personal Development",
@@ -552,13 +563,34 @@
       "readinessTitle": "Relationship Readiness Scale",
       "readinessDescription": "How ready do you feel to start or work on a romantic relationship right now?",
       "readinessLevels": {
-        "1": { "label": "Not ready", "description": "Still healing from past hurts" },
-        "2": { "label": "Mostly not ready", "description": "Working through some issues" },
-        "3": { "label": "Somewhat ready", "description": "Making progress but cautious" },
-        "4": { "label": "Getting ready", "description": "Feeling more confident" },
-        "5": { "label": "Ready", "description": "Open to finding the right person" },
-        "6": { "label": "Very ready", "description": "Actively seeking connection" },
-        "7": { "label": "Completely ready", "description": "Confident and optimistic" }
+        "1": {
+          "label": "Not ready",
+          "description": "Still healing from past hurts"
+        },
+        "2": {
+          "label": "Mostly not ready",
+          "description": "Working through some issues"
+        },
+        "3": {
+          "label": "Somewhat ready",
+          "description": "Making progress but cautious"
+        },
+        "4": {
+          "label": "Getting ready",
+          "description": "Feeling more confident"
+        },
+        "5": {
+          "label": "Ready",
+          "description": "Open to finding the right person"
+        },
+        "6": {
+          "label": "Very ready",
+          "description": "Actively seeking connection"
+        },
+        "7": {
+          "label": "Completely ready",
+          "description": "Confident and optimistic"
+        }
       },
       "readinessScale": {
         "notReady": "Not ready",
@@ -759,7 +791,7 @@
           "description": "Being genuine and truthful"
         },
         "loyalty": {
-          "label": "Loyalty & Commitment", 
+          "label": "Loyalty & Commitment",
           "description": "Staying dedicated through challenges"
         },
         "respect": {
@@ -861,7 +893,7 @@
         "title": "Your Profile Snapshot",
         "name": "Name",
         "relationshipStatus": "Relationship Status",
-        "attachmentStyle": "Attachment Style", 
+        "attachmentStyle": "Attachment Style",
         "relationshipReadiness": "Relationship Readiness",
         "notProvided": "Not provided",
         "notSpecified": "Not specified",
@@ -932,7 +964,7 @@
           "label": "Widowed",
           "description": "Lost a partner and ready to move forward"
         },
-        "complicated": {
+        "its-complicated": {
           "label": "It's complicated",
           "description": "Relationship status is complex"
         }
@@ -943,7 +975,7 @@
       "description": "Please review your responses below. This information will be used to personalize your coaching experience.",
       "relationshipStatusLabel": "Relationship Status",
       "goalsLabel": "Your Goals",
-      "challengesLabel": "Current Challenges", 
+      "challengesLabel": "Current Challenges",
       "communicationStyleLabel": "Communication Style",
       "personalityLabel": "Personality & Preferences",
       "personalityFields": {
@@ -954,7 +986,7 @@
       },
       "personalityValues": {
         "extroverted": "Extroverted",
-        "introverted": "Introverted", 
+        "introverted": "Introverted",
         "balanced": "Balanced",
         "logicFocused": "Logic-focused",
         "highlyEmpathetic": "Highly empathetic",
@@ -1195,7 +1227,7 @@
     },
     "sections": {
       "progress": "Your Progress",
-      "style": "Your Style", 
+      "style": "Your Style",
       "quickActions": "Quick Actions",
       "recommendedPrograms": "Recommended Programs",
       "yourAiCoach": "Your AI Coach"

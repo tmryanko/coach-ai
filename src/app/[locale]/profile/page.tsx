@@ -1,33 +1,55 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { useTranslations, useLocale } from 'next-intl';
-import { api } from '@/utils/api';
-import { SimpleAppLayout } from '@/components/layout/app-layout';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Loader2, Edit, ArrowLeft, RefreshCw } from 'lucide-react';
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useTranslations, useLocale } from "next-intl";
+import { api } from "@/utils/api";
+import { SimpleAppLayout } from "@/components/layout/app-layout";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Loader2, Edit, ArrowLeft, RefreshCw } from "lucide-react";
 
 export default function ProfilePage() {
   const router = useRouter();
   const locale = useLocale();
-  const t = useTranslations('profile');
+  const t = useTranslations("profile");
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const tGoals = useTranslations('assessment.goals.goalOptions');
-  const tChallenges = useTranslations('assessment.challenges.challengeOptions');
-  const tComm = useTranslations('assessment.lifestyleCompatibility.communicationStyles');
-  const tStatus = useTranslations('assessment.relationshipStatus.statusOptions');
+  const tGoals = useTranslations("assessment.goals.goalOptions");
+  const tChallenges = useTranslations("assessment.challenges.challengeOptions");
+  const tComm = useTranslations(
+    "assessment.lifestyleCompatibility.communicationStyles"
+  );
+  const tStatus = useTranslations(
+    "assessment.relationshipStatus.statusOptions"
+  );
+  const tValues = useTranslations(
+    "assessment.lifestyleCompatibility.coreValues"
+  );
+  const tStrengths = useTranslations(
+    "assessment.enhanced.selfReflection.personalStrengths"
+  );
 
-  const { data: profile, isLoading, refetch: refetchProfile } = api.assessment.getProfile.useQuery();
-  const { data: assessmentStatus, refetch: refetchStatus } = api.assessment.getStatus.useQuery();
-  const repairAssessment = api.assessment.repairAssessmentCompletion.useMutation({
-    onSuccess: () => {
-      refetchStatus();
-      refetchProfile();
-    },
-  });
+  const {
+    data: profile,
+    isLoading,
+    refetch: refetchProfile,
+  } = api.assessment.getProfile.useQuery();
+  const { data: assessmentStatus, refetch: refetchStatus } =
+    api.assessment.getStatus.useQuery();
+  const repairAssessment =
+    api.assessment.repairAssessmentCompletion.useMutation({
+      onSuccess: () => {
+        refetchStatus();
+        refetchProfile();
+      },
+    });
 
   // Manual refresh function
   const handleRefresh = async () => {
@@ -44,8 +66,13 @@ export default function ProfilePage() {
   useEffect(() => {
     if (assessmentStatus && !assessmentStatus.isCompleted) {
       // If user has substantial data but no completion timestamp, try to repair
-      if (profile && (profile.name || profile.emotionalProfile || profile.coreValues?.length)) {
-        console.log('🔧 User has data but no completion timestamp, attempting repair...');
+      if (
+        profile &&
+        (profile.name || profile.emotionalProfile || profile.coreValues?.length)
+      ) {
+        console.log(
+          "🔧 User has data but no completion timestamp, attempting repair..."
+        );
         repairAssessment.mutate();
       } else {
         // Otherwise redirect to assessment
@@ -68,8 +95,8 @@ export default function ProfilePage() {
     };
 
     // Listen for when user focuses back to this page
-    window.addEventListener('focus', handleFocus);
-    
+    window.addEventListener("focus", handleFocus);
+
     // Also refresh on component mount in case of direct navigation back
     const timeoutId = setTimeout(async () => {
       if (!isLoading) {
@@ -83,7 +110,7 @@ export default function ProfilePage() {
     }, 100);
 
     return () => {
-      window.removeEventListener('focus', handleFocus);
+      window.removeEventListener("focus", handleFocus);
       clearTimeout(timeoutId);
     };
   }, [refetchProfile, isLoading]);
@@ -119,9 +146,9 @@ export default function ProfilePage() {
         <div className="max-w-2xl mx-auto p-4">
           <Card>
             <CardContent className="p-6 text-center">
-              <p className="text-gray-500 mb-4">{t('noProfileFound')}</p>
-              <Button onClick={() => router.push('/assessment')}>
-                {t('completeAssessment')}
+              <p className="text-gray-500 mb-4">{t("noProfileFound")}</p>
+              <Button onClick={() => router.push(`/${locale}/assessment`)}>
+                {t("completeAssessment")}
               </Button>
             </CardContent>
           </Card>
@@ -132,13 +159,51 @@ export default function ProfilePage() {
 
   const getPersonalityDescription = () => {
     const traits = profile.personalityTraits as any;
-    if (!traits) return t('notSpecified');
-    
-    const socialStyle = traits.introversion <= 2 ? t('personalityValues.extroverted') : traits.introversion >= 4 ? t('personalityValues.introverted') : t('personalityValues.balanced');
-    const empathyLevel = traits.empathy <= 2 ? t('personalityValues.logicFocused') : traits.empathy >= 4 ? t('personalityValues.highlyEmpathetic') : t('personalityValues.balancedEmpathy');
-    
+    if (!traits) return t("notSpecified");
+
+    const socialStyle =
+      traits.introversion <= 2
+        ? t("personalityValues.extroverted")
+        : traits.introversion >= 4
+        ? t("personalityValues.introverted")
+        : t("personalityValues.balanced");
+    const empathyLevel =
+      traits.empathy <= 2
+        ? t("personalityValues.logicFocused")
+        : traits.empathy >= 4
+        ? t("personalityValues.highlyEmpathetic")
+        : t("personalityValues.balancedEmpathy");
+
     return `${socialStyle}, ${empathyLevel}`;
   };
+
+  const translateValue = (value: string) => {
+    try {
+      // Try to translate core values with .label suffix
+      const coreValueTranslation = tValues(`${value}.label`);
+      if (
+        coreValueTranslation &&
+        !coreValueTranslation.includes("assessment.lifestyleCompatibility")
+      ) {
+        return coreValueTranslation;
+      }
+
+      // Try to translate personal strengths
+      const strengthTranslation = tStrengths(value);
+      if (
+        strengthTranslation &&
+        !strengthTranslation.includes("assessment.enhanced")
+      ) {
+        return strengthTranslation;
+      }
+    } catch (error) {
+      // If translation fails, continue to fallback
+    }
+
+    // Fallback to formatted value
+    return value.replace("-", " ").replace(/\b\w/g, (l) => l.toUpperCase());
+  };
+  console.log("profile:", profile);
 
   return (
     <SimpleAppLayout>
@@ -147,10 +212,8 @@ export default function ProfilePage() {
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle>{t('title')}</CardTitle>
-                <CardDescription>
-                  {t('description')}
-                </CardDescription>
+                <CardTitle>{t("title")}</CardTitle>
+                <CardDescription>{t("description")}</CardDescription>
               </div>
               <div className="flex gap-2">
                 <Button
@@ -159,8 +222,14 @@ export default function ProfilePage() {
                   size="sm"
                   disabled={isRefreshing}
                 >
-                  <RefreshCw className={`h-4 w-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
-                  {isRefreshing ? 'Refreshing...' : 'Refresh'}
+                  <RefreshCw
+                    className={`h-4 w-4 mr-2 ${
+                      isRefreshing ? "animate-spin" : ""
+                    }`}
+                  />
+                  {isRefreshing
+                    ? t("buttons.refreshing")
+                    : t("buttons.refresh")}
                 </Button>
                 <Button
                   onClick={() => router.push(`/${locale}/assessment?edit=true`)}
@@ -168,7 +237,7 @@ export default function ProfilePage() {
                   size="sm"
                 >
                   <Edit className="h-4 w-4 mr-2" />
-                  {t('editProfile')}
+                  {t("editProfile")}
                 </Button>
               </div>
             </div>
@@ -179,27 +248,34 @@ export default function ProfilePage() {
           {/* Relationship Status */}
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-lg">{t('relationshipStatus')}</CardTitle>
+              <CardTitle className="text-lg">
+                {t("relationshipStatus")}
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <Badge variant="outline" className="text-sm">
-                {profile.relationshipStatus ? (() => {
-                  // Handle specific known values with hardcoded translations
-                  const statusMap: { [key: string]: string } = {
-                    'its-complicated': "It's complicated",
-                    'single': 'Single',
-                    'dating': 'Dating',
-                    'in-relationship': 'In a relationship',
-                    'engaged': 'Engaged',
-                    'married': 'Married',
-                    'divorced': 'Divorced',
-                    'separated': 'Separated',
-                    'widowed': 'Widowed'
-                  };
-                  
-                  return statusMap[profile.relationshipStatus] || 
-                         profile.relationshipStatus.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase());
-                })() : t('notSpecified')}
+                {profile.relationshipStatus
+                  ? (() => {
+                      try {
+                        const statusTranslation = tStatus(
+                          `${profile.relationshipStatus}.label`
+                        );
+                        if (
+                          statusTranslation &&
+                          !statusTranslation.includes(
+                            "assessment.relationshipStatus"
+                          )
+                        ) {
+                          return statusTranslation;
+                        }
+                      } catch (error) {
+                        // Fall through to fallback
+                      }
+                      return profile.relationshipStatus
+                        .replace("-", " ")
+                        .replace(/\b\w/g, (l) => l.toUpperCase());
+                    })()
+                  : t("notSpecified")}
               </Badge>
             </CardContent>
           </Card>
@@ -208,14 +284,16 @@ export default function ProfilePage() {
           <Card>
             <CardHeader className="pb-3">
               <CardTitle className="text-lg">
-                {t('goals')} 
-                ({(profile.relationshipGoals?.length || 0) + (profile.coreValues?.length || 0)})
+                {t("goals")}(
+                {(profile.relationshipGoals?.length || 0) +
+                  (profile.coreValues?.length || 0)}
+                )
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex flex-wrap gap-2">
                 {/* Legacy relationship goals */}
-                {profile.relationshipGoals?.map(goal => (
+                {profile.relationshipGoals?.map((goal) => (
                   <Badge key={goal} variant="secondary">
                     {tGoals(goal)}
                   </Badge>
@@ -223,12 +301,15 @@ export default function ProfilePage() {
                 {/* Core values from rich assessment */}
                 {profile.coreValues?.map((value, index) => (
                   <Badge key={`core-value-${index}`} variant="secondary">
-                    {value}
+                    {translateValue(value)}
                   </Badge>
                 ))}
-                {(!profile.relationshipGoals?.length && !profile.coreValues?.length) && (
-                  <span className="text-gray-500">{t('noGoalsSpecified')}</span>
-                )}
+                {!profile.relationshipGoals?.length &&
+                  !profile.coreValues?.length && (
+                    <span className="text-gray-500">
+                      {t("noGoalsSpecified")}
+                    </span>
+                  )}
               </div>
             </CardContent>
           </Card>
@@ -237,16 +318,22 @@ export default function ProfilePage() {
           <Card>
             <CardHeader className="pb-3">
               <CardTitle className="text-lg">
-                {t('challenges')}
-                ({(profile.currentChallenges?.length || 0) + (profile.dealBreakers?.length || 0) + ((profile.emotionalProfile as any)?.emotionalChallenges?.length || 0)})
+                {t("challenges")}(
+                {(profile.currentChallenges?.length || 0) +
+                  (profile.dealBreakers?.length || 0) +
+                  ((profile.emotionalProfile as any)?.emotionalChallenges
+                    ?.length || 0)}
+                )
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex flex-wrap gap-2">
                 {/* Legacy challenges */}
-                {profile.currentChallenges?.map(challenge => (
+                {profile.currentChallenges?.map((challenge) => (
                   <Badge key={challenge} variant="destructive">
-                    {tChallenges(challenge) || tChallenges(`${challenge}.label`) || challenge}
+                    {tChallenges(challenge) ||
+                      tChallenges(`${challenge}.label`) ||
+                      challenge}
                   </Badge>
                 ))}
                 {/* Deal breakers from rich assessment */}
@@ -256,14 +343,21 @@ export default function ProfilePage() {
                   </Badge>
                 ))}
                 {/* Emotional challenges from rich assessment */}
-                {((profile.emotionalProfile as any)?.emotionalChallenges || []).map((challenge: string, index: number) => (
+                {(
+                  (profile.emotionalProfile as any)?.emotionalChallenges || []
+                ).map((challenge: string, index: number) => (
                   <Badge key={`emotional-challenge-${index}`} variant="outline">
                     {challenge}
                   </Badge>
                 ))}
-                {(!profile.currentChallenges?.length && !profile.dealBreakers?.length && !((profile.emotionalProfile as any)?.emotionalChallenges?.length)) && (
-                  <span className="text-gray-500">{t('noChallengesSpecified')}</span>
-                )}
+                {!profile.currentChallenges?.length &&
+                  !profile.dealBreakers?.length &&
+                  !(profile.emotionalProfile as any)?.emotionalChallenges
+                    ?.length && (
+                    <span className="text-gray-500">
+                      {t("noChallengesSpecified")}
+                    </span>
+                  )}
               </div>
             </CardContent>
           </Card>
@@ -271,14 +365,18 @@ export default function ProfilePage() {
           {/* Communication Style */}
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-lg">{t('communicationStyle')}</CardTitle>
+              <CardTitle className="text-lg">
+                {t("communicationStyle")}
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <Badge variant="outline">
-                {profile.preferredCommunicationStyle ? (
-                  // Try direct translation first, fallback to adding .label
-                  tComm(profile.preferredCommunicationStyle) || tComm(`${profile.preferredCommunicationStyle}.label`) || profile.preferredCommunicationStyle
-                ) : t('notSpecified')}
+                {profile.preferredCommunicationStyle
+                  ? // Try direct translation first, fallback to adding .label
+                    tComm(profile.preferredCommunicationStyle) ||
+                    tComm(`${profile.preferredCommunicationStyle}.label`) ||
+                    profile.preferredCommunicationStyle
+                  : t("notSpecified")}
               </Badge>
             </CardContent>
           </Card>
@@ -286,58 +384,83 @@ export default function ProfilePage() {
           {/* Emotional Profile and Personality */}
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-lg">{t('personality')}</CardTitle>
+              <CardTitle className="text-lg">{t("personality")}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               {/* Basic personality traits */}
               <div>
-                <span className="text-sm font-medium">{t('personalityFields.personality')}</span>
+                <span className="text-sm font-medium">
+                  {t("personalityFields.personality")}
+                </span>
                 <span className="ml-2 text-sm text-gray-600 dark:text-gray-300">
                   {getPersonalityDescription()}
                 </span>
               </div>
-              
+
               {/* Attachment style from emotional profile */}
               {(profile.emotionalProfile as any)?.attachmentStyle && (
                 <div>
-                  <span className="text-sm font-medium">Attachment Style:</span>
+                  <span className="text-sm font-medium">
+                    {t("sections.attachmentStyle")}:
+                  </span>
                   <span className="ml-2 text-sm text-gray-600 dark:text-gray-300 capitalize">
-                    {(profile.emotionalProfile as any).attachmentStyle.replace('_', ' ')}
+                    {(profile.emotionalProfile as any).attachmentStyle.replace(
+                      "_",
+                      " "
+                    )}
                   </span>
                 </div>
               )}
-              
+
               {/* Top strengths from emotional profile */}
-              {((profile.emotionalProfile as any)?.topStrengths?.length > 0) && (
+              {(profile.emotionalProfile as any)?.topStrengths?.length > 0 && (
                 <div>
-                  <span className="text-sm font-medium">Top Strengths:</span>
+                  <span className="text-sm font-medium">
+                    {t("sections.topStrengths")}:
+                  </span>
                   <div className="mt-1 flex flex-wrap gap-1">
-                    {(profile.emotionalProfile as any).topStrengths.map((strength: string, index: number) => (
-                      <Badge key={`strength-${index}`} variant="secondary" className="text-xs">
-                        {strength}
-                      </Badge>
-                    ))}
+                    {(profile.emotionalProfile as any).topStrengths.map(
+                      (strength: string, index: number) => (
+                        <Badge
+                          key={`strength-${index}`}
+                          variant="secondary"
+                          className="text-xs"
+                        >
+                          {translateValue(strength)}
+                        </Badge>
+                      )
+                    )}
                   </div>
                 </div>
               )}
-              
+
               {/* Primary fears from emotional profile */}
-              {((profile.emotionalProfile as any)?.primaryFears?.length > 0) && (
+              {(profile.emotionalProfile as any)?.primaryFears?.length > 0 && (
                 <div>
-                  <span className="text-sm font-medium">Primary Concerns:</span>
+                  <span className="text-sm font-medium">
+                    {t("sections.primaryConcerns")}:
+                  </span>
                   <div className="mt-1 flex flex-wrap gap-1">
-                    {(profile.emotionalProfile as any).primaryFears.map((fear: string, index: number) => (
-                      <Badge key={`fear-${index}`} variant="outline" className="text-xs">
-                        {fear}
-                      </Badge>
-                    ))}
+                    {(profile.emotionalProfile as any).primaryFears.map(
+                      (fear: string, index: number) => (
+                        <Badge
+                          key={`fear-${index}`}
+                          variant="outline"
+                          className="text-xs"
+                        >
+                          {fear}
+                        </Badge>
+                      )
+                    )}
                   </div>
                 </div>
               )}
-              
+
               {(profile.personalityTraits as any)?.conflictStyle && (
                 <div>
-                  <span className="text-sm font-medium">{t('personalityFields.conflictStyle')}</span>
+                  <span className="text-sm font-medium">
+                    {t("personalityFields.conflictStyle")}
+                  </span>
                   <span className="ml-2 text-sm text-gray-600 dark:text-gray-300 capitalize">
                     {(profile.personalityTraits as any).conflictStyle}
                   </span>
@@ -345,24 +468,39 @@ export default function ProfilePage() {
               )}
               {(profile.personalityTraits as any)?.learningPreference && (
                 <div>
-                  <span className="text-sm font-medium">{t('personalityFields.learningStyle')}</span>
+                  <span className="text-sm font-medium">
+                    {t("personalityFields.learningStyle")}
+                  </span>
                   <span className="ml-2 text-sm text-gray-600 dark:text-gray-300 capitalize">
-                    {(profile.personalityTraits as any).learningPreference.replace('-', ' ')}
+                    {(
+                      profile.personalityTraits as any
+                    ).learningPreference.replace("-", " ")}
                   </span>
                 </div>
               )}
-              {(profile.personalityTraits as any)?.priorities && (profile.personalityTraits as any).priorities.length > 0 && (
-                <div>
-                  <span className="text-sm font-medium">{t('personalityFields.lifePriorities')}</span>
-                  <div className="mt-1 flex flex-wrap gap-1">
-                    {(profile.personalityTraits as any).priorities.map((priority: any) => (
-                      <Badge key={priority} variant="outline" className="text-xs">
-                        {priority.replace('-', ' ').replace(/\b\w/g, (l: any) => l.toUpperCase())}
-                      </Badge>
-                    ))}
+              {(profile.personalityTraits as any)?.priorities &&
+                (profile.personalityTraits as any).priorities.length > 0 && (
+                  <div>
+                    <span className="text-sm font-medium">
+                      {t("personalityFields.lifePriorities")}
+                    </span>
+                    <div className="mt-1 flex flex-wrap gap-1">
+                      {(profile.personalityTraits as any).priorities.map(
+                        (priority: any) => (
+                          <Badge
+                            key={priority}
+                            variant="outline"
+                            className="text-xs"
+                          >
+                            {priority
+                              .replace("-", " ")
+                              .replace(/\b\w/g, (l: any) => l.toUpperCase())}
+                          </Badge>
+                        )
+                      )}
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
             </CardContent>
           </Card>
 
@@ -370,7 +508,9 @@ export default function ProfilePage() {
           {profile.relationshipVision && (
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className="text-lg">Relationship Vision</CardTitle>
+                <CardTitle className="text-lg">
+                  {t("sections.relationshipVision")}
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-gray-600 dark:text-gray-300">
@@ -379,17 +519,21 @@ export default function ProfilePage() {
               </CardContent>
             </Card>
           )}
-          
+
           {/* Self Reflection */}
           {(profile.selfReflection as any)?.friendsDescription && (
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className="text-lg">Self Reflection</CardTitle>
+                <CardTitle className="text-lg">
+                  {t("sections.selfReflection")}
+                </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 {(profile.selfReflection as any).friendsDescription && (
                   <div>
-                    <span className="text-sm font-medium">How friends describe you:</span>
+                    <span className="text-sm font-medium">
+                      {t("sections.friendsDescription")}:
+                    </span>
                     <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
                       {(profile.selfReflection as any).friendsDescription}
                     </p>
@@ -397,21 +541,32 @@ export default function ProfilePage() {
                 )}
                 {(profile.selfReflection as any).proudestMoment && (
                   <div>
-                    <span className="text-sm font-medium">Proudest moment:</span>
+                    <span className="text-sm font-medium">
+                      {t("sections.proudestMoment")}:
+                    </span>
                     <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
                       {(profile.selfReflection as any).proudestMoment}
                     </p>
                   </div>
                 )}
-                {(profile.selfReflection as any).personalStrengths?.length > 0 && (
+                {(profile.selfReflection as any).personalStrengths?.length >
+                  0 && (
                   <div>
-                    <span className="text-sm font-medium">Personal strengths:</span>
+                    <span className="text-sm font-medium">
+                      {t("sections.personalStrengths")}:
+                    </span>
                     <div className="mt-1 flex flex-wrap gap-1">
-                      {(profile.selfReflection as any).personalStrengths.map((strength: string, index: number) => (
-                        <Badge key={`personal-strength-${index}`} variant="secondary" className="text-xs">
-                          {strength}
-                        </Badge>
-                      ))}
+                      {(profile.selfReflection as any).personalStrengths.map(
+                        (strength: string, index: number) => (
+                          <Badge
+                            key={`personal-strength-${index}`}
+                            variant="secondary"
+                            className="text-xs"
+                          >
+                            {translateValue(strength)}
+                          </Badge>
+                        )
+                      )}
                     </div>
                   </div>
                 )}
@@ -423,7 +578,7 @@ export default function ProfilePage() {
           {profile.assessmentCompletedAt && (
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className="text-lg">{t('completedAt')}</CardTitle>
+                <CardTitle className="text-lg">{t("completedAt")}</CardTitle>
               </CardHeader>
               <CardContent>
                 <span className="text-sm text-gray-600 dark:text-gray-300">
@@ -436,12 +591,12 @@ export default function ProfilePage() {
 
         <div className="mt-6 pt-6 border-t">
           <Button
-            onClick={() => router.push('/dashboard')}
+            onClick={() => router.push(`/${locale}/dashboard`)}
             variant="outline"
             className="w-full"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
-            {t('backToDashboard')}
+            {t("backToDashboard")}
           </Button>
         </div>
       </div>

@@ -28,6 +28,20 @@
       "logicFocused": "מתמקד בהיגיון",
       "highlyEmpathetic": "אמפתי מאוד",
       "balancedEmpathy": "אמפתיה מאוזנת"
+    },
+    "sections": {
+      "relationshipVision": "חזון זוגי",
+      "selfReflection": "הרהור עצמי",
+      "attachmentStyle": "סגנון התקשרות",
+      "topStrengths": "חוזקות עיקריות",
+      "primaryConcerns": "דאגות עיקריות",
+      "friendsDescription": "איך חברים מתארים אותך",
+      "proudestMoment": "הרגע הכי גאה",
+      "personalStrengths": "חוזקות אישיות"
+    },
+    "buttons": {
+      "refresh": "רענן",
+      "refreshing": "מרענן..."
     }
   },
   "navigation": {
@@ -166,10 +180,7 @@
           "תכניות אימון כלליות",
           "תמיכת קהילה"
         ],
-        "limitations": [
-          "היסטוריית מפגשים מוגבלת",
-          "מעקב התקדמות בסיסי"
-        ]
+        "limitations": ["היסטוריית מפגשים מוגבלת", "מעקב התקדמות בסיסי"]
       },
       "monthly": {
         "name": "חודשי",
@@ -953,7 +964,7 @@
           "label": "אלמן/ה",
           "description": "איבד/ה שותף/ה ומוכן/ה להתקדם"
         },
-        "complicated": {
+        "its-complicated": {
           "label": "זה מסובך",
           "description": "המצב הזוגי מורכב"
         }
