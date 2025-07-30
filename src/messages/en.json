@@ -463,27 +463,45 @@
         "secure": {
           "label": "Secure",
           "description": "I find it easy to get close to others and am comfortable depending on them. I don't often worry about being abandoned.",
-          "traits": ["Comfortable with intimacy", "Good communication", "Trusting"]
+          "traits": {
+            "0": "Comfortable with intimacy",
+            "1": "Good communication",
+            "2": "Trusting"
+          }
         },
         "anxious": {
           "label": "Anxious",
           "description": "I want to be very close to partners, but worry they don't feel the same. I fear being abandoned or unloved.",
-          "traits": ["Seeks reassurance", "Fears abandonment", "Highly empathetic"]
+          "traits": {
+            "0": "Seeks reassurance",
+            "1": "Fears abandonment",
+            "2": "Highly empathetic"
+          }
         },
         "avoidant": {
           "label": "Avoidant",
           "description": "I prefer independence and self-sufficiency. I sometimes find it difficult to trust others completely.",
-          "traits": ["Values independence", "Uncomfortable with emotions", "Self-reliant"]
+          "traits": {
+            "0": "Values independence",
+            "1": "Uncomfortable with emotions",
+            "2": "Self-reliant"
+          }
         },
         "disorganized": {
           "label": "Fearful-Avoidant",
           "description": "I want close relationships but worry about getting hurt. I have mixed feelings about depending on others.",
-          "traits": ["Wants closeness but fears it", "Inconsistent emotions", "Past relationship trauma"]
+          "traits": {
+            "0": "Wants closeness but fears it",
+            "1": "Inconsistent emotions",
+            "2": "Past relationship trauma"
+          }
         },
         "unsure": {
           "label": "I'm not sure",
           "description": "I need to learn more about my attachment patterns.",
-          "traits": ["Self-discovery needed"]
+          "traits": {
+            "0": "Self-discovery needed"
+          }
         }
       },
       "fearsTitle": "Relationship Fears (Select up to 3)",

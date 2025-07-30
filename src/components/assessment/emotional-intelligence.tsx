@@ -17,38 +17,47 @@ interface EmotionalIntelligenceStepProps {
   isLoading: boolean;
 }
 
-const getAttachmentStyles = (t: any) => [
+const getAttachmentStyles = (t: any) => {
+  const getTraitsArray = (traitsObj: any) => {
+    if (typeof traitsObj === 'object' && traitsObj !== null && !Array.isArray(traitsObj)) {
+      return Object.values(traitsObj);
+    }
+    return Array.isArray(traitsObj) ? traitsObj : [];
+  };
+
+  
+  return [
   {
     value: "secure",
     label: t("attachmentStyles.secure.label"),
     description: t("attachmentStyles.secure.description"),
-    traits: Array.isArray(t("attachmentStyles.secure.traits")) ? t("attachmentStyles.secure.traits") : [],
+    traits: getTraitsArray(t("attachmentStyles.secure.traits")),
   },
   {
     value: "anxious",
     label: t("attachmentStyles.anxious.label"),
     description: t("attachmentStyles.anxious.description"),
-    traits: Array.isArray(t("attachmentStyles.anxious.traits")) ? t("attachmentStyles.anxious.traits") : [],
+    traits: getTraitsArray(t("attachmentStyles.anxious.traits")),
   },
   {
     value: "avoidant",
     label: t("attachmentStyles.avoidant.label"),
     description: t("attachmentStyles.avoidant.description"),
-    traits: Array.isArray(t("attachmentStyles.avoidant.traits")) ? t("attachmentStyles.avoidant.traits") : [],
+    traits: getTraitsArray(t("attachmentStyles.avoidant.traits")),
   },
   {
     value: "disorganized",
     label: t("attachmentStyles.disorganized.label"),
     description: t("attachmentStyles.disorganized.description"),
-    traits: Array.isArray(t("attachmentStyles.disorganized.traits")) ? t("attachmentStyles.disorganized.traits") : [],
+    traits: getTraitsArray(t("attachmentStyles.disorganized.traits")),
   },
   {
     value: "unsure",
     label: t("attachmentStyles.unsure.label"),
     description: t("attachmentStyles.unsure.description"),
-    traits: Array.isArray(t("attachmentStyles.unsure.traits")) ? t("attachmentStyles.unsure.traits") : [],
+    traits: getTraitsArray(t("attachmentStyles.unsure.traits")),
   },
-];
+]};
 
 const getFearOptions = (t: any) => [
   { value: "rejection", label: t("fearOptions.rejection"), icon: "💔" },
