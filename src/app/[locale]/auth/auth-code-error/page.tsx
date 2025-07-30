@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 
 export default function AuthCodeError() {
   const t = useTranslations('errors.authError');
@@ -12,12 +13,12 @@ export default function AuthCodeError() {
         <p className="text-gray-600 dark:text-gray-300 mb-6">
           {t('description')}
         </p>
-        <a
+        <Link
           href="/login"
           className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors"
         >
           {t('tryAgain')}
-        </a>
+        </Link>
       </div>
     </div>
   );

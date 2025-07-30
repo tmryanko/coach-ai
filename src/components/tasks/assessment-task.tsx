@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { TaskStatus } from '@prisma/client';
 import { CheckCircle, Clock } from 'lucide-react';
 import { api } from '@/utils/api';
+import { useTranslations } from 'next-intl';
 
 interface AssessmentTaskProps {
   task: {
@@ -22,6 +23,7 @@ interface AssessmentTaskProps {
 }
 
 export function AssessmentTask({ task, taskProgress, onComplete }: AssessmentTaskProps) {
+  const t = useTranslations('taskComponents.assessmentTask');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const isCompleted = taskProgress?.status === TaskStatus.COMPLETED;
 
@@ -41,10 +43,10 @@ export function AssessmentTask({ task, taskProgress, onComplete }: AssessmentTas
       <div className="text-center py-8">
         <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
         <h3 className="text-xl font-semibold text-green-900 dark:text-green-100 mb-2">
-          Assessment Completed!
+          {t('completedTitle')}
         </h3>
         <p className="text-green-700 dark:text-green-300">
-          You&apos;ve successfully completed this assessment.
+          {t('completedDescription')}
         </p>
       </div>
     );
@@ -54,11 +56,11 @@ export function AssessmentTask({ task, taskProgress, onComplete }: AssessmentTas
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>Assessment Coming Soon</CardTitle>
+          <CardTitle>{t('comingSoonTitle')}</CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-gray-600 dark:text-gray-300 mb-4">
-            Assessment task interface is being developed. For now, you can mark this task as complete.
+            {t('comingSoonDescription')}
           </p>
           <Button 
             onClick={async () => {
@@ -82,10 +84,10 @@ export function AssessmentTask({ task, taskProgress, onComplete }: AssessmentTas
             {isSubmitting ? (
               <>
                 <Clock className="w-4 h-4 mr-2 animate-spin" />
-                Completing...
+                {t('completing')}
               </>
             ) : (
-              'Mark as Complete'
+              t('markAsComplete')
             )}
           </Button>
         </CardContent>

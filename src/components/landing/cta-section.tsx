@@ -18,10 +18,10 @@ export function CTASection() {
           </p>
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button asChild size="lg" variant="secondary" className="text-lg px-8 py-6 w-full sm:w-auto">
-              <a href="/login" className="flex items-center justify-center gap-2">
+              <Link href="/login" className="flex items-center justify-center gap-2">
                 {t('getStarted')}
                 <ArrowRight className="h-5 w-5" />
-              </a>
+              </Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="text-lg px-8 py-6 w-full sm:w-auto border-blue-200 text-blue-100 hover:bg-blue-50 hover:text-blue-600">
               <Link href="/pricing">{t('viewAllPlans')}</Link>

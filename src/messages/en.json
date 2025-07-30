@@ -1378,5 +1378,40 @@
     "keyStages": "Key stages for you:",
     "recommended": "Recommended",
     "noPrograms": "No coaching programs are currently available. Check back soon!"
+  },
+  "programDetailPage": {
+    "loadingTitle": "Loading Program...",
+    "notFoundTitle": "Program Not Found",
+    "notFoundDescription": "This program could not be found.",
+    "backToPrograms": "Back to Programs",
+    "enrolled": "Enrolled",
+    "enrolling": "Enrolling...",
+    "enrollNow": "Enroll Now",
+    "duration": "{count} days",
+    "stages": "{count} stages",
+    "tasks": "{count} tasks",
+    "overallProgress": "Overall Progress",
+    "programStages": "Program Stages",
+    "stage": "Stage {number}: {name}",
+    "tasksCompleted": "{completed}/{total} tasks completed",
+    "tasksInStage": "Tasks in this Stage",
+    "startTask": "Start Task",
+    "continueTask": "Continue Task",
+    "reviewTask": "Review Task"
+  },
+  "taskComponents": {
+    "assessmentTask": {
+      "completedTitle": "Assessment Completed!",
+      "completedDescription": "You've successfully completed this assessment.",
+      "comingSoonTitle": "Assessment Coming Soon",
+      "comingSoonDescription": "Assessment task interface is being developed. For now, you can mark this task as complete.",
+      "completing": "Completing...",
+      "markAsComplete": "Mark as Complete"
+    },
+    "taskPage": {
+      "taskNotFound": "Task not found or you don't have access to this task.",
+      "goBack": "Go back",
+      "unsupportedTaskType": "Task type \"{taskType}\" is not yet supported."
+    }
   }
 }

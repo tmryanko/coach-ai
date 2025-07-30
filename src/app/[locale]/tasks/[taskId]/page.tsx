@@ -10,8 +10,10 @@ import { JournalingTask } from '@/components/tasks/journaling-task';
 import { CommunicationTask } from '@/components/tasks/communication-task';
 import { TaskType } from '@prisma/client';
 import { Loader2 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export default function TaskPage() {
+  const t = useTranslations('taskPage');
   const params = useParams();
   const router = useRouter();
   const taskId = params.taskId as string;
@@ -41,13 +43,13 @@ export default function TaskPage() {
       >
         <div className="text-center py-12">
           <p className="text-gray-600 dark:text-gray-300 mb-4">
-            Task not found or you don&apos;t have access to this task.
+            {t('taskNotFound')}
           </p>
           <button 
             onClick={() => router.back()}
             className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
           >
-            Go back
+            {t('goBack')}
           </button>
         </div>
       </TaskLayout>
@@ -86,7 +88,7 @@ export default function TaskPage() {
         return (
           <div className="text-center py-8">
             <p className="text-gray-600 dark:text-gray-300">
-              Task type &quot;{task.type}&quot; is not yet supported.
+              {t('unsupportedTaskType', { taskType: task.type })}
             </p>
           </div>
         );
@@ -98,7 +100,6 @@ export default function TaskPage() {
       task={task}
       taskProgress={taskProgress}
       onBack={() => router.push(`/programs/${programId}`)}
-      onTaskComplete={handleTaskComplete}
     >
       {renderTaskComponent()}
     </TaskLayout>

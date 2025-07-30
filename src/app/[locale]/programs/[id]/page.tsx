@@ -20,8 +20,10 @@ import {
   Loader2
 } from 'lucide-react';
 import { TaskStatus } from '@prisma/client';
+import { useTranslations } from 'next-intl';
 
 export default function ProgramDetailPage() {
+  const t = useTranslations('programDetailPage');
   const params = useParams();
   const router = useRouter();
   const programId = params.id as string;
@@ -40,7 +42,7 @@ export default function ProgramDetailPage() {
 
   if (isLoading) {
     return (
-      <AppLayout title="Loading Program..." showBackButton={true}>
+      <AppLayout title={t('loadingTitle')} showBackButton={true}>
         <div className="flex items-center justify-center py-12">
           <Loader2 className="h-8 w-8 animate-spin" />
         </div>
@@ -50,11 +52,11 @@ export default function ProgramDetailPage() {
 
   if (!program) {
     return (
-      <AppLayout title="Program Not Found" showBackButton={true}>
+      <AppLayout title={t('notFoundTitle')} showBackButton={true}>
         <div className="text-center py-12">
-          <p className="text-gray-600 dark:text-gray-300">This program could not be found.</p>
+          <p className="text-gray-600 dark:text-gray-300">{t('notFoundDescription')}</p>
           <Button onClick={() => router.push('/programs')} className="mt-4">
-            Back to Programs
+            {t('backToPrograms')}
           </Button>
         </div>
       </AppLayout>
@@ -127,10 +129,10 @@ export default function ProgramDetailPage() {
                 </CardDescription>
               </div>
               {isEnrolled ? (
-                <Badge variant="default" className="ml-4">Enrolled</Badge>
+                <Badge variant="default" className="ml-4">{t('enrolled')}</Badge>
               ) : (
                 <Button onClick={handleEnroll} disabled={enrollMutation.isPending}>
-                  {enrollMutation.isPending ? 'Enrolling...' : 'Enroll Now'}
+                  {enrollMutation.isPending ? t('enrolling') : t('enrollNow')}
                 </Button>
               )}
             </div>
@@ -138,22 +140,22 @@ export default function ProgramDetailPage() {
             <div className="flex items-center gap-6 mt-4 text-sm text-gray-600 dark:text-gray-300">
               <div className="flex items-center gap-1">
                 <Clock className="w-4 h-4" />
-                <span>{program.duration} days</span>
+                <span>{t('duration', {count: program.duration})}</span>
               </div>
               <div className="flex items-center gap-1">
                 <Target className="w-4 h-4" />
-                <span>{program.phases.length} stages</span>
+                <span>{t('stages', {count: program.phases.length})}</span>
               </div>
               <div className="flex items-center gap-1">
                 <BookOpen className="w-4 h-4" />
-                <span>{program.phases.reduce((sum, phase) => sum + phase.tasks.length, 0)} tasks</span>
+                <span>{t('tasks', {count: program.phases.reduce((sum, phase) => sum + phase.tasks.length, 0)})}</span>
               </div>
             </div>
 
             {isEnrolled && (
               <div className="mt-4">
                 <div className="flex items-center justify-between text-sm mb-2">
-                  <span>Overall Progress</span>
+                  <span>{t('overallProgress')}</span>
                   <span>{Math.round(progressPercentage)}%</span>
                 </div>
                 <Progress value={progressPercentage} className="h-2" />
@@ -166,7 +168,7 @@ export default function ProgramDetailPage() {
           {/* Stages Sidebar */}
           <Card className="lg:col-span-1">
             <CardHeader>
-              <CardTitle className="text-lg">Program Stages</CardTitle>
+              <CardTitle className="text-lg">{t('programStages')}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
@@ -187,7 +189,7 @@ export default function ProgramDetailPage() {
                     >
                       <div className="flex items-center justify-between mb-1">
                         <span className="font-medium text-sm">
-                          Stage {index + 1}: {phase.name}
+                          {t('stage', {number: index + 1, name: phase.name})}
                         </span>
                         {isCompleted ? (
                           <CheckCircle className="w-4 h-4 text-green-500" />
@@ -200,7 +202,7 @@ export default function ProgramDetailPage() {
                       </p>
                       {isEnrolled && (
                         <div className="text-xs text-gray-500">
-                          {stageProgress.completed}/{stageProgress.total} tasks completed
+                          {t('tasksCompleted', {completed: stageProgress.completed, total: stageProgress.total})}
                         </div>
                       )}
                     </button>
@@ -219,7 +221,7 @@ export default function ProgramDetailPage() {
                     <div className="flex items-center justify-between">
                       <div>
                         <CardTitle className="text-xl">
-                          Stage {selectedStageIndex + 1}: {currentStage.name}
+                          {t('stage', {number: selectedStageIndex + 1, name: currentStage.name})}
                         </CardTitle>
                         <CardDescription className="mt-1">
                           {currentStage.description}
@@ -249,7 +251,7 @@ export default function ProgramDetailPage() {
 
                 {/* Stage Tasks */}
                 <div className="space-y-4">
-                  <h3 className="text-lg font-semibold">Tasks in this Stage</h3>
+                  <h3 className="text-lg font-semibold">{t('tasksInStage')}</h3>
                   {currentStage.tasks.map((task, taskIndex) => {
                     const taskStatus = getTaskStatus(task.id);
                     const isCompleted = taskStatus === TaskStatus.COMPLETED;
@@ -283,7 +285,7 @@ export default function ProgramDetailPage() {
                                   disabled={startTaskMutation.isPending}
                                 >
                                   <Play className="w-4 h-4 mr-1" />
-                                  Start Task
+                                  {t('startTask')}
                                 </Button>
                               ) : isInProgress ? (
                                 <Button 
@@ -291,7 +293,7 @@ export default function ProgramDetailPage() {
                                   variant="outline"
                                   onClick={() => handleContinueTask(task.id)}
                                 >
-                                  Continue Task
+                                  {t('continueTask')}
                                 </Button>
                               ) : (
                                 <Button 
@@ -299,7 +301,7 @@ export default function ProgramDetailPage() {
                                   variant="outline"
                                   onClick={() => handleContinueTask(task.id)}
                                 >
-                                  Review Task
+                                  {t('reviewTask')}
                                 </Button>
                               )}
                             </div>

@@ -4,6 +4,7 @@ import { useAuth } from '@/contexts/auth-context';
 import { MainNavigation } from '@/components/navigation/main-nav';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -44,7 +45,7 @@ export function AppLayout({
           </CardHeader>
           <CardContent>
             <Button asChild className="w-full" size="lg">
-              <a href="/login">Sign In with Google</a>
+              <Link href="/login">Sign In with Google</Link>
             </Button>
           </CardContent>
         </Card>
@@ -70,7 +71,7 @@ export function AppLayout({
                 </div>
                 {showBackButton && (
                   <Button variant="outline" asChild>
-                    <a href={backButtonHref}>{backButtonText}</a>
+                    <Link href={backButtonHref}>{backButtonText}</Link>
                   </Button>
                 )}
               </div>
@@ -109,7 +110,7 @@ export function SimpleAppLayout({ children }: { children: React.ReactNode }) {
           </CardHeader>
           <CardContent>
             <Button asChild className="w-full" size="lg">
-              <a href="/login">Sign In with Google</a>
+              <Link href="/login">Sign In with Google</Link>
             </Button>
           </CardContent>
         </Card>

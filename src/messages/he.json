@@ -1479,5 +1479,40 @@
     "keyStages": "שלבים עיקריים עבורך:",
     "recommended": "מומלץ",
     "noPrograms": "אין כרגע תוכניות אימון זמינות. חזור בקרוב!"
+  },
+  "programDetailPage": {
+    "loadingTitle": "טוען תוכנית...",
+    "notFoundTitle": "תוכנית לא נמצאה",
+    "notFoundDescription": "לא ניתן למצוא את התוכנית הזו.",
+    "backToPrograms": "חזרה לתוכניות",
+    "enrolled": "נרשם",
+    "enrolling": "נרשם...",
+    "enrollNow": "הירשם עכשיו",
+    "duration": "{count} ימים",
+    "stages": "{count} שלבים",
+    "tasks": "{count} משימות",
+    "overallProgress": "התקדמות כללית",
+    "programStages": "שלבי התוכנית",
+    "stage": "שלב {number}: {name}",
+    "tasksCompleted": "{completed}/{total} משימות הושלמו",
+    "tasksInStage": "משימות בשלב זה",
+    "startTask": "התחל משימה",
+    "continueTask": "המשך משימה",
+    "reviewTask": "סקור משימה"
+  },
+  "taskComponents": {
+    "assessmentTask": {
+      "completedTitle": "ההערכה הושלמה!",
+      "completedDescription": "השלמת בהצלחה את ההערכה הזו.",
+      "comingSoonTitle": "הערכה בקרוב",
+      "comingSoonDescription": "ממשק משימת ההערכה בפיתוח. בינתיים, באפשרותך לסמן משימה זו כהושלמה.",
+      "completing": "משלים...",
+      "markAsComplete": "סמן כהושלם"
+    }
+  },
+  "taskPage": {
+    "taskNotFound": "המשימה לא נמצאה או שאין לך גישה למשימה זו.",
+    "goBack": "חזור",
+    "unsupportedTaskType": "סוג משימה \"{taskType}\" אינו נתמך עדיין."
   }
 }
