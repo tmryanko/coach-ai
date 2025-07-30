@@ -37,7 +37,38 @@ interface TaskLayoutProps {
 
 export function TaskLayout({ task, taskProgress, onBack, onTaskComplete, children }: TaskLayoutProps) {
   const t = useTranslations('taskLayout');
+  const tProgram = useTranslations('coachingProgram');
   const [coachMessage, setCoachMessage] = useState<string>('');
+
+  // Function to get translated task content
+  const getTranslatedTask = (task: any) => {
+    // Map of known task titles to their translation keys
+    const taskTranslationMap: Record<string, { phase: string; task: string }> = {
+      'Define Your Core Values': { phase: 'selfDiscovery', task: 'defineCoreValues' },
+      'Your Authentic Self Assessment': { phase: 'selfDiscovery', task: 'authenticSelfAssessment' },
+      'Relationship Pattern Analysis': { phase: 'pastRelationshipPatterns', task: 'relationshipPatternAnalysis' },
+      'Emotional Wounds Inventory': { phase: 'pastRelationshipPatterns', task: 'emotionalWoundsInventory' },
+      // Add more mappings as needed
+    };
+
+    const mapping = taskTranslationMap[task.title];
+    if (mapping) {
+      return {
+        title: tProgram(`tasks.${mapping.phase}.${mapping.task}.title`),
+        description: tProgram(`tasks.${mapping.phase}.${mapping.task}.description`),
+        goal: tProgram(`tasks.${mapping.phase}.${mapping.task}.goal`),
+        focus: tProgram(`tasks.${mapping.phase}.${mapping.task}.focus`)
+      };
+    }
+
+    // Return original content if no translation found
+    return {
+      title: task.title,
+      description: task.description,
+      goal: task.content?.goal,
+      focus: task.content?.focus
+    };
+  };
 
   useEffect(() => {
     if (task) {
@@ -117,29 +148,32 @@ export function TaskLayout({ task, taskProgress, onBack, onTaskComplete, childre
             {t('backToProgram')}
           </Button>
 
-          {task && (
-            <div className="space-y-2">
-              <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
-                <span>{task.phase.program.name}</span>
-                <span>•</span>
-                <span>{task.phase.name}</span>
-              </div>
-              <div className="flex items-center gap-3 mb-4">
-                <h1 className="text-2xl font-bold">{task.title}</h1>
-                <Badge className={getTaskTypeColor(task.type)}>
-                  {t(`taskTypes.${task.type.toLowerCase()}`)}
-                </Badge>
-                {taskProgress && (
-                  <Badge className={getStatusColor(taskProgress.status)}>
-                    {t(`taskStatuses.${taskProgress.status.toLowerCase().replace('_', '_')}`)}
+          {task && (() => {
+            const translatedTask = getTranslatedTask(task);
+            return (
+              <div className="space-y-2">
+                <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+                  <span>{task.phase.program.name}</span>
+                  <span>•</span>
+                  <span>{task.phase.name}</span>
+                </div>
+                <div className="flex items-center gap-3 mb-4">
+                  <h1 className="text-2xl font-bold">{translatedTask.title}</h1>
+                  <Badge className={getTaskTypeColor(task.type)}>
+                    {t(`taskTypes.${task.type.toLowerCase()}`)}
                   </Badge>
-                )}
+                  {taskProgress && (
+                    <Badge className={getStatusColor(taskProgress.status)}>
+                      {t(`taskStatuses.${taskProgress.status.toLowerCase()}`)}
+                    </Badge>
+                  )}
+                </div>
+                <p className="text-gray-600 dark:text-gray-300">
+                  {translatedTask.description}
+                </p>
               </div>
-              <p className="text-gray-600 dark:text-gray-300">
-                {task.description}
-              </p>
-            </div>
-          )}
+            );
+          })()}
         </div>
 
         {/* AI Coach Message */}
@@ -166,32 +200,35 @@ export function TaskLayout({ task, taskProgress, onBack, onTaskComplete, childre
         )}
 
         {/* Task Content */}
-        {task?.content && (
-          <Card className="mb-6">
-            <CardHeader className="pb-4">
-              <div className="space-y-3">
-                {task.content.goal && (
-                  <div className="flex items-start gap-2">
-                    <Target className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('goal')}</p>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">{task.content.goal}</p>
+        {task?.content && (() => {
+          const translatedTask = getTranslatedTask(task);
+          return (
+            <Card className="mb-6">
+              <CardHeader className="pb-4">
+                <div className="space-y-3">
+                  {(translatedTask.goal || task.content.goal) && (
+                    <div className="flex items-start gap-2">
+                      <Target className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <p className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('goal')}</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">{translatedTask.goal || task.content.goal}</p>
+                      </div>
                     </div>
-                  </div>
-                )}
-                {task.content.focus && (
-                  <div className="flex items-start gap-2">
-                    <Focus className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('focus')}</p>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">{task.content.focus}</p>
+                  )}
+                  {(translatedTask.focus || task.content.focus) && (
+                    <div className="flex items-start gap-2">
+                      <Focus className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <p className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('focus')}</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">{translatedTask.focus || task.content.focus}</p>
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            </CardHeader>
-          </Card>
-        )}
+                  )}
+                </div>
+              </CardHeader>
+            </Card>
+          );
+        })()}
 
         {/* Task Interface */}
         <Card>

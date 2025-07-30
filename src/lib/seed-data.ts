@@ -1,45 +1,44 @@
 import { PrismaClient, TaskType } from '@prisma/client';
+import { getTranslations } from 'next-intl/server';
 
 const prisma = new PrismaClient();
 
-export const seedData = async () => {
+export const seedData = async (locale: string = 'en') => {
+  const t = await getTranslations({ locale, namespace: 'coachingProgram' });
+  
   // Create the comprehensive 12-stage AI Relationship Coaching Program
   const program = await prisma.coachingProgram.create({
     data: {
-      name: 'AI Relationship Coaching Program',
-      description: 'A comprehensive 12-stage journey to build deeper self-awareness, heal past patterns, and create the loving relationship you truly desire.',
+      name: t('name'),
+      description: t('description'),
       duration: 84, // 12 stages × 7 days each
       phases: {
         create: [
           {
-            name: 'Self-Discovery',
-            description: 'Build self-awareness and define personal values',
+            name: t('phases.selfDiscovery.name'),
+            description: t('phases.selfDiscovery.description'),
             order: 1,
             tasks: {
               create: [
                 {
-                  title: 'Define Your Core Values',
-                  description: 'List 5 values that are most important to you in life and relationships. Reflect on why.',
+                  title: t('tasks.selfDiscovery.defineCoreValues.title'),
+                  description: t('tasks.selfDiscovery.defineCoreValues.description'),
                   type: TaskType.REFLECTION,
                   order: 1,
                   content: {
-                    goal: 'Build self-awareness and define personal values',
-                    focus: 'Who am I? What do I really want?',
-                    prompts: [
-                      'What values guide your daily decisions?',
-                      'Which values are non-negotiable in relationships?',
-                      'How do your values influence your relationship choices?',
-                      'When have you compromised your values? How did it feel?',
-                      'What values do you want to embody more fully?'
-                    ]
+                    goal: t('tasks.selfDiscovery.defineCoreValues.goal'),
+                    focus: t('tasks.selfDiscovery.defineCoreValues.focus'),
+                    prompts: t.raw('prompts.selfDiscovery.defineCoreValues')
                   }
                 },
                 {
-                  title: 'Your Authentic Self Assessment',
-                  description: 'Explore who you are when you feel most yourself and confident.',
+                  title: t('tasks.selfDiscovery.authenticSelfAssessment.title'),
+                  description: t('tasks.selfDiscovery.authenticSelfAssessment.description'),
                   type: TaskType.ASSESSMENT,
                   order: 2,
                   content: {
+                    goal: t('tasks.selfDiscovery.authenticSelfAssessment.goal'),
+                    focus: t('tasks.selfDiscovery.authenticSelfAssessment.focus'),
                     questions: [
                       'When do you feel most authentically yourself?',
                       'What qualities do you love most about yourself?',
@@ -519,10 +518,10 @@ export const seedData = async () => {
   return program;
 };
 
-export const runSeed = async () => {
+export const runSeed = async (locale: string = 'en') => {
   try {
-    await seedData();
-    console.log('Seeding completed successfully');
+    await seedData(locale);
+    console.log(`Seeding completed successfully for locale: ${locale}`);
   } catch (error) {
     console.error('Error seeding data:', error);
   } finally {

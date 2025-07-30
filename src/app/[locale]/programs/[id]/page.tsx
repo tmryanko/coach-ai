@@ -24,10 +24,60 @@ import { useTranslations } from 'next-intl';
 
 export default function ProgramDetailPage() {
   const t = useTranslations('programDetailPage');
+  const tProgram = useTranslations('coachingProgram');
   const params = useParams();
   const router = useRouter();
   const programId = params.id as string;
   const [selectedStageIndex, setSelectedStageIndex] = useState(0);
+
+  // Function to get translated program content
+  const getTranslatedProgram = (program: any) => {
+    // If the program name matches our main coaching program, use translations
+    if (program.name === 'AI Relationship Coaching Program' || program.name === 'תכנית אימון זוגי עם AI') {
+      return {
+        name: tProgram('name'),
+        description: tProgram('description')
+      };
+    }
+    // Otherwise, return the original content
+    return {
+      name: program.name,
+      description: program.description
+    };
+  };
+
+  // Function to get translated phase content
+  const getTranslatedPhase = (phase: any) => {
+    // Map of known phase names to their translation keys
+    const phaseTranslationMap: Record<string, string> = {
+      'Self-Discovery': 'selfDiscovery',
+      'Past Relationship Patterns': 'pastRelationshipPatterns',
+      'Inner Blocks & Fears': 'innerBlocksFears',
+      'Emotional Regulation': 'emotionalRegulation',
+      'Self-Compassion & Confidence': 'selfCompassionConfidence',
+      'Communication & Expression': 'communicationExpression',
+      'Boundaries & Standards': 'boundariesStandards',
+      'Ideal Partner & Vision': 'idealPartnerVision',
+      'Real-Life Exposure': 'realLifeExposure',
+      'Handling Rejection & Uncertainty': 'handlingRejectionUncertainty',
+      'Healthy Attraction': 'healthyAttraction',
+      'Integration & Readiness': 'integrationReadiness'
+    };
+
+    const translationKey = phaseTranslationMap[phase.name];
+    if (translationKey) {
+      return {
+        name: tProgram(`phases.${translationKey}.name`),
+        description: tProgram(`phases.${translationKey}.description`)
+      };
+    }
+
+    // Return original content if no translation found
+    return {
+      name: phase.name,
+      description: phase.description
+    };
+  };
   
   const { data: program, isLoading } = api.programs.getById.useQuery({ id: programId });
   const { data: userProgress } = api.programs.getUserProgress.useQuery({ programId });
@@ -111,10 +161,12 @@ export default function ProgramDetailPage() {
     enrollMutation.mutate({ programId });
   };
 
+  const translatedProgram = getTranslatedProgram(program);
+
   return (
     <AppLayout 
-      title={program.name} 
-      description={program.description}
+      title={translatedProgram.name} 
+      description={translatedProgram.description}
       showBackButton={true}
     >
       <div className="max-w-6xl mx-auto">
@@ -123,9 +175,9 @@ export default function ProgramDetailPage() {
           <CardHeader>
             <div className="flex items-start justify-between">
               <div>
-                <CardTitle className="text-2xl mb-2">{program.name}</CardTitle>
+                <CardTitle className="text-2xl mb-2">{translatedProgram.name}</CardTitle>
                 <CardDescription className="text-base">
-                  {program.description}
+                  {translatedProgram.description}
                 </CardDescription>
               </div>
               {isEnrolled ? (
@@ -187,19 +239,26 @@ export default function ProgramDetailPage() {
                           : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
                       }`}
                     >
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="font-medium text-sm">
-                          {t('stage', {number: index + 1, name: phase.name})}
-                        </span>
-                        {isCompleted ? (
-                          <CheckCircle className="w-4 h-4 text-green-500" />
-                        ) : (
-                          <Circle className="w-4 h-4 text-gray-400" />
-                        )}
-                      </div>
-                      <p className="text-xs text-gray-600 dark:text-gray-300 mb-2">
-                        {phase.description}
-                      </p>
+                      {(() => {
+                        const translatedPhase = getTranslatedPhase(phase);
+                        return (
+                          <>
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="font-medium text-sm">
+                                {t('stage', {number: index + 1, name: translatedPhase.name})}
+                              </span>
+                              {isCompleted ? (
+                                <CheckCircle className="w-4 h-4 text-green-500" />
+                              ) : (
+                                <Circle className="w-4 h-4 text-gray-400" />
+                              )}
+                            </div>
+                            <p className="text-xs text-gray-600 dark:text-gray-300 mb-2">
+                              {translatedPhase.description}
+                            </p>
+                          </>
+                        );
+                      })()}
                       {isEnrolled && (
                         <div className="text-xs text-gray-500">
                           {t('tasksCompleted', {completed: stageProgress.completed, total: stageProgress.total})}
@@ -214,19 +273,21 @@ export default function ProgramDetailPage() {
 
           {/* Stage Details */}
           <div className="lg:col-span-2 space-y-6">
-            {currentStage && (
-              <>
-                <Card>
-                  <CardHeader>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <CardTitle className="text-xl">
-                          {t('stage', {number: selectedStageIndex + 1, name: currentStage.name})}
-                        </CardTitle>
-                        <CardDescription className="mt-1">
-                          {currentStage.description}
-                        </CardDescription>
-                      </div>
+            {currentStage && (() => {
+              const translatedCurrentStage = getTranslatedPhase(currentStage);
+              return (
+                <>
+                  <Card>
+                    <CardHeader>
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <CardTitle className="text-xl">
+                            {t('stage', {number: selectedStageIndex + 1, name: translatedCurrentStage.name})}
+                          </CardTitle>
+                          <CardDescription className="mt-1">
+                            {translatedCurrentStage.description}
+                          </CardDescription>
+                        </div>
                       <div className="flex gap-2">
                         <Button
                           variant="outline"
@@ -311,8 +372,9 @@ export default function ProgramDetailPage() {
                     );
                   })}
                 </div>
-              </>
-            )}
+                </>
+              );
+            })()}
           </div>
         </div>
       </div>

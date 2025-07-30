@@ -1496,7 +1496,8 @@
     "taskStatuses": {
       "completed": "completed",
       "in_progress": "in progress",
-      "pending": "pending"
+      "not_started": "not started",
+      "skipped": "skipped"
     },
     "coachMessages": {
       "reflection": "Let's do this together. I'll guide you step by step through this reflection. First — take a deep breath and think about what truly matters to you. This is a safe space to explore your thoughts and feelings.",
@@ -1505,6 +1506,340 @@
       "journaling": "Time for some personal reflection through writing. I'll be here to support you as you explore your thoughts and feelings. Let your authentic voice flow onto the page.",
       "communication": "Let's practice some communication skills together! This is a safe space to try new approaches and build your confidence. I'll provide guidance as you work through the exercises.",
       "default": "I'm here to support you through this task. Take your time, be honest with yourself, and remember — every step forward is progress worth celebrating."
+    }
+  },
+  "coachingProgram": {
+    "name": "AI Relationship Coaching Program",
+    "description": "A comprehensive 12-stage journey to build deeper self-awareness, heal past patterns, and create the loving relationship you truly desire.",
+    "phases": {
+      "selfDiscovery": {
+        "name": "Self-Discovery",
+        "description": "Build self-awareness and define personal values"
+      },
+      "pastRelationshipPatterns": {
+        "name": "Past Relationship Patterns",
+        "description": "Reflect on past experiences to identify patterns and wounds"
+      },
+      "innerBlocksFears": {
+        "name": "Inner Blocks & Fears",
+        "description": "Explore fears, limiting beliefs, and internal resistance"
+      },
+      "emotionalRegulation": {
+        "name": "Emotional Regulation",
+        "description": "Learn how to recognize and manage emotional triggers"
+      },
+      "selfCompassionConfidence": {
+        "name": "Self-Compassion & Confidence",
+        "description": "Strengthen self-worth and inner dialogue"
+      },
+      "communicationExpression": {
+        "name": "Communication & Expression",
+        "description": "Improve honesty, vulnerability, and listening"
+      },
+      "boundariesStandards": {
+        "name": "Boundaries & Standards",
+        "description": "Define what is okay — and what's not — for you in a relationship"
+      },
+      "idealPartnerVision": {
+        "name": "Ideal Partner & Vision",
+        "description": "Clarify the kind of connection you're seeking"
+      },
+      "realLifeExposure": {
+        "name": "Real-Life Exposure",
+        "description": "Begin taking intentional action in real life"
+      },
+      "handlingRejectionUncertainty": {
+        "name": "Handling Rejection & Uncertainty",
+        "description": "Build resilience in the face of emotional risk"
+      },
+      "healthyAttraction": {
+        "name": "Healthy Attraction",
+        "description": "Recognize authentic interest vs. emotional addiction"
+      },
+      "integrationReadiness": {
+        "name": "Integration & Readiness",
+        "description": "Reflect on growth and prepare for long-term connection"
+      }
+    },
+    "tasks": {
+      "selfDiscovery": {
+        "defineCoreValues": {
+          "title": "Define Your Core Values",
+          "description": "List 5 values that are most important to you in life and relationships. Reflect on why.",
+          "goal": "Build self-awareness and define personal values",
+          "focus": "Who am I? What do I really want?"
+        },
+        "authenticSelfAssessment": {
+          "title": "Your Authentic Self Assessment",
+          "description": "Explore who you are when you feel most yourself and confident.",
+          "goal": "Build self-awareness and define personal values",
+          "focus": "Who am I? What do I really want?"
+        }
+      },
+      "pastRelationshipPatterns": {
+        "relationshipPatternAnalysis": {
+          "title": "Relationship Pattern Analysis",
+          "description": "Describe your most meaningful past relationship. What worked? What didn't?",
+          "goal": "Reflect on past experiences to identify patterns and wounds",
+          "focus": "Lessons learned, emotional baggage"
+        },
+        "emotionalWoundsInventory": {
+          "title": "Emotional Wounds Inventory",
+          "description": "Identify any unresolved hurt or trauma that might be affecting your ability to connect.",
+          "goal": "Reflect on past experiences to identify patterns and wounds",
+          "focus": "Lessons learned, emotional baggage"
+        }
+      },
+      "innerBlocksFears": {
+        "fearIdentificationExercise": {
+          "title": "Fear Identification Exercise",
+          "description": "What's one thought that often holds you back from opening up to someone new?",
+          "goal": "Explore fears, limiting beliefs, and internal resistance",
+          "focus": "Fear of rejection, abandonment, self-doubt"
+        },
+        "limitingBeliefChallenge": {
+          "title": "Limiting Belief Challenge",
+          "description": "Identify and challenge the negative beliefs that create relationship barriers.",
+          "goal": "Explore fears, limiting beliefs, and internal resistance",
+          "focus": "Fear of rejection, abandonment, self-doubt"
+        }
+      },
+      "emotionalRegulation": {
+        "triggerResponseAnalysis": {
+          "title": "Trigger Response Analysis",
+          "description": "Describe a recent emotional trigger and how you reacted. Could you respond differently next time?",
+          "goal": "Learn how to recognize and manage emotional triggers",
+          "focus": "Emotional maturity, calm under pressure"
+        },
+        "emotionalRegulationToolkit": {
+          "title": "Emotional Regulation Toolkit",
+          "description": "Develop a personalized set of strategies for managing intense emotions.",
+          "goal": "Learn how to recognize and manage emotional triggers",
+          "focus": "Emotional maturity, calm under pressure"
+        }
+      },
+      "selfCompassionConfidence": {
+        "selfCompassionLetter": {
+          "title": "Self-Compassion Letter",
+          "description": "Write a short letter to yourself offering kindness and support, as if you were your own best friend.",
+          "goal": "Strengthen self-worth and inner dialogue",
+          "focus": "Self-love, confidence, self-talk"
+        },
+        "confidenceBuildingPractice": {
+          "title": "Confidence Building Practice",
+          "description": "Identify your strengths and practice celebrating your unique qualities.",
+          "goal": "Strengthen self-worth and inner dialogue",
+          "focus": "Self-love, confidence, self-talk"
+        }
+      },
+      "communicationExpression": {
+        "authenticExpressionPractice": {
+          "title": "Authentic Expression Practice",
+          "description": "Describe a time you didn't speak your truth. What would you say now?",
+          "goal": "Improve honesty, vulnerability, and listening",
+          "focus": "Assertiveness, sharing needs, setting tone"
+        },
+        "activeListeningChallenge": {
+          "title": "Active Listening Challenge",
+          "description": "Practice deep listening skills with someone in your life this week.",
+          "goal": "Improve honesty, vulnerability, and listening",
+          "focus": "Assertiveness, sharing needs, setting tone"
+        }
+      },
+      "boundariesStandards": {
+        "relationshipBoundariesDefinition": {
+          "title": "Relationship Boundaries Definition",
+          "description": "List 3 emotional boundaries that you need in a healthy relationship.",
+          "goal": "Define what is okay — and what's not — for you in a relationship",
+          "focus": "Self-respect, protection, clarity"
+        },
+        "standardsAssessment": {
+          "title": "Standards Assessment",
+          "description": "Define your non-negotiable standards for a romantic partnership.",
+          "goal": "Define what is okay — and what's not — for you in a relationship",
+          "focus": "Self-respect, protection, clarity"
+        }
+      },
+      "idealPartnerVision": {
+        "relationshipVisionBoard": {
+          "title": "Relationship Vision Board",
+          "description": "Write a vision of your ideal relationship — what does it feel like? What do you bring into it?",
+          "goal": "Clarify the kind of connection you're seeking",
+          "focus": "Alignment, compatibility, long-term vision"
+        },
+        "valuesAlignmentExercise": {
+          "title": "Values Alignment Exercise",
+          "description": "Explore how your values align with your relationship vision.",
+          "goal": "Clarify the kind of connection you're seeking",
+          "focus": "Alignment, compatibility, long-term vision"
+        }
+      },
+      "realLifeExposure": {
+        "socialConnectionPractice": {
+          "title": "Social Connection Practice",
+          "description": "Start a short conversation with someone new this week. Reflect on how it felt.",
+          "goal": "Begin taking intentional action in real life",
+          "focus": "Initiating conversations, putting self out there"
+        },
+        "comfortZoneExpansion": {
+          "title": "Comfort Zone Expansion",
+          "description": "Take one small step outside your comfort zone in social situations.",
+          "goal": "Begin taking intentional action in real life",
+          "focus": "Initiating conversations, putting self out there"
+        }
+      },
+      "handlingRejectionUncertainty": {
+        "rejectionReframeExercise": {
+          "title": "Rejection Reframe Exercise",
+          "description": "Recall a recent rejection or let-down. What did you learn? What did you make it mean about yourself?",
+          "goal": "Build resilience in the face of emotional risk",
+          "focus": "Emotional agility, detachment, staying open"
+        },
+        "resilienceBuildingToolkit": {
+          "title": "Resilience Building Toolkit",
+          "description": "Develop strategies for bouncing back from romantic disappointments.",
+          "goal": "Build resilience in the face of emotional risk",
+          "focus": "Emotional agility, detachment, staying open"
+        }
+      },
+      "healthyAttraction": {
+        "attractionAnalysis": {
+          "title": "Attraction Analysis",
+          "description": "Think of someone you were recently attracted to. What drew you in — and was it healthy?",
+          "goal": "Recognize authentic interest vs. emotional addiction",
+          "focus": "Avoiding toxic patterns, tuning into real compatibility"
+        },
+        "healthyUnhealthyPatternsAssessment": {
+          "title": "Healthy vs. Unhealthy Patterns Assessment",
+          "description": "Learn to identify the difference between healthy connection and emotional addiction.",
+          "goal": "Recognize authentic interest vs. emotional addiction",
+          "focus": "Avoiding toxic patterns, tuning into real compatibility"
+        }
+      },
+      "integrationReadiness": {
+        "journeyReflection": {
+          "title": "Journey Reflection",
+          "description": "In your own words, how have you changed since beginning this journey? What are you ready for now?",
+          "goal": "Reflect on growth and prepare for long-term connection",
+          "focus": "Integration, self-trust, conscious readiness"
+        },
+        "readinessAssessmentCommitment": {
+          "title": "Readiness Assessment & Commitment",
+          "description": "Evaluate your readiness for a healthy, conscious relationship.",
+          "goal": "Reflect on growth and prepare for long-term connection",
+          "focus": "Integration, self-trust, conscious readiness"
+        }
+      }
+    },
+    "prompts": {
+      "selfDiscovery": {
+        "defineCoreValues": [
+          "What values guide your daily decisions?",
+          "Which values are non-negotiable in relationships?",
+          "How do your values influence your relationship choices?",
+          "When have you compromised your values? How did it feel?",
+          "What values do you want to embody more fully?"
+        ]
+      },
+      "pastRelationshipPatterns": {
+        "relationshipPatternAnalysis": [
+          "What patterns do you notice across your relationships?",
+          "What role do you typically play in relationships?",
+          "What lessons have your past relationships taught you?",
+          "Which relationship patterns serve you? Which don't?",
+          "What would you do differently in future relationships?"
+        ]
+      },
+      "innerBlocksFears": {
+        "fearIdentificationExercise": [
+          "What are your biggest fears about relationships?",
+          "What beliefs about love hold you back?",
+          "When do you feel most vulnerable in relationships?",
+          "What stories do you tell yourself about your worthiness?",
+          "How do these fears protect you? How do they limit you?"
+        ]
+      },
+      "emotionalRegulation": {
+        "triggerResponseAnalysis": [
+          "What situations typically trigger strong emotions for you?",
+          "How do you usually react when triggered?",
+          "What physical sensations do you notice when triggered?",
+          "What would a healthier response look like?",
+          "How can you create space between trigger and response?"
+        ]
+      },
+      "selfCompassionConfidence": {
+        "selfCompassionLetter": [
+          "What would you say to a dear friend going through your situation?",
+          "What kindness do you need to hear right now?",
+          "How can you be more gentle with yourself?",
+          "What are you most proud of about your journey so far?",
+          "What would unconditional self-love look like?"
+        ]
+      },
+      "communicationExpression": {
+        "authenticExpressionPractice": [
+          "When do you find it hardest to speak your truth?",
+          "What prevents you from being fully honest?",
+          "How do you want to communicate your needs?",
+          "What would authentic vulnerability look like for you?",
+          "How can you balance honesty with kindness?"
+        ]
+      },
+      "boundariesStandards": {
+        "relationshipBoundariesDefinition": [
+          "What behaviors are absolutely unacceptable to you?",
+          "What do you need to feel safe and respected?",
+          "How do you want to be treated when you're upset?",
+          "What boundaries have you struggled to maintain?",
+          "How will you communicate your boundaries clearly?"
+        ]
+      },
+      "idealPartnerVision": {
+        "relationshipVisionBoard": [
+          "How do you want to feel in your ideal relationship?",
+          "What kind of partnership do you envision?",
+          "What qualities do you want in a life partner?",
+          "How do you want to grow together?",
+          "What would you contribute to this relationship?"
+        ]
+      },
+      "realLifeExposure": {
+        "comfortZoneExpansion": [
+          "What feels scary but exciting about meeting new people?",
+          "How did it feel to step outside your comfort zone?",
+          "What did you learn about yourself?",
+          "What would you do differently next time?",
+          "How can you continue expanding your social world?"
+        ]
+      },
+      "handlingRejectionUncertainty": {
+        "rejectionReframeExercise": [
+          "How do you typically handle rejection?",
+          "What stories do you tell yourself when things don't work out?",
+          "What would rejection mean if it wasn't about your worth?",
+          "How can you stay open while protecting your heart?",
+          "What would fearless dating look like for you?"
+        ]
+      },
+      "healthyAttraction": {
+        "attractionAnalysis": [
+          "What typically attracts you to someone?",
+          "Do you confuse intensity with compatibility?",
+          "What red flags have you ignored because of attraction?",
+          "How do you distinguish healthy attraction from unhealthy patterns?",
+          "What would balanced, healthy attraction feel like?"
+        ]
+      },
+      "integrationReadiness": {
+        "journeyReflection": [
+          "What has been your biggest breakthrough in this journey?",
+          "How has your relationship with yourself changed?",
+          "What patterns have you released or transformed?",
+          "What new strengths have you discovered?",
+          "How do you feel different about love and relationships now?"
+        ]
+      }
     }
   }
 }

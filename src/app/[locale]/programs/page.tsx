@@ -46,6 +46,23 @@ export default function ProgramsPage() {
   };
 
   const t = useTranslations("programsPage");
+  const tProgram = useTranslations("coachingProgram");
+
+  // Function to get translated program content
+  const getTranslatedProgram = (program: any) => {
+    // If the program name matches our main coaching program, use translations
+    if (program.name === 'AI Relationship Coaching Program' || program.name === 'תכנית אימון זוגי עם AI') {
+      return {
+        name: tProgram('name'),
+        description: tProgram('description')
+      };
+    }
+    // Otherwise, return the original content
+    return {
+      name: program.name,
+      description: program.description
+    };
+  };
 
   if (isLoading) {
     return (
@@ -74,15 +91,16 @@ export default function ProgramsPage() {
           const progressPercentage = userProg
             ? (userProg.completedTasks / userProg.totalTasks) * 100
             : 0;
+          const translatedProgram = getTranslatedProgram(program);
 
           return (
             <Card key={program.id} className="relative overflow-hidden">
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div>
-                    <CardTitle className="text-lg">{program.name}</CardTitle>
+                    <CardTitle className="text-lg">{translatedProgram.name}</CardTitle>
                     <CardDescription className="mt-1">
-                      {program.description}
+                      {translatedProgram.description}
                     </CardDescription>
                   </div>
                   {isEnrolled && (
