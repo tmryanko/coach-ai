@@ -42,7 +42,7 @@ export function ModelSelector({
   variant = 'compact',
   disabled = false 
 }: ModelSelectorProps) {
-  const t = useTranslations('taskComponents.modelSelector');
+  const t = useTranslations('modelSelector');
   const { data: availableModels, isLoading } = api.ai.getAvailableModels.useQuery();
 
   if (isLoading || !availableModels) {

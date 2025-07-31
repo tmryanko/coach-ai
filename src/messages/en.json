@@ -1478,42 +1478,42 @@
       "completing": "Completing...",
       "readyToCompleteTask": "Ready to Complete Task",
       "sessionCompleted": "✅ Coaching session completed! You can now finalize your task."
+    }
+  },
+  "appLayout": {
+    "loading": "Loading...",
+    "welcome": "Welcome to Coach AI",
+    "description": "Your personal AI relationship coach. Sign in to get started with personalized coaching programs.",
+    "signInWithGoogle": "Sign In with Google",
+    "backToDashboard": "Back to Dashboard"
+  },
+  "modelSelector": {
+    "title": "AI Model",
+    "description": "Choose your preferred AI model",
+    "currentModel": "Using: {modelName}",
+    "changeModel": "Change Model",
+    "selectModel": "Select AI Model",
+    "categories": {
+      "premium": "Premium",
+      "standard": "Standard"
     },
-    "modelSelector": {
-      "title": "AI Model",
-      "description": "Choose your preferred AI model",
-      "currentModel": "Using: {modelName}",
-      "changeModel": "Change Model",
-      "selectModel": "Select AI Model",
-      "categories": {
-        "premium": "Premium",
-        "standard": "Standard"
+    "models": {
+      "gpt4o": {
+        "name": "GPT-4 Omni",
+        "description": "Most capable model with enhanced reasoning"
       },
-      "models": {
-        "gpt4o": {
-          "name": "GPT-4 Omni",
-          "description": "Most capable model with enhanced reasoning"
-        },
-        "gpt4omini": {
-          "name": "GPT-4 Omni Mini",
-          "description": "Fast and cost-effective with good performance"
-        },
-        "gpt35turbo": {
-          "name": "GPT-3.5 Turbo",
-          "description": "Classic model with reliable performance"
-        },
-        "gpt4": {
-          "name": "GPT-4",
-          "description": "Original GPT-4 with excellent reasoning"
-        }
+      "gpt4omini": {
+        "name": "GPT-4 Omni Mini",
+        "description": "Fast and cost-effective with good performance"
+      },
+      "gpt35turbo": {
+        "name": "GPT-3.5 Turbo",
+        "description": "Classic model with reliable performance"
+      },
+      "gpt4": {
+        "name": "GPT-4",
+        "description": "Original GPT-4 with excellent reasoning"
       }
-    },
-    "appLayout": {
-      "loading": "Loading...",
-      "welcome": "Welcome to Coach AI",
-      "description": "Your personal AI relationship coach. Sign in to get started with personalized coaching programs.",
-      "signInWithGoogle": "Sign In with Google",
-      "backToDashboard": "Back to Dashboard"
     }
   },
   "taskPage": {
