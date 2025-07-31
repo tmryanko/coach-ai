@@ -68,6 +68,11 @@
       "profileSettings": "הגדרות פרופיל",
       "signOut": "התנתקות"
     },
+    "languageSwitcher": {
+      "switchLanguage": "החלף שפה",
+      "english": "English",
+      "hebrew": "עברית"
+    },
     "appName": "מאמן AI"
   },
   "hero": {

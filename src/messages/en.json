@@ -68,6 +68,11 @@
       "profileSettings": "Profile Settings",
       "signOut": "Sign Out"
     },
+    "languageSwitcher": {
+      "switchLanguage": "Switch Language",
+      "english": "English",
+      "hebrew": "עברית"
+    },
     "appName": "Coach AI"
   },
   "hero": {

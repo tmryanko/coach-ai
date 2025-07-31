@@ -28,6 +28,7 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import { api } from '@/utils/api';
+import { LanguageSwitcher } from './language-switcher';
 
 interface NavItem {
   href: string;
@@ -128,6 +129,7 @@ export function MainNavigation() {
 
         {/* Mobile Menu Button */}
         <div className="flex flex-1 items-center justify-end space-x-2 md:hidden">
+          <LanguageSwitcher />
           <Button
             variant="ghost"
             size="icon"
@@ -150,6 +152,7 @@ export function MainNavigation() {
                 {profile.relationshipStatus.charAt(0).toUpperCase() + profile.relationshipStatus.slice(1)}
               </Badge>
             )}
+            <LanguageSwitcher />
           </div>
 
           {/* User Menu */}

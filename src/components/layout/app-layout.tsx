@@ -2,6 +2,7 @@
 
 import { useAuth } from '@/contexts/auth-context';
 import { MainNavigation } from '@/components/navigation/main-nav';
+import { LanguageSwitcher } from '@/components/navigation/language-switcher';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -38,20 +39,25 @@ export function AppLayout({
 
   if (!user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
-        <Card className="w-full max-w-md">
-          <CardHeader className="text-center">
-            <CardTitle className="text-2xl font-bold">{t('welcome')}</CardTitle>
-            <CardDescription>
-              {t('description')}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Button asChild className="w-full" size="lg">
-              <Link href="/login">{t('signInWithGoogle')}</Link>
-            </Button>
-          </CardContent>
-        </Card>
+      <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
+        <div className="flex justify-end p-4">
+          <LanguageSwitcher />
+        </div>
+        <div className="flex-1 flex items-center justify-center">
+          <Card className="w-full max-w-md">
+            <CardHeader className="text-center">
+              <CardTitle className="text-2xl font-bold">{t('welcome')}</CardTitle>
+              <CardDescription>
+                {t('description')}
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button asChild className="w-full" size="lg">
+                <Link href="/login">{t('signInWithGoogle')}</Link>
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     );
   }
@@ -104,20 +110,25 @@ export function SimpleAppLayout({ children }: { children: React.ReactNode }) {
 
   if (!user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
-        <Card className="w-full max-w-md">
-          <CardHeader className="text-center">
-            <CardTitle className="text-2xl font-bold">{t('welcome')}</CardTitle>
-            <CardDescription>
-              {t('description')}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Button asChild className="w-full" size="lg">
-              <Link href="/login">{t('signInWithGoogle')}</Link>
-            </Button>
-          </CardContent>
-        </Card>
+      <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
+        <div className="flex justify-end p-4">
+          <LanguageSwitcher />
+        </div>
+        <div className="flex-1 flex items-center justify-center">
+          <Card className="w-full max-w-md">
+            <CardHeader className="text-center">
+              <CardTitle className="text-2xl font-bold">{t('welcome')}</CardTitle>
+              <CardDescription>
+                {t('description')}
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button asChild className="w-full" size="lg">
+                <Link href="/login">{t('signInWithGoogle')}</Link>
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     );
   }
