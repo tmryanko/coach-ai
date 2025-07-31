@@ -18,6 +18,11 @@ interface SelfReflectionStepProps {
   isLoading: boolean;
 }
 
+// Map actual IDs to translation keys (removing hyphens)
+const getTranslationKey = (id: string): string => {
+  return id.replace(/-/g, '');
+};
+
 const getPersonalStrengths = (t: any) => [
   { value: 'empathy', label: t('personalStrengths.empathy'), icon: '💝' },
   { value: 'loyalty', label: t('personalStrengths.loyalty'), icon: '🤝' },
@@ -33,22 +38,22 @@ const getPersonalStrengths = (t: any) => [
   { value: 'communication', label: t('personalStrengths.communication'), icon: '💬' },
   { value: 'independence', label: t('personalStrengths.independence'), icon: '🦋' },
   { value: 'ambition', label: t('personalStrengths.ambition'), icon: '🎯' },
-  { value: 'emotional-intelligence', label: t('personalStrengths.emotional-intelligence'), icon: '🧘‍♀️' },
+  { value: 'emotional-intelligence', label: t(`personalStrengths.${getTranslationKey('emotional-intelligence')}`), icon: '🧘‍♀️' },
 ];
 
 const getFutureRelationshipGoals = (t: any) => [
-  { value: 'deep-connection', label: t('relationshipGoals.deep-connection'), icon: '💞' },
-  { value: 'effective-communication', label: t('relationshipGoals.effective-communication'), icon: '💬' },
-  { value: 'healthy-boundaries', label: t('relationshipGoals.healthy-boundaries'), icon: '🚧' },
-  { value: 'conflict-resolution', label: t('relationshipGoals.conflict-resolution'), icon: '🤝' },
-  { value: 'trust-building', label: t('relationshipGoals.trust-building'), icon: '🔒' },
+  { value: 'deep-connection', label: t(`relationshipGoals.${getTranslationKey('deep-connection')}`), icon: '💞' },
+  { value: 'effective-communication', label: t(`relationshipGoals.${getTranslationKey('effective-communication')}`), icon: '💬' },
+  { value: 'healthy-boundaries', label: t(`relationshipGoals.${getTranslationKey('healthy-boundaries')}`), icon: '🚧' },
+  { value: 'conflict-resolution', label: t(`relationshipGoals.${getTranslationKey('conflict-resolution')}`), icon: '🤝' },
+  { value: 'trust-building', label: t(`relationshipGoals.${getTranslationKey('trust-building')}`), icon: '🔒' },
   { value: 'intimacy', label: t('relationshipGoals.intimacy'), icon: '🌹' },
-  { value: 'support-partnership', label: t('relationshipGoals.support-partnership'), icon: '🫂' },
-  { value: 'personal-growth', label: t('relationshipGoals.personal-growth'), icon: '🌱' },
-  { value: 'life-balance', label: t('relationshipGoals.life-balance'), icon: '⚖️' },
-  { value: 'shared-goals', label: t('relationshipGoals.shared-goals'), icon: '🎯' },
-  { value: 'emotional-security', label: t('relationshipGoals.emotional-security'), icon: '🛡️' },
-  { value: 'fun-connection', label: t('relationshipGoals.fun-connection'), icon: '🎪' },
+  { value: 'support-partnership', label: t(`relationshipGoals.${getTranslationKey('support-partnership')}`), icon: '🫂' },
+  { value: 'personal-growth', label: t(`relationshipGoals.${getTranslationKey('personal-growth')}`), icon: '🌱' },
+  { value: 'life-balance', label: t(`relationshipGoals.${getTranslationKey('life-balance')}`), icon: '⚖️' },
+  { value: 'shared-goals', label: t(`relationshipGoals.${getTranslationKey('shared-goals')}`), icon: '🎯' },
+  { value: 'emotional-security', label: t(`relationshipGoals.${getTranslationKey('emotional-security')}`), icon: '🛡️' },
+  { value: 'fun-connection', label: t(`relationshipGoals.${getTranslationKey('fun-connection')}`), icon: '🎪' },
 ];
 
 export function SelfReflectionStep({ 

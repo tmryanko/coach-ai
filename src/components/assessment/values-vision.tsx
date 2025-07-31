@@ -120,53 +120,58 @@ const getCoreValues = (t: any) => [
 const getLifePriorities = (t: any) => [
   {
     value: "career-success",
-    label: t("lifePriorities.career-success"),
+    label: t(`lifePriorities.${getTranslationKey("career-success")}`),
     icon: "💼",
   },
-  { value: "family-time", label: t("lifePriorities.family-time"), icon: "👨‍👩‍👧‍👦" },
+  { value: "family-time", label: t(`lifePriorities.${getTranslationKey("family-time")}`), icon: "👨‍👩‍👧‍👦" },
   {
     value: "personal-growth",
-    label: t("lifePriorities.personal-growth"),
+    label: t(`lifePriorities.${getTranslationKey("personal-growth")}`),
     icon: "🌱",
   },
   {
     value: "health-fitness",
-    label: t("lifePriorities.health-fitness"),
+    label: t(`lifePriorities.${getTranslationKey("health-fitness")}`),
     icon: "💪",
   },
   {
     value: "financial-security",
-    label: t("lifePriorities.financial-security"),
+    label: t(`lifePriorities.${getTranslationKey("financial-security")}`),
     icon: "💰",
   },
   {
     value: "travel-adventure",
-    label: t("lifePriorities.travel-adventure"),
+    label: t(`lifePriorities.${getTranslationKey("travel-adventure")}`),
     icon: "✈️",
   },
   {
     value: "social-connections",
-    label: t("lifePriorities.social-connections"),
+    label: t(`lifePriorities.${getTranslationKey("social-connections")}`),
     icon: "👥",
   },
   { value: "creativity", label: t("lifePriorities.creativity"), icon: "🎨" },
   { value: "learning", label: t("lifePriorities.learning"), icon: "📚" },
   {
     value: "community-service",
-    label: t("lifePriorities.community-service"),
+    label: t(`lifePriorities.${getTranslationKey("community-service")}`),
     icon: "🤲",
   },
   {
     value: "spiritual-practice",
-    label: t("lifePriorities.spiritual-practice"),
+    label: t(`lifePriorities.${getTranslationKey("spiritual-practice")}`),
     icon: "🧘",
   },
   {
     value: "work-life-balance",
-    label: t("lifePriorities.work-life-balance"),
+    label: t(`lifePriorities.${getTranslationKey("work-life-balance")}`),
     icon: "⚖️",
   },
 ];
+
+// Map actual IDs to translation keys (removing hyphens)
+const getTranslationKey = (id: string): string => {
+  return id.replace(/-/g, '');
+};
 
 const getDealBreakers = (t: any) => [
   { value: "dishonesty", label: t("dealBreakers.dishonesty"), icon: "🚫" },
@@ -176,30 +181,30 @@ const getDealBreakers = (t: any) => [
   { value: "addiction", label: t("dealBreakers.addiction"), icon: "🚫" },
   {
     value: "different-values",
-    label: t("dealBreakers.different-values"),
+    label: t(`dealBreakers.${getTranslationKey("different-values")}`),
     icon: "🔀",
   },
   {
     value: "no-commitment",
-    label: t("dealBreakers.no-commitment"),
+    label: t(`dealBreakers.${getTranslationKey("no-commitment")}`),
     icon: "🏃‍♂️",
   },
   {
     value: "poor-communication",
-    label: t("dealBreakers.poor-communication"),
+    label: t(`dealBreakers.${getTranslationKey("poor-communication")}`),
     icon: "🤐",
   },
   {
     value: "different-goals",
-    label: t("dealBreakers.different-goals"),
+    label: t(`dealBreakers.${getTranslationKey("different-goals")}`),
     icon: "↔️",
   },
   {
     value: "financial-irresponsibility",
-    label: t("dealBreakers.financial-irresponsibility"),
+    label: t(`dealBreakers.${getTranslationKey("financial-irresponsibility")}`),
     icon: "💸",
   },
-  { value: "no-growth", label: t("dealBreakers.no-growth"), icon: "🚧" },
+  { value: "no-growth", label: t(`dealBreakers.${getTranslationKey("no-growth")}`), icon: "🚧" },
   { value: "jealousy", label: t("dealBreakers.jealousy"), icon: "👁️" },
 ];
 

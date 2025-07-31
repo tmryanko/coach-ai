@@ -113,53 +113,58 @@ const getStrengthOptions = (t: any) => [
   { value: "forgiveness", label: t("strengthOptions.forgiveness"), icon: "🕊️" },
 ];
 
+// Map actual challenge IDs to translation keys (removing hyphens)
+const getTranslationKey = (challengeId: string): string => {
+  return challengeId.replace(/-/g, '');
+};
+
 const getChallengeOptions = (t: any) => [
   {
     value: "setting-boundaries",
-    label: t("challengeOptions.setting-boundaries"),
+    label: t(`challengeOptions.${getTranslationKey("setting-boundaries")}`),
     icon: "🚧",
   },
   {
     value: "expressing-emotions",
-    label: t("challengeOptions.expressing-emotions"),
+    label: t(`challengeOptions.${getTranslationKey("expressing-emotions")}`),
     icon: "💭",
   },
   {
     value: "managing-anxiety",
-    label: t("challengeOptions.managing-anxiety"),
+    label: t(`challengeOptions.${getTranslationKey("managing-anxiety")}`),
     icon: "😰",
   },
   {
     value: "trusting-others",
-    label: t("challengeOptions.trusting-others"),
+    label: t(`challengeOptions.${getTranslationKey("trusting-others")}`),
     icon: "🤔",
   },
   {
     value: "conflict-resolution",
-    label: t("challengeOptions.conflict-resolution"),
+    label: t(`challengeOptions.${getTranslationKey("conflict-resolution")}`),
     icon: "⚡",
   },
   {
     value: "self-confidence",
-    label: t("challengeOptions.self-confidence"),
+    label: t(`challengeOptions.${getTranslationKey("self-confidence")}`),
     icon: "💪",
   },
   {
     value: "emotional-regulation",
-    label: t("challengeOptions.emotional-regulation"),
+    label: t(`challengeOptions.${getTranslationKey("emotional-regulation")}`),
     icon: "🌊",
   },
   {
     value: "overthinking",
-    label: t("challengeOptions.overthinking"),
+    label: t(`challengeOptions.${getTranslationKey("overthinking")}`),
     icon: "🤯",
   },
   {
     value: "past-trauma",
-    label: t("challengeOptions.past-trauma"),
+    label: t(`challengeOptions.${getTranslationKey("past-trauma")}`),
     icon: "🩹",
   },
-  { value: "opening-up", label: t("challengeOptions.opening-up"), icon: "🔓" },
+  { value: "opening-up", label: t(`challengeOptions.${getTranslationKey("opening-up")}`), icon: "🔓" },
 ];
 
 const getReadinessLevels = (t: any) => [

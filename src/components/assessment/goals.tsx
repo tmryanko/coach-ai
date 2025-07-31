@@ -31,6 +31,11 @@ const GOAL_OPTIONS = [
   { value: 'emotional-intelligence', category: 'emotional' },
 ];
 
+// Map actual goal IDs to translation keys (removing hyphens)
+const getTranslationKey = (goalId: string): string => {
+  return goalId.replace(/-/g, '');
+};
+
 export function GoalsStep({ data, onNext, onBack, canGoBack, isLoading }: GoalsStepProps) {
   const t = useTranslations('assessment.goals');
   const tCommon = useTranslations('common');
@@ -70,7 +75,7 @@ export function GoalsStep({ data, onNext, onBack, canGoBack, isLoading }: GoalsS
             {selectedGoals.map(goal => {
               return (
                 <Badge key={goal} variant="secondary">
-                  {t(`goalOptions.${goal}`)}
+                  {t(`goalOptions.${getTranslationKey(goal)}`)}
                 </Badge>
               );
             })}
@@ -91,7 +96,7 @@ export function GoalsStep({ data, onNext, onBack, canGoBack, isLoading }: GoalsS
           >
             <div className="flex items-center justify-between">
               <span className="font-medium text-gray-900 dark:text-gray-100">
-                {t(`goalOptions.${option.value}`)}
+                {t(`goalOptions.${getTranslationKey(option.value)}`)}
               </span>
               <div className={`w-4 h-4 rounded border-2 flex items-center justify-center ${
                 selectedGoals.includes(option.value)

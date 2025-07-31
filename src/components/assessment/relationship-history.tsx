@@ -19,6 +19,11 @@ interface RelationshipHistoryStepProps {
 }
 
 
+// Map actual status IDs to translation keys (removing hyphens)
+const getTranslationKey = (statusId: string): string => {
+  return statusId.replace(/-/g, '');
+};
+
 export function RelationshipHistoryStep({ 
   data, 
   onNext, 
@@ -32,20 +37,20 @@ export function RelationshipHistoryStep({
   const RELATIONSHIP_STATUS_OPTIONS = [
     { 
       value: 'single-never-married', 
-      label: t('statusOptions.single-never-married.label'), 
-      description: t('statusOptions.single-never-married.description'),
+      label: t(`statusOptions.${getTranslationKey('single-never-married')}.label`), 
+      description: t(`statusOptions.${getTranslationKey('single-never-married')}.description`),
       followUp: true
     },
     { 
       value: 'single-dating', 
-      label: t('statusOptions.single-dating.label'), 
-      description: t('statusOptions.single-dating.description'),
+      label: t(`statusOptions.${getTranslationKey('single-dating')}.label`), 
+      description: t(`statusOptions.${getTranslationKey('single-dating')}.description`),
       followUp: true
     },
     { 
       value: 'recently-single', 
-      label: t('statusOptions.recently-single.label'), 
-      description: t('statusOptions.recently-single.description'),
+      label: t(`statusOptions.${getTranslationKey('recently-single')}.label`), 
+      description: t(`statusOptions.${getTranslationKey('recently-single')}.description`),
       followUp: true
     },
     { 
@@ -62,25 +67,25 @@ export function RelationshipHistoryStep({
     },
     { 
       value: 'its-complicated', 
-      label: t('statusOptions.its-complicated.label'), 
-      description: t('statusOptions.its-complicated.description'),
+      label: t(`statusOptions.${getTranslationKey('its-complicated')}.label`), 
+      description: t(`statusOptions.${getTranslationKey('its-complicated')}.description`),
       followUp: true
     },
     { 
       value: 'in-relationship', 
-      label: t('statusOptions.in-relationship.label'), 
-      description: t('statusOptions.in-relationship.description'),
+      label: t(`statusOptions.${getTranslationKey('in-relationship')}.label`), 
+      description: t(`statusOptions.${getTranslationKey('in-relationship')}.description`),
       followUp: false
     },
   ];
 
   const DURATION_OPTIONS = [
-    { value: 'few-months', label: t('durationOptions.few-months') },
-    { value: 'one-year', label: t('durationOptions.one-year') },
-    { value: 'two-years', label: t('durationOptions.two-years') },
-    { value: 'long-term', label: t('durationOptions.long-term') },
-    { value: 'very-long-term', label: t('durationOptions.very-long-term') },
-    { value: 'no-significant', label: t('durationOptions.no-significant') },
+    { value: 'few-months', label: t(`durationOptions.${getTranslationKey('few-months')}`) },
+    { value: 'one-year', label: t(`durationOptions.${getTranslationKey('one-year')}`) },
+    { value: 'two-years', label: t(`durationOptions.${getTranslationKey('two-years')}`) },
+    { value: 'long-term', label: t(`durationOptions.${getTranslationKey('long-term')}`) },
+    { value: 'very-long-term', label: t(`durationOptions.${getTranslationKey('very-long-term')}`) },
+    { value: 'no-significant', label: t(`durationOptions.${getTranslationKey('no-significant')}`) },
   ];
 
   const TIME_SINCE_OPTIONS = [

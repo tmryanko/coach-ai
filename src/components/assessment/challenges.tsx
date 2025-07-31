@@ -32,6 +32,11 @@ const CHALLENGE_OPTIONS = [
   'commitment-fears',
 ];
 
+// Map actual challenge IDs to translation keys (removing hyphens)
+const getTranslationKey = (challengeId: string): string => {
+  return challengeId.replace(/-/g, '');
+};
+
 export function ChallengesStep({ data, onNext, onBack, canGoBack, isLoading }: ChallengesStepProps) {
   const t = useTranslations('assessment.challenges');
   const tCommon = useTranslations('common');
@@ -70,7 +75,7 @@ export function ChallengesStep({ data, onNext, onBack, canGoBack, isLoading }: C
           <div className="flex flex-wrap gap-2">
             {selectedChallenges.map(challenge => (
               <Badge key={challenge} variant="secondary">
-                {t(`challengeOptions.${challenge}.label`)}
+                {t(`challengeOptions.${getTranslationKey(challenge)}.label`)}
               </Badge>
             ))}
           </div>
@@ -91,10 +96,10 @@ export function ChallengesStep({ data, onNext, onBack, canGoBack, isLoading }: C
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="font-medium text-gray-900 dark:text-gray-100">
-                  {t(`challengeOptions.${option}.label`)}
+                  {t(`challengeOptions.${getTranslationKey(option)}.label`)}
                 </h3>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                  {t(`challengeOptions.${option}.description`)}
+                  {t(`challengeOptions.${getTranslationKey(option)}.description`)}
                 </p>
               </div>
               <div className={`w-4 h-4 rounded border-2 flex items-center justify-center ${

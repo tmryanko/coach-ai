@@ -276,18 +276,18 @@
         "improve-communication": "Improve Communication",
         "build-trust": "Build Trust",
         "resolve-conflicts": "Resolve Conflicts Better",
-        "increase-intimacy": "Increase Intimacy",
-        "work-life-balance": "Better Work-Life Balance",
-        "future-planning": "Plan Our Future Together",
-        "family-planning": "Navigate Family Planning",
-        "financial-harmony": "Financial Harmony",
-        "social-life": "Improve Social Life Together",
-        "personal-growth": "Support Each Other's Growth",
-        "physical-health": "Health & Fitness Goals",
-        "spiritual-connection": "Spiritual Connection",
-        "dating-skills": "Improve Dating Skills",
-        "self-confidence": "Build Self-Confidence",
-        "emotional-intelligence": "Emotional Intelligence"
+        "increaseintimacy": "Increase Intimacy",
+        "worklifebalance": "Better Work-Life Balance",
+        "futureplanning": "Plan Our Future Together",
+        "familyplanning": "Navigate Family Planning",
+        "financialharmony": "Financial Harmony",
+        "sociallife": "Improve Social Life Together",
+        "personalgrowth": "Support Each Other's Growth",
+        "physicalhealth": "Health & Fitness Goals",
+        "spiritualconnection": "Spiritual Connection",
+        "datingskills": "Improve Dating Skills",
+        "selfconfidence": "Build Self-Confidence",
+        "emotionalintelligence": "Emotional Intelligence"
       }
     },
     "challenges": {
@@ -295,35 +295,35 @@
       "description": "Select the areas where you'd like support. Being honest helps us provide better guidance.",
       "selectedChallengesText": "Selected challenges",
       "challengeOptions": {
-        "poor-communication": {
+        "poorcommunication": {
           "label": "Poor Communication",
           "description": "We don't communicate well"
         },
-        "frequent-arguments": {
+        "frequentarguments": {
           "label": "Frequent Arguments",
           "description": "We argue too often"
         },
-        "trust-issues": {
+        "trustissues": {
           "label": "Trust Issues",
           "description": "Lack of trust between us"
         },
-        "lack-intimacy": {
+        "lackintimacy": {
           "label": "Lack of Intimacy",
           "description": "Physical or emotional distance"
         },
-        "different-values": {
+        "differentvalues": {
           "label": "Different Values",
           "description": "We have conflicting values"
         },
-        "time-management": {
+        "timemanagement": {
           "label": "Time Management",
           "description": "Struggling to spend quality time together"
         },
-        "financial-stress": {
+        "financialstress": {
           "label": "Financial Stress",
           "description": "Money causes tension"
         },
-        "family-pressure": {
+        "familypressure": {
           "label": "Family Pressure",
           "description": "External family influences"
         },
@@ -331,31 +331,31 @@
           "label": "Jealousy Issues",
           "description": "Jealousy is affecting our relationship"
         },
-        "future-uncertainty": {
+        "futureuncertainty": {
           "label": "Future Uncertainty",
           "description": "Unclear about our future together"
         },
-        "social-differences": {
+        "socialdifferences": {
           "label": "Social Differences",
           "description": "Different social needs and preferences"
         },
-        "personal-growth": {
+        "personalgrowth": {
           "label": "Personal Growth Gaps",
           "description": "Growing at different rates"
         },
-        "past-baggage": {
+        "pastbaggage": {
           "label": "Past Relationship Baggage",
           "description": "Previous experiences affecting us"
         },
-        "long-distance": {
+        "longdistance": {
           "label": "Long Distance",
           "description": "Physical distance challenges"
         },
-        "work-stress": {
+        "workstress": {
           "label": "Work-Related Stress",
           "description": "Career pressures affecting relationship"
         },
-        "commitment-fears": {
+        "commitmentfears": {
           "label": "Commitment Fears",
           "description": "Anxiety about commitment level"
         }
@@ -455,12 +455,12 @@
       },
       "prioritiesLabel": "What are your top life priorities? (Select up to 3)",
       "priorityOptions": {
-        "family-time": "Quality Family Time",
-        "career-growth": "Career Growth",
-        "personal-health": "Personal Health & Fitness",
-        "financial-security": "Financial Security",
-        "social-connections": "Social Connections",
-        "personal-growth": "Personal Development",
+        "familytime": "Quality Family Time",
+        "careergrowth": "Career Growth",
+        "personalhealth": "Personal Health & Fitness",
+        "financialsecurity": "Financial Security",
+        "socialconnections": "Social Connections",
+        "personalgrowth": "Personal Development",
         "adventure": "Adventure & Travel",
         "stability": "Stability & Routine"
       },
@@ -554,16 +554,16 @@
       "challengesDescription": "What emotional skills would you like to develop or improve?",
       "challengesSelected": "Growth areas ({count}/3):",
       "challengeOptions": {
-        "setting-boundaries": "Setting healthy boundaries",
-        "expressing-emotions": "Expressing emotions clearly",
-        "managing-anxiety": "Managing relationship anxiety",
-        "trusting-others": "Trusting new people",
-        "conflict-resolution": "Handling conflict",
-        "self-confidence": "Self-confidence in relationships",
-        "emotional-regulation": "Managing intense emotions",
+        "settingboundaries": "Setting healthy boundaries",
+        "expressingemotions": "Expressing emotions clearly",
+        "managinganxiety": "Managing relationship anxiety",
+        "trustingothers": "Trusting new people",
+        "conflictresolution": "Handling conflict",
+        "selfconfidence": "Self-confidence in relationships",
+        "emotionalregulation": "Managing intense emotions",
         "overthinking": "Overthinking situations",
-        "past-trauma": "Processing past relationship trauma",
-        "opening-up": "Opening up to someone new"
+        "pasttrauma": "Processing past relationship trauma",
+        "openingup": "Opening up to someone new"
       },
       "readinessTitle": "Relationship Readiness Scale",
       "readinessDescription": "How ready do you feel to start or work on a romantic relationship right now?",
@@ -749,21 +749,21 @@
         "communication": "Good Communication",
         "independence": "Independence & Self-Reliance",
         "ambition": "Ambition & Drive",
-        "emotional-intelligence": "Emotional Intelligence"
+        "emotionalintelligence": "Emotional Intelligence"
       },
       "relationshipGoals": {
-        "deep-connection": "Build deep emotional connection",
-        "effective-communication": "Communicate more effectively",
-        "healthy-boundaries": "Set healthy boundaries",
-        "conflict-resolution": "Handle conflicts better",
-        "trust-building": "Build and maintain trust",
+        "deepconnection": "Build deep emotional connection",
+        "effectivecommunication": "Communicate more effectively",
+        "healthyboundaries": "Set healthy boundaries",
+        "conflictresolution": "Handle conflicts better",
+        "trustbuilding": "Build and maintain trust",
         "intimacy": "Create deeper intimacy",
-        "support-partnership": "Be a supportive partner",
-        "personal-growth": "Continue growing together",
-        "life-balance": "Balance relationship and independence",
-        "shared-goals": "Work toward shared goals",
-        "emotional-security": "Create emotional security",
-        "fun-connection": "Keep things fun and playful"
+        "supportpartnership": "Be a supportive partner",
+        "personalgrowth": "Continue growing together",
+        "lifebalance": "Balance relationship and independence",
+        "sharedgoals": "Work toward shared goals",
+        "emotionalsecurity": "Create emotional security",
+        "funconnection": "Keep things fun and playful"
       },
       "buttons": {
         "back": "Back",
@@ -853,18 +853,18 @@
         }
       },
       "lifePriorities": {
-        "career-success": "Career Success",
-        "family-time": "Quality Family Time",
-        "personal-growth": "Personal Development",
-        "health-fitness": "Health & Fitness",
-        "financial-security": "Financial Security",
-        "travel-adventure": "Travel & Adventure",
-        "social-connections": "Social Relationships",
+        "careersuccess": "Career Success",
+        "familytime": "Quality Family Time",
+        "personalgrowth": "Personal Development",
+        "healthfitness": "Health & Fitness",
+        "financialsecurity": "Financial Security",
+        "traveladventure": "Travel & Adventure",
+        "socialconnections": "Social Relationships",
         "creativity": "Creative Expression",
         "learning": "Continuous Learning",
-        "community-service": "Community Service",
-        "spiritual-practice": "Spiritual Practice",
-        "work-life-balance": "Work-Life Balance"
+        "communityservice": "Community Service",
+        "spiritualpractice": "Spiritual Practice",
+        "worklifebalance": "Work-Life Balance"
       },
       "dealBreakers": {
         "dishonesty": "Dishonesty or lying",
@@ -872,12 +872,12 @@
         "infidelity": "Cheating or infidelity",
         "abuse": "Any form of abuse",
         "addiction": "Substance abuse problems",
-        "different-values": "Fundamentally different values",
-        "no-commitment": "Fear of commitment",
-        "poor-communication": "Unwillingness to communicate",
-        "different-goals": "Incompatible life goals",
-        "financial-irresponsibility": "Financial irresponsibility",
-        "no-growth": "Unwillingness to grow",
+        "differentvalues": "Fundamentally different values",
+        "nocommitment": "Fear of commitment",
+        "poorcommunication": "Unwillingness to communicate",
+        "differentgoals": "Incompatible life goals",
+        "financialirresponsibility": "Financial irresponsibility",
+        "nogrowth": "Unwillingness to grow",
         "jealousy": "Extreme jealousy or possessiveness"
       },
       "buttons": {
@@ -1081,15 +1081,15 @@
         "description": "Understanding your relationship history helps us provide coaching that honors your journey and builds on what you've learned.",
         "statusQuestion": "What's your current relationship status?",
         "statusOptions": {
-          "single-never-married": {
+          "singlenevermarried": {
             "label": "Single (never married)",
             "description": "Ready to explore new connections"
           },
-          "single-dating": {
+          "singledating": {
             "label": "Single but dating",
             "description": "Actively meeting people"
           },
-          "recently-single": {
+          "recentlysingle": {
             "label": "Recently single",
             "description": "Recently ended a relationship"
           },
@@ -1249,9 +1249,9 @@
       "improve-communication": "improve communication",
       "build-trust": "build trust",
       "resolve-conflicts": "resolve conflicts",
-      "increase-intimacy": "increase intimacy",
-      "work-life-balance": "achieve work-life balance",
-      "personal-growth": "personal growth",
+      "increaseintimacy": "increase intimacy",
+      "worklifebalance": "achieve work-life balance",
+      "personalgrowth": "personal growth",
       "default": "personal growth"
     },
     "buttons": {

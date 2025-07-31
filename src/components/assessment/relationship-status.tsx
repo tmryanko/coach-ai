@@ -24,6 +24,11 @@ const RELATIONSHIP_OPTIONS = [
   'complicated',
 ];
 
+// Map actual status IDs to translation keys (removing hyphens)
+const getTranslationKey = (statusId: string): string => {
+  return statusId.replace(/-/g, '');
+};
+
 export function RelationshipStatusStep({ data, onNext, onBack, canGoBack, isLoading }: RelationshipStatusStepProps) {
   const t = useTranslations('assessment.relationshipStatus');
   const tCommon = useTranslations('common');
@@ -60,10 +65,10 @@ export function RelationshipStatusStep({ data, onNext, onBack, canGoBack, isLoad
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="font-medium text-gray-900 dark:text-gray-100">
-                  {t(`statusOptions.${option}.label`)}
+                  {t(`statusOptions.${getTranslationKey(option)}.label`)}
                 </h3>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                  {t(`statusOptions.${option}.description`)}
+                  {t(`statusOptions.${getTranslationKey(option)}.description`)}
                 </p>
               </div>
               <div className={`w-4 h-4 rounded-full border-2 ${

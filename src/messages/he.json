@@ -587,16 +587,16 @@
       "challengesDescription": "איזה כישורים רגשיים הייתם רוצים לפתח או לשפר?",
       "challengesSelected": "תחומי צמיחה ({count}/3):",
       "challengeOptions": {
-        "setting-boundaries": "קביעת גבולות בריאים",
-        "expressing-emotions": "ביטוי רגשות בבירור",
-        "managing-anxiety": "ניהול חרדה במערכות יחסים",
-        "trusting-others": "אמון באנשים חדשים",
-        "conflict-resolution": "התמודדות עם קונפליקט",
-        "self-confidence": "ביטחון עצמי במערכות יחסים",
-        "emotional-regulation": "ניהול רגשות עזים",
+        "settingboundaries": "קביעת גבולות בריאים",
+        "expressingemotions": "ביטוי רגשות בבירור",
+        "managinganxiety": "ניהול חרדה במערכות יחסים",
+        "trustingothers": "אמון באנשים חדשים",
+        "conflictresolution": "התמודדות עם קונפליקט",
+        "selfconfidence": "ביטחון עצמי במערכות יחסים",
+        "emotionalregulation": "ניהול רגשות עזים",
         "overthinking": "חשיבה יתר על מצבים",
-        "past-trauma": "עיבוד טראומה ממערכות יחסים קודמות",
-        "opening-up": "פתיחות למישהו חדש"
+        "pasttrauma": "עיבוד טראומה ממערכות יחסים קודמות",
+        "openingup": "פתיחות למישהו חדש"
       },
       "readinessTitle": "סולם מוכנות למערכת יחסים",
       "readinessDescription": "כמה מוכנים אתם מרגישים להתחיל או לעבוד על מערכת יחסים רומנטית עכשיו?",
@@ -791,21 +791,21 @@
         "conflict-resolution": "פתרון קונפליקטים",
         "managing-anxiety": "ניהול חרדה",
         "supportiveness": "תמיכה באחרים",
-        "emotional-awareness": "מודעות רגשית"
+        "emotionalawareness": "מודעות רגשית"
       },
       "relationshipGoals": {
-        "deep-connection": "בניית קשר רגשי עמוק",
-        "effective-communication": "תקשורת יעילה יותר",
-        "healthy-boundaries": "הצבת גבולות בריאים",
-        "conflict-resolution": "התמודדות טובה יותר עם קונפליקטים",
-        "trust-building": "בניה ושמירה על אמון",
+        "deepconnection": "בניית קשר רגשי עמוק",
+        "effectivecommunication": "תקשורת יעילה יותר",
+        "healthyboundaries": "הצבת גבולות בריאים",
+        "conflictresolution": "התמודדות טובה יותר עם קונפליקטים",
+        "trustbuilding": "בניה ושמירה על אמון",
         "intimacy": "יצירת אינטימיות עמוקה יותר",
-        "support-partnership": "להיות שותף תומך",
-        "personal-growth": "להמשיך לצמוח יחד",
-        "life-balance": "איזון בין זוגיות לעצמאות",
-        "shared-goals": "עבודה לקראת מטרות משותפות",
-        "emotional-security": "יצירת בטחון רגשי",
-        "fun-connection": "לשמור על דברים מהנים ושובבים"
+        "supportpartnership": "להיות שותף תומך",
+        "personalgrowth": "להמשיך לצמוח יחד",
+        "lifebalance": "איזון בין זוגיות לעצמאות",
+        "sharedgoals": "עבודה לקראת מטרות משותפות",
+        "emotionalsecurity": "יצירת בטחון רגשי",
+        "funconnection": "לשמור על דברים מהנים ושובבים"
       },
       "buttons": {
         "back": "חזרה",
@@ -1182,15 +1182,15 @@
         "description": "הבנת ההיסטוריה הזוגית שלכם עוזרת לנו לספק אימון המכבד את המסע שלכם ובנוי על מה שלמדתם.",
         "statusQuestion": "מה המצב הזוגי הנוכחי שלכם?",
         "statusOptions": {
-          "single-never-married": {
+          "singlenevermarried": {
             "label": "רווק/ה (מעולם לא הייתי נשוי/ה)",
             "description": "מוכן/ה לחקור קשרים חדשים"
           },
-          "single-dating": {
+          "singledating": {
             "label": "רווק/ה אבל יוצא/ת לדייטים",
             "description": "פוגש/ת אנשים באופן פעיל"
           },
-          "recently-single": {
+          "recentlysingle": {
             "label": "רווק/ה לאחרונה",
             "description": "סיימתי מערכת יחסים לאחרונה"
           },
