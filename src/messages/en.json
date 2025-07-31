@@ -1490,19 +1490,19 @@
         "standard": "Standard"
       },
       "models": {
-        "gpt-4o": {
+        "gpt4o": {
           "name": "GPT-4 Omni",
           "description": "Most capable model with enhanced reasoning"
         },
-        "gpt-4o-mini": {
+        "gpt4omini": {
           "name": "GPT-4 Omni Mini",
           "description": "Fast and cost-effective with good performance"
         },
-        "gpt-3.5-turbo": {
+        "gpt35turbo": {
           "name": "GPT-3.5 Turbo",
           "description": "Classic model with reliable performance"
         },
-        "gpt-4": {
+        "gpt4": {
           "name": "GPT-4",
           "description": "Original GPT-4 with excellent reasoning"
         }

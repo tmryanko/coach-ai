@@ -31,6 +31,11 @@ const MODEL_ICONS = {
   'gpt-4': Brain,
 } as const;
 
+// Map actual model IDs to translation keys (removing dots and hyphens)
+const getTranslationKey = (modelId: string): string => {
+  return modelId.replace(/-/g, '').replace(/\./g, '');
+};
+
 export function ModelSelector({ 
   selectedModel, 
   onModelChange, 
@@ -45,7 +50,7 @@ export function ModelSelector({
   }
 
   const currentModel = availableModels.find(model => model.id === selectedModel);
-  const currentModelName = currentModel ? t(`models.${currentModel.id}.name`) : selectedModel;
+  const currentModelName = currentModel ? t(`models.${getTranslationKey(currentModel.id)}.name`) : selectedModel;
 
   if (variant === 'compact') {
     return (
@@ -102,14 +107,14 @@ export function ModelSelector({
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">
                           <span className="font-medium text-sm">
-                            {t(`models.${model.id}.name`)}
+                            {t(`models.${getTranslationKey(model.id)}.name`)}
                           </span>
                           <Badge variant="secondary" className="text-xs px-1.5 py-0.5">
                             {t('categories.premium')}
                           </Badge>
                         </div>
                         <p className="text-xs text-muted-foreground mt-1">
-                          {t(`models.${model.id}.description`)}
+                          {t(`models.${getTranslationKey(model.id)}.description`)}
                         </p>
                       </div>
                       {selectedModel === model.id && (
@@ -147,14 +152,14 @@ export function ModelSelector({
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">
                           <span className="font-medium text-sm">
-                            {t(`models.${model.id}.name`)}
+                            {t(`models.${getTranslationKey(model.id)}.name`)}
                           </span>
                           <Badge variant="outline" className="text-xs px-1.5 py-0.5">
                             {t('categories.standard')}
                           </Badge>
                         </div>
                         <p className="text-xs text-muted-foreground mt-1">
-                          {t(`models.${model.id}.description`)}
+                          {t(`models.${getTranslationKey(model.id)}.description`)}
                         </p>
                       </div>
                       {selectedModel === model.id && (
@@ -205,7 +210,7 @@ export function ModelSelector({
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
                   <span className="font-medium">
-                    {t(`models.${model.id}.name`)}
+                    {t(`models.${getTranslationKey(model.id)}.name`)}
                   </span>
                   <Badge 
                     variant={model.category === 'premium' ? 'secondary' : 'outline'}
@@ -215,7 +220,7 @@ export function ModelSelector({
                   </Badge>
                 </div>
                 <p className="text-sm text-muted-foreground mt-1">
-                  {t(`models.${model.id}.description`)}
+                  {t(`models.${getTranslationKey(model.id)}.description`)}
                 </p>
               </div>
               {isSelected && (
