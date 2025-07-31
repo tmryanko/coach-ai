@@ -2,12 +2,18 @@ import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 
 export const createClient = async () => {
+  // Check if we have required environment variables
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    console.warn('Supabase environment variables not available, creating minimal client');
+    throw new Error('Supabase configuration not available');
+  }
+
   try {
     const cookieStore = await cookies();
 
     return createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      process.env.NEXT_PUBLIC_SUPABASE_URL,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
       {
         cookies: {
           getAll() {
@@ -33,8 +39,8 @@ export const createClient = async () => {
     console.warn('Failed to access cookies, creating client without cookie support:', error);
     
     return createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      process.env.NEXT_PUBLIC_SUPABASE_URL,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
       {
         cookies: {
           getAll() {

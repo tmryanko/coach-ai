@@ -41,16 +41,25 @@ const createInnerTRPCContext = (opts: CreateContextOptions) => {
  * @see https://trpc.io/docs/context
  */
 export const createTRPCContext = async (opts: FetchCreateContextFnOptions) => {
-  const supabase = await createClient();
-  
-  // Get the user session
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  try {
+    const supabase = await createClient();
+    
+    // Get the user session
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
 
-  return createInnerTRPCContext({
-    userId: user?.id,
-  });
+    return createInnerTRPCContext({
+      userId: user?.id,
+    });
+  } catch (error) {
+    // If we can't create Supabase client or get user (e.g., during build),
+    // return context without user
+    console.warn('Failed to create tRPC context with Supabase, using fallback:', error);
+    return createInnerTRPCContext({
+      userId: undefined,
+    });
+  }
 };
 
 /**
