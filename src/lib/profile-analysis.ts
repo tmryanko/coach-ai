@@ -88,7 +88,7 @@ async function generateCommunicationAnalysis(data: EnhancedAssessmentData): Prom
   const prompt = `Analyze this person's communication patterns based on their assessment:
 
 Communication Style: ${data.preferredCommunicationStyle || 'Not specified'}
-Conflict Resolution: ${data.conflictResolutionStyle || 'Not specified'}
+Conflict Resolution: ${data.personalityTraits?.conflictStyle || 'Not specified'}
 Emotional Profile: ${data.emotionalProfile ? JSON.stringify(data.emotionalProfile) : 'Not provided'}
 
 Provide a supportive analysis (150-200 words) covering:

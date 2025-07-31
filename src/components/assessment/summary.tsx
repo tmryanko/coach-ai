@@ -63,7 +63,7 @@ export function SummaryStep({ data, onNext, onBack, canGoBack, isLoading }: Summ
           </CardHeader>
           <CardContent>
             <div className="flex flex-wrap gap-2">
-              {data.relationshipGoals?.map(goal => (
+              {data.relationshipGoals?.map((goal: string) => (
                 <Badge key={goal} variant="secondary">
                   {tGoals(goal)}
                 </Badge>
@@ -79,7 +79,7 @@ export function SummaryStep({ data, onNext, onBack, canGoBack, isLoading }: Summ
           </CardHeader>
           <CardContent>
             <div className="flex flex-wrap gap-2">
-              {data.currentChallenges?.map(challenge => (
+              {data.currentChallenges?.map((challenge: string) => (
                 <Badge key={challenge} variant="destructive">
                   {tChallenges(`${challenge}.label`)}
                 </Badge>
@@ -132,7 +132,7 @@ export function SummaryStep({ data, onNext, onBack, canGoBack, isLoading }: Summ
               <div>
                 <span className="text-sm font-medium">{t('personalityFields.lifePriorities')}</span>
                 <div className="mt-1 flex flex-wrap gap-1">
-                  {data.personalityTraits.priorities.map(priority => (
+                  {data.personalityTraits.priorities.map((priority: string) => (
                     <Badge key={priority} variant="outline" className="text-xs">
                       {priority.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
                     </Badge>

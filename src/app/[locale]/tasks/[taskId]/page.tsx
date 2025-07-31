@@ -17,6 +17,7 @@ export default function TaskPage() {
   const params = useParams();
   const router = useRouter();
   const taskId = params.taskId as string;
+  const utils = api.useUtils();
 
   const { data: taskProgress, isLoading } = api.tasks.getTaskProgress.useQuery({ taskId });
 
@@ -61,14 +62,20 @@ export default function TaskPage() {
 
   const handleTaskComplete = () => {
     // Refresh task progress to update status
-    api.tasks.getTaskProgress.invalidate({ taskId });
+    void utils.tasks.getTaskProgress.invalidate({ taskId });
     // Navigate back to program page
     router.push(`/programs/${programId}`);
   };
 
   const renderTaskComponent = () => {
+    // Type assertion for task content since it comes from database as JsonValue
+    const typedTask = {
+      ...task,
+      content: task.content as any
+    };
+
     const taskProps = {
-      task,
+      task: typedTask,
       taskProgress,
       onComplete: handleTaskComplete,
     };

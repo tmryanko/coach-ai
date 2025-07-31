@@ -41,7 +41,7 @@ export function TaskChat({ taskId, taskTitle, onTaskCompletion }: TaskChatProps)
   const createSessionMutation = api.chat.createTaskSession.useMutation({
     onSuccess: () => {
       // Refetch session after creation
-      utils.chat.getTaskSession.invalidate({ taskId });
+      void utils.chat.getTaskSession.invalidate({ taskId });
     },
   });
 
@@ -49,7 +49,7 @@ export function TaskChat({ taskId, taskTitle, onTaskCompletion }: TaskChatProps)
     onSuccess: () => {
       setMessage('');
       // Refetch session to get new messages
-      utils.chat.getTaskSession.invalidate({ taskId });
+      void utils.chat.getTaskSession.invalidate({ taskId });
     },
   });
 
