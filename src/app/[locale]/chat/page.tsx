@@ -12,6 +12,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Send, Plus, MessageCircle } from 'lucide-react';
 import { MessageRole } from '@prisma/client';
+import { ModelSelector } from '@/components/ui/model-selector';
 
 export default function ChatPage() {
   const t = useTranslations('chat');
@@ -20,6 +21,7 @@ export default function ChatPage() {
   const [currentSessionId, setCurrentSessionId] = useState<string | null>(null);
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedModel, setSelectedModel] = useState('gpt-4o-mini');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const { data: sessions, refetch: refetchSessions } = api.chat.getSessions.useQuery(undefined, {
@@ -60,6 +62,13 @@ export default function ChatPage() {
     scrollToBottom();
   }, [currentSession?.messages]);
 
+  // Initialize selected model from session when available
+  useEffect(() => {
+    if (currentSession?.selectedModel && currentSession.selectedModel !== selectedModel) {
+      setSelectedModel(currentSession.selectedModel);
+    }
+  }, [currentSession?.selectedModel, selectedModel]);
+
   const handleSendMessage = async () => {
     if (!message.trim() || !currentSessionId) return;
 
@@ -67,6 +76,7 @@ export default function ChatPage() {
     await sendMessageMutation.mutateAsync({
       sessionId: currentSessionId,
       message: message.trim(),
+      selectedModel,
     });
   };
 
@@ -147,7 +157,15 @@ export default function ChatPage() {
                     {t('coachWelcome')}
                   </p>
                 </div>
-                <Badge variant="secondary">{t('online')}</Badge>
+                <div className="flex items-center gap-3">
+                  <ModelSelector
+                    selectedModel={selectedModel}
+                    onModelChange={setSelectedModel}
+                    variant="compact"
+                    disabled={isLoading}
+                  />
+                  <Badge variant="secondary">{t('online')}</Badge>
+                </div>
               </div>
             </div>
 
