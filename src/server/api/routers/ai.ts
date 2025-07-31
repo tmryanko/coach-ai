@@ -4,12 +4,23 @@ import {
   generateCoachResponse,
   generateTaskFeedback,
   generateTaskCoachResponse,
+  AI_MODELS,
+  type AIModelKey,
 } from "@/lib/openai";
 import { generateProfileInsights } from "@/lib/profile-analysis";
 import { MessageRole, SessionType } from "@prisma/client";
 import { getTaskCompletionMessage } from "@/lib/task-prompts";
 
 export const aiRouter = createTRPCRouter({
+  getAvailableModels: protectedProcedure.query(() => {
+    return Object.entries(AI_MODELS).map(([key, config]) => ({
+      id: key as AIModelKey,
+      name: config.name,
+      description: config.description,
+      category: config.category,
+    }));
+  }),
+
   testOpenAI: protectedProcedure.mutation(async () => {
     try {
       const response = await generateCoachResponse(
@@ -32,6 +43,7 @@ export const aiRouter = createTRPCRouter({
         sessionId: z.string(),
         message: z.string(),
         includeContext: z.boolean().default(true),
+        selectedModel: z.string().optional(),
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -142,13 +154,25 @@ export const aiRouter = createTRPCRouter({
         };
       }
 
+      // Update session with selected model if provided
+      if (input.selectedModel) {
+        await ctx.prisma.chatSession.update({
+          where: { id: input.sessionId },
+          data: { selectedModel: input.selectedModel },
+        });
+      }
+
+      // Get the model to use (from input, session, or user preference)
+      const modelToUse = input.selectedModel || session.selectedModel;
+
       // Generate AI response
       let aiResponse;
       try {
         aiResponse = await generateCoachResponse(
           input.message,
           conversationHistory,
-          context
+          context,
+          modelToUse as AIModelKey
         );
       } catch (error) {
         console.error("Error generating AI response:", error);
@@ -306,6 +330,7 @@ Format as a structured, encouraging response that feels personalized to their ex
       z.object({
         sessionId: z.string(),
         message: z.string(),
+        selectedModel: z.string().optional(),
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -377,6 +402,17 @@ Format as a structured, encouraging response that feels personalized to their ex
         },
       });
 
+      // Update session with selected model if provided
+      if (input.selectedModel) {
+        await ctx.prisma.chatSession.update({
+          where: { id: input.sessionId },
+          data: { selectedModel: input.selectedModel },
+        });
+      }
+
+      // Get the model to use (from input, session, or user preference)
+      const modelToUse = input.selectedModel || session.selectedModel;
+
       // Generate task-focused AI response
       let aiResponse;
       try {
@@ -399,7 +435,8 @@ Your role is to:
 5. Recognize when they've made good progress and encourage completion
 
 Be supportive, specific to the task, and help them get the most value from this exercise.`,
-          }
+          },
+          modelToUse as AIModelKey
         );
       } catch (error) {
         console.error("Error generating task coach response:", error);

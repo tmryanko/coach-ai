@@ -1579,6 +1579,35 @@
       "completing": "משלים...",
       "readyToCompleteTask": "מוכן להשלים את המשימה",
       "sessionCompleted": "✅ סשן האימון הושלם! כעת תוכל לסיים את המשימה שלך."
+    },
+    "modelSelector": {
+      "title": "מודל AI",
+      "description": "בחר את מודל ה-AI המועדף עליך",
+      "currentModel": "משתמש ב: {modelName}",
+      "changeModel": "שנה מודל",
+      "selectModel": "בחר מודל AI",
+      "categories": {
+        "premium": "מתקדם",
+        "standard": "סטנדרטי"
+      },
+      "models": {
+        "gpt-4o": {
+          "name": "GPT-4 Omni",
+          "description": "המודל המתקדם ביותר עם חשיבה משופרת"
+        },
+        "gpt-4o-mini": {
+          "name": "GPT-4 Omni Mini",
+          "description": "מהיר וחסכוני עם ביצועים טובים"
+        },
+        "gpt-3.5-turbo": {
+          "name": "GPT-3.5 Turbo",
+          "description": "מודל קלאסי עם ביצועים אמינים"
+        },
+        "gpt-4": {
+          "name": "GPT-4",
+          "description": "GPT-4 המקורי עם חשיבה מעולה"
+        }
+      }
     }
   },
   "appLayout": {

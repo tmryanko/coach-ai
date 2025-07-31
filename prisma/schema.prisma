@@ -24,6 +24,7 @@ model User {
   assessmentCompletedAt       DateTime?
   locale                      String         @default("en")
   preferredLanguage           String         @default("en")
+  preferredAiModel            String         @default("gpt-4o-mini")
   age                         Int?
   assessmentProgress          Json?
   coreValues                  String[]       @default([])
@@ -127,6 +128,7 @@ model ChatSession {
   sessionType     SessionType   @default(GENERAL)
   systemPrompt    String?
   taskId          String?
+  selectedModel   String        @default("gpt-4o-mini")
   messages        ChatMessage[]
   user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
 

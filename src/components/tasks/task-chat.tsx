@@ -11,6 +11,7 @@ import { MessageRole } from '@prisma/client';
 import { Bot, User, Send, MessageCircle, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useTranslations } from 'next-intl';
+import { ModelSelector } from '@/components/ui/model-selector';
 
 interface TaskChatProps {
   taskId: string;
@@ -30,6 +31,7 @@ export function TaskChat({ taskId, taskTitle, onTaskCompletion }: TaskChatProps)
   const [message, setMessage] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
+  const [selectedModel, setSelectedModel] = useState('gpt-4o-mini');
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const utils = api.useUtils();
   
@@ -67,6 +69,13 @@ export function TaskChat({ taskId, taskTitle, onTaskCompletion }: TaskChatProps)
     }
   }, [session?.messages]);
 
+  // Initialize selected model from session when available
+  useEffect(() => {
+    if (session?.selectedModel && session.selectedModel !== selectedModel) {
+      setSelectedModel(session.selectedModel);
+    }
+  }, [session?.selectedModel, selectedModel]);
+
   const handleStartChat = async () => {
     setIsInitialized(true);
     if (!session && !createSessionMutation.isPending) {
@@ -88,6 +97,7 @@ export function TaskChat({ taskId, taskTitle, onTaskCompletion }: TaskChatProps)
       await sendMessageMutation.mutateAsync({
         sessionId: session.id,
         message: message.trim(),
+        selectedModel,
       });
     } catch (error) {
       console.error('Failed to send message:', error);
@@ -225,6 +235,12 @@ export function TaskChat({ taskId, taskTitle, onTaskCompletion }: TaskChatProps)
                 {t('completed')}
               </Badge>
             )}
+            <ModelSelector
+              selectedModel={selectedModel}
+              onModelChange={setSelectedModel}
+              variant="compact"
+              disabled={sendMessageMutation.isPending}
+            />
             <Button 
               variant="outline" 
               size="sm"

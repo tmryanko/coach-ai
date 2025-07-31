@@ -54,32 +54,65 @@ Remember to:
 
 If a user shares something concerning (abuse, violence, severe mental health crisis), gently encourage them to seek professional help immediately.`;
 
-// Model fallback chain in order of preference
-const MODEL_FALLBACKS = ["gpt-4o-mini", "gpt-3.5-turbo", "gpt-4o", "gpt-4"];
+// Available AI models with their configurations
+export const AI_MODELS = {
+  "gpt-4o": {
+    name: "GPT-4 Omni",
+    description: "Most capable model with enhanced reasoning",
+    maxTokens: 800,
+    category: "premium"
+  },
+  "gpt-4o-mini": {
+    name: "GPT-4 Omni Mini",
+    description: "Fast and cost-effective with good performance",
+    maxTokens: 800,
+    category: "standard"
+  },
+  "gpt-3.5-turbo": {
+    name: "GPT-3.5 Turbo",
+    description: "Classic model with reliable performance",
+    maxTokens: 800,
+    category: "standard"
+  },
+  "gpt-4": {
+    name: "GPT-4",
+    description: "Original GPT-4 with excellent reasoning",
+    maxTokens: 600,
+    category: "premium"
+  }
+} as const;
+
+export type AIModelKey = keyof typeof AI_MODELS;
+
+// Model fallback chain for backwards compatibility
+const MODEL_FALLBACKS: AIModelKey[] = ["gpt-4o-mini", "gpt-3.5-turbo", "gpt-4o", "gpt-4"];
 
 async function tryOpenAICompletion(
   messages: OpenAI.Chat.Completions.ChatCompletionMessageParam[],
-  modelIndex: number = 0
+  selectedModel?: AIModelKey,
+  fallbackIndex: number = 0
 ): Promise<string> {
-  if (modelIndex >= MODEL_FALLBACKS.length) {
+  // Use selected model or fallback chain
+  const model = selectedModel || MODEL_FALLBACKS[fallbackIndex];
+  
+  if (!selectedModel && fallbackIndex >= MODEL_FALLBACKS.length) {
     throw new Error("All model fallbacks exhausted");
   }
 
-  const model = MODEL_FALLBACKS[modelIndex];
+  const modelConfig = AI_MODELS[model];
+  if (!modelConfig) {
+    throw new Error(`Unknown model: ${model}`);
+  }
 
   try {
-    const startTime = Date.now();
-
     const completion = await openai!.chat.completions.create({
       model,
       messages,
-      max_tokens: 800,
+      max_tokens: modelConfig.maxTokens,
       temperature: 0.7,
       presence_penalty: 0.1,
       frequency_penalty: 0.1,
     });
-
-    const endTime = Date.now();
 
     const responseContent =
       completion.choices[0]?.message?.content ||
@@ -89,9 +122,14 @@ async function tryOpenAICompletion(
   } catch (error: any) {
     console.error(`❌ Model ${model} failed:`, error.message);
 
-    // If it's a 404 (model not found) or 403 (no access), try next model
+    // If we have a selected model and it fails, don't fallback
+    if (selectedModel) {
+      throw error;
+    }
+
+    // If it's a 404 (model not found) or 403 (no access), try next model in fallback chain
     if (error.status === 404 || error.status === 403) {
-      return tryOpenAICompletion(messages, modelIndex + 1);
+      return tryOpenAICompletion(messages, undefined, fallbackIndex + 1);
     }
 
     // For other errors (auth, rate limit, etc.), don't fallback
@@ -110,7 +148,8 @@ export async function generateCoachResponse(
     userProgress?: any;
     currentTask?: any;
     programPhase?: string;
-  }
+  },
+  selectedModel?: AIModelKey
 ) {
   if (!openai) {
     throw new Error(
@@ -222,8 +261,8 @@ export async function generateCoachResponse(
     // Add current user message
     messages.push({ role: "user", content: userMessage });
 
-    // Use the fallback system
-    const responseContent = await tryOpenAICompletion(messages);
+    // Use the selected model or fallback system
+    const responseContent = await tryOpenAICompletion(messages, selectedModel);
 
     return responseContent;
   } catch (error) {
@@ -263,7 +302,8 @@ export async function generateCoachResponse(
 export async function generateTaskFeedback(
   taskDescription: string,
   userResponse: string,
-  taskType: string
+  taskType: string,
+  selectedModel?: AIModelKey
 ) {
   if (!openai) {
     throw new Error(
@@ -286,13 +326,16 @@ Please provide:
 
 Keep the feedback supportive, specific, and actionable. Limit to 200 words.`;
 
+    const model = selectedModel || "gpt-4o-mini";
+    const modelConfig = AI_MODELS[model];
+    
     const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
+      model,
       messages: [
         { role: "system", content: SYSTEM_PROMPT },
         { role: "user", content: feedbackPrompt },
       ],
-      max_tokens: 300,
+      max_tokens: Math.min(300, modelConfig.maxTokens),
       temperature: 0.6,
     });
 
@@ -321,7 +364,8 @@ export async function generateTaskCoachResponse(
     task: any;
     userProfile?: any;
     systemPrompt: string;
-  }
+  },
+  selectedModel?: AIModelKey
 ) {
   if (!openai) {
     throw new Error(
@@ -382,10 +426,13 @@ export async function generateTaskCoachResponse(
       conversationHistory
     );
 
+    const model = selectedModel || "gpt-4o-mini";
+    const modelConfig = AI_MODELS[model];
+    
     const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
+      model,
       messages,
-      max_tokens: 300,
+      max_tokens: Math.min(300, modelConfig.maxTokens),
       temperature: 0.7,
       presence_penalty: 0.2,
       frequency_penalty: 0.1,
