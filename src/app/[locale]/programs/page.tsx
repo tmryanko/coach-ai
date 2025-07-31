@@ -64,6 +64,42 @@ export default function ProgramsPage() {
     };
   };
 
+  // Function to get translated phase name
+  const getTranslatedPhase = (phaseName: string) => {
+    const phaseMapping: { [key: string]: string } = {
+      "Self-Discovery": "selfDiscovery",
+      "גילוי עצמי": "selfDiscovery",
+      "Past Relationship Patterns": "pastRelationshipPatterns", 
+      "דפוסי מערכות יחסים עבר": "pastRelationshipPatterns",
+      "Inner Blocks & Fears": "innerBlocksFears",
+      "חסימות פנימיות ופחדים": "innerBlocksFears",
+      "Emotional Regulation": "emotionalRegulation",
+      "ויסות רגשי": "emotionalRegulation",
+      "Self-Compassion & Confidence": "selfCompassionConfidence",
+      "חמלה עצמית וביטחון": "selfCompassionConfidence",
+      "Communication & Expression": "communicationExpression",
+      "תקשורת וביטוי": "communicationExpression",
+      "Boundaries & Standards": "boundariesStandards",
+      "גבולות וסטנדרטים": "boundariesStandards",
+      "Ideal Partner & Vision": "idealPartnerVision",
+      "בן/בת זוג אידיאלי וחזון": "idealPartnerVision",
+      "Real-Life Exposure": "realLifeExposure",
+      "חשיפה למציאות": "realLifeExposure",
+      "Handling Rejection & Uncertainty": "handlingRejectionUncertainty",
+      "התמודדות עם דחייה ואי ודאות": "handlingRejectionUncertainty",
+      "Healthy Attraction": "healthyAttraction",
+      "משיכה בריאה": "healthyAttraction",
+      "Integration & Readiness": "integrationReadiness",
+      "אינטגרציה ומוכנות": "integrationReadiness"
+    };
+
+    const phaseKey = phaseMapping[phaseName];
+    if (phaseKey) {
+      return tProgram(`phases.${phaseKey}.name`);
+    }
+    return phaseName;
+  };
+
   if (isLoading) {
     return (
       <AppLayout
@@ -148,7 +184,7 @@ export default function ProgramsPage() {
                           className="flex items-center justify-between text-xs"
                         >
                           <span className="text-gray-600 dark:text-gray-300">
-                            {index + 1}. {phase.name}
+                            {index + 1}. {getTranslatedPhase(phase.name)}
                           </span>
                           <span className="text-xs text-gray-500">
                             ({phase.tasks.length} {t("tasks")})
