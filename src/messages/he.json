@@ -92,7 +92,7 @@
       "description": "מלא הערכה שעוזרת למאמן ה-AI שלך להבין אותך לעומק — האישיות שלך, מערכות יחסים קודמות, אתגרים נוכחיים ומטרות."
     },
     "step2": {
-      "title": "פגש את המאמן AI שלך",
+      "title": "פגוש את המאמן AI שלך",
       "description": "התחל שיחה מתמשכת ודינמית עם המאמן האישי שלך — מותאם במיוחד עבורך."
     },
     "step3": {
@@ -185,7 +185,10 @@
           "תכניות אימון כלליות",
           "תמיכת קהילה"
         ],
-        "limitations": ["היסטוריית מפגשים מוגבלת", "מעקב התקדמות בסיסי"]
+        "limitations": [
+          "היסטוריית מפגשים מוגבלת",
+          "מעקב התקדמות בסיסי"
+        ]
       },
       "monthly": {
         "name": "חודשי",
@@ -276,18 +279,18 @@
         "improve-communication": "שיפור תקשורת",
         "build-trust": "בניית אמון",
         "resolve-conflicts": "פתרון קונפליקטים בצורה טובה יותר",
-        "increase-intimacy": "הגברת אינטימיות",
-        "work-life-balance": "איזון טוב יותר בין עבודה לחיים",
-        "future-planning": "תכנון העתיד שלנו יחד",
-        "family-planning": "ניווט בתכנון משפחה",
-        "financial-harmony": "הרמוניה כלכלית",
-        "social-life": "שיפור החיים החברתיים יחד",
-        "personal-growth": "תמיכה בצמיחה האישית של זה את זה",
-        "physical-health": "מטרות בריאות וכושר",
-        "spiritual-connection": "קשר רוחני",
-        "dating-skills": "שיפור כישורי דייטים",
-        "self-confidence": "בניית ביטחון עצמי",
-        "emotional-intelligence": "אינטליגנציה רגשית"
+        "increaseintimacy": "הגברת אינטימיות",
+        "worklifebalance": "איזון עבודה-חיים",
+        "futureplanning": "תכנון עתידי",
+        "familyplanning": "תכנון משפחה",
+        "financialharmony": "הרמוניה כלכלית",
+        "sociallife": "שיפור חיי חברה",
+        "personalgrowth": "צמיחה אישית",
+        "physicalhealth": "בריאות וכושר גופני",
+        "spiritualconnection": "חיבור רוחני",
+        "datingskills": "שיפור כישורי דייטינג",
+        "selfconfidence": "בניית ביטחון עצמי",
+        "emotionalintelligence": "אינטליגנציה רגשית"
       }
     },
     "challenges": {
@@ -295,35 +298,35 @@
       "description": "בחרו את התחומים שבהם תרצו תמיכה. כנות עוזרת לנו לספק הדרכה טובה יותר.",
       "selectedChallengesText": "אתגרים שנבחרו",
       "challengeOptions": {
-        "poor-communication": {
+        "poorcommunication": {
           "label": "תקשורת לקויה",
           "description": "אנחנו לא מתקשרים טוב"
         },
-        "frequent-arguments": {
+        "frequentarguments": {
           "label": "ויכוחים תכופים",
           "description": "אנחנו רבים יותר מדי"
         },
-        "trust-issues": {
+        "trustissues": {
           "label": "בעיות אמון",
           "description": "חוסר אמון בינינו"
         },
-        "lack-intimacy": {
+        "lackintimacy": {
           "label": "חוסר אינטימיות",
           "description": "מרחק פיזי או רגשי"
         },
-        "different-values": {
+        "differentvalues": {
           "label": "ערכים שונים",
           "description": "יש לנו ערכים מתנגשים"
         },
-        "time-management": {
+        "timemanagement": {
           "label": "ניהול זמן",
           "description": "מתקשים לבלות זמן איכות יחד"
         },
-        "financial-stress": {
+        "financialstress": {
           "label": "לחץ כלכלי",
           "description": "כסף גורם למתח"
         },
-        "family-pressure": {
+        "familypressure": {
           "label": "לחץ משפחתי",
           "description": "השפעות חיצוניות מהמשפחה"
         },
@@ -331,57 +334,37 @@
           "label": "בעיות קנאה",
           "description": "קנאה משפיעה על הזוגיות שלנו"
         },
-        "future-uncertainty": {
-          "label": "אי וודאות לגבי העתיד",
+        "futureuncertainty": {
+          "label": "חוסר ודאות לגבי העתיד",
           "description": "לא ברור לנו לגבי העתיד שלנו יחד"
         },
-        "social-differences": {
+        "socialdifferences": {
           "label": "הבדלים חברתיים",
           "description": "צרכים והעדפות חברתיות שונות"
         },
-        "personal-growth": {
+        "personalgrowth": {
           "label": "פערי צמיחה אישית",
           "description": "צומחים בקצבים שונים"
         },
-        "past-baggage": {
-          "label": "מטען מזוגיות קודמת",
+        "pastbaggage": {
+          "label": "מטען מעברים קודמים",
           "description": "חוויות קודמות משפיעות עלינו"
         },
-        "long-distance": {
-          "label": "מרחק ארוך",
+        "longdistance": {
+          "label": "קשר מרחוק",
           "description": "אתגרי מרחק פיזי"
         },
-        "work-stress": {
-          "label": "לחץ הקשור לעבודה",
+        "workstress": {
+          "label": "לחץ מהעבודה",
           "description": "לחצי קריירה משפיעים על הזוגיות"
         },
-        "commitment-fears": {
+        "commitmentfears": {
           "label": "פחדי מחויבות",
           "description": "חרדה לגבי רמת המחויבות"
         },
-        "disrespect": {
-          "label": "חוסר כבוד",
-          "description": "התנהגות חסרת כבוד במערכת היחסים"
-        },
-        "abuse": {
-          "label": "התעללות",
-          "description": "כל צורה של התעללות במערכת היחסים"
-        },
-        "different-goals": {
-          "label": "מטרות שונות",
-          "description": "מטרות חיים לא תואמות"
-        },
-        "expressing-emotions": {
-          "label": "קושי בביטוי רגשות",
-          "description": "קושי לבטא רגשות בצורה ברורה"
-        },
-        "conflict-resolution": {
-          "label": "פתרון קונפליקטים",
-          "description": "קושי להתמודד עם קונפליקטים"
-        },
-        "managing-anxiety": {
-          "label": "ניהול חרדה",
-          "description": "קושי לנהל חרדה במערכות יחסים"
+        "setting-boundaries": {
+          "label": "הצבת גבולות",
+          "description": "קושי בהצבת ותחזוקת גבולות בריאים"
         }
       }
     },
@@ -479,12 +462,12 @@
       },
       "prioritiesLabel": "מה העדיפויות החיים העליונות שלכם? (בחרו עד 3)",
       "priorityOptions": {
-        "family-time": "זמן איכות עם המשפחה",
-        "career-growth": "צמיחה בקריירה",
-        "personal-health": "בריאות ויכולת פיזית אישית",
-        "financial-security": "ביטחון כלכלי",
-        "social-connections": "קשרים חברתיים",
-        "personal-growth": "פיתוח אישי",
+        "familytime": "זמן איכות משפחתי",
+        "careergrowth": "צמיחה בקריירה",
+        "personalhealth": "בריאות וכושר אישיים",
+        "financialsecurity": "ביטחון כלכלי",
+        "socialconnections": "קשרים חברתיים",
+        "personalgrowth": "פיתוח אישי",
         "adventure": "הרפתקאות ונסיעות",
         "stability": "יציבות ושגרה"
       },
@@ -574,15 +557,7 @@
         "authenticity": "אותנטיות",
         "supportiveness": "תמיכה",
         "forgiveness": "יכולת לסלוח",
-        "disrespect": "יכולת לשמור על כבוד עצמי",
-        "abuse": "יכולת להגן על עצמי",
-        "poor-communication": "תקשורת יעילה",
-        "different-goals": "גמישות במטרות",
-        "expressing-emotions": "ביטוי רגשות ברור",
-        "conflict-resolution": "פתרון קונפליקטים",
-        "managing-anxiety": "ניהול חרדה",
-        "creativity": "יצירתיות",
-        "emotional-intelligence": "אינטליגנציה רגשית"
+        "setting-boundaries": "הצבת גבולות"
       },
       "challengesTitle": "תחומי צמיחה (בחרו עד 3)",
       "challengesDescription": "איזה כישורים רגשיים הייתם רוצים לפתח או לשפר?",
@@ -692,8 +667,6 @@
       },
       "communicationStyleTitle": "סגנון תקשורת",
       "communicationStyleDescription": "איך אתם בדרך כלל מתקשרים במערכות יחסים?",
-      "conflictStyleTitle": "סגנון פתרון קונפליקטים",
-      "conflictStyleDescription": "איך אתם מעדיפים להתמודד עם חילוקי דעות או קונפליקטים?",
       "communicationStyles": {
         "direct-straightforward": {
           "label": "ישיר וחד-משמעי",
@@ -716,6 +689,8 @@
           "description": "אני משתמש בהומור וקלילות כדי להתחבר ולתקשר"
         }
       },
+      "conflictStyleTitle": "סגנון פתרון קונפליקטים",
+      "conflictStyleDescription": "איך אתם מעדיפים להתמודד עם חילוקי דעות או קונפליקטים?",
       "conflictStyles": {
         "address-immediately": {
           "label": "להתמודד מיד",
@@ -783,16 +758,7 @@
         "communication": "תקשורת טובה",
         "independence": "עצמאות והסתמכות עצמית",
         "ambition": "שאפתנות ומתמדה",
-        "emotional-intelligence": "אינטליגנציה רגשית",
-        "disrespect": "יכולת לשמור על כבוד",
-        "abuse": "יכולת להגן על עצמי",
-        "poor-communication": "תקשורת יעילה",
-        "different-goals": "גמישות במטרות",
-        "expressing-emotions": "ביטוי רגשות",
-        "conflict-resolution": "פתרון קונפליקטים",
-        "managing-anxiety": "ניהול חרדה",
-        "supportiveness": "תמיכה באחרים",
-        "emotionalawareness": "מודעות רגשית"
+        "emotionalintelligence": "אינטליגנציה רגשית"
       },
       "relationshipGoals": {
         "deepconnection": "בניית קשר רגשי עמוק",
@@ -893,77 +859,21 @@
         "kindness": {
           "label": "אדיבות וחמלה",
           "description": "להתייחס זה לזה בטיפול"
-        },
-        "disrespect": {
-          "label": "חוסר כבוד",
-          "description": "התנהגות חסרת כבוד או מזלזלת"
-        },
-        "abuse": {
-          "label": "התעללות",
-          "description": "כל צורה של התעללות פיזית או רגשית"
-        },
-        "poor-communication": {
-          "label": "תקשורת לקויה",
-          "description": "חוסר יכולת או רצון לתקשר בצורה יעילה"
-        },
-        "different-goals": {
-          "label": "מטרות שונות",
-          "description": "מטרות חיים לא תואמות או סותרות"
-        },
-        "expressing-emotions": {
-          "label": "ביטוי רגשות",
-          "description": "יכולת לבטא רגשות באופן ברור ובריא"
-        },
-        "conflict-resolution": {
-          "label": "פתרון קונפליקטים",
-          "description": "כישורים בטיפול ופתרון מחלוקות"
-        },
-        "managing-anxiety": {
-          "label": "ניהול חרדה",
-          "description": "יכולת להתמודד עם חרדה במערכות יחסים"
-        },
-        "empathy": {
-          "label": "אמפתיה",
-          "description": "יכולת להבין ולהרגיש עם האחר"
-        },
-        "supportiveness": {
-          "label": "תמיכה",
-          "description": "להיות תומך ומעודד"
-        },
-        "authenticity": {
-          "label": "אותנטיות",
-          "description": "להיות אמיתי וכנה לעצמי"
-        },
-        "emotional-awareness": {
-          "label": "מודעות רגשית",
-          "description": "הבנה ומודעות לרגשות שלי ושל אחרים"
-        },
-        "creativity": {
-          "label": "יצירתיות",
-          "description": "יכולת לחשוב ולפעול בצורה יצירתית"
-        },
-        "resilience": {
-          "label": "חוסן",
-          "description": "יכולת להתמודד עם קשיים ולהתאושש"
-        },
-        "emotional-intelligence": {
-          "label": "אינטליגנציה רגשית",
-          "description": "יכולת להבין ולנהל רגשות בצורה חכמה"
         }
       },
       "lifePriorities": {
-        "career-success": "הצלחה בקריירה",
-        "family-time": "זמן איכות עם המשפחה",
-        "personal-growth": "פיתוח אישי",
-        "health-fitness": "בריאות וכושר",
-        "financial-security": "ביטחון כלכלי",
-        "travel-adventure": "נסיעות והרפתקאות",
-        "social-connections": "קשרים חברתיים",
+        "careersuccess": "הצלחה בקריירה",
+        "familytime": "זמן איכות משפחתי",
+        "personalgrowth": "פיתוח אישי",
+        "healthfitness": "בריאות וכושר",
+        "financialsecurity": "ביטחון כלכלי",
+        "traveladventure": "טיולים והרפתקאות",
+        "socialconnections": "קשרים חברתיים",
         "creativity": "ביטוי יצירתי",
         "learning": "למידה מתמשכת",
-        "community-service": "שירות קהילתי",
-        "spiritual-practice": "תרגול רוחני",
-        "work-life-balance": "איזון עבודה-חיים"
+        "communityservice": "שירות קהילתי",
+        "spiritualpractice": "עיסוק רוחני",
+        "worklifebalance": "איזון עבודה-חיים"
       },
       "dealBreakers": {
         "dishonesty": "חוסר כנות או שקר",
@@ -971,16 +881,13 @@
         "infidelity": "בגידה או חוסר נאמנות",
         "abuse": "כל צורה של התעללות",
         "addiction": "בעיות התמכרות לחומרים",
-        "different-values": "ערכים שונים מהיסוד",
-        "no-commitment": "פחד מהתחייבות",
-        "poor-communication": "חוסר רצון לתקשר",
-        "different-goals": "מטרות חיים לא תואמות",
-        "financial-irresponsibility": "חוסר אחריות כלכלית",
-        "no-growth": "חוסר רצון לצמוח",
-        "jealousy": "קנאה קיצונית או רכושנות",
-        "expressing-emotions": "חוסר יכולת לבטא רגשות",
-        "conflict-resolution": "חוסר יכולת להתמודד עם קונפליקטים",
-        "managing-anxiety": "חוסר יכולת לנהל חרדה במערכות יחסים"
+        "differentvalues": "ערכים שונים מהיסוד",
+        "nocommitment": "פחד מהתחייבות",
+        "poorcommunication": "חוסר רצון לתקשר",
+        "differentgoals": "מטרות חיים לא תואמות",
+        "financialirresponsibility": "חוסר אחריות כלכלית",
+        "nogrowth": "חוסר רצון לצמוח",
+        "jealousy": "קנאה קיצונית או רכושנות"
       },
       "buttons": {
         "back": "חזרה",
@@ -1220,7 +1127,7 @@
           },
           "no": {
             "label": "לא",
-            "description": "אני חדש/ה למערכות יחסים רצינות"
+            "description": "אני חדש/ה למערכות יחסים רציניות"
           }
         },
         "durationQuestion": "כמה זמן ארכה מערכת היחסים הכי משמעותית שלכם?",
@@ -1232,94 +1139,94 @@
           "very-long-term": "5+ שנים",
           "no-significant": "ללא מערכות יחסים משמעותיות"
         },
-        "timeSinceQuestion": "[תרגום נדרש] How long has it been since your last relationship ended?",
+        "timeSinceQuestion": "כמה זמן עבר מאז שהסתיימה מערכת היחסים האחרונה שלכם?",
         "timeSinceOptions": {
-          "very-recent": "[תרגום נדרש] Less than 3 months",
-          "recent": "[תרגום נדרש] 3-6 months",
-          "moderate": "[תרגום נדרש] 6 months - 1 year",
-          "longer": "[תרגום נדרש] 1-2 years",
-          "long-ago": "[תרגום נדרש] 2+ years ago"
+          "very-recent": "פחות מ-3 חודשים",
+          "recent": "3-6 חודשים",
+          "moderate": "6 חודשים - שנה",
+          "longer": "1-2 שנים",
+          "long-ago": "לפני יותר משנתיים"
         },
         "lessonsQuestion": "מה לקח חשוב אחד שלמדתם ממערכות היחסים הקודמות שלכם?",
         "lessonsDescription": "זה יכול להיות על תקשורת, גבולות, אזהרות אדומות, או מה אתם צריכים בבן/בת זוג.",
         "lessonsPlaceholder": "למדתי ש...",
-        "healingQuestion": "[תרגום נדרש] How are you feeling about this past relationship now?",
-        "healingDescription": "[תרגום נדרש] Are you still processing, feeling healed, or somewhere in between?",
-        "healingPlaceholder": "[תרגום נדרש] I'm feeling..."
+        "healingQuestion": "איך אתם מרגישים לגבי מערכת היחסים הזו כעת?",
+        "healingDescription": "האם אתם עדיין מעבדים, מרגישים שריפאתם, או איפשהו באמצע?",
+        "healingPlaceholder": "אני מרגיש/ה..."
       },
       "emotionalIntelligence": {
-        "title": "[תרגום נדרש] Your Emotional Landscape",
-        "description": "[תרגום נדרש] Understanding your emotional patterns helps us provide more effective coaching.",
-        "attachmentStyleQuestion": "[תרגום נדרש] How do you typically feel in close relationships?",
+        "title": "הנוף הרגשי שלכם",
+        "description": "הבנת הדפוסים הרגשיים שלכם עוזרת לנו לספק אימון יעיל יותר.",
+        "attachmentStyleQuestion": "איך אתם מרגישים בדרך כלל במערכות יחסים קרובות?",
         "attachmentStyleOptions": {
           "secure": {
-            "label": "[תרגום נדרש] Secure",
-            "description": "[תרגום נדרש] I feel comfortable with intimacy and independence"
+            "label": "בטוח",
+            "description": "אני מרגיש/ה בנוח עם אינטימיות ועצמאות"
           },
           "anxious": {
-            "label": "[תרגום נדרש] Anxious",
-            "description": "[תרגום נדרש] I worry about being abandoned or not being enough"
+            "label": "חרד",
+            "description": "אני דואג/ת מנטישה או מלהיות לא מספיק/ה"
           },
           "avoidant": {
-            "label": "[תרגום נדרש] Avoidant",
-            "description": "[תרגום נדרש] I value independence and sometimes feel uncomfortable with closeness"
+            "label": "נמנע",
+            "description": "אני מעריך/ה עצמאות ולפעמים מרגיש/ה לא בנוח עם קרבה"
           },
           "disorganized": {
-            "label": "[תרגום נדרש] Mixed/Unclear",
-            "description": "[תרגום נדרש] My feelings about relationships vary a lot"
+            "label": "מעורב/לא ברור",
+            "description": "הרגשות שלי לגבי מערכות יחסים משתנים מאוד"
           }
         },
-        "fearsQuestion": "[תרגום נדרש] What fears or concerns do you have about relationships?",
-        "strengthsQuestion": "[תרגום נדרש] What are your greatest strengths in relationships?",
-        "challengesQuestion": "[תרגום נדרש] What emotional challenges do you face in relationships?",
-        "readinessQuestion": "[תרגום נדרש] On a scale of 1-10, how ready do you feel for a serious relationship?",
-        "readinessDescription": "[תרגום נדרש] 1 = Not ready at all, 10 = Completely ready"
+        "fearsQuestion": "אילו פחדים או חששות יש לכם לגבי מערכות יחסים?",
+        "strengthsQuestion": "מהן החוזקות הגדולות ביותר שלכם במערכות יחסים?",
+        "challengesQuestion": "עם אילו אתגרים רגשיים אתם מתמודדים במערכות יחסים?",
+        "readinessQuestion": "בסקאלה של 1-10, כמה מוכנים אתם מרגישים למערכת יחסים רצינית?",
+        "readinessDescription": "1 = בכלל לא מוכן/ה, 10 = מוכן/ה לחלוטין"
       },
       "valuesVision": {
-        "title": "[תרגום נדרש] Your Values & Vision",
-        "description": "[תרגום נדרש] Understanding what matters most to you helps us guide you toward compatible connections.",
-        "coreValuesQuestion": "[תרגום נדרש] What values are most important to you?",
-        "visionQuestion": "[תרגום נדרש] Describe your ideal relationship",
-        "visionPlaceholder": "[תרגום נדרש] In my ideal relationship...",
-        "dealBreakersQuestion": "[תרגום נדרש] What are your absolute deal-breakers?"
+        "title": "הערכים והחזון שלכם",
+        "description": "הבנת מה שהכי חשוב לכם עוזרת לנו להדריך אתכם לקראת קשרים תואמים.",
+        "coreValuesQuestion": "אילו ערכים הכי חשובים לכם?",
+        "visionQuestion": "תארו את מערכת היחסים האידיאלית שלכם",
+        "visionPlaceholder": "במערכת היחסים האידיאלית שלי...",
+        "dealBreakersQuestion": "מהם שוברי העסקה המוחלטים שלכם?"
       },
       "lifestyleCompatibility": {
-        "title": "[תרגום נדרש] Your Lifestyle & Communication",
-        "description": "[תרגום נדרש] Let's understand how you live and communicate to find the best matches.",
-        "workLifeBalanceQuestion": "[תרגום נדרש] How would you describe your work-life balance?",
-        "socialEnergyQuestion": "[תרגום נדרש] How social are you?",
-        "socialEnergyDescription": "[תרגום נדרש] 1 = Very introverted, 10 = Very extroverted",
-        "hobbiesQuestion": "[תרגום נדרש] What are your main hobbies and interests?",
-        "communicationStyleQuestion": "[תרגום נדרש] How do you prefer to communicate?",
-        "conflictStyleQuestion": "[תרגום נדרש] How do you handle disagreements?"
+        "title": "סגנון החיים והתקשורת שלכם",
+        "description": "בואו נבין איך אתם חיים ומתקשרים כדי למצוא את ההתאמות הטובות ביותר.",
+        "workLifeBalanceQuestion": "איך הייתם מתארים את איזון העבודה-חיים שלכם?",
+        "socialEnergyQuestion": "כמה חברתיים אתם?",
+        "socialEnergyDescription": "1 = מאוד מופנם/ת, 10 = מאוד מוחצן/ת",
+        "hobbiesQuestion": "מהם התחביבים ותחומי העניין העיקריים שלכם?",
+        "communicationStyleQuestion": "איך אתם מעדיפים לתקשר?",
+        "conflictStyleQuestion": "איך אתם מתמודדים עם אי הסכמות?"
       },
       "selfReflection": {
-        "title": "[תרגום נדרש] Self-Reflection & Growth",
-        "description": "[תרגום נדרש] These deeper questions help us understand your self-awareness and growth mindset.",
-        "friendsDescriptionQuestion": "[תרגום נדרש] How would your closest friends describe you?",
-        "friendsDescriptionPlaceholder": "[תרגום נדרש] My friends would say I'm...",
-        "proudestMomentQuestion": "[תרגום נדרש] What's a moment you're really proud of?",
-        "proudestMomentPlaceholder": "[תרגום נדרש] I'm proud of the time when...",
-        "growthAreaQuestion": "[תרגום נדרש] What's the biggest area you want to grow in?",
-        "growthAreaPlaceholder": "[תרגום נדרש] I want to improve my...",
-        "strengthsQuestion": "[תרגום נדרש] What are your top 3 personal strengths?",
-        "futureGoalsQuestion": "[תרגום נדרש] What are your relationship goals for the future?"
+        "title": "התבוננות עצמית וצמיחה",
+        "description": "שאלות עומק אלו עוזרות לנו להבין את המודעות העצמית וצורת החשיבה הצמיחתית שלכם.",
+        "friendsDescriptionQuestion": "איך החברים הכי קרובים שלכם היו מתארים אתכם?",
+        "friendsDescriptionPlaceholder": "החברים שלי היו אומרים שאני...",
+        "proudestMomentQuestion": "מהו רגע שאתם ממש גאים בו?",
+        "proudestMomentPlaceholder": "אני גאה ברגע שבו...",
+        "growthAreaQuestion": "מהו התחום הגדול ביותר שבו אתם רוצים לצמוח?",
+        "growthAreaPlaceholder": "אני רוצה לשפר את...",
+        "strengthsQuestion": "מהן 3 החוזקות האישיות המובילות שלכם?",
+        "futureGoalsQuestion": "מהן מטרותיכם הזוגיות לעתיד?"
       },
       "summary": {
-        "title": "[תרגום נדרש] Your Personal Profile",
-        "description": "[תרגום נדרש] Here's what we've learned about you. This helps us create your personalized coaching experience.",
-        "coreIdentity": "[תרגום נדרש] Core Identity",
-        "relationshipJourney": "[תרגום נדרש] Relationship Journey",
-        "emotionalProfile": "[תרגום נדרש] Emotional Profile",
-        "valuesAndVision": "[תרגום נדרש] Values & Vision",
-        "lifestyle": "[תרגום נדרש] Lifestyle",
-        "personalGrowth": "[תרגום נדרש] Personal Growth",
-        "topStrengths": "[תרגום נדרש] Your Top Strengths",
-        "coreValues": "[תרגום נדרש] Your Core Values",
-        "analyzing": "[תרגום נדרש] Analyzing your responses...",
-        "generatingInsights": "[תרגום נדרש] Generating personalized insights...",
-        "almostReady": "[תרגום נדרש] Almost ready!",
-        "startCoaching": "[תרגום נדרש] Start Your Coaching Journey"
+        "title": "הפרופיל האישי שלכם",
+        "description": "הנה מה שלמדנו עליכם. זה עוזר לנו ליצור את חווית האימון האישית שלכם.",
+        "coreIdentity": "זהות ליבה",
+        "relationshipJourney": "מסע זוגי",
+        "emotionalProfile": "פרופיל רגשי",
+        "valuesAndVision": "ערכים וחזון",
+        "lifestyle": "סגנון חיים",
+        "personalGrowth": "צמיחה אישית",
+        "topStrengths": "החוזקות המובילות שלכם",
+        "coreValues": "ערכי הליבה שלכם",
+        "analyzing": "מנתח את תשובותיכם...",
+        "generatingInsights": "יוצר תובנות אישיות...",
+        "almostReady": "כמעט מוכן!",
+        "startCoaching": "התחילו את מסע האימון שלכם"
       }
     }
   },
@@ -1351,9 +1258,9 @@
       "improve-communication": "שיפור תקשורת",
       "build-trust": "בניית אמון",
       "resolve-conflicts": "פתרון קונפליקטים",
-      "increase-intimacy": "הגברת אינטימיות",
-      "work-life-balance": "השגת איזון עבודה-חיים",
-      "personal-growth": "צמיחה אישית",
+      "increaseintimacy": "הגברת אינטימיות",
+      "worklifebalance": "השגת איזון עבודה-חיים",
+      "personalgrowth": "צמיחה אישית",
       "default": "צמיחה אישית"
     },
     "buttons": {
