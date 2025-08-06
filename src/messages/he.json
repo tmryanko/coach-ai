@@ -365,6 +365,14 @@
         "setting-boundaries": {
           "label": "הצבת גבולות",
           "description": "קושי בהצבת ותחזוקת גבולות בריאים"
+        },
+        "opening-up": {
+          "label": "פתיחות רגשית",
+          "description": "קושי בפתיחות רגשית מול בני זוג"
+        },
+        "self-confidence": {
+          "label": "ביטחון עצמי",
+          "description": "חוסר ביטחון עצמי במערכות יחסים"
         }
       }
     },
@@ -541,7 +549,8 @@
         "repeating-mistakes": "פחד מחזרה על טעויות העבר",
         "being-hurt": "פחד מלהיפגע שוב",
         "conflict": "פחד מקונפליקט",
-        "self-confidence": "פחד מחוסר ביטחון עצמי"
+        "self-confidence": "פחד מחוסר ביטחון עצמי",
+        "opening-up": "פחד מפגיעות רגשית"
       },
       "strengthsTitle": "החוזקות הרגשיות שלכם (בחרו עד 4)",
       "strengthsDescription": "מה הכוחות העל שלכם בכל הנוגע למערכות יחסים ורגשות?",
@@ -557,7 +566,8 @@
         "authenticity": "אותנטיות",
         "supportiveness": "תמיכה",
         "forgiveness": "יכולת לסלוח",
-        "setting-boundaries": "הצבת גבולות"
+        "setting-boundaries": "הצבת גבולות",
+        "opening-up": "יכולת להיות פגיע ופתוח"
       },
       "challengesTitle": "תחומי צמיחה (בחרו עד 3)",
       "challengesDescription": "איזה כישורים רגשיים הייתם רוצים לפתח או לשפר?",
@@ -759,7 +769,9 @@
         "independence": "עצמאות והסתמכות עצמית",
         "ambition": "שאפתנות ומתמדה",
         "emotionalintelligence": "אינטליגנציה רגשית",
-        "setting-boundaries": "הצבת גבולות"
+        "setting-boundaries": "הצבת גבולות",
+        "opening-up": "פתיחות רגשית",
+        "self-confidence": "ביטחון עצמי"
       },
       "relationshipGoals": {
         "deepconnection": "בניית קשר רגשי עמוק",
@@ -860,6 +872,14 @@
         "kindness": {
           "label": "אדיבות וחמלה",
           "description": "להתייחס זה לזה בטיפול"
+        },
+        "opening-up": {
+          "label": "פתיחות רגשית",
+          "description": "להיות פגיע ופתוח עם רגשות"
+        },
+        "self-confidence": {
+          "label": "ביטחון עצמי",
+          "description": "לקבל ביטחון בעצמך ובערך שלך"
         }
       },
       "lifePriorities": {
@@ -888,7 +908,9 @@
         "differentgoals": "מטרות חיים לא תואמות",
         "financialirresponsibility": "חוסר אחריות כלכלית",
         "nogrowth": "חוסר רצון לצמוח",
-        "jealousy": "קנאה קיצונית או רכושנות"
+        "jealousy": "קנאה קיצונית או רכושנות",
+        "opening-up": "חוסר זמינות רגשית או התנהגות סגורה",
+        "self-confidence": "חוסר ביטחון עצמי קיצוני"
       },
       "buttons": {
         "back": "חזרה",

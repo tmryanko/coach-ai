@@ -362,6 +362,14 @@
         "setting-boundaries": {
           "label": "Setting Boundaries",
           "description": "Difficulty setting healthy boundaries"
+        },
+        "opening-up": {
+          "label": "Opening Up",
+          "description": "Difficulty opening up emotionally to partners"
+        },
+        "self-confidence": {
+          "label": "Self-Confidence",
+          "description": "Lack of confidence in relationships"
         }
       }
     },
@@ -538,7 +546,8 @@
         "repeating-mistakes": "Fear of repeating past mistakes",
         "being-hurt": "Fear of being hurt again",
         "conflict": "Fear of conflict",
-        "self-confidence": "Fear of lacking self-confidence"
+        "self-confidence": "Fear of lacking self-confidence",
+        "opening-up": "Fear of emotional vulnerability"
       },
       "strengthsTitle": "Your Emotional Strengths (Select up to 4)",
       "strengthsDescription": "What are your superpowers when it comes to relationships and emotions?",
@@ -553,7 +562,8 @@
         "patience": "Patience",
         "authenticity": "Authenticity",
         "supportiveness": "Being supportive",
-        "forgiveness": "Ability to forgive"
+        "forgiveness": "Ability to forgive",
+        "opening-up": "Ability to be vulnerable and open"
       },
       "challengesTitle": "Areas for Growth (Select up to 3)",
       "challengesDescription": "What emotional skills would you like to develop or improve?",
@@ -755,7 +765,8 @@
         "independence": "Independence & Self-Reliance",
         "ambition": "Ambition & Drive",
         "emotionalintelligence": "Emotional Intelligence",
-        "setting-boundaries": "Setting Boundaries"
+        "setting-boundaries": "Setting Boundaries",
+        "opening-up": "Emotional Openness"
       },
       "relationshipGoals": {
         "deepconnection": "Build deep emotional connection",
@@ -856,6 +867,14 @@
         "kindness": {
           "label": "Kindness & Compassion",
           "description": "Treating each other with care"
+        },
+        "opening-up": {
+          "label": "Emotional Openness",
+          "description": "Being vulnerable and open with feelings"
+        },
+        "self-confidence": {
+          "label": "Self-Confidence",
+          "description": "Having confidence in oneself and one's worth"
         }
       },
       "lifePriorities": {
@@ -884,7 +903,8 @@
         "differentgoals": "Incompatible life goals",
         "financialirresponsibility": "Financial irresponsibility",
         "nogrowth": "Unwillingness to grow",
-        "jealousy": "Extreme jealousy or possessiveness"
+        "jealousy": "Extreme jealousy or possessiveness",
+        "opening-up": "Emotional unavailability or closed-off behavior"
       },
       "buttons": {
         "back": "Back",
