@@ -31,7 +31,7 @@ export default function Dashboard() {
   // Check if user has completed assessment
   useEffect(() => {
     if (!profileLoading && !profile && user) {
-      router.push(`/${locale}/assessment`);
+      router.push('/assessment');
     }
   }, [profile, profileLoading, user, router, locale]);
 

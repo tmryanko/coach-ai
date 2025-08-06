@@ -42,7 +42,10 @@
     "buttons": {
       "refresh": "רענן",
       "refreshing": "מרענן..."
-    }
+    },
+    "redirecting": "מפנה לדף ההערכה...",
+    "repairingProfile": "מתקן את הפרופיל...",
+    "loadingProfile": "טוען את הפרופיל שלכם..."
   },
   "navigation": {
     "home": "בית",

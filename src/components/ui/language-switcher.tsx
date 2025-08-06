@@ -18,19 +18,6 @@ export function LanguageSwitcher() {
   const pathname = usePathname();
   const t = useTranslations("common");
 
-  const getLocalizedPath = (newLocale: string) => {
-    const segments = pathname.split("/").filter(Boolean);
-
-    // Remove current locale if it exists
-    if (segments[0] && locales.includes(segments[0] as any)) {
-      segments.shift();
-    }
-
-    // Add new locale (unless it's your default locale, if you have one)
-    const path = segments.length ? `/${segments.join("/")}` : "/";
-    return `/${newLocale}${path === "/" ? "" : path}`;
-  };
-
   const currentLocaleConfig = localeConfig[locale as keyof typeof localeConfig];
 
   return (
@@ -49,7 +36,8 @@ export function LanguageSwitcher() {
           return (
             <DropdownMenuItem key={loc} asChild>
               <Link
-                href={getLocalizedPath(loc)}
+                href={pathname}
+                locale={loc}
                 className={`flex items-center gap-2 w-full ${
                   loc === locale ? "bg-muted" : ""
                 }`}

@@ -42,7 +42,10 @@
     "buttons": {
       "refresh": "Refresh",
       "refreshing": "Refreshing..."
-    }
+    },
+    "redirecting": "Redirecting to assessment...",
+    "repairingProfile": "Repairing profile...",
+    "loadingProfile": "Loading your profile..."
   },
   "navigation": {
     "home": "Home",

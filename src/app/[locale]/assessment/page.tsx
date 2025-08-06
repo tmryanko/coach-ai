@@ -111,9 +111,9 @@ export default function AssessmentPage() {
       await utils.assessment.getStatus.invalidate();
 
       if (isEditMode) {
-        router.push(`/${locale}/profile`);
+        router.push('/profile');
       } else {
-        router.push(`/${locale}/dashboard`);
+        router.push('/dashboard');
       }
     },
   });
@@ -125,9 +125,9 @@ export default function AssessmentPage() {
       await utils.assessment.getStatus.invalidate();
 
       if (isEditMode) {
-        router.push(`/${locale}/profile`);
+        router.push('/profile');
       } else {
-        router.push(`/${locale}/dashboard`);
+        router.push('/dashboard');
       }
     },
   });
@@ -144,7 +144,7 @@ export default function AssessmentPage() {
   // If user has already completed assessment and not in edit mode, redirect to profile
   useEffect(() => {
     if (assessmentStatus?.isCompleted && !isEditMode) {
-      router.push(`/${locale}/profile`);
+      router.push('/profile');
     }
   }, [assessmentStatus?.isCompleted, isEditMode, router, locale]);
 

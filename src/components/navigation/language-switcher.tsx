@@ -1,7 +1,7 @@
 'use client';
 
 import { useLocale, useTranslations } from 'next-intl';
-import { usePathname, useRouter } from '@/i18n/navigation';
+import { usePathname, Link } from '@/i18n/navigation';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -20,22 +20,8 @@ const languages = [
 export function LanguageSwitcher() {
   const locale = useLocale();
   const pathname = usePathname();
-  const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const t = useTranslations('navigation.languageSwitcher');
-
-  const handleLanguageChange = (newLocale: string) => {
-    if (newLocale === locale) return;
-
-    startTransition(() => {
-      // Replace the current locale in the pathname with the new one
-      const segments = pathname.split('/');
-      segments[1] = newLocale; // Replace locale segment
-      const newPath = segments.join('/');
-      
-      router.push(newPath);
-    });
-  };
 
   const currentLanguage = languages.find(lang => lang.code === locale);
 
@@ -62,20 +48,31 @@ export function LanguageSwitcher() {
         {languages.map((language) => (
           <DropdownMenuItem
             key={language.code}
-            onClick={() => handleLanguageChange(language.code)}
-            className={`cursor-pointer flex items-center justify-between ${
+            asChild
+            className={`cursor-pointer ${
               language.code === locale 
                 ? 'bg-accent text-accent-foreground' 
                 : ''
             }`}
           >
-            <div className="flex items-center">
-              <span className="mr-2">{language.flag}</span>
-              {language.name}
-            </div>
-            {language.code === locale && (
-              <Check className="h-4 w-4 ml-2" />
-            )}
+            <Link
+              href={pathname}
+              locale={language.code as 'en' | 'he'}
+              className="flex items-center justify-between w-full"
+              onClick={() => {
+                startTransition(() => {
+                  // The Link component with locale prop handles the navigation automatically
+                });
+              }}
+            >
+              <div className="flex items-center">
+                <span className="mr-2">{language.flag}</span>
+                {language.name}
+              </div>
+              {language.code === locale && (
+                <Check className="h-4 w-4 ml-2" />
+              )}
+            </Link>
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>
