@@ -13,9 +13,9 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { api } from "@/utils/api";
 import { useAuth } from "@/contexts/auth-context";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { useEffect } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 export default function Dashboard() {
   const t = useTranslations("dashboard");
