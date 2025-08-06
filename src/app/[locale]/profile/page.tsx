@@ -292,7 +292,26 @@ export default function ProfilePage() {
     };
   }, [handleFocus]);
 
-  // Show loading while redirecting or repairing
+  // UNIFIED LOADING STATE LOGIC - Check in priority order to prevent UI flashes
+  
+  // Priority 1: Still loading critical data - show loading until we have both pieces of data
+  if (isLoading || assessmentStatus === undefined || profile === undefined) {
+    return (
+      <SimpleAppLayout>
+        <div className="max-w-2xl mx-auto p-4">
+          <div className="flex items-center justify-center h-64">
+            <div className="text-center">
+              <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4" />
+              <p className="text-sm text-gray-500">{t("loadingProfile")}</p>
+            </div>
+          </div>
+        </div>
+      </SimpleAppLayout>
+    );
+  }
+
+  // Priority 2: Assessment incomplete OR repair in progress - show redirect/repair loading
+  // This prevents profile content from flashing before redirect
   if ((assessmentStatus && !assessmentStatus.isCompleted) || isRepairInProgress) {
     return (
       <SimpleAppLayout>
@@ -310,22 +329,7 @@ export default function ProfilePage() {
     );
   }
 
-  // Show loading for initial data fetch
-  if (isLoading || (!profile && !assessmentStatus)) {
-    return (
-      <SimpleAppLayout>
-        <div className="max-w-2xl mx-auto p-4">
-          <div className="flex items-center justify-center h-64">
-            <div className="text-center">
-              <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4" />
-              <p className="text-sm text-gray-500">{t("loadingProfile")}</p>
-            </div>
-          </div>
-        </div>
-      </SimpleAppLayout>
-    );
-  }
-
+  // Priority 3: No profile data available - should rarely happen due to unified loading above
   if (!profile) {
     return (
       <SimpleAppLayout>
@@ -343,7 +347,7 @@ export default function ProfilePage() {
     );
   }
 
-
+  // Priority 4: All data loaded and assessment is complete - show profile content
   const getPersonalityDescription = () => {
     const traits = profile.personalityTraits as PersonalityTraits;
     if (!traits) return t("notSpecified");
