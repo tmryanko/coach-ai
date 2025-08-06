@@ -758,7 +758,8 @@
         "communication": "תקשורת טובה",
         "independence": "עצמאות והסתמכות עצמית",
         "ambition": "שאפתנות ומתמדה",
-        "emotionalintelligence": "אינטליגנציה רגשית"
+        "emotionalintelligence": "אינטליגנציה רגשית",
+        "setting-boundaries": "הצבת גבולות"
       },
       "relationshipGoals": {
         "deepconnection": "בניית קשר רגשי עמוק",
@@ -949,6 +950,10 @@
         "single": {
           "label": "רווק/ה",
           "description": "לא במערכת יחסים כרגע"
+        },
+        "single-never-married": {
+          "label": "רווק/ה (מעולם לא הייתי נשוי/ה)",
+          "description": "מוכן/ה לחקור קשרים חדשים"
         },
         "dating": {
           "label": "דייטים",

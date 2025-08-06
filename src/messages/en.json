@@ -358,6 +358,10 @@
         "commitmentfears": {
           "label": "Commitment Fears",
           "description": "Anxiety about commitment level"
+        },
+        "setting-boundaries": {
+          "label": "Setting Boundaries",
+          "description": "Difficulty setting healthy boundaries"
         }
       }
     },
@@ -750,7 +754,8 @@
         "communication": "Good Communication",
         "independence": "Independence & Self-Reliance",
         "ambition": "Ambition & Drive",
-        "emotionalintelligence": "Emotional Intelligence"
+        "emotionalintelligence": "Emotional Intelligence",
+        "setting-boundaries": "Setting Boundaries"
       },
       "relationshipGoals": {
         "deepconnection": "Build deep emotional connection",
@@ -941,6 +946,10 @@
         "single": {
           "label": "Single",
           "description": "Not currently in a relationship"
+        },
+        "single-never-married": {
+          "label": "Single (never married)",
+          "description": "Ready to explore new connections"
         },
         "dating": {
           "label": "Dating",
