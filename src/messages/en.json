@@ -373,6 +373,18 @@
         "self-confidence": {
           "label": "Self-Confidence",
           "description": "Lack of confidence in relationships"
+        },
+        "trusting-others": {
+          "label": "Trusting Others",
+          "description": "Difficulty trusting others in relationships"
+        },
+        "conflict-resolution": {
+          "label": "Conflict Resolution",
+          "description": "Resolving conflicts effectively"
+        },
+        "emotional-regulation": {
+          "label": "Emotional Regulation",
+          "description": "Managing emotions effectively"
         }
       }
     },
@@ -494,45 +506,27 @@
         "secure": {
           "label": "Secure",
           "description": "I find it easy to get close to others and am comfortable depending on them. I don't often worry about being abandoned.",
-          "traits": {
-            "0": "Comfortable with intimacy",
-            "1": "Good communication",
-            "2": "Trusting"
-          }
+          "traits": "Comfortable with intimacy • Good communication • Trusting"
         },
         "anxious": {
           "label": "Anxious",
           "description": "I want to be very close to partners, but worry they don't feel the same. I fear being abandoned or unloved.",
-          "traits": {
-            "0": "Seeks reassurance",
-            "1": "Fears abandonment",
-            "2": "Highly empathetic"
-          }
+          "traits": "Seeks reassurance • Fears abandonment • Highly empathetic"
         },
         "avoidant": {
           "label": "Avoidant",
           "description": "I prefer independence and self-sufficiency. I sometimes find it difficult to trust others completely.",
-          "traits": {
-            "0": "Values independence",
-            "1": "Uncomfortable with emotions",
-            "2": "Self-reliant"
-          }
+          "traits": "Values independence • Uncomfortable with emotions • Self-reliant"
         },
         "disorganized": {
           "label": "Fearful-Avoidant",
           "description": "I want close relationships but worry about getting hurt. I have mixed feelings about depending on others.",
-          "traits": {
-            "0": "Wants closeness but fears it",
-            "1": "Inconsistent emotions",
-            "2": "Past relationship trauma"
-          }
+          "traits": "Wants closeness but fears it • Inconsistent emotions • Past relationship trauma"
         },
         "unsure": {
           "label": "I'm not sure",
           "description": "I need to learn more about my attachment patterns.",
-          "traits": {
-            "0": "Self-discovery needed"
-          }
+          "traits": "Self-discovery needed"
         }
       },
       "fearsTitle": "Relationship Fears (Select up to 3)",
@@ -550,7 +544,10 @@
         "being-hurt": "Fear of being hurt again",
         "conflict": "Fear of conflict",
         "self-confidence": "Fear of lacking self-confidence",
-        "opening-up": "Fear of emotional vulnerability"
+        "opening-up": "Fear of emotional vulnerability",
+        "trusting-others": "Trust issues",
+        "conflict-resolution": "Poor conflict resolution",
+        "emotional-regulation": "Emotional instability"
       },
       "strengthsTitle": "Your Emotional Strengths (Select up to 4)",
       "strengthsDescription": "What are your superpowers when it comes to relationships and emotions?",
@@ -566,7 +563,10 @@
         "authenticity": "Authenticity",
         "supportiveness": "Being supportive",
         "forgiveness": "Ability to forgive",
-        "opening-up": "Ability to be vulnerable and open"
+        "opening-up": "Ability to be vulnerable and open",
+        "trusting-others": "Building trust",
+        "conflict-resolution": "Conflict resolution",
+        "emotional-regulation": "Emotional regulation"
       },
       "challengesTitle": "Areas for Growth (Select up to 3)",
       "challengesDescription": "What emotional skills would you like to develop or improve?",
@@ -769,7 +769,10 @@
         "ambition": "Ambition & Drive",
         "emotionalintelligence": "Emotional Intelligence",
         "setting-boundaries": "Setting Boundaries",
-        "opening-up": "Emotional Openness"
+        "opening-up": "Emotional Openness",
+        "trusting-others": "Trusting Others",
+        "conflict-resolution": "Conflict Resolution",
+        "emotional-regulation": "Emotional Regulation"
       },
       "relationshipGoals": {
         "deepconnection": "Build deep emotional connection",
@@ -878,6 +881,18 @@
         "self-confidence": {
           "label": "Self-Confidence",
           "description": "Having confidence in oneself and one's worth"
+        },
+        "trusting-others": {
+          "label": "Trusting Others",
+          "description": "Building trust in relationships"
+        },
+        "conflict-resolution": {
+          "label": "Conflict Resolution",
+          "description": "Managing disagreements effectively"
+        },
+        "emotional-regulation": {
+          "label": "Emotional Regulation",
+          "description": "Emotional stability and control"
         }
       },
       "lifePriorities": {
@@ -907,7 +922,10 @@
         "financialirresponsibility": "Financial irresponsibility",
         "nogrowth": "Unwillingness to grow",
         "jealousy": "Extreme jealousy or possessiveness",
-        "opening-up": "Emotional unavailability or closed-off behavior"
+        "opening-up": "Emotional unavailability or closed-off behavior",
+        "trusting-others": "Lack of trust",
+        "conflict-resolution": "Unresolved conflicts",
+        "emotional-regulation": "Poor emotional control"
       },
       "buttons": {
         "back": "Back",
@@ -1005,6 +1023,10 @@
         "its-complicated": {
           "label": "It's complicated",
           "description": "Relationship status is complex"
+        },
+        "in-relationship": {
+          "label": "In a relationship",
+          "description": "Currently in a committed partnership"
         }
       }
     },
@@ -1141,6 +1163,14 @@
           "in-relationship": {
             "label": "In a relationship",
             "description": "Working on current partnership"
+          },
+          "itscomplicated": {
+            "label": "It's complicated",
+            "description": "Relationship status is complex"
+          },
+          "inrelationship": {
+            "label": "In a relationship",
+            "description": "Currently in a committed partnership"
           }
         },
         "significantPastQuestion": "Have you had any significant romantic relationships in the past?",
@@ -1161,7 +1191,13 @@
           "two-years": "1-2 years",
           "long-term": "2-5 years",
           "very-long-term": "5+ years",
-          "no-significant": "No significant relationships"
+          "no-significant": "No significant relationships",
+          "fewmonths": "A few months",
+          "oneyear": "About a year",
+          "twoyears": "1-2 years",
+          "longterm": "Long-term (3+ years)",
+          "verylongterm": "Very long-term (5+ years)",
+          "nosignificant": "No significant relationships"
         },
         "timeSinceQuestion": "How long has it been since your last relationship ended?",
         "timeSinceOptions": {

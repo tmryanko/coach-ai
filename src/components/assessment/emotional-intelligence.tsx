@@ -19,6 +19,11 @@ interface EmotionalIntelligenceStepProps {
 
 const getAttachmentStyles = (t: any) => {
   const getTraitsArray = (traitsObj: any) => {
+    // Handle new string format with bullet separators  
+    if (typeof traitsObj === 'string') {
+      return traitsObj.split(' • ').filter(trait => trait.trim());
+    }
+    // Legacy object support for backward compatibility
     if (typeof traitsObj === 'object' && traitsObj !== null && !Array.isArray(traitsObj)) {
       return Object.values(traitsObj);
     }
